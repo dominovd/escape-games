@@ -41,7 +41,7 @@
             946,
             751
           ],
-          "if": "flag:_once:patch/big"
+          "if": "flag:d_big"
         },
         {
           "image": "assets/layer_lantern_taken.png",
@@ -109,7 +109,6 @@
             643,
             655
           ],
-          "once": true,
           "do": [
             {
               "sfx": "lid"
@@ -119,6 +118,23 @@
             },
             {
               "set": "d_big"
+            }
+          ],
+          "if": "!flag:d_big"
+        },
+        {
+          "id": "big_done",
+          "label": "Big pumpkin",
+          "rect": [
+            930,
+            861,
+            643,
+            655
+          ],
+          "if": "flag:d_big",
+          "do": [
+            {
+              "say": "The slip in the biggest pumpkin says 7."
             }
           ]
         },
@@ -211,7 +227,7 @@
             946,
             751
           ],
-          "if": "flag:_once:patch/big"
+          "if": "flag:d_big"
         },
         {
           "image": "assets/layer_lantern_taken.png",
@@ -277,7 +293,8 @@
             {
               "set": "d_medium"
             }
-          ]
+          ],
+          "hint": "The lid of the medium pumpkin is stuck. Something flat could pry it."
         },
         {
           "id": "medium_done",
@@ -307,7 +324,7 @@
           "if": "!flag:d_small",
           "use": "lantern",
           "consume": true,
-          "fail": "It is too dark inside to see anything.",
+          "fail": "Too dark inside to see anything. Select a light in your inventory, then click the pumpkin.",
           "do": [
             {
               "say": "You set the lantern inside. The pumpkin glows, and a 9 is painted on the bottom."
@@ -315,7 +332,8 @@
             {
               "set": "d_small"
             }
-          ]
+          ],
+          "hint": "The small pumpkin needs a light inside."
         },
         {
           "id": "small_done",
@@ -354,7 +372,7 @@
             946,
             751
           ],
-          "if": "flag:_once:patch/big"
+          "if": "flag:d_big"
         },
         {
           "image": "assets/layer_lantern_taken.png",
@@ -425,13 +443,29 @@
             207,
             218
           ],
-          "once": true,
           "do": [
             {
               "say": "The scarecrow holds the tiniest pumpkin. Under it: a slip with a 4."
             },
             {
               "set": "d_tiny"
+            }
+          ],
+          "if": "!flag:d_tiny"
+        },
+        {
+          "id": "tiny_done",
+          "label": "Tiny pumpkin",
+          "rect": [
+            2595,
+            804,
+            207,
+            218
+          ],
+          "if": "flag:d_tiny",
+          "do": [
+            {
+              "say": "The slip under the tiny pumpkin says 4."
             }
           ]
         }
@@ -456,7 +490,7 @@
             946,
             751
           ],
-          "if": "flag:_once:patch/big"
+          "if": "flag:d_big"
         },
         {
           "image": "assets/layer_lantern_taken.png",
