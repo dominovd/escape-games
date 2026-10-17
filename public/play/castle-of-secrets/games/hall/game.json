@@ -1,0 +1,924 @@
+{
+  "id": "hall",
+  "title": "Castle of Secrets: The Great Hall",
+  "theme": "castle",
+  "start": "hall",
+  "intro": "The doors slam shut behind you. The great hall is silent except for the fire, and the way upstairs is barred.",
+  "winTitle": "Upstairs!",
+  "winText": "The gate creaks open and you climb the grand staircase. Chapter one: done.",
+  "audio": {
+    "music": "assets/audio/music_hall.mp3",
+    "ambience": "assets/audio/amb_hall.mp3",
+    "musicVolume": 0.55,
+    "ambienceVolume": 0.5,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "fire_light": "assets/audio/sfx_fire_light.mp3",
+      "ash_rake": "assets/audio/sfx_ash_rake.mp3",
+      "clock_start": "assets/audio/sfx_clock_start.mp3",
+      "clock_chime": "assets/audio/sfx_clock_chime.mp3",
+      "box_open": "assets/audio/sfx_box_open.mp3",
+      "candles_ignite": "assets/audio/sfx_candles_ignite.mp3",
+      "portrait_click": "assets/audio/sfx_portrait_click.mp3",
+      "safe_open": "assets/audio/sfx_safe_open.mp3",
+      "gate_unlock": "assets/audio/sfx_gate_unlock.mp3",
+      "paper": "assets/audio/sfx_paper.mp3"
+    }
+  },
+  "scenes": {
+    "hall": {
+      "title": "Great hall",
+      "image": "assets/hall.webp",
+      "layers": [
+        {
+          "image": "assets/layer_armor_empty.png",
+          "rect": [1367, 689, 230, 310],
+          "if": "flag:_once:hearth/armor_hand"
+        },
+        {
+          "image": "assets/layer_poker_taken.png",
+          "rect": [854, 1107, 266, 565],
+          "if": "flag:_once:hearth/tools"
+        },
+        {
+          "image": "assets/layer_ashes_raked.png",
+          "rect": [593, 1442, 331, 223],
+          "if": "flag:_once:hearth/ashes"
+        },
+        {
+          "image": "assets/layer_portrait_open.png",
+          "rect": [2595, 184, 758, 850],
+          "if": "flag:portrait_moved"
+        },
+        {
+          "image": "assets/layer_safe_open.png",
+          "rect": [2813, 299, 494, 574],
+          "if": "solved:safe"
+        },
+        {
+          "image": "assets/layer_gate_open.png",
+          "rect": [1608, 0, 861, 1321],
+          "if": "flag:gate_open"
+        },
+        {
+          "image": "assets/layer_clock_open.png",
+          "rect": [3376, 850, 402, 781],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_blank.png",
+          "rect": [3365, 563, 287, 287],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_hands.png",
+          "rect": [3387, 586, 240, 240],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_box_open.png",
+          "rect": [2297, 1217, 402, 413],
+          "if": "flag:box_open"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [1814, 1011, 413, 574],
+          "if": "solved:candles"
+        },
+        {
+          "image": "assets/layer_letter.png",
+          "rect": [2067, 1378, 367, 253],
+          "if": ["solved:candles", "!has:letter"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "gate_zone",
+          "label": "Iron gate",
+          "rect": [1608, 0, 861, 1321],
+          "do": [
+            {
+              "goto": "gate"
+            }
+          ]
+        },
+        {
+          "id": "hearth_zone",
+          "label": "Fireplace",
+          "rect": [0, 574, 1539, 1240],
+          "do": [
+            {
+              "goto": "hearth"
+            }
+          ]
+        },
+        {
+          "id": "table_zone",
+          "label": "Dining table",
+          "rect": [1091, 1378, 1987, 689],
+          "do": [
+            {
+              "goto": "table"
+            }
+          ]
+        },
+        {
+          "id": "candles_zone",
+          "label": "Candelabra",
+          "rect": [1826, 1068, 367, 494],
+          "do": [
+            {
+              "goto": "table"
+            }
+          ]
+        },
+        {
+          "id": "portrait_zone",
+          "label": "Portrait",
+          "rect": [2676, 195, 551, 815],
+          "do": [
+            {
+              "goto": "portrait"
+            }
+          ]
+        },
+        {
+          "id": "clock_zone",
+          "label": "Grandfather clock",
+          "rect": [3284, 276, 459, 1481],
+          "do": [
+            {
+              "goto": "clock"
+            }
+          ]
+        }
+      ]
+    },
+    "hearth": {
+      "title": "Fireplace",
+      "image": "assets/hall.webp",
+      "crop": [0, 597, 1906, 1073],
+      "back": "hall",
+      "layers": [
+        {
+          "image": "assets/layer_armor_empty.png",
+          "rect": [1367, 689, 230, 310],
+          "if": "flag:_once:hearth/armor_hand"
+        },
+        {
+          "image": "assets/layer_poker_taken.png",
+          "rect": [854, 1107, 266, 565],
+          "if": "flag:_once:hearth/tools"
+        },
+        {
+          "image": "assets/layer_ashes_raked.png",
+          "rect": [593, 1442, 331, 223],
+          "if": "flag:_once:hearth/ashes"
+        },
+        {
+          "image": "assets/layer_portrait_open.png",
+          "rect": [2595, 184, 758, 850],
+          "if": "flag:portrait_moved"
+        },
+        {
+          "image": "assets/layer_safe_open.png",
+          "rect": [2813, 299, 494, 574],
+          "if": "solved:safe"
+        },
+        {
+          "image": "assets/layer_gate_open.png",
+          "rect": [1608, 0, 861, 1321],
+          "if": "flag:gate_open"
+        },
+        {
+          "image": "assets/layer_clock_open.png",
+          "rect": [3376, 850, 402, 781],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_blank.png",
+          "rect": [3365, 563, 287, 287],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_hands.png",
+          "rect": [3387, 586, 240, 240],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_box_open.png",
+          "rect": [2297, 1217, 402, 413],
+          "if": "flag:box_open"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [1814, 1011, 413, 574],
+          "if": "solved:candles"
+        },
+        {
+          "image": "assets/layer_letter.png",
+          "rect": [2067, 1378, 367, 253],
+          "if": ["solved:candles", "!has:letter"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "armor",
+          "label": "Suit of armor",
+          "rect": [1079, 586, 436, 930],
+          "do": [
+            {
+              "say": "An old suit of armor. Empty, thankfully."
+            }
+          ]
+        },
+        {
+          "id": "armor_hand",
+          "label": "Gauntlet",
+          "rect": [1429, 730, 101, 230],
+          "once": true,
+          "do": [
+            {
+              "say": "The knight's gauntlet held an unlit taper."
+            },
+            {
+              "give": "taper"
+            }
+          ]
+        },
+        {
+          "id": "tools",
+          "label": "Fire tools",
+          "rect": [891, 1148, 195, 482],
+          "once": true,
+          "do": [
+            {
+              "say": "A fireplace poker. Could be useful."
+            },
+            {
+              "give": "poker"
+            }
+          ]
+        },
+        {
+          "id": "fire",
+          "label": "Fire",
+          "rect": [207, 1079, 494, 528],
+          "use": "taper",
+          "consume": true,
+          "fail": "The fire crackles. It would light anything you hold to it.",
+          "do": [
+            {
+              "sfx": "fire_light"
+            },
+            {
+              "say": "You light the taper in the fire."
+            },
+            {
+              "give": "lit_taper"
+            }
+          ]
+        },
+        {
+          "id": "ashes",
+          "label": "Ashes",
+          "rect": [648, 1504, 207, 126],
+          "use": "poker",
+          "once": true,
+          "fail": "Warm ashes. Something glints inside, but it's too hot to touch.",
+          "do": [
+            {
+              "sfx": "ash_rake"
+            },
+            {
+              "say": "You rake the ashes with the poker. A brass gear and a half-burnt note!"
+            },
+            {
+              "give": "brass_gear"
+            },
+            {
+              "give": "charred_note"
+            },
+            {
+              "inspect": "charred_note"
+            }
+          ]
+        }
+      ]
+    },
+    "table": {
+      "title": "Dining table",
+      "image": "assets/hall.webp",
+      "crop": [1079, 1011, 2021, 1137],
+      "back": "hall",
+      "layers": [
+        {
+          "image": "assets/layer_armor_empty.png",
+          "rect": [1367, 689, 230, 310],
+          "if": "flag:_once:hearth/armor_hand"
+        },
+        {
+          "image": "assets/layer_poker_taken.png",
+          "rect": [854, 1107, 266, 565],
+          "if": "flag:_once:hearth/tools"
+        },
+        {
+          "image": "assets/layer_ashes_raked.png",
+          "rect": [593, 1442, 331, 223],
+          "if": "flag:_once:hearth/ashes"
+        },
+        {
+          "image": "assets/layer_portrait_open.png",
+          "rect": [2595, 184, 758, 850],
+          "if": "flag:portrait_moved"
+        },
+        {
+          "image": "assets/layer_safe_open.png",
+          "rect": [2813, 299, 494, 574],
+          "if": "solved:safe"
+        },
+        {
+          "image": "assets/layer_gate_open.png",
+          "rect": [1608, 0, 861, 1321],
+          "if": "flag:gate_open"
+        },
+        {
+          "image": "assets/layer_clock_open.png",
+          "rect": [3376, 850, 402, 781],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_blank.png",
+          "rect": [3365, 563, 287, 287],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_hands.png",
+          "rect": [3387, 586, 240, 240],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_box_open.png",
+          "rect": [2297, 1217, 402, 413],
+          "if": "flag:box_open"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [1814, 1011, 413, 574],
+          "if": "solved:candles"
+        },
+        {
+          "image": "assets/layer_letter.png",
+          "rect": [2067, 1378, 367, 253],
+          "if": ["solved:candles", "!has:letter"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "plates",
+          "label": "Plates",
+          "rect": [1367, 1389, 459, 218],
+          "do": [
+            {
+              "say": "Dinner for one, long gone cold."
+            }
+          ]
+        },
+        {
+          "id": "candles",
+          "label": "Candelabra",
+          "rect": [1826, 1068, 367, 494],
+          "if": "!solved:candles",
+          "use": "lit_taper",
+          "fail": "Four cold candles in a silver candelabra.",
+          "do": [
+            {
+              "puzzle": "candles"
+            }
+          ]
+        },
+        {
+          "id": "box",
+          "label": "Jewelry box",
+          "rect": [2347, 1378, 287, 211],
+          "if": "!flag:box_open",
+          "use": "silver_key",
+          "consume": true,
+          "fail": "A small jewelry box with a tiny silver keyhole.",
+          "do": [
+            {
+              "sfx": "box_open"
+            },
+            {
+              "say": "Inside, on red velvet: a signet ring."
+            },
+            {
+              "set": "box_open"
+            },
+            {
+              "give": "signet_ring"
+            },
+            {
+              "inspect": "signet_ring"
+            }
+          ]
+        },
+        {
+          "id": "letter",
+          "label": "Folded letter",
+          "rect": [2124, 1470, 207, 110],
+          "if": ["solved:candles", "!has:letter"],
+          "do": [
+            {
+              "sfx": "paper"
+            },
+            {
+              "say": "A folded letter. You unfold it."
+            },
+            {
+              "give": "letter"
+            },
+            {
+              "inspect": "letter"
+            }
+          ]
+        }
+      ]
+    },
+    "clock": {
+      "title": "Grandfather clock",
+      "image": "assets/hall.webp",
+      "crop": [3169, 253, 671, 1470],
+      "back": "hall",
+      "layers": [
+        {
+          "image": "assets/layer_armor_empty.png",
+          "rect": [1367, 689, 230, 310],
+          "if": "flag:_once:hearth/armor_hand"
+        },
+        {
+          "image": "assets/layer_poker_taken.png",
+          "rect": [854, 1107, 266, 565],
+          "if": "flag:_once:hearth/tools"
+        },
+        {
+          "image": "assets/layer_ashes_raked.png",
+          "rect": [593, 1442, 331, 223],
+          "if": "flag:_once:hearth/ashes"
+        },
+        {
+          "image": "assets/layer_portrait_open.png",
+          "rect": [2595, 184, 758, 850],
+          "if": "flag:portrait_moved"
+        },
+        {
+          "image": "assets/layer_safe_open.png",
+          "rect": [2813, 299, 494, 574],
+          "if": "solved:safe"
+        },
+        {
+          "image": "assets/layer_gate_open.png",
+          "rect": [1608, 0, 861, 1321],
+          "if": "flag:gate_open"
+        },
+        {
+          "image": "assets/layer_clock_open.png",
+          "rect": [3376, 850, 402, 781],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_blank.png",
+          "rect": [3365, 563, 287, 287],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_hands.png",
+          "rect": [3387, 586, 240, 240],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_box_open.png",
+          "rect": [2297, 1217, 402, 413],
+          "if": "flag:box_open"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [1814, 1011, 413, 574],
+          "if": "solved:candles"
+        },
+        {
+          "image": "assets/layer_letter.png",
+          "rect": [2067, 1378, 367, 253],
+          "if": ["solved:candles", "!has:letter"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "face_stopped",
+          "label": "Clock face",
+          "rect": [3388, 586, 241, 241],
+          "if": "!flag:clock_running",
+          "use": "brass_gear",
+          "consume": true,
+          "fail": "The clock has stopped. A gear is missing behind the face.",
+          "do": [
+            {
+              "sfx": "clock_start"
+            },
+            {
+              "say": "The gear clicks in. Tick, tock. The hands swing loose."
+            },
+            {
+              "set": "clock_running"
+            }
+          ]
+        },
+        {
+          "id": "face",
+          "label": "Clock hands",
+          "rect": [3388, 586, 241, 241],
+          "if": ["flag:clock_running", "!solved:clock"],
+          "do": [
+            {
+              "puzzle": "clock"
+            }
+          ]
+        },
+        {
+          "id": "case",
+          "label": "Clock case",
+          "rect": [3417, 907, 207, 712],
+          "if": "!solved:clock",
+          "do": [
+            {
+              "say": "The case door is locked."
+            }
+          ]
+        },
+        {
+          "id": "pendulum",
+          "label": "Pendulum",
+          "rect": [3399, 907, 344, 712],
+          "if": "solved:clock",
+          "once": true,
+          "do": [
+            {
+              "say": "A small silver key hangs from the pendulum."
+            },
+            {
+              "give": "silver_key"
+            }
+          ]
+        }
+      ]
+    },
+    "portrait": {
+      "title": "Portrait",
+      "image": "assets/hall.webp",
+      "crop": [2503, 138, 1011, 965],
+      "back": "hall",
+      "layers": [
+        {
+          "image": "assets/layer_armor_empty.png",
+          "rect": [1367, 689, 230, 310],
+          "if": "flag:_once:hearth/armor_hand"
+        },
+        {
+          "image": "assets/layer_poker_taken.png",
+          "rect": [854, 1107, 266, 565],
+          "if": "flag:_once:hearth/tools"
+        },
+        {
+          "image": "assets/layer_ashes_raked.png",
+          "rect": [593, 1442, 331, 223],
+          "if": "flag:_once:hearth/ashes"
+        },
+        {
+          "image": "assets/layer_portrait_open.png",
+          "rect": [2595, 184, 758, 850],
+          "if": "flag:portrait_moved"
+        },
+        {
+          "image": "assets/layer_safe_open.png",
+          "rect": [2813, 299, 494, 574],
+          "if": "solved:safe"
+        },
+        {
+          "image": "assets/layer_gate_open.png",
+          "rect": [1608, 0, 861, 1321],
+          "if": "flag:gate_open"
+        },
+        {
+          "image": "assets/layer_clock_open.png",
+          "rect": [3376, 850, 402, 781],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_blank.png",
+          "rect": [3365, 563, 287, 287],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_hands.png",
+          "rect": [3387, 586, 240, 240],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_box_open.png",
+          "rect": [2297, 1217, 402, 413],
+          "if": "flag:box_open"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [1814, 1011, 413, 574],
+          "if": "solved:candles"
+        },
+        {
+          "image": "assets/layer_letter.png",
+          "rect": [2067, 1378, 367, 253],
+          "if": ["solved:candles", "!has:letter"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "painting",
+          "label": "Lady Morwen",
+          "rect": [2687, 207, 528, 792],
+          "if": "!flag:portrait_moved",
+          "do": [
+            {
+              "say": "Lady Morwen, the last mistress of the castle. Her frame has a small crest."
+            }
+          ]
+        },
+        {
+          "id": "crest",
+          "label": "Crest on the frame",
+          "rect": [2894, 887, 115, 119],
+          "if": "!flag:portrait_moved",
+          "use": "signet_ring",
+          "fail": "A crest-shaped recess in the frame.",
+          "do": [
+            {
+              "sfx": "portrait_click"
+            },
+            {
+              "say": "The ring fits the crest. Click! The portrait swings aside and reveals a safe."
+            },
+            {
+              "set": "portrait_moved"
+            }
+          ]
+        },
+        {
+          "id": "safe",
+          "label": "Wall safe",
+          "rect": [2843, 471, 276, 367],
+          "if": ["flag:portrait_moved", "!solved:safe"],
+          "do": [
+            {
+              "puzzle": "safe"
+            }
+          ]
+        },
+        {
+          "id": "safe_inside",
+          "label": "Inside the safe",
+          "rect": [2843, 471, 276, 367],
+          "if": "solved:safe",
+          "once": true,
+          "do": [
+            {
+              "say": "Inside the safe: a heavy iron key."
+            },
+            {
+              "give": "gate_key"
+            }
+          ]
+        }
+      ]
+    },
+    "gate": {
+      "title": "Iron gate",
+      "image": "assets/hall.webp",
+      "crop": [1585, 0, 919, 1378],
+      "back": "hall",
+      "layers": [
+        {
+          "image": "assets/layer_armor_empty.png",
+          "rect": [1367, 689, 230, 310],
+          "if": "flag:_once:hearth/armor_hand"
+        },
+        {
+          "image": "assets/layer_poker_taken.png",
+          "rect": [854, 1107, 266, 565],
+          "if": "flag:_once:hearth/tools"
+        },
+        {
+          "image": "assets/layer_ashes_raked.png",
+          "rect": [593, 1442, 331, 223],
+          "if": "flag:_once:hearth/ashes"
+        },
+        {
+          "image": "assets/layer_portrait_open.png",
+          "rect": [2595, 184, 758, 850],
+          "if": "flag:portrait_moved"
+        },
+        {
+          "image": "assets/layer_safe_open.png",
+          "rect": [2813, 299, 494, 574],
+          "if": "solved:safe"
+        },
+        {
+          "image": "assets/layer_gate_open.png",
+          "rect": [1608, 0, 861, 1321],
+          "if": "flag:gate_open"
+        },
+        {
+          "image": "assets/layer_clock_open.png",
+          "rect": [3376, 850, 402, 781],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_blank.png",
+          "rect": [3365, 563, 287, 287],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_clock_hands.png",
+          "rect": [3387, 586, 240, 240],
+          "if": "solved:clock"
+        },
+        {
+          "image": "assets/layer_box_open.png",
+          "rect": [2297, 1217, 402, 413],
+          "if": "flag:box_open"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [1814, 1011, 413, 574],
+          "if": "solved:candles"
+        },
+        {
+          "image": "assets/layer_letter.png",
+          "rect": [2067, 1378, 367, 253],
+          "if": ["solved:candles", "!has:letter"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "bars",
+          "label": "Iron bars",
+          "rect": [1619, 23, 838, 1286],
+          "if": "!flag:gate_open",
+          "do": [
+            {
+              "say": "Through the bars: a grand staircase going up."
+            }
+          ]
+        },
+        {
+          "id": "lock",
+          "label": "Gate lock",
+          "rect": [1966, 795, 147, 239],
+          "if": "!flag:gate_open",
+          "use": "gate_key",
+          "consume": true,
+          "fail": "A huge iron lock.",
+          "do": [
+            {
+              "sfx": "gate_unlock"
+            },
+            {
+              "say": "The lock turns and the gate creaks open."
+            },
+            {
+              "set": "gate_open"
+            }
+          ]
+        },
+        {
+          "id": "stairs",
+          "label": "Staircase",
+          "rect": [1745, 138, 689, 1148],
+          "if": "flag:gate_open",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "taper": {
+      "name": "Taper",
+      "icon": "assets/taper.png",
+      "text": "A thin, unlit wax taper."
+    },
+    "lit_taper": {
+      "name": "Lit taper",
+      "icon": "assets/lit_taper.png",
+      "text": "A small steady flame."
+    },
+    "poker": {
+      "name": "Poker",
+      "icon": "assets/poker.png",
+      "text": "A heavy iron fireplace poker."
+    },
+    "brass_gear": {
+      "name": "Brass gear",
+      "icon": "assets/brass_gear.png",
+      "text": "A small toothed gear. It came out of some mechanism."
+    },
+    "charred_note": {
+      "name": "Charred note",
+      "icon": "assets/charred_note.png",
+      "text": "Half burnt:\n\"...dinner is served at a quarter past seven.\nDo not be late, my dear...\""
+    },
+    "silver_key": {
+      "name": "Silver key",
+      "icon": "assets/silver_key.png",
+      "text": "Tiny and delicate. Too small for any door."
+    },
+    "signet_ring": {
+      "name": "Signet ring",
+      "icon": "assets/signet_ring.png",
+      "text": "A gold ring with a crest.\nEngraved inside the band: III · I · IV · II"
+    },
+    "gate_key": {
+      "name": "Iron key",
+      "icon": "assets/gate_key.png",
+      "text": "Big, heavy and old."
+    },
+    "letter": {
+      "name": "Folded letter",
+      "icon": "assets/letter.png",
+      "image": "assets/letter_full.png",
+      "text": "Signed only \"M.\""
+    }
+  },
+  "puzzles": {
+    "clock": {
+      "type": "dials",
+      "title": "Clock hands",
+      "prompt": "Set the hour and the minutes. Someone was expected at a certain time.",
+      "wheels": [
+        ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+        ["00", "15", "30", "45"]
+      ],
+      "start": ["12", "00"],
+      "answer": ["7", "15"],
+      "clue": "has:charred_note",
+      "do": [
+        {
+          "sfx": "clock_chime"
+        },
+        {
+          "say": "The clock chimes. The case door swings open."
+        }
+      ]
+    },
+    "candles": {
+      "type": "sequence",
+      "title": "Candelabra",
+      "prompt": "Light the four candles. The order matters.",
+      "buttons": ["I", "II", "III", "IV"],
+      "answer": ["III", "I", "IV", "II"],
+      "clue": "has:signet_ring",
+      "do": [
+        {
+          "sfx": "candles_ignite"
+        },
+        {
+          "say": "The flames flare up. In their light, a folded letter appears on the table that wasn't there before."
+        }
+      ]
+    },
+    "safe": {
+      "type": "code",
+      "title": "Wall safe",
+      "prompt": "Four digits.",
+      "answer": "6139",
+      "clue": "has:letter",
+      "do": [
+        {
+          "sfx": "safe_open"
+        },
+        {
+          "say": "The safe door swings open."
+        }
+      ]
+    }
+  }
+}

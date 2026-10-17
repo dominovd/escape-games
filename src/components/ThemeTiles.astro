@@ -1,0 +1,34 @@
+---
+import Icon from './Icon.astro';
+import { liveThemes, hubUrl, gamesInTheme } from '../lib/catalog';
+const themes = liveThemes();
+---
+{themes.length > 0 && (
+  <ul class="tiles">
+    {themes.map((t) => (
+      <li>
+        <a href={hubUrl(t.slug)} style={`--a:${t.accent}`}>
+          <span class="ic"><Icon name={t.icon} size={34} /></span>
+          <span class="nm">{t.name}</span>
+          <span class="ct">{gamesInTheme(t.slug).length} games</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 640px) { .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (min-width: 960px) { .tiles { grid-template-columns: repeat(7, minmax(0, 1fr)); } }
+  a {
+    display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 8px;
+    border: 1px solid color-mix(in srgb, var(--a) 35%, var(--line)); border-radius: var(--radius); text-decoration: none;
+    background: radial-gradient(100% 80% at 50% 0%, color-mix(in srgb, var(--a) 18%, transparent), transparent 70%), var(--card);
+    transition: border-color .15s;
+  }
+  a:hover { border-color: var(--a); }
+  .ic { color: var(--a); display: flex; }
+  .nm { font-weight: 700; }
+  .ct { font-size: .8rem; color: var(--muted); }
+</style>

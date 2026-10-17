@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+import { SITE } from '../data/site';
+import { liveThemes, hubUrl, allSeries, seriesUrl } from '../lib/catalog';
+import { games } from '../data/games';
+
+const walkthroughs = games.filter((g) => g.walkthrough && !g.sample).slice(0, 6);
+const [first, ...rest] = SITE.name.split(' ');
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div>
+      <a class="logo" href="/"><span class="logo-icon"><Icon name="keyhole" size={24} /></span>{first} <b>{rest.join(' ')}</b></a>
+      <p class="muted small">Free online escape games. No downloads, no sign-up.</p>
+    </div>
+    <nav aria-label="Escape games by theme">
+      <h2>Escape games</h2>
+      <ul>
+        <li><a href="/escape-room-games/">All escape room games</a></li>
+        {liveThemes().map((t) => <li><a href={hubUrl(t.slug)}>{t.h1}</a></li>)}
+        <li><a href="/new/">New escape games</a></li>
+      </ul>
+    </nav>
+    {(allSeries().length > 0 || walkthroughs.length > 0) && (
+      <nav aria-label="Series and walkthroughs">
+        <h2>Series & walkthroughs</h2>
+        <ul>
+          {allSeries().map((s) => <li><a href={seriesUrl(s.slug)}>{s.name} series</a></li>)}
+          {walkthroughs.map((g) => <li><a href={`/games/${g.slug}/walkthrough/`}>{g.title} walkthrough</a></li>)}
+        </ul>
+      </nav>
+    )}
+    <nav aria-label="Site">
+      <h2>Site</h2>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+        <li><a href="/terms/">Terms</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap copy muted small">© {year} {SITE.name}</div>
+</footer>
+
+<style>
+  .site-footer { border-top: 1px solid var(--line); margin-top: 56px; padding: 32px 0 20px; background: #0e0f12; }
+  .cols { display: grid; gap: 28px; grid-template-columns: 1fr 1fr; }
+  @media (min-width: 860px) { .cols { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+  .cols > div:first-child { grid-column: 1 / -1; }
+  @media (min-width: 860px) { .cols > div:first-child { grid-column: auto; } }
+  .logo { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
+  .logo-icon { color: var(--brand); display: flex; }
+  .logo b { color: var(--brand); margin-left: 4px; }
+  h2 { font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { margin-bottom: 6px; }
+  a { text-decoration: none; color: #dcdee4; font-size: .95rem; }
+  a:hover { color: #fff; text-decoration: underline; }
+  .small { font-size: .9rem; }
+  .copy { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
+</style>

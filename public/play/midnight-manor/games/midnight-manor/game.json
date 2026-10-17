@@ -1,0 +1,597 @@
+{
+  "id": "ballroom",
+  "title": "Midnight Manor: The Ballroom",
+  "theme": "castle",
+  "start": "ballroom",
+  "intro": "The clock struck twelve, the music stopped and every guest vanished. The ballroom doors locked behind you.",
+  "winTitle": "The doors open",
+  "winText": "The great doors swing open onto a dark corridor. Somewhere ahead, a library light is still on. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_ballroom.mp3",
+    "ambience": "assets/audio/amb_ballroom.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "record": "assets/audio/sfx_record.mp3",
+      "drawer": "assets/audio/sfx_drawer.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3"
+    }
+  },
+  "scenes": {
+    "ballroom": {
+      "title": "Ballroom",
+      "image": "assets/ballroom.webp",
+      "layers": [
+        {
+          "image": "assets/layer_mask_taken.png",
+          "rect": [
+            2028,
+            1683,
+            792,
+            354
+          ],
+          "if": "flag:_once:ballroom/mask"
+        },
+        {
+          "image": "assets/layer_piano_open.png",
+          "rect": [
+            0,
+            666,
+            912,
+            661
+          ],
+          "if": "flag:piano_open"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            285,
+            1210,
+            558,
+            170
+          ],
+          "if": "solved:piano"
+        },
+        {
+          "image": "assets/layer_doors_open.png",
+          "rect": [
+            1553,
+            443,
+            877,
+            1197
+          ],
+          "if": "solved:doors"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "piano",
+          "label": "Grand piano",
+          "rect": [
+            11,
+            769,
+            896,
+            838
+          ],
+          "do": [
+            {
+              "goto": "piano"
+            }
+          ]
+        },
+        {
+          "id": "cake",
+          "label": "Birthday cake",
+          "rect": [
+            850,
+            781,
+            850,
+            666
+          ],
+          "do": [
+            {
+              "say": "A towering birthday cake for the host. One hundred candles, all burned down to stubs."
+            },
+            {
+              "set": "saw_cake"
+            }
+          ]
+        },
+        {
+          "id": "doors",
+          "label": "Ballroom doors",
+          "rect": [
+            1619,
+            344,
+            678,
+            988
+          ],
+          "do": [
+            {
+              "goto": "doors"
+            }
+          ]
+        },
+        {
+          "id": "chandelier",
+          "label": "Chandelier",
+          "rect": [
+            1585,
+            0,
+            850,
+            379
+          ],
+          "do": [
+            {
+              "say": "The chandelier sways gently, though there is no draft."
+            }
+          ]
+        },
+        {
+          "id": "mask",
+          "label": "Mask on the floor",
+          "rect": [
+            2056,
+            1711,
+            735,
+            287
+          ],
+          "once": true,
+          "hint": "Someone dropped something on the dance floor.",
+          "do": [
+            {
+              "say": "A feathered mask, dropped mid-dance."
+            },
+            {
+              "give": "mask"
+            },
+            {
+              "inspect": "mask"
+            }
+          ]
+        },
+        {
+          "id": "coats",
+          "label": "Coat rack",
+          "rect": [
+            2526,
+            655,
+            425,
+            781
+          ],
+          "do": [
+            {
+              "goto": "coats"
+            }
+          ]
+        },
+        {
+          "id": "gramophone",
+          "label": "Gramophone",
+          "rect": [
+            3319,
+            781,
+            494,
+            873
+          ],
+          "do": [
+            {
+              "sfx": "record"
+            },
+            {
+              "say": "The record label is hand-written: \"Midnight Waltz. It starts on E, falls to C, climbs to G and comes home to E.\""
+            },
+            {
+              "set": "read_record"
+            }
+          ]
+        }
+      ]
+    },
+    "piano": {
+      "title": "Grand piano",
+      "image": "assets/ballroom.webp",
+      "crop": [
+        0,
+        668,
+        1847,
+        1039
+      ],
+      "back": "ballroom",
+      "layers": [
+        {
+          "image": "assets/layer_mask_taken.png",
+          "rect": [
+            2028,
+            1683,
+            792,
+            354
+          ],
+          "if": "flag:_once:ballroom/mask"
+        },
+        {
+          "image": "assets/layer_piano_open.png",
+          "rect": [
+            0,
+            666,
+            912,
+            661
+          ],
+          "if": "flag:piano_open"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            285,
+            1210,
+            558,
+            170
+          ],
+          "if": "solved:piano"
+        },
+        {
+          "image": "assets/layer_doors_open.png",
+          "rect": [
+            1553,
+            443,
+            877,
+            1197
+          ],
+          "if": "solved:doors"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "lid",
+          "label": "Piano lid",
+          "rect": [
+            46,
+            1102,
+            850,
+            207
+          ],
+          "if": "!flag:piano_open",
+          "use": "tiny_key",
+          "consume": true,
+          "fail": "The lid is locked. There is a tiny brass keyhole in the wood.",
+          "do": [
+            {
+              "sfx": "unlock"
+            },
+            {
+              "say": "The tiny key turns. You lift the lid over the keys."
+            },
+            {
+              "set": "piano_open"
+            }
+          ]
+        },
+        {
+          "id": "keys",
+          "label": "Piano keys",
+          "rect": [
+            46,
+            1102,
+            850,
+            207
+          ],
+          "if": [
+            "flag:piano_open",
+            "!solved:piano"
+          ],
+          "do": [
+            {
+              "puzzle": "piano"
+            }
+          ]
+        },
+        {
+          "id": "drawer",
+          "label": "Hidden drawer",
+          "rect": [
+            322,
+            1240,
+            505,
+            126
+          ],
+          "if": "solved:piano",
+          "once": true,
+          "do": [
+            {
+              "say": "In the drawer lies an invitation card."
+            },
+            {
+              "give": "invitation"
+            },
+            {
+              "inspect": "invitation"
+            }
+          ]
+        }
+      ]
+    },
+    "coats": {
+      "title": "Coat rack",
+      "image": "assets/ballroom.webp",
+      "crop": [
+        1878,
+        561,
+        1722,
+        968
+      ],
+      "back": "ballroom",
+      "layers": [
+        {
+          "image": "assets/layer_mask_taken.png",
+          "rect": [
+            2028,
+            1683,
+            792,
+            354
+          ],
+          "if": "flag:_once:ballroom/mask"
+        },
+        {
+          "image": "assets/layer_piano_open.png",
+          "rect": [
+            0,
+            666,
+            912,
+            661
+          ],
+          "if": "flag:piano_open"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            285,
+            1210,
+            558,
+            170
+          ],
+          "if": "solved:piano"
+        },
+        {
+          "image": "assets/layer_doors_open.png",
+          "rect": [
+            1553,
+            443,
+            877,
+            1197
+          ],
+          "if": "solved:doors"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "red",
+          "label": "Red coat",
+          "rect": [
+            2526,
+            781,
+            165,
+            643
+          ],
+          "do": [
+            {
+              "say": "Empty pockets and a whiff of perfume."
+            }
+          ]
+        },
+        {
+          "id": "green",
+          "label": "Green coat",
+          "rect": [
+            2692,
+            781,
+            129,
+            643
+          ],
+          "do": [
+            {
+              "if": "!has:mask",
+              "say": "A stranger's green coat. You would need a reason to go through its pockets."
+            },
+            {
+              "if": [
+                "has:mask",
+                "!flag:coat_searched"
+              ],
+              "say": "The guest in green left something in the pocket: a tiny brass key."
+            },
+            {
+              "if": [
+                "has:mask",
+                "!flag:coat_searched"
+              ],
+              "give": "tiny_key"
+            },
+            {
+              "if": "has:mask",
+              "set": "coat_searched"
+            }
+          ]
+        },
+        {
+          "id": "blue",
+          "label": "Blue coat",
+          "rect": [
+            2820,
+            781,
+            138,
+            643
+          ],
+          "do": [
+            {
+              "say": "Nothing but a cold theatre ticket."
+            }
+          ]
+        }
+      ]
+    },
+    "doors": {
+      "title": "Ballroom doors",
+      "image": "assets/ballroom.webp",
+      "crop": [
+        1163,
+        483,
+        1671,
+        940
+      ],
+      "back": "ballroom",
+      "layers": [
+        {
+          "image": "assets/layer_mask_taken.png",
+          "rect": [
+            2028,
+            1683,
+            792,
+            354
+          ],
+          "if": "flag:_once:ballroom/mask"
+        },
+        {
+          "image": "assets/layer_piano_open.png",
+          "rect": [
+            0,
+            666,
+            912,
+            661
+          ],
+          "if": "flag:piano_open"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            285,
+            1210,
+            558,
+            170
+          ],
+          "if": "solved:piano"
+        },
+        {
+          "image": "assets/layer_doors_open.png",
+          "rect": [
+            1553,
+            443,
+            877,
+            1197
+          ],
+          "if": "solved:doors"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "lock",
+          "label": "Keypad",
+          "rect": [
+            2239,
+            907,
+            138,
+            161
+          ],
+          "if": "!solved:doors",
+          "do": [
+            {
+              "puzzle": "doors"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open doors",
+          "rect": [
+            1619,
+            344,
+            678,
+            988
+          ],
+          "if": "solved:doors",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "mask": {
+      "name": "Green mask",
+      "icon": "assets/mask.png",
+      "text": "A green feathered masquerade mask. A ribbon inside reads: \"For the guest in green.\""
+    },
+    "tiny_key": {
+      "name": "Tiny brass key",
+      "icon": "assets/tiny_key.png",
+      "text": "Too small for a door. Maybe a lid or a drawer."
+    },
+    "invitation": {
+      "name": "Invitation",
+      "icon": "assets/invitation.png",
+      "text": "Lord Ashcombe requests the pleasure of your company\nat his 100th birthday.\nHalloween night, 1926.\n\nThe doors lock at midnight.\nThey open only for the year our host was born."
+    }
+  },
+  "puzzles": {
+    "piano": {
+      "type": "sequence",
+      "title": "Piano keys",
+      "prompt": "Play the opening of the waltz.",
+      "buttons": [
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "A",
+        "B"
+      ],
+      "answer": [
+        "E",
+        "C",
+        "G",
+        "E"
+      ],
+      "clue": "flag:read_record",
+      "do": [
+        {
+          "sfx": "drawer"
+        },
+        {
+          "say": "The last note rings out and a hidden drawer slides out under the keys."
+        }
+      ]
+    },
+    "doors": {
+      "type": "code",
+      "title": "Door keypad",
+      "prompt": "Four brass keys. The year engraved on them is long worn away.",
+      "answer": "1826",
+      "clue": [
+        "has:invitation",
+        "flag:saw_cake"
+      ],
+      "do": [
+        {
+          "sfx": "unlock"
+        },
+        {
+          "say": "100 years before 1926. The lock gives way and the doors swing open."
+        }
+      ]
+    }
+  }
+}

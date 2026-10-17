@@ -1,0 +1,17 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../data/site';
+---
+<Page title="Contact" description="Contact Escape Games with a question, bug report, game suggestion or rights inquiry.">
+  <p>Have a question, found something broken or thought of a room you’d like to play? We’d like to hear from you.</p>
+  <p>Email us at <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+  <h2>Report a problem</h2>
+  <p>Please include the game name or page link, what you were trying to do and what happened instead. Your device and browser name can help us reproduce the issue. A screenshot is useful if there’s an error message or a visual problem.</p>
+  <p>You don’t need to send passwords, account details or other sensitive information.</p>
+  <h2>Suggest a game or share feedback</h2>
+  <p>Tell us what you enjoyed, what felt confusing or which kind of escape you’d like to see next. If you’re suggesting a game, include its name and a link so we can take a look.</p>
+  <h2>Game creators and rights holders</h2>
+  <p>For questions about artwork, game listings or permissions, send the relevant page link and explain your connection to the material. If you’re reporting a rights concern, identify the material and provide enough information for us to review it.</p>
+  <h2>Privacy questions</h2>
+  <p>Use the same email address for questions about your information. Put “Privacy” in the subject line and describe what you’d like us to review. Our <a href="/privacy/">Privacy Policy</a> explains how the site handles information.</p>
+</Page>

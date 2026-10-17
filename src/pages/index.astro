@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro';
+import GameCard from '../components/GameCard.astro';
+import ThemeTiles from '../components/ThemeTiles.astro';
+import AdSlot from '../components/AdSlot.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+import { featuredGames, liveThemes, gamesInTheme, hubUrl } from '../lib/catalog';
+import { websiteLd } from '../lib/schema';
+
+const featured = featuredGames();
+const blocks = liveThemes().map((t) => {
+  const list = gamesInTheme(t.slug);
+  // Флагманские (featured) игры темы идут первыми
+  const sorted = [...list.filter((g) => g.featured), ...list.filter((g) => !g.featured)];
+  return { theme: t, games: sorted.slice(0, 6) };
+});
+
+const faq = [
+  { q: 'Are these escape games free?', a: 'Yes. You won’t need to pay or create an account. Available games open right in your browser; those still in development are marked Coming soon.' },
+  { q: 'Can I play escape games on my phone?', a: 'Look for “Mouse & touch” on the game page. Those games support phones and tablets. For games marked “Best with a mouse,” use a computer.' },
+  { q: 'What if I get stuck?', a: 'If a game has a walkthrough, you’ll find a link on its page. Start with the hint and open the solution only if you still need help.' },
+  { q: 'Is my progress saved?', a: 'Saving depends on the game. Check its own menu for a save or continue option before closing the tab.' },
+];
+---
+<Base
+  title={`${SITE.tagline}: Play Escape Room Games in Your Browser`}
+  description={SITE.description}
+  jsonLd={websiteLd(Astro.site!)}
+>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Free Online Escape Games</h1>
+      <p class="sub">A locked door. A few hidden clues. Can you find your way out?</p>
+      <ul class="usp">
+        <li>No downloads</li>
+        <li>No sign-up</li>
+        <li>Mobile friendly</li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="featured-h">
+      <div class="tabs">
+        <h2 id="featured-h" class="tab active">Featured</h2>
+        <a class="tab" href="/new/">New</a>
+      </div>
+      <div class="grid">
+        {featured.map((g, i) => <GameCard game={g} eager={i < 6} />)}
+      </div>
+    </section>
+
+    <AdSlot height={100} />
+
+    <section class="section" aria-labelledby="themes-h">
+      <h2 id="themes-h">Find your next escape</h2>
+      <ThemeTiles />
+    </section>
+
+    {blocks.map(({ theme, games }, i) => (
+      <>
+        <section class="section" style={`--accent:${theme.accent}`}>
+          <div class="section-head">
+            <h2><a href={hubUrl(theme.slug)}>{theme.h1}</a></h2>
+            <a class="more" href={hubUrl(theme.slug)}>View all <Icon name="arrow" size={14} /></a>
+          </div>
+          <div class="grid">{games.map((g) => <GameCard game={g} />)}</div>
+        </section>
+        {i === 0 && <AdSlot height={250} maxWidth={970} />}
+      </>
+    ))}
+
+    <section class="section text-cols">
+      <div>
+        <h2>One room. Plenty of secrets.</h2>
+        <p>
+          A drawer that won’t open. A note tucked behind a painting. A key with no obvious lock.
+          Escape games ask you to make sense of little details like these until you find a way out.
+          Some clues are easy to spot; others only make sense when you return to them later.
+        </p>
+        <p>
+          Browse the rooms above and see what catches your eye. Each card gives you a difficulty
+          level and a rough playing time, so you can choose a quick puzzle for a break or something
+          longer to settle into. Available games run in your browser, with no download or account needed.
+          You’ll see “Coming soon” on games that aren’t ready yet.
+        </p>
+        <h2>Start by looking around</h2>
+        <p>
+          Click or tap to explore the room. Check the shelves, open the drawers and read any notes
+          you find. In many games, you can collect objects and use them somewhere else: a small
+          screwdriver might open a panel, while a pattern on the wall could be the code for a lock.
+        </p>
+        <p>
+          You don’t have to work everything out in order. If a puzzle isn’t making sense, leave it
+          for a moment and try another part of the room. A clue you haven’t found yet may be all
+          you’re missing.
+        </p>
+      </div>
+      <div>
+        <h2>What kind of room are you in the mood for?</h2>
+        <p>
+          Start with a Halloween room for creaky doors, candlelit halls and a little mystery.
+          Prison escapes swap the haunted house for locked cells and a route to freedom.
+          If you’d rather take your time, look for an easy room; if you enjoy keeping track of
+          several clues at once, try one marked hard.
+        </p>
+        <h2>Playing on your phone?</h2>
+        <p>
+          Check the controls on the game page before you start. “Mouse &amp; touch” means you can
+          play with your fingers on a phone or tablet. “Best with a mouse” is your cue to use
+          a computer. Turning your phone sideways can also make a wider room easier to explore.
+        </p>
+        <h2>A little help when you need it</h2>
+        <p>
+          A good hint can get you moving again without giving everything away. Where a walkthrough
+          is available, you can read a hint first and leave the full solution closed. There’s no
+          need to spoil the next puzzle just because this one has you stuck.
+        </p>
+      </div>
+    </section>
+
+    <Faq items={faq} />
+  </div>
+</Base>
+
+<style>
+  .hero { padding: 28px 0 8px; }
+  .hero h1 { margin-bottom: .2em; }
+  .sub { font-size: clamp(1.05rem, 2.4vw, 1.4rem); color: #e2e3e8; margin: 0 0 6px; }
+  .usp { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); font-size: .95rem; }
+  .usp li + li::before { content: '•'; margin-right: 14px; }
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 16px; padding-bottom: 10px; }
+  .tab { font-size: .95rem; font-weight: 650; margin: 0; padding: 7px 22px; border-radius: 7px; text-decoration: none; background: var(--bg-2); color: var(--text); }
+  .tab.active { background: var(--brand); color: #1a0d00; }
+  .tab:not(.active):hover { background: #26282f; }
+</style>

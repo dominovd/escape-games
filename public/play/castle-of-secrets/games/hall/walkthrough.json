@@ -1,0 +1,30 @@
+{
+  "id": "hall",
+  "title": "Castle of Secrets: The Great Hall",
+  "steps": [
+    "Great hall: open Fireplace",
+    "Fireplace: Gauntlet → get Taper",
+    "Fireplace: Fire tools → get Poker",
+    "Fireplace: use Taper on Fire → get Lit taper",
+    "Fireplace: use Poker on Ashes → get Brass gear, Charred note",
+    "Go back to Great hall",
+    "Great hall: open Grandfather clock",
+    "Grandfather clock: use Brass gear on Clock face",
+    "Grandfather clock: Clock hands → solve \"Clock hands\" (answer: 7 15)",
+    "Grandfather clock: Pendulum → get Silver key",
+    "Go back to Great hall",
+    "Great hall: open Dining table",
+    "Dining table: use Silver key on Jewelry box → get Signet ring",
+    "Dining table: use Lit taper on Candelabra → solve \"Candelabra\" (answer: III I IV II)",
+    "Dining table: Folded letter → get Folded letter",
+    "Go back to Great hall",
+    "Great hall: open Portrait",
+    "Portrait: use Signet ring on Crest on the frame",
+    "Portrait: Wall safe → solve \"Wall safe\" (answer: 6139)",
+    "Portrait: Inside the safe → get Iron key",
+    "Go back to Great hall",
+    "Great hall: open Iron gate",
+    "Iron gate: use Iron key on Gate lock",
+    "Iron gate: Staircase"
+  ]
+}

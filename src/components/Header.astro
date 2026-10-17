@@ -1,0 +1,53 @@
+---
+import Icon from './Icon.astro';
+import { SITE } from '../data/site';
+import { liveThemes, hubUrl } from '../lib/catalog';
+
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/escape-room-games/', label: 'All Games' },
+  ...liveThemes().map((t) => ({ href: hubUrl(t.slug), label: t.name })),
+  { href: '/new/', label: 'New' },
+];
+const [first, ...rest] = SITE.name.split(' ');
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label={`${SITE.name} home`}>
+      <span class="logo-icon"><Icon name="keyhole" size={26} /></span>
+      <span class="logo-text">{first} <b>{rest.join(' ')}</b></span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        {nav.map((n) => (
+          <li><a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <form class="search" action="/search/" method="get" role="search">
+      <label class="sr-only" for="q">Search games</label>
+      <Icon name="search" size={16} />
+      <input id="q" name="q" type="search" placeholder="Search" autocomplete="off" />
+    </form>
+  </div>
+</header>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 20; }
+  .bar { display: flex; align-items: center; gap: 20px; min-height: 60px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; font-size: 1.05rem; }
+  .logo-icon { color: var(--brand); display: flex; }
+  .logo b { color: var(--brand); }
+  nav { order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; }
+  nav a { display: block; padding: 6px 12px; text-decoration: none; border-radius: 6px; font-size: .95rem; white-space: nowrap; color: #e4e5ea; }
+  nav a:hover, nav a[aria-current='page'] { background: var(--bg-2); color: #fff; }
+  .search { margin-left: auto; display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; color: var(--muted); background: var(--bg-2); }
+  .search input { background: transparent; border: 0; color: var(--text); width: 92px; font: inherit; font-size: .95rem; outline: none; }
+  .bar { column-gap: 12px; }
+  @media (max-width: 380px) { .logo { font-size: .95rem; } .search input { width: 70px; } }
+  @media (min-width: 860px) {
+    nav { order: 0; width: auto; }
+    .search input { width: 190px; }
+  }
+</style>

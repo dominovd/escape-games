@@ -1,0 +1,12 @@
+---
+// Рекламный слот с зарезервированной высотой (без сдвигов макета).
+// Включается флагом SITE.adsEnabled. Код рекламной сети вставить внутрь div.
+import { SITE } from '../data/site';
+interface Props { height?: number; maxWidth?: number; label?: string; }
+const { height = 100, maxWidth = 970, label = 'Advertisement' } = Astro.props;
+---
+{SITE.adsEnabled && (
+  <div class="ad-slot" style={`min-height:${height}px;max-width:${maxWidth}px`} aria-label={label}>
+    {label}
+  </div>
+)}

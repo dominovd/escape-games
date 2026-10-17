@@ -1,0 +1,677 @@
+{
+  "id": "parlor",
+  "title": "The Haunted House: The Parlor",
+  "theme": "castle",
+  "start": "parlor",
+  "intro": "The front door slammed by itself. The parlor is freezing, and the portraits on the wall are watching you.",
+  "winTitle": "The ghost is at peace",
+  "winText": "The door opens with a sigh. Behind you, a little girl waves from the window and fades away. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_parlor.mp3",
+    "ambience": "assets/audio/amb_parlor.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "creak": "assets/audio/sfx_creak.mp3",
+      "whisper": "assets/audio/sfx_whisper.mp3",
+      "lullaby": "assets/audio/sfx_lullaby.mp3",
+      "planchette": "assets/audio/sfx_planchette.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3"
+    }
+  },
+  "scenes": {
+    "parlor": {
+      "title": "Parlor",
+      "image": "assets/parlor.webp",
+      "layers": [
+        {
+          "image": "assets/layer_table_drawer.png",
+          "rect": [
+            1509,
+            1364,
+            379,
+            299
+          ],
+          "if": "solved:board"
+        },
+        {
+          "image": "assets/layer_music_box_open.png",
+          "rect": [
+            269,
+            740,
+            301,
+            299
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_ghost.png",
+          "rect": [
+            2405,
+            494,
+            455,
+            905
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3229,
+            103,
+            611,
+            1998
+          ],
+          "if": "solved:door"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "bookcase",
+          "label": "Bookcase",
+          "rect": [
+            0,
+            92,
+            792,
+            1608
+          ],
+          "do": [
+            {
+              "goto": "bookcase"
+            }
+          ]
+        },
+        {
+          "id": "portraits",
+          "label": "Portraits",
+          "rect": [
+            838,
+            149,
+            1378,
+            804
+          ],
+          "do": [
+            {
+              "goto": "portraits"
+            }
+          ]
+        },
+        {
+          "id": "table",
+          "label": "Round table",
+          "rect": [
+            1206,
+            1056,
+            1011,
+            919
+          ],
+          "do": [
+            {
+              "goto": "table"
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "label": "Window",
+          "rect": [
+            2389,
+            0,
+            643,
+            1194
+          ],
+          "do": [
+            {
+              "say": "Fog presses against the glass. For a moment you see your breath."
+            }
+          ]
+        },
+        {
+          "id": "chair",
+          "label": "Rocking chair",
+          "rect": [
+            2423,
+            930,
+            643,
+            758
+          ],
+          "once": true,
+          "hint": "The rocking chair moves by itself. Look under the shawl.",
+          "do": [
+            {
+              "sfx": "creak"
+            },
+            {
+              "say": "The chair rocks by itself. Under the shawl lies an old diary."
+            },
+            {
+              "give": "diary"
+            },
+            {
+              "inspect": "diary"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Front door",
+          "rect": [
+            3204,
+            115,
+            551,
+            1516
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        }
+      ]
+    },
+    "bookcase": {
+      "title": "Bookcase",
+      "image": "assets/parlor.webp",
+      "crop": [
+        0,
+        617,
+        1316,
+        740
+      ],
+      "back": "parlor",
+      "layers": [
+        {
+          "image": "assets/layer_table_drawer.png",
+          "rect": [
+            1509,
+            1364,
+            379,
+            299
+          ],
+          "if": "solved:board"
+        },
+        {
+          "image": "assets/layer_music_box_open.png",
+          "rect": [
+            269,
+            740,
+            301,
+            299
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_ghost.png",
+          "rect": [
+            2405,
+            494,
+            455,
+            905
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3229,
+            103,
+            611,
+            1998
+          ],
+          "if": "solved:door"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "books",
+          "label": "Books",
+          "rect": [
+            126,
+            299,
+            551,
+            574
+          ],
+          "do": [
+            {
+              "say": "Lullabies, ghost stories and a book of pressed flowers."
+            }
+          ]
+        },
+        {
+          "id": "music_box",
+          "label": "Music box",
+          "rect": [
+            299,
+            873,
+            230,
+            149
+          ],
+          "if": "!flag:lullaby",
+          "use": "winding_key",
+          "consume": true,
+          "fail": "A silver music box. Its winding key is missing.",
+          "do": [
+            {
+              "sfx": "lullaby"
+            },
+            {
+              "say": "You wind the box and a lullaby fills the room. A little girl appears by the window, humming along. The cold is gone."
+            },
+            {
+              "set": "lullaby"
+            }
+          ]
+        },
+        {
+          "id": "music_box_on",
+          "label": "Music box",
+          "rect": [
+            299,
+            873,
+            230,
+            149
+          ],
+          "if": "flag:lullaby",
+          "do": [
+            {
+              "say": "The lullaby plays softly."
+            }
+          ]
+        }
+      ]
+    },
+    "portraits": {
+      "title": "Portraits",
+      "image": "assets/parlor.webp",
+      "crop": [
+        641,
+        53,
+        1772,
+        997
+      ],
+      "back": "parlor",
+      "layers": [
+        {
+          "image": "assets/layer_table_drawer.png",
+          "rect": [
+            1509,
+            1364,
+            379,
+            299
+          ],
+          "if": "solved:board"
+        },
+        {
+          "image": "assets/layer_music_box_open.png",
+          "rect": [
+            269,
+            740,
+            301,
+            299
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_ghost.png",
+          "rect": [
+            2405,
+            494,
+            455,
+            905
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3229,
+            103,
+            611,
+            1998
+          ],
+          "if": "solved:door"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "mother",
+          "label": "Left portrait",
+          "rect": [
+            850,
+            218,
+            425,
+            735
+          ],
+          "do": [
+            {
+              "sfx": "whisper"
+            },
+            {
+              "say": "Mother. Her eyes follow you. She holds a red rose."
+            },
+            {
+              "set": "p_mother"
+            }
+          ]
+        },
+        {
+          "id": "father",
+          "label": "Middle portrait",
+          "rect": [
+            1286,
+            161,
+            448,
+            781
+          ],
+          "do": [
+            {
+              "sfx": "whisper"
+            },
+            {
+              "say": "Father. His eyes follow you. He holds an iron key."
+            },
+            {
+              "set": "p_father"
+            }
+          ]
+        },
+        {
+          "id": "lily",
+          "label": "Right portrait",
+          "rect": [
+            1768,
+            218,
+            448,
+            735
+          ],
+          "do": [
+            {
+              "sfx": "whisper"
+            },
+            {
+              "say": "Lily. Her eyes follow you. She holds a lit candle."
+            },
+            {
+              "set": "p_lily"
+            }
+          ]
+        }
+      ]
+    },
+    "table": {
+      "title": "Spirit board",
+      "image": "assets/parlor.webp",
+      "crop": [
+        952,
+        973,
+        1519,
+        854
+      ],
+      "back": "parlor",
+      "layers": [
+        {
+          "image": "assets/layer_table_drawer.png",
+          "rect": [
+            1509,
+            1364,
+            379,
+            299
+          ],
+          "if": "solved:board"
+        },
+        {
+          "image": "assets/layer_music_box_open.png",
+          "rect": [
+            269,
+            740,
+            301,
+            299
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_ghost.png",
+          "rect": [
+            2405,
+            494,
+            455,
+            905
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3229,
+            103,
+            611,
+            1998
+          ],
+          "if": "solved:door"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "board",
+          "label": "Spirit board",
+          "rect": [
+            1424,
+            1252,
+            563,
+            142
+          ],
+          "if": "!solved:board",
+          "do": [
+            {
+              "puzzle": "board"
+            }
+          ]
+        },
+        {
+          "id": "candle",
+          "label": "Candle",
+          "rect": [
+            1957,
+            1056,
+            115,
+            287
+          ],
+          "do": [
+            {
+              "say": "The flame leans toward the board, as if someone is breathing on it."
+            }
+          ]
+        },
+        {
+          "id": "drawer",
+          "label": "Table drawer",
+          "rect": [
+            1527,
+            1401,
+            344,
+            230
+          ],
+          "if": "solved:board",
+          "once": true,
+          "do": [
+            {
+              "say": "In the little drawer: a silver winding key."
+            },
+            {
+              "give": "winding_key"
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Front door",
+      "image": "assets/parlor.webp",
+      "crop": [
+        2169,
+        483,
+        1671,
+        940
+      ],
+      "back": "parlor",
+      "layers": [
+        {
+          "image": "assets/layer_table_drawer.png",
+          "rect": [
+            1509,
+            1364,
+            379,
+            299
+          ],
+          "if": "solved:board"
+        },
+        {
+          "image": "assets/layer_music_box_open.png",
+          "rect": [
+            269,
+            740,
+            301,
+            299
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_ghost.png",
+          "rect": [
+            2405,
+            494,
+            455,
+            905
+          ],
+          "if": "flag:lullaby"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3229,
+            103,
+            611,
+            1998
+          ],
+          "if": "solved:door"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "lock",
+          "label": "Dial lock",
+          "rect": [
+            3388,
+            804,
+            218,
+            241
+          ],
+          "if": "!solved:door",
+          "do": [
+            {
+              "if": "!flag:lullaby",
+              "say": "The lock is ice cold. Its three dials are frozen solid."
+            },
+            {
+              "if": "flag:lullaby",
+              "puzzle": "door"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            3204,
+            115,
+            551,
+            1516
+          ],
+          "if": "solved:door",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "diary": {
+      "name": "Diary",
+      "icon": "assets/diary.png",
+      "text": "My little sister never lets anyone forget her name. The spirit board answers to it.\n\nMother, Father and Lily hang in the parlor, each with the thing they loved most. The front door remembers them in that order."
+    },
+    "winding_key": {
+      "name": "Winding key",
+      "icon": "assets/winding_key.png",
+      "text": "A small silver key for winding something up."
+    }
+  },
+  "puzzles": {
+    "board": {
+      "type": "code",
+      "title": "Spirit board",
+      "prompt": "Guide the planchette. Spell the name.",
+      "keys": "letters",
+      "answer": "LILY",
+      "clue": "has:diary",
+      "do": [
+        {
+          "sfx": "planchette"
+        },
+        {
+          "say": "The planchette glides by itself: L, I, L, Y. A little drawer clicks open under the table."
+        }
+      ]
+    },
+    "door": {
+      "type": "dials",
+      "title": "Door dials",
+      "prompt": "Three dials, three family treasures.",
+      "options": [
+        "🌙",
+        "🌹",
+        "🗝️",
+        "🕯️",
+        "🦉"
+      ],
+      "start": [
+        "🌙",
+        "🌙",
+        "🌙"
+      ],
+      "answer": [
+        "🌹",
+        "🗝️",
+        "🕯️"
+      ],
+      "clue": [
+        "has:diary",
+        "flag:p_mother",
+        "flag:p_father",
+        "flag:p_lily"
+      ],
+      "do": [
+        {
+          "sfx": "unlock"
+        },
+        {
+          "say": "Rose, key, candle. The bolt slides back on its own."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,61 @@
+/* Escape Kit theme: pumpkin. Friendly Halloween for kids games: candy orange, grape purple, rounded shapes.
+   Enable with "theme": "pumpkin" in game.json. Every rule is scoped to .ek.theme-pumpkin. */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap');
+
+.ek.theme-pumpkin{
+  --p-orange:#ff8a2a; --p-orange-hi:#ffb35c; --p-orange-lo:#c95a10; --p-grape:#3a1f5c; --p-grape-2:#4d2a78; --p-lime:#9be15d;
+  --ek-bg:#170c26; --ek-text:#fff1de; --ek-dim:#d3b9e8; --ek-accent:var(--p-orange-hi); --ek-line:#ffb35c33;
+  --p-font:'Fredoka',system-ui,sans-serif;
+  font-family:var(--p-font);
+  background:radial-gradient(120% 90% at 50% 40%,#2c1745 0%,#170c26 70%,#0d0617 100%);
+}
+.ek.theme-pumpkin .ek-top,
+.ek.theme-pumpkin .ek-inv{background:linear-gradient(#3a1f5c,#2a1545);border-color:#ff8a2a55}
+.ek.theme-pumpkin .ek-top{border-bottom:2px solid #ff8a2a66}
+.ek.theme-pumpkin .ek-inv{border-top:2px solid #ff8a2a66}
+.ek.theme-pumpkin .ek-title{font:700 21px/1.2 var(--p-font);letter-spacing:.02em;color:var(--p-orange-hi);text-shadow:0 2px 0 #0006}
+
+.ek.theme-pumpkin .ek-btn.ghost{
+  font:600 14px var(--p-font)!important;color:#fff1de!important;border:2px solid #ff8a2a88;border-radius:999px;padding:6px 16px;
+  background:#4d2a78;box-shadow:0 3px 0 #1d0f30;
+}
+.ek.theme-pumpkin .ek-btn.ghost:hover:not(:disabled){background:#5d3490;border-color:var(--p-orange-hi)}
+.ek.theme-pumpkin .ek-btn.ghost:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 #1d0f30}
+.ek.theme-pumpkin .ek-btn:not(.ghost){
+  font:700 16px var(--p-font)!important;border-radius:999px;padding:11px 28px;color:#2a1206!important;border:0;
+  background:linear-gradient(#ffc070,#ff8a2a);box-shadow:0 4px 0 #a5460c,0 8px 18px #0008;
+}
+.ek.theme-pumpkin .ek-btn:not(.ghost):active{transform:translateY(3px);box-shadow:0 1px 0 #a5460c}
+.ek.theme-pumpkin .ek-sound{width:38px;padding:0!important}
+.ek.theme-pumpkin .ek-sound.off{color:#a68cc0!important}
+.ek.theme-pumpkin button:focus-visible{outline:3px solid var(--p-lime);outline-offset:2px}
+
+.ek.theme-pumpkin .ek-scene{border-radius:16px;box-shadow:0 0 0 3px var(--p-orange),0 24px 60px #000c,0 0 120px #ff8a2a22}
+
+.ek.theme-pumpkin .ek-back{
+  width:56px;height:56px;color:#2a1206;border:0;background:radial-gradient(circle at 35% 30%,#ffd29a,#ff8a2a 60%,#d0600f);
+  box-shadow:0 4px 0 #a5460c,0 8px 16px #0009;backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.ek.theme-pumpkin .ek-back:hover{filter:brightness(1.08)}
+
+.ek.theme-pumpkin .ek-msg{
+  font:500 18px/1.35 var(--p-font);color:#fff1de;background:#3a1f5ef2;border:2px solid var(--p-orange);border-radius:18px;padding:10px 22px;
+  box-shadow:0 6px 0 #1d0f30,0 12px 28px #000a;
+}
+.ek.theme-pumpkin .ek-msg .hint{color:var(--p-lime)}
+
+.ek.theme-pumpkin .ek-slot{border-radius:14px;border:2px solid #ff8a2a55;background:radial-gradient(circle at 50% 40%,#4d2a78,#2a1545)}
+.ek.theme-pumpkin .ek-slot.sel{border-color:var(--p-lime);box-shadow:0 0 0 3px #9be15d55,0 0 18px #9be15d55}
+
+.ek.theme-pumpkin .ek-modal{background:#0d0617cc}
+.ek.theme-pumpkin .ek-card{border-radius:22px;background:linear-gradient(#4d2a78,#2f1850);border:3px solid var(--p-orange);box-shadow:0 8px 0 #1d0f30,0 30px 80px #000a}
+.ek.theme-pumpkin .ek-card.solved{box-shadow:0 0 0 3px var(--p-lime),0 0 60px #9be15d66}
+.ek.theme-pumpkin .ek-card-head h2{font:700 24px var(--p-font);color:var(--p-orange-hi)}
+.ek.theme-pumpkin .ek-note{font:500 18px/1.6 var(--p-font);color:#3a1f12;background:#ffe9c7;border:0;border-radius:12px;box-shadow:inset 0 0 0 2px #ffb35c}
+.ek.theme-pumpkin .ek-code-cell{border-radius:12px;border:2px solid #ffb35c66;background:#1d0f30;font-family:var(--p-font);color:var(--p-orange-hi)}
+.ek.theme-pumpkin .ek-key{border-radius:14px;border:0;background:#5d3490;box-shadow:0 3px 0 #1d0f30;font-family:var(--p-font)!important}
+.ek.theme-pumpkin .ek-key:hover{background:#6c3ea6}
+.ek.theme-pumpkin .ek-dial-face{border-radius:18px;border:2px solid #ffb35c88;background:radial-gradient(#5d3490,#2a1545);font-family:var(--p-font)}
+.ek.theme-pumpkin .ek-seq-btn{border:2px solid #ffb35c66;background:radial-gradient(#5d3490,#2a1545)}
+.ek.theme-pumpkin .ek-progress i.on{background:var(--p-lime)}
+.ek.theme-pumpkin .ek-view{background:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 45%,#0d061799 100%)}

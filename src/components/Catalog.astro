@@ -1,0 +1,93 @@
+---
+// Сетка с фильтрами (клиентские, не меняют URL и canonical) и пагинацией обычными ссылками.
+import type { Game } from '../data/games';
+import GameCard from './GameCard.astro';
+
+interface Props {
+  games: Game[];
+  prevUrl?: string;
+  nextUrl?: string;
+  currentPage?: number;
+  lastPage?: number;
+  baseUrl?: string;
+}
+const { games, prevUrl, nextUrl, currentPage = 1, lastPage = 1, baseUrl = '' } = Astro.props;
+const pageUrl = (n: number) => (n === 1 ? baseUrl : `${baseUrl}${n}/`);
+---
+<div class="catalog">
+  <form class="filters" aria-label="Filter games">
+    <fieldset>
+      <legend>Difficulty</legend>
+      <label><input type="checkbox" name="difficulty" value="easy" /> Easy</label>
+      <label><input type="checkbox" name="difficulty" value="medium" /> Medium</label>
+      <label><input type="checkbox" name="difficulty" value="hard" /> Hard</label>
+    </fieldset>
+    <fieldset>
+      <legend>Playing time</legend>
+      <label><input type="radio" name="length" value="" checked /> Any</label>
+      <label><input type="radio" name="length" value="0-10" /> Up to 10 min</label>
+      <label><input type="radio" name="length" value="11-20" /> 11–20 min</label>
+      <label><input type="radio" name="length" value="21-999" /> 20+ min</label>
+    </fieldset>
+    <fieldset>
+      <legend>Device</legend>
+      <label><input type="checkbox" name="mobile" value="1" /> Plays on mobile</label>
+    </fieldset>
+  </form>
+
+  <div class="grid" data-grid>
+    {games.map((g, i) => <GameCard game={g} eager={i < 6} />)}
+  </div>
+  <p class="empty muted" hidden data-empty>Nothing here matches yet. Try changing a filter to see more games.</p>
+
+  {lastPage > 1 && (
+    <nav class="pager" aria-label="Pagination">
+      {prevUrl ? <a href={prevUrl} rel="prev">Previous</a> : <span />}
+      <ol>
+        {Array.from({ length: lastPage }, (_, i) => i + 1).map((n) => (
+          <li>{n === currentPage ? <span aria-current="page">{n}</span> : <a href={pageUrl(n)}>{n}</a>}</li>
+        ))}
+      </ol>
+      {nextUrl ? <a href={nextUrl} rel="next">Next</a> : <span />}
+    </nav>
+  )}
+</div>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.filters');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-grid] .card')];
+  const empty = document.querySelector<HTMLElement>('[data-empty]');
+  const apply = () => {
+    if (!form) return;
+    const data = new FormData(form);
+    const diffs = data.getAll('difficulty') as string[];
+    const len = (data.get('length') as string) || '';
+    const mobile = data.get('mobile') === '1';
+    const [min, max] = len ? len.split('-').map(Number) : [0, Infinity];
+    let shown = 0;
+    cards.forEach((c) => {
+      const m = Number(c.dataset.minutes);
+      const ok =
+        (!diffs.length || diffs.includes(c.dataset.difficulty!)) &&
+        m >= min && m <= max &&
+        (!mobile || c.dataset.mobile === '1');
+      c.hidden = !ok;
+      if (ok) shown++;
+    });
+    if (empty) empty.hidden = shown > 0;
+  };
+  form?.addEventListener('change', apply);
+</script>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 6px 0 18px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-2); }
+  fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+  legend { float: left; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-right: 6px; padding: 0; }
+  label { font-size: .92rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+  input { accent-color: var(--accent, var(--brand)); }
+  :global(.card[hidden]) { display: none; }
+  .pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; }
+  .pager ol { list-style: none; display: flex; gap: 6px; padding: 0; margin: 0; }
+  .pager a, .pager span[aria-current] { display: inline-block; padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px; text-decoration: none; }
+  .pager span[aria-current] { background: var(--brand); color: #1a0d00; border-color: var(--brand); font-weight: 700; }
+</style>

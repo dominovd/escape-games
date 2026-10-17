@@ -1,0 +1,55 @@
+---
+// Обложка 4:3 с фиксированными размерами (без CLS).
+// Если у игры нет image, рисуется цветной плейсхолдер в цвете темы.
+import type { Game } from '../data/games';
+import { accentOf } from '../lib/catalog';
+import { themeBySlug } from '../data/themes';
+import Icon from './Icon.astro';
+
+interface Props { game: Game; eager?: boolean; width?: number; height?: number; }
+const { game, eager = false, width = 400, height = 300 } = Astro.props;
+const accent = accentOf(game);
+const icon = themeBySlug(game.themes[0])?.icon ?? 'keyhole';
+---
+{game.image && game.coverIndex !== undefined ? (
+  <span class="thumb atlas">
+    <img
+      src={game.image}
+      alt={`${game.title} cover illustration`}
+      width={1536}
+      height={1024}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+      decoding="async"
+      style={`left:${-(game.coverIndex % 6) * 100}%;top:${-(Math.floor(game.coverIndex / 6) * 4 / 3 + 1 / 6) * 100}%`}
+    />
+  </span>
+) : game.image ? (
+  <img
+    class="thumb"
+    src={game.image}
+    alt={`${game.title} escape game`}
+    width={width}
+    height={height}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    decoding="async"
+  />
+) : (
+  <div class="thumb ph" style={`--a:${accent}`} role="img" aria-label={`${game.title} escape game`}>
+    <span class="ph-icon"><Icon name={icon} size={44} /></span>
+  </div>
+)}
+
+<style>
+  .thumb { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #23252c; }
+  .atlas { display: block; position: relative; overflow: hidden; }
+  .atlas img { position: absolute; width: 600%; max-width: none; height: 533.333333%; object-fit: fill; }
+  .ph {
+    display: grid; place-items: center;
+    background:
+      radial-gradient(120% 90% at 30% 20%, color-mix(in srgb, var(--a) 35%, transparent), transparent 60%),
+      linear-gradient(160deg, #262830, #15161a);
+  }
+  .ph-icon { color: var(--a); opacity: .85; }
+</style>

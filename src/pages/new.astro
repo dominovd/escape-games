@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Catalog from '../components/Catalog.astro';
+import { newestGames } from '../lib/catalog';
+import { breadcrumbLd, itemListLd } from '../lib/schema';
+
+const list = newestGames(48);
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'New Escape Games', href: '/new/' }];
+---
+<Base
+  title="New Escape Games: Latest Free Online Escape Rooms"
+  description="The newest free online escape games, updated as new rooms are added. Play in your browser on PC or mobile."
+  jsonLd={[breadcrumbLd(crumbs, Astro.site!), itemListLd(list, Astro.site!)]}
+>
+  <div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>New Escape Games</h1>
+    <p class="muted">A fresh room to explore? Here are the latest additions, starting with the newest.</p>
+    <Catalog games={list} />
+  </div>
+</Base>

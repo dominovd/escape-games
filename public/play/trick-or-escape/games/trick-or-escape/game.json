@@ -1,0 +1,520 @@
+{
+  "id": "hallway",
+  "title": "Trick or Escape",
+  "theme": "pumpkin",
+  "start": "hallway",
+  "intro": "You knocked on the wrong door. It swung shut behind you, and a skeleton butler is holding the key.",
+  "winTitle": "Treat accepted!",
+  "winText": "The skeleton bows, the door swings open and the cool night air smells of candy. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_hallway.mp3",
+    "ambience": "assets/audio/amb_hallway.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "fortune": "assets/audio/sfx_fortune.mp3",
+      "candy": "assets/audio/sfx_candy.mp3",
+      "dog": "assets/audio/sfx_dog.mp3",
+      "rattle": "assets/audio/sfx_rattle.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3"
+    }
+  },
+  "scenes": {
+    "hallway": {
+      "title": "Hallway",
+      "image": "assets/hallway.webp",
+      "layers": [
+        {
+          "image": "assets/layer_fortune_lit.png",
+          "rect": [
+            381,
+            388,
+            627,
+            1378
+          ],
+          "if": "flag:fortune"
+        },
+        {
+          "image": "assets/layer_dog_moved.png",
+          "rect": [
+            2490,
+            834,
+            1350,
+            1121
+          ],
+          "if": "flag:dog_moved"
+        },
+        {
+          "image": "assets/layer_skeleton_empty.png",
+          "rect": [
+            2770,
+            301,
+            299,
+            464
+          ],
+          "if": "flag:traded"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1576,
+            55,
+            870,
+            1474
+          ],
+          "if": "flag:door_open"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "jar",
+          "label": "Treat jar",
+          "rect": [
+            92,
+            425,
+            230,
+            287
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "A jar shaped like a bone, full of dog biscuits. You take one."
+            },
+            {
+              "give": "biscuit"
+            }
+          ]
+        },
+        {
+          "id": "machines",
+          "label": "Machines",
+          "rect": [
+            379,
+            207,
+            1068,
+            1263
+          ],
+          "do": [
+            {
+              "goto": "machines"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Front door",
+          "rect": [
+            1585,
+            23,
+            689,
+            1355
+          ],
+          "if": "!flag:door_open",
+          "use": "door_key",
+          "consume": true,
+          "fail": "Locked. The keyhole is big enough for a very big key.",
+          "do": [
+            {
+              "sfx": "unlock"
+            },
+            {
+              "say": "The big key turns and the door creaks open."
+            },
+            {
+              "set": "door_open"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            1585,
+            23,
+            689,
+            1355
+          ],
+          "if": "flag:door_open",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        },
+        {
+          "id": "skeleton",
+          "label": "Skeleton butler",
+          "rect": [
+            2434,
+            322,
+            574,
+            1171
+          ],
+          "if": "!flag:traded",
+          "use": "lollipop",
+          "consume": true,
+          "fail": "\"Trick or treat!\" the skeleton rattles, holding up a big brass key. \"Something red, round and on a stick, please.\"",
+          "do": [
+            {
+              "sfx": "rattle"
+            },
+            {
+              "say": "\"My favourite!\" The skeleton swaps the key for the lollipop."
+            },
+            {
+              "set": "traded"
+            },
+            {
+              "give": "door_key"
+            }
+          ]
+        },
+        {
+          "id": "skeleton_done",
+          "label": "Skeleton butler",
+          "rect": [
+            2434,
+            322,
+            574,
+            1171
+          ],
+          "if": "flag:traded",
+          "do": [
+            {
+              "say": "The skeleton is very happy with its lollipop."
+            }
+          ]
+        },
+        {
+          "id": "sofa",
+          "label": "Sofa",
+          "rect": [
+            2836,
+            792,
+            1004,
+            723
+          ],
+          "do": [
+            {
+              "goto": "sofa"
+            }
+          ]
+        }
+      ]
+    },
+    "machines": {
+      "title": "Machines",
+      "image": "assets/hallway.webp",
+      "crop": [
+        0,
+        297,
+        2127,
+        1197
+      ],
+      "back": "hallway",
+      "layers": [
+        {
+          "image": "assets/layer_fortune_lit.png",
+          "rect": [
+            381,
+            388,
+            627,
+            1378
+          ],
+          "if": "flag:fortune"
+        },
+        {
+          "image": "assets/layer_dog_moved.png",
+          "rect": [
+            2490,
+            834,
+            1350,
+            1121
+          ],
+          "if": "flag:dog_moved"
+        },
+        {
+          "image": "assets/layer_skeleton_empty.png",
+          "rect": [
+            2770,
+            301,
+            299,
+            464
+          ],
+          "if": "flag:traded"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1576,
+            55,
+            870,
+            1474
+          ],
+          "if": "flag:door_open"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "fortune",
+          "label": "Fortune teller",
+          "rect": [
+            379,
+            207,
+            620,
+            1252
+          ],
+          "if": "!flag:fortune",
+          "use": "coin",
+          "consume": true,
+          "fail": "A fortune-teller machine with a crystal ball. A sign says: \"Insert coin\".",
+          "do": [
+            {
+              "sfx": "fortune"
+            },
+            {
+              "say": "The crystal ball glows and a card slides out."
+            },
+            {
+              "set": "fortune"
+            },
+            {
+              "give": "fortune_card"
+            },
+            {
+              "inspect": "fortune_card"
+            }
+          ]
+        },
+        {
+          "id": "fortune_done",
+          "label": "Fortune teller",
+          "rect": [
+            379,
+            207,
+            620,
+            1252
+          ],
+          "if": "flag:fortune",
+          "do": [
+            {
+              "say": "\"Come again soon,\" the fortune teller hums."
+            }
+          ]
+        },
+        {
+          "id": "candy",
+          "label": "Candy machine",
+          "rect": [
+            1033,
+            494,
+            402,
+            953
+          ],
+          "if": "!solved:candy",
+          "do": [
+            {
+              "puzzle": "candy"
+            }
+          ]
+        },
+        {
+          "id": "candy_done",
+          "label": "Candy machine",
+          "rect": [
+            1033,
+            494,
+            402,
+            953
+          ],
+          "if": "solved:candy",
+          "do": [
+            {
+              "say": "Rows of candy behind the glass. You already got the best one."
+            }
+          ]
+        }
+      ]
+    },
+    "sofa": {
+      "title": "Sofa",
+      "image": "assets/hallway.webp",
+      "crop": [
+        2246,
+        705,
+        1594,
+        897
+      ],
+      "back": "hallway",
+      "layers": [
+        {
+          "image": "assets/layer_fortune_lit.png",
+          "rect": [
+            381,
+            388,
+            627,
+            1378
+          ],
+          "if": "flag:fortune"
+        },
+        {
+          "image": "assets/layer_dog_moved.png",
+          "rect": [
+            2490,
+            834,
+            1350,
+            1121
+          ],
+          "if": "flag:dog_moved"
+        },
+        {
+          "image": "assets/layer_skeleton_empty.png",
+          "rect": [
+            2770,
+            301,
+            299,
+            464
+          ],
+          "if": "flag:traded"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1576,
+            55,
+            870,
+            1474
+          ],
+          "if": "flag:door_open"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "dog",
+          "label": "Sleeping dog",
+          "rect": [
+            3078,
+            930,
+            735,
+            310
+          ],
+          "if": "!flag:dog_moved",
+          "use": "biscuit",
+          "consume": true,
+          "fail": "A big sleepy dog snores on the sofa cushions. It will not budge.",
+          "do": [
+            {
+              "sfx": "dog"
+            },
+            {
+              "say": "The dog sniffs the biscuit, jumps down and crunches it on the rug."
+            },
+            {
+              "set": "dog_moved"
+            }
+          ]
+        },
+        {
+          "id": "cushions",
+          "label": "Cushions",
+          "rect": [
+            2986,
+            965,
+            827,
+            390
+          ],
+          "if": "flag:dog_moved",
+          "once": true,
+          "do": [
+            {
+              "say": "Between the cushions: a shiny coin."
+            },
+            {
+              "give": "coin"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "biscuit": {
+      "name": "Dog biscuit",
+      "icon": "assets/biscuit.png",
+      "text": "Bone-shaped and crunchy."
+    },
+    "coin": {
+      "name": "Coin",
+      "icon": "assets/coin.png",
+      "text": "A shiny coin."
+    },
+    "fortune_card": {
+      "name": "Fortune card",
+      "icon": "assets/fortune_card.png",
+      "text": "Your fortune:\nSomething sweet and red waits in the bottom row, third from the left.\nTrade it to the one who holds the key."
+    },
+    "lollipop": {
+      "name": "Red lollipop",
+      "icon": "assets/lollipop.png",
+      "text": "Red, round and on a stick."
+    },
+    "door_key": {
+      "name": "Big brass key",
+      "icon": "assets/door_key.png",
+      "text": "Heavy, and as long as your hand."
+    }
+  },
+  "puzzles": {
+    "candy": {
+      "type": "dials",
+      "title": "Candy machine",
+      "prompt": "Pick a row (A is the top) and a column.",
+      "wheels": [
+        [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      ],
+      "start": [
+        "A",
+        "1"
+      ],
+      "answer": [
+        "E",
+        "3"
+      ],
+      "clue": "has:fortune_card",
+      "do": [
+        {
+          "sfx": "candy"
+        },
+        {
+          "say": "The spiral turns and a red lollipop drops into the tray."
+        },
+        {
+          "give": "lollipop"
+        }
+      ]
+    }
+  }
+}

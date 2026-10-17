@@ -1,0 +1,32 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../data/site';
+---
+<Page title="Privacy Policy" description="How Escape Games handles site visits, browser storage and information you send by email.">
+  <p class="muted">Last updated: October 16, 2026</p>
+  <p>This policy explains how {SITE.name} handles information when you browse the site, play an available game or contact us.</p>
+  <h2>Browsing the site</h2>
+  <p>You can browse without creating an account. The site does not ask for your name, address or payment details to view game listings.</p>
+  <p>When your browser requests a page, the hosting service receives technical information needed to deliver it, such as your IP address, browser information and the requested URL. The hosting service may keep access or error logs for operation and security. The site’s application code does not maintain a visitor profile.</p>
+  <h2>Cookies, analytics and advertising</h2>
+  <p>The site does not set advertising cookies and does not show ads. {SITE.umamiWebsiteId ? 'We use Umami, a cookie-free analytics service, to count page views and game events in aggregate. Umami does not build visitor profiles or track you across other websites.' : 'The site does not include third-party analytics scripts.'} If this changes, we will update this policy.</p>
+  <h2>Game statistics and ratings</h2>
+  <p>To show play counts and ratings and to see which puzzles are too hard, the site records anonymous game events: pressing Play, finishing a game, opening or solving a puzzle, using a hint and the time taken. Each event is linked to a random ID stored in your browser, not to your name or email.</p>
+  <p>When you like or dislike a game, we store your vote with the same random ID so you can change it later. To limit abuse, we keep a salted hash of your IP address with events and votes; the IP address itself is not stored. These records are kept by our database provider, Supabase.</p>
+  <p>Clearing your browser storage removes the random ID, and new events will no longer be linked to earlier ones.</p>
+  <h2>Games and browser storage</h2>
+  <p>A game may use storage on your device to remember settings or progress. Saving depends on the individual game; the site does not provide account-based saves or sync progress between devices.</p>
+  <p>You can remove stored data through your browser’s settings. Doing so may also remove game progress or preferences. Before clearing it, check whether the game offers a way to export or save your progress.</p>
+  <h2>Search</h2>
+  <p>Catalog searches are filtered in your browser. Your search words also appear in the page URL, which may be recorded in your browser history or hosting logs. Avoid entering personal or sensitive information in the search box.</p>
+  <h2>Email you send us</h2>
+  <p>If you contact us, we receive your email address, message and any attachments you send. We use that information to respond, investigate a reported issue or follow up on your request. Our email provider also processes messages to deliver and store them.</p>
+  <p>We keep correspondence while it is needed to handle the request and any related follow-up. To ask about or request deletion of a message you sent, email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>. We may need to confirm that the request comes from the sender.</p>
+  <h2>Links to other sites</h2>
+  <p>If you follow a link to another website, that website’s privacy policy applies. Its storage, tracking and account features may differ from ours.</p>
+  <h2>Younger visitors</h2>
+  <p>Browsing the site does not require personal details. Younger visitors should ask a parent or guardian before sending an email or sharing personal information. If you believe a child has sent us personal information, contact us so we can review and remove it where appropriate.</p>
+  <h2>Changes and questions</h2>
+  <p>We will update this page when the site’s information practices change. The date above shows the latest revision.</p>
+  <p>For privacy questions, contact <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+</Page>

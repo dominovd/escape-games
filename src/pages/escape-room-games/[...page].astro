@@ -1,0 +1,35 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Catalog from '../../components/Catalog.astro';
+import ThemeTiles from '../../components/ThemeTiles.astro';
+import { newestGames } from '../../lib/catalog';
+import { breadcrumbLd, itemListLd } from '../../lib/schema';
+
+export const getStaticPaths = (({ paginate }) => paginate(newestGames(), { pageSize: 36 })) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const isFirst = page.currentPage === 1;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Escape Room Games', href: '/escape-room-games/' }];
+---
+<Base
+  title={isFirst ? 'Escape Room Games Online: All Free Games' : `Escape Room Games Online: Page ${page.currentPage}`}
+  description="All free online escape room games in one place. Filter by difficulty, length and device and start playing in your browser."
+  jsonLd={[breadcrumbLd(crumbs, Astro.site!), itemListLd(page.data, Astro.site!)]}
+>
+  <div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Escape Room Games Online{!isFirst && <span class="muted"> · Page {page.currentPage}</span>}</h1>
+    {isFirst && <p class="muted">Not sure where to start? Pick a theme, or narrow the list by difficulty and how much time you have.</p>}
+    {isFirst && <div class="section"><ThemeTiles /></div>}
+    <Catalog
+      games={page.data}
+      prevUrl={page.url.prev ?? undefined}
+      nextUrl={page.url.next ?? undefined}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      baseUrl="/escape-room-games/"
+    />
+  </div>
+</Base>

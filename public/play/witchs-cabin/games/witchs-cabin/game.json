@@ -1,0 +1,622 @@
+{
+  "id": "cabin",
+  "title": "Witch's Cabin",
+  "theme": "castle",
+  "start": "cabin",
+  "intro": "The witch is out, the cauldron is bubbling and the door is sealed with a glowing green rune.",
+  "winTitle": "The rune fades",
+  "winText": "The potion hisses on the rune and the door creaks open onto the moonlit forest. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_cabin.mp3",
+    "ambience": "assets/audio/amb_cabin.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "cat": "assets/audio/sfx_cat.mp3",
+      "book": "assets/audio/sfx_book.mp3",
+      "brew": "assets/audio/sfx_brew.mp3",
+      "rune": "assets/audio/sfx_rune.mp3"
+    }
+  },
+  "scenes": {
+    "cabin": {
+      "title": "Cabin",
+      "image": "assets/cabin.webp",
+      "layers": [
+        {
+          "image": "assets/layer_bottle_taken.png",
+          "rect": [
+            1824,
+            659,
+            218,
+            289
+          ],
+          "if": "flag:_once:cabin/moonwater"
+        },
+        {
+          "image": "assets/layer_feather_taken.png",
+          "rect": [
+            2944,
+            1027,
+            181,
+            317
+          ],
+          "if": "flag:_once:cabin/broom"
+        },
+        {
+          "image": "assets/layer_book_open.png",
+          "rect": [
+            2205,
+            737,
+            664,
+            501
+          ],
+          "if": "flag:book_open"
+        },
+        {
+          "image": "assets/layer_brew.png",
+          "rect": [
+            1378,
+            852,
+            655,
+            427
+          ],
+          "if": "solved:potion"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3094,
+            200,
+            746,
+            1961
+          ],
+          "if": "flag:door_open"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "shelves",
+          "label": "Shelves",
+          "rect": [
+            0,
+            46,
+            988,
+            1608
+          ],
+          "do": [
+            {
+              "goto": "shelves"
+            }
+          ]
+        },
+        {
+          "id": "cat",
+          "label": "Black cat",
+          "rect": [
+            815,
+            999,
+            344,
+            643
+          ],
+          "if": "!flag:cat_fed",
+          "use": "fish",
+          "consume": true,
+          "fail": "The black cat guards its stool and hisses. A tiny key glints on its collar.",
+          "do": [
+            {
+              "sfx": "cat"
+            },
+            {
+              "say": "The cat purrs over the fish and lets you unclip the key from its collar."
+            },
+            {
+              "set": "cat_fed"
+            },
+            {
+              "give": "collar_key"
+            }
+          ]
+        },
+        {
+          "id": "cat_fed",
+          "label": "Black cat",
+          "rect": [
+            815,
+            999,
+            344,
+            643
+          ],
+          "if": "flag:cat_fed",
+          "do": [
+            {
+              "say": "The cat is busy with its fish."
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "label": "Window",
+          "rect": [
+            1355,
+            207,
+            609,
+            712
+          ],
+          "do": [
+            {
+              "say": "A full moon over the forest. Somewhere an owl hoots."
+            }
+          ]
+        },
+        {
+          "id": "moonwater",
+          "label": "Bottle on the sill",
+          "rect": [
+            1849,
+            678,
+            172,
+            230
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "A bottle of water glowing in the moonlight. The label says \"Moonwater\"."
+            },
+            {
+              "give": "moonwater"
+            }
+          ]
+        },
+        {
+          "id": "cauldron_wait",
+          "label": "Cauldron",
+          "rect": [
+            1217,
+            1148,
+            965,
+            620
+          ],
+          "if": "!solved:potion",
+          "do": [
+            {
+              "say": "The cauldron bubbles with plain water. It needs ingredients."
+            }
+          ]
+        },
+        {
+          "id": "cauldron",
+          "label": "Cauldron",
+          "rect": [
+            1217,
+            1148,
+            965,
+            620
+          ],
+          "if": [
+            "has:toadstool",
+            "has:moonwater",
+            "has:feather",
+            "!solved:potion"
+          ],
+          "do": [
+            {
+              "puzzle": "potion"
+            }
+          ]
+        },
+        {
+          "id": "lectern",
+          "label": "Spellbook",
+          "rect": [
+            2205,
+            769,
+            643,
+            884
+          ],
+          "do": [
+            {
+              "goto": "lectern"
+            }
+          ]
+        },
+        {
+          "id": "broom",
+          "label": "Broom",
+          "rect": [
+            2859,
+            459,
+            264,
+            1171
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "A black raven's feather is tucked into the broom's bristles."
+            },
+            {
+              "give": "feather"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Sealed door",
+          "rect": [
+            3204,
+            184,
+            620,
+            1447
+          ],
+          "if": "!flag:door_open",
+          "use": "potion",
+          "consume": true,
+          "fail": "A glowing green rune seals the door. It hums when you come close.",
+          "do": [
+            {
+              "sfx": "rune"
+            },
+            {
+              "say": "You pour the potion over the rune. It hisses, smokes and goes dark."
+            },
+            {
+              "set": "door_open"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            3204,
+            184,
+            620,
+            1447
+          ],
+          "if": "flag:door_open",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    },
+    "shelves": {
+      "title": "Shelves",
+      "image": "assets/cabin.webp",
+      "crop": [
+        0,
+        91,
+        2127,
+        1197
+      ],
+      "back": "cabin",
+      "layers": [
+        {
+          "image": "assets/layer_bottle_taken.png",
+          "rect": [
+            1824,
+            659,
+            218,
+            289
+          ],
+          "if": "flag:_once:cabin/moonwater"
+        },
+        {
+          "image": "assets/layer_feather_taken.png",
+          "rect": [
+            2944,
+            1027,
+            181,
+            317
+          ],
+          "if": "flag:_once:cabin/broom"
+        },
+        {
+          "image": "assets/layer_book_open.png",
+          "rect": [
+            2205,
+            737,
+            664,
+            501
+          ],
+          "if": "flag:book_open"
+        },
+        {
+          "image": "assets/layer_brew.png",
+          "rect": [
+            1378,
+            852,
+            655,
+            427
+          ],
+          "if": "solved:potion"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3094,
+            200,
+            746,
+            1961
+          ],
+          "if": "flag:door_open"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "fish",
+          "label": "Jar of dried fish",
+          "rect": [
+            138,
+            241,
+            241,
+            413
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "A jar of dried fish. Someone in this cabin loves these."
+            },
+            {
+              "give": "fish"
+            }
+          ]
+        },
+        {
+          "id": "toadstool",
+          "label": "Jar of toadstools",
+          "rect": [
+            402,
+            299,
+            230,
+            379
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "A red toadstool with white spots."
+            },
+            {
+              "give": "toadstool"
+            }
+          ]
+        },
+        {
+          "id": "other",
+          "label": "Other jars",
+          "rect": [
+            643,
+            344,
+            218,
+            344
+          ],
+          "do": [
+            {
+              "say": "Spider silk and bat wings. Better leave those unless a recipe asks for them."
+            }
+          ]
+        },
+        {
+          "id": "herbs",
+          "label": "Herbs",
+          "rect": [
+            115,
+            712,
+            758,
+            390
+          ],
+          "do": [
+            {
+              "say": "Bundles of dried herbs. They smell of rain."
+            }
+          ]
+        }
+      ]
+    },
+    "lectern": {
+      "title": "Spellbook",
+      "image": "assets/cabin.webp",
+      "crop": [
+        1552,
+        663,
+        1949,
+        1096
+      ],
+      "back": "cabin",
+      "layers": [
+        {
+          "image": "assets/layer_bottle_taken.png",
+          "rect": [
+            1824,
+            659,
+            218,
+            289
+          ],
+          "if": "flag:_once:cabin/moonwater"
+        },
+        {
+          "image": "assets/layer_feather_taken.png",
+          "rect": [
+            2944,
+            1027,
+            181,
+            317
+          ],
+          "if": "flag:_once:cabin/broom"
+        },
+        {
+          "image": "assets/layer_book_open.png",
+          "rect": [
+            2205,
+            737,
+            664,
+            501
+          ],
+          "if": "flag:book_open"
+        },
+        {
+          "image": "assets/layer_brew.png",
+          "rect": [
+            1378,
+            852,
+            655,
+            427
+          ],
+          "if": "solved:potion"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3094,
+            200,
+            746,
+            1961
+          ],
+          "if": "flag:door_open"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "book",
+          "label": "Spellbook",
+          "rect": [
+            2331,
+            769,
+            413,
+            322
+          ],
+          "if": "!flag:book_open",
+          "use": "collar_key",
+          "consume": true,
+          "fail": "A heavy spellbook with a locked brass clasp.",
+          "do": [
+            {
+              "sfx": "book"
+            },
+            {
+              "say": "The clasp springs open. One page is marked with a ribbon."
+            },
+            {
+              "set": "book_open"
+            }
+          ]
+        },
+        {
+          "id": "page",
+          "label": "Marked page",
+          "rect": [
+            2331,
+            769,
+            413,
+            322
+          ],
+          "if": [
+            "flag:book_open",
+            "!has:recipe"
+          ],
+          "do": [
+            {
+              "say": "You carefully tear out the marked page."
+            },
+            {
+              "give": "recipe"
+            },
+            {
+              "inspect": "recipe"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "fish": {
+      "name": "Dried fish",
+      "icon": "assets/fish.png",
+      "text": "Smelly. A cat would love it."
+    },
+    "collar_key": {
+      "name": "Collar key",
+      "icon": "assets/collar_key.png",
+      "text": "A tiny brass key from the cat collar."
+    },
+    "toadstool": {
+      "name": "Toadstool",
+      "icon": "assets/toadstool.png",
+      "text": "Red with white spots. Do not eat."
+    },
+    "moonwater": {
+      "name": "Moonwater",
+      "icon": "assets/moonwater.png",
+      "text": "Water that glows faintly silver."
+    },
+    "feather": {
+      "name": "Raven's feather",
+      "icon": "assets/feather.png",
+      "text": "Long, black and glossy."
+    },
+    "recipe": {
+      "name": "Recipe page",
+      "icon": "assets/recipe.png",
+      "text": "Potion of Opening\n\nFirst the toadstool,\nthen the moonwater,\nthen the raven's feather.\n\nAdd nothing else, or start over."
+    },
+    "potion": {
+      "name": "Potion of Opening",
+      "icon": "assets/potion.png",
+      "text": "Bright green and fizzing."
+    }
+  },
+  "puzzles": {
+    "potion": {
+      "type": "sequence",
+      "title": "Cauldron",
+      "prompt": "Add the ingredients in the right order.",
+      "buttons": [
+        "🕸️",
+        "🍄",
+        "🦇",
+        "💧",
+        "🪶"
+      ],
+      "answer": [
+        "🍄",
+        "💧",
+        "🪶"
+      ],
+      "clue": "has:recipe",
+      "do": [
+        {
+          "sfx": "brew"
+        },
+        {
+          "take": "toadstool"
+        },
+        {
+          "take": "moonwater"
+        },
+        {
+          "take": "feather"
+        },
+        {
+          "say": "The brew turns bright green. You fill a flask with the Potion of Opening."
+        },
+        {
+          "give": "potion"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import GameCard from '../components/GameCard.astro';
+import { featuredGames } from '../lib/catalog';
+---
+<Base title="Page not found" description="This room is locked. Try another escape game." noindex>
+  <div class="wrap">
+    <section class="nf">
+      <h1>This room is locked</h1>
+      <p class="muted">The page you are looking for does not exist. Try one of these escape games instead.</p>
+      <a class="btn" href="/">Back to all games</a>
+    </section>
+    <div class="grid">{featuredGames().slice(0, 6).map((g) => <GameCard game={g} />)}</div>
+  </div>
+</Base>
+
+<style>
+  .nf { padding: 40px 0 24px; }
+</style>

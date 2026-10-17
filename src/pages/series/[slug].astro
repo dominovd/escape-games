@@ -1,0 +1,34 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GameCard from '../../components/GameCard.astro';
+import { allSeries, seriesGames, seriesUrl } from '../../lib/catalog';
+import { breadcrumbLd, itemListLd } from '../../lib/schema';
+
+export const getStaticPaths = (() => allSeries().map((s) => ({ params: { slug: s.slug }, props: { series: s } }))) satisfies GetStaticPaths;
+
+const { series } = Astro.props;
+const list = seriesGames(series.slug);
+const crumbs = [{ name: 'Home', href: '/' }, { name: `${series.name} Series`, href: seriesUrl(series.slug) }];
+---
+<Base
+  title={`${series.name} Escape Games: All Parts in Order`}
+  description={`Play all ${list.length} parts of the ${series.name} escape game series in order. Free in your browser.`}
+  noindex={list.every((g) => g.sample)}
+  jsonLd={[breadcrumbLd(crumbs, Astro.site!), itemListLd(list, Astro.site!)]}
+>
+  <div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>{series.name} Escape Games</h1>
+    <p class="muted">All {list.length} parts in order. Each game continues the story of the previous one.</p>
+    <ol class="grid cols-4 series">
+      {list.map((g) => <li><span class="part">Part {g.series!.part}</span><GameCard game={g} /></li>)}
+    </ol>
+  </div>
+</Base>
+
+<style>
+  .series { list-style: none; padding: 0; margin: 20px 0 0; }
+  .part { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 6px; }
+</style>

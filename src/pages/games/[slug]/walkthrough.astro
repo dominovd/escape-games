@@ -1,0 +1,80 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Icon from '../../../components/Icon.astro';
+import AdSlot from '../../../components/AdSlot.astro';
+import { games } from '../../../data/games';
+import { primaryTheme, isLiveTheme, hubUrl, gameUrl, walkthroughUrl } from '../../../lib/catalog';
+import { breadcrumbLd } from '../../../lib/schema';
+
+export const getStaticPaths = (() =>
+  games.filter((g) => g.walkthrough).map((game) => ({ params: { slug: game.slug }, props: { game } }))) satisfies GetStaticPaths;
+
+const { game } = Astro.props;
+const wt = game.walkthrough!;
+const theme = primaryTheme(game);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  theme && isLiveTheme(theme.slug) ? { name: theme.h1, href: hubUrl(theme.slug) } : { name: 'Escape Room Games', href: '/escape-room-games/' },
+  { name: game.title, href: gameUrl(game.slug) },
+  { name: 'Walkthrough', href: walkthroughUrl(game.slug) },
+];
+const anchor = (i: number) => `step-${i + 1}`;
+---
+<Base
+  title={`${game.title} Walkthrough: Hints and Full Solution`}
+  description={`Step-by-step ${game.title} walkthrough. Get a hint for each room first, then open the full solution only if you need it.`}
+  noindex={game.sample}
+  jsonLd={breadcrumbLd(crumbs, Astro.site!)}
+>
+  <div class="wrap narrow" style={`--accent:${theme?.accent ?? 'var(--brand)'}`}>
+    <Breadcrumbs items={crumbs} />
+    <h1>{game.title} Walkthrough</h1>
+    <p class="lead">{wt.intro}</p>
+    <a class="btn" href={gameUrl(game.slug)}><Icon name="play" size={18} />Play {game.title}</a>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>{wt.steps.map((s, i) => <li><a href={`#${anchor(i)}`}>{s.title}</a></li>)}</ol>
+    </nav>
+
+    {wt.steps.map((s, i) => (
+      <>
+        <section class="step" id={anchor(i)}>
+          <h2>{s.title}</h2>
+          <p class="hint"><strong>Hint:</strong> {s.hint}</p>
+          <details>
+            <summary>Show solution</summary>
+            <p>{s.solution}</p>
+            {s.image && <img src={s.image} alt={`${game.title} ${s.title} solution`} width="800" height="450" loading="lazy" decoding="async" />}
+          </details>
+        </section>
+        {i === 1 && <AdSlot height={250} maxWidth={728} />}
+      </>
+    ))}
+
+    <div class="end">
+      <p>Made it out? Try another room.</p>
+      <a class="btn" href={gameUrl(game.slug)}><Icon name="play" size={18} />Back to {game.title}</a>
+      {theme && isLiveTheme(theme.slug) && <a class="btn ghost" href={hubUrl(theme.slug)}>More {theme.name.toLowerCase()} escape games</a>}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .narrow { max-width: 820px; }
+  .lead { color: #d7d9df; font-size: 1.05rem; }
+  .toc { margin: 24px 0; padding: 14px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-2); }
+  .toc h2 { font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .toc ol { margin: 0; padding-left: 1.2em; }
+  .toc a { color: var(--text); }
+  .step { padding: 18px 0; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+  .hint { color: #d7d9df; }
+  details { border: 1px solid var(--line); border-radius: 8px; background: var(--bg-2); }
+  summary { cursor: pointer; padding: 10px 14px; font-weight: 650; color: var(--accent); }
+  details p { padding: 0 14px; color: #d7d9df; }
+  details img { margin: 0 14px 14px; border-radius: 6px; max-width: calc(100% - 28px); }
+  .end { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .end p { width: 100%; margin: 0; }
+</style>

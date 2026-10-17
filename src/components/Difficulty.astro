@@ -1,0 +1,23 @@
+---
+import type { Difficulty } from '../data/games';
+import { difficultyLabel } from '../lib/catalog';
+interface Props { level: Difficulty; }
+const { level } = Astro.props;
+const bars = level === 'easy' ? 1 : level === 'medium' ? 2 : 3;
+---
+<span class={`diff ${level}`}>
+  <span class="bars" aria-hidden="true">{[1, 2, 3].map((i) => <i class={i <= bars ? 'on' : ''} />)}</span>
+  {difficultyLabel[level]}
+</span>
+
+<style>
+  .diff { display: inline-flex; align-items: center; gap: 6px; }
+  .bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+  .bars i { width: 3px; background: #4a4d57; border-radius: 1px; }
+  .bars i:nth-child(1) { height: 5px; }
+  .bars i:nth-child(2) { height: 8px; }
+  .bars i:nth-child(3) { height: 12px; }
+  .easy .on { background: var(--easy); }
+  .medium .on { background: var(--medium); }
+  .hard .on { background: var(--hard); }
+</style>

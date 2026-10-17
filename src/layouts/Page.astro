@@ -1,0 +1,16 @@
+---
+// Простые служебные страницы (About, Privacy, Terms, Contact)
+import Base from './Base.astro';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+---
+<Base title={title} description={description}>
+  <div class="wrap prose page">
+    <h1>{title}</h1>
+    <slot />
+  </div>
+</Base>
+
+<style>
+  .page { padding-top: 28px; }
+</style>

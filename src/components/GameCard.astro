@@ -1,0 +1,44 @@
+---
+import type { Game } from '../data/games';
+import { gameUrl, walkthroughUrl, isNew } from '../lib/catalog';
+import Thumb from './Thumb.astro';
+import Difficulty from './Difficulty.astro';
+import Icon from './Icon.astro';
+
+interface Props { game: Game; eager?: boolean; }
+const { game, eager = false } = Astro.props;
+---
+<article class="card" data-difficulty={game.difficulty} data-minutes={game.minutes} data-mobile={game.mobile ? '1' : '0'}>
+  <a class="cover" href={gameUrl(game.slug)} tabindex="-1" aria-hidden="true">
+    <Thumb game={game} eager={eager} />
+    {isNew(game) && <span class="badge">NEW</span>}
+  </a>
+  <div class="body">
+    <h3><a href={gameUrl(game.slug)}>{game.title}</a></h3>
+    <div class="meta">
+      <Difficulty level={game.difficulty} />
+      <span class="time"><Icon name="clock" size={14} />{game.minutes} min</span>
+    </div>
+    <span class="plays" data-stat="plays" data-slug={game.slug} hidden><Icon name="play" size={12} /><span data-label></span></span>
+    {game.walkthrough && (
+      <a class="wt" href={walkthroughUrl(game.slug)}><Icon name="book" size={13} />Walkthrough</a>
+    )}
+  </div>
+</article>
+
+<style>
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: border-color .15s, transform .15s; }
+  .card:hover { border-color: #4a4d57; transform: translateY(-2px); }
+  .cover { position: relative; display: block; }
+  .badge { position: absolute; top: 8px; right: 8px; background: var(--brand); color: #1a0d00; font-size: .7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; letter-spacing: .05em; }
+  .body { padding: 9px 10px 11px; display: flex; flex-direction: column; gap: 6px; }
+  h3 { font-size: .98rem; margin: 0; font-weight: 650; line-height: 1.25; }
+  h3 a { text-decoration: none; }
+  h3 a::after { content: ''; }
+  h3 a:hover { color: var(--brand); }
+  .meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: .82rem; color: #c9ccd4; flex-wrap: wrap; }
+  .time { display: inline-flex; align-items: center; gap: 4px; }
+  .plays { display: inline-flex; align-items: center; gap: 4px; font-size: .8rem; color: var(--muted); }
+  .wt { display: inline-flex; align-items: center; gap: 5px; font-size: .8rem; color: var(--muted); text-decoration: none; }
+  .wt:hover { color: var(--text); text-decoration: underline; }
+</style>

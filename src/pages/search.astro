@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import GameCard from '../components/GameCard.astro';
+import { newestGames } from '../lib/catalog';
+import { themeBySlug } from '../data/themes';
+
+const list = newestGames();
+const index = Object.fromEntries(
+  list.map((g) => [g.slug, [g.title, ...g.themes.map((t) => themeBySlug(t)?.name ?? t), g.difficulty].join(' ').toLowerCase()]),
+);
+---
+<Base title="Search Escape Games" description="Search free online escape games." noindex>
+  <div class="wrap">
+    <h1>Search escape games</h1>
+    <form action="/search/" method="get" class="sbox">
+      <label class="sr-only" for="sq">Search</label>
+      <input id="sq" name="q" type="search" placeholder="Try: prison, halloween, easy" />
+      <button class="btn" type="submit">Search</button>
+    </form>
+    <p class="muted" data-status></p>
+    <div class="grid" data-results>
+      {list.map((g) => <div data-slug={g.slug}><GameCard game={g} /></div>)}
+    </div>
+  </div>
+  <script define:vars={{ index }}>
+    const q = (new URLSearchParams(location.search).get('q') || '').trim().toLowerCase();
+    const input = document.getElementById('sq');
+    input.value = q;
+    const words = q.split(/\s+/).filter(Boolean);
+    let n = 0;
+    document.querySelectorAll('[data-slug]').forEach((el) => {
+      const ok = words.every((w) => index[el.dataset.slug].includes(w));
+      el.hidden = !ok;
+      if (ok) n++;
+    });
+    document.querySelector('[data-status]').textContent = q ? `${n} ${n === 1 ? 'game' : 'games'} for “${q}”` : '';
+  </script>
+</Base>
+
+<style>
+  .sbox { display: flex; gap: 8px; margin: 10px 0 14px; max-width: 520px; }
+  .sbox input { flex: 1; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg-2); color: var(--text); font: inherit; }
+  [hidden] { display: none !important; }
+</style>

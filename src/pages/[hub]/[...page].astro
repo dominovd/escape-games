@@ -1,0 +1,83 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Catalog from '../../components/Catalog.astro';
+import Faq from '../../components/Faq.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { liveThemes, gamesInTheme, hubUrl } from '../../lib/catalog';
+import { breadcrumbLd, itemListLd } from '../../lib/schema';
+
+export const getStaticPaths = (({ paginate }) =>
+  liveThemes().flatMap((theme) => {
+    const list = gamesInTheme(theme.slug);
+    const sorted = [...list.filter((g) => g.featured), ...list.filter((g) => !g.featured)];
+    return paginate(sorted, { pageSize: 36, params: { hub: `${theme.slug}-escape-games` }, props: { theme } });
+  })) satisfies GetStaticPaths;
+
+const { page, theme } = Astro.props;
+const base = hubUrl(theme.slug);
+const isFirst = page.currentPage === 1;
+const title = isFirst ? theme.title : `${theme.h1}: Page ${page.currentPage}`;
+const others = liveThemes().filter((t) => t.slug !== theme.slug);
+const crumbs = [{ name: 'Home', href: '/' }, { name: theme.h1, href: base }];
+const allSample = page.data.every((g) => g.sample);
+---
+<Base
+  title={title}
+  description={theme.metaDescription}
+  noindex={allSample}
+  jsonLd={[breadcrumbLd(crumbs, Astro.site!), itemListLd(page.data, Astro.site!)]}
+>
+  <div class="wrap" style={`--accent:${theme.accent}`}>
+    <Breadcrumbs items={crumbs} />
+    <header class="hub-head">
+      <h1>{theme.h1}{!isFirst && <span class="muted"> · Page {page.currentPage}</span>}</h1>
+      {isFirst && <p class="intro">{theme.intro}</p>}
+    </header>
+
+    <Catalog
+      games={page.data}
+      prevUrl={page.url.prev ?? undefined}
+      nextUrl={page.url.next ?? undefined}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      baseUrl={base}
+    />
+
+    <AdSlot height={250} />
+
+    {isFirst && (
+      <section class="section prose">
+        {theme.body.map((b) => (
+          <>
+            <h2>{b.h2}</h2>
+            <p>{b.text}</p>
+          </>
+        ))}
+      </section>
+    )}
+
+    {isFirst && theme.faq && <Faq items={theme.faq} heading={`${theme.name} escape games FAQ`} />}
+
+    {others.length > 0 && (
+      <section class="section">
+        <h2>More escape games</h2>
+        <ul class="others">
+          <li><a class="pill" href="/escape-room-games/">All escape room games</a></li>
+          {others.map((t) => <li><a class="pill" href={hubUrl(t.slug)}>{t.h1}</a></li>)}
+        </ul>
+      </section>
+    )}
+  </div>
+</Base>
+
+<style>
+  .hub-head {
+    padding: 4px 0 4px; border-left: 4px solid var(--accent); padding-left: 14px; margin-bottom: 8px;
+  }
+  .intro { color: #d7d9df; max-width: 720px; margin: 0; }
+  .others { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .others a { text-decoration: none; }
+  .others a:hover { color: var(--text); border-color: var(--accent); }
+</style>

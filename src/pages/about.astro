@@ -1,0 +1,17 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../data/site';
+---
+<Page title={`About ${SITE.name}`} description="Get to know Escape Games: browser puzzles, hidden clues and a way out waiting to be found.">
+  <p>A locked drawer, a strange note, a door that won’t budge. If you enjoy figuring out how the pieces fit together, you’re in the right place.</p>
+  <p>{SITE.name} brings escape room puzzles to your browser. Browse the catalog, choose a setting that catches your eye and take a closer look. You don’t need an account to explore the site.</p>
+  <h2>Find a room that suits you</h2>
+  <p>Start with a theme, from Halloween mysteries to prison escapes. Each game page lists the difficulty, estimated playing time and controls, so you can decide whether it fits a quick break or a longer puzzle session.</p>
+  <p>Some games support a mouse and touch controls; others work best on a computer. Check the game page before playing on a phone or tablet.</p>
+  <h2>A hint when you need one</h2>
+  <p>Getting stuck is part of the fun, but staying stuck doesn’t have to be. Where a walkthrough is available, it starts with a hint. The full solution stays hidden until you choose to open it.</p>
+  <h2>A growing catalog</h2>
+  <p>The site is still taking shape. Games that aren’t ready to play are marked “Coming soon.” Cover illustrations give you a feel for each setting; they aren’t necessarily screenshots of the game itself.</p>
+  <h2>Help us make it better</h2>
+  <p>Found a broken link or a puzzle that won’t load? Have an idea for a room you’d love to explore? Visit our <a href="/contact/">contact page</a> or email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+</Page>

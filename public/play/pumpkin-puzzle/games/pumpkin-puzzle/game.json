@@ -1,0 +1,572 @@
+{
+  "id": "patch",
+  "title": "Pumpkin Puzzle",
+  "theme": "pumpkin",
+  "start": "patch",
+  "intro": "The garden gate shut behind you. Each pumpkin in the patch hides one number of the shed code.",
+  "winTitle": "You got out!",
+  "winText": "The shed opens onto the back gate and the way home. Happy Halloween!",
+  "audio": {
+    "music": "assets/audio/music_patch.mp3",
+    "ambience": "assets/audio/amb_patch.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "lid": "assets/audio/sfx_lid.mp3",
+      "crow": "assets/audio/sfx_crow.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3"
+    }
+  },
+  "scenes": {
+    "patch": {
+      "title": "Pumpkin patch",
+      "image": "assets/patch.webp",
+      "layers": [
+        {
+          "image": "assets/layer_big_open.png",
+          "rect": [
+            691,
+            822,
+            946,
+            751
+          ],
+          "if": "flag:_once:patch/big"
+        },
+        {
+          "image": "assets/layer_lantern_taken.png",
+          "rect": [
+            1603,
+            531,
+            363,
+            547
+          ],
+          "if": "flag:_once:patch/lantern"
+        },
+        {
+          "image": "assets/layer_medium_open.png",
+          "rect": [
+            1635,
+            1045,
+            597,
+            542
+          ],
+          "if": "flag:d_medium"
+        },
+        {
+          "image": "assets/layer_small_lit.png",
+          "rect": [
+            2200,
+            1295,
+            340,
+            328
+          ],
+          "if": "flag:d_small"
+        },
+        {
+          "image": "assets/layer_shed_open.png",
+          "rect": [
+            358,
+            386,
+            829,
+            1174
+          ],
+          "if": "solved:shed"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "shed",
+          "label": "Shed door",
+          "rect": [
+            230,
+            138,
+            861,
+            1286
+          ],
+          "do": [
+            {
+              "goto": "shed"
+            }
+          ]
+        },
+        {
+          "id": "big",
+          "label": "Big pumpkin",
+          "rect": [
+            930,
+            861,
+            643,
+            655
+          ],
+          "once": true,
+          "do": [
+            {
+              "sfx": "lid"
+            },
+            {
+              "say": "You lift the lid of the biggest pumpkin. Inside, a paper slip with the number 7."
+            },
+            {
+              "set": "d_big"
+            }
+          ]
+        },
+        {
+          "id": "lantern",
+          "label": "Lantern",
+          "rect": [
+            1608,
+            505,
+            264,
+            402
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "You unhook the lantern from the post."
+            },
+            {
+              "give": "lantern"
+            }
+          ]
+        },
+        {
+          "id": "pumpkins",
+          "label": "Pumpkins",
+          "rect": [
+            1665,
+            1079,
+            838,
+            482
+          ],
+          "do": [
+            {
+              "goto": "pumpkins"
+            }
+          ]
+        },
+        {
+          "id": "scarecrow",
+          "label": "Scarecrow",
+          "rect": [
+            2457,
+            230,
+            528,
+            1332
+          ],
+          "do": [
+            {
+              "goto": "scarecrow"
+            }
+          ]
+        },
+        {
+          "id": "trowel",
+          "label": "Wheelbarrow",
+          "rect": [
+            2928,
+            1125,
+            850,
+            551
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "A little garden trowel lies in the wheelbarrow."
+            },
+            {
+              "give": "trowel"
+            }
+          ]
+        }
+      ]
+    },
+    "pumpkins": {
+      "title": "Pumpkins",
+      "image": "assets/patch.webp",
+      "crop": [
+        1553,
+        1021,
+        1063,
+        598
+      ],
+      "back": "patch",
+      "layers": [
+        {
+          "image": "assets/layer_big_open.png",
+          "rect": [
+            691,
+            822,
+            946,
+            751
+          ],
+          "if": "flag:_once:patch/big"
+        },
+        {
+          "image": "assets/layer_lantern_taken.png",
+          "rect": [
+            1603,
+            531,
+            363,
+            547
+          ],
+          "if": "flag:_once:patch/lantern"
+        },
+        {
+          "image": "assets/layer_medium_open.png",
+          "rect": [
+            1635,
+            1045,
+            597,
+            542
+          ],
+          "if": "flag:d_medium"
+        },
+        {
+          "image": "assets/layer_small_lit.png",
+          "rect": [
+            2200,
+            1295,
+            340,
+            328
+          ],
+          "if": "flag:d_small"
+        },
+        {
+          "image": "assets/layer_shed_open.png",
+          "rect": [
+            358,
+            386,
+            829,
+            1174
+          ],
+          "if": "solved:shed"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "medium",
+          "label": "Medium pumpkin",
+          "rect": [
+            1677,
+            1079,
+            471,
+            448
+          ],
+          "if": "!flag:d_medium",
+          "use": "trowel",
+          "fail": "The lid is stuck tight. Something flat could pry it up.",
+          "do": [
+            {
+              "sfx": "lid"
+            },
+            {
+              "say": "The trowel pops the lid off. A slip inside says 2."
+            },
+            {
+              "set": "d_medium"
+            }
+          ]
+        },
+        {
+          "id": "medium_done",
+          "label": "Medium pumpkin",
+          "rect": [
+            1677,
+            1079,
+            471,
+            448
+          ],
+          "if": "flag:d_medium",
+          "do": [
+            {
+              "say": "The slip in the medium pumpkin says 2."
+            }
+          ]
+        },
+        {
+          "id": "small",
+          "label": "Small pumpkin",
+          "rect": [
+            2159,
+            1229,
+            333,
+            322
+          ],
+          "if": "!flag:d_small",
+          "use": "lantern",
+          "consume": true,
+          "fail": "It is too dark inside to see anything.",
+          "do": [
+            {
+              "say": "You set the lantern inside. The pumpkin glows, and a 9 is painted on the bottom."
+            },
+            {
+              "set": "d_small"
+            }
+          ]
+        },
+        {
+          "id": "small_done",
+          "label": "Small pumpkin",
+          "rect": [
+            2159,
+            1229,
+            333,
+            322
+          ],
+          "if": "flag:d_small",
+          "do": [
+            {
+              "say": "The glowing pumpkin shows a 9."
+            }
+          ]
+        }
+      ]
+    },
+    "scarecrow": {
+      "title": "Scarecrow",
+      "image": "assets/patch.webp",
+      "crop": [
+        1669,
+        91,
+        2127,
+        1197
+      ],
+      "back": "patch",
+      "layers": [
+        {
+          "image": "assets/layer_big_open.png",
+          "rect": [
+            691,
+            822,
+            946,
+            751
+          ],
+          "if": "flag:_once:patch/big"
+        },
+        {
+          "image": "assets/layer_lantern_taken.png",
+          "rect": [
+            1603,
+            531,
+            363,
+            547
+          ],
+          "if": "flag:_once:patch/lantern"
+        },
+        {
+          "image": "assets/layer_medium_open.png",
+          "rect": [
+            1635,
+            1045,
+            597,
+            542
+          ],
+          "if": "flag:d_medium"
+        },
+        {
+          "image": "assets/layer_small_lit.png",
+          "rect": [
+            2200,
+            1295,
+            340,
+            328
+          ],
+          "if": "flag:d_small"
+        },
+        {
+          "image": "assets/layer_shed_open.png",
+          "rect": [
+            358,
+            386,
+            829,
+            1174
+          ],
+          "if": "solved:shed"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "crow",
+          "label": "Crow",
+          "rect": [
+            2767,
+            218,
+            230,
+            218
+          ],
+          "do": [
+            {
+              "sfx": "crow"
+            },
+            {
+              "say": "Caw! The crow is not scared of this scarecrow at all."
+            }
+          ]
+        },
+        {
+          "id": "tiny",
+          "label": "Tiny pumpkin",
+          "rect": [
+            2595,
+            804,
+            207,
+            218
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "The scarecrow holds the tiniest pumpkin. Under it: a slip with a 4."
+            },
+            {
+              "set": "d_tiny"
+            }
+          ]
+        }
+      ]
+    },
+    "shed": {
+      "title": "Shed door",
+      "image": "assets/patch.webp",
+      "crop": [
+        0,
+        368,
+        1671,
+        940
+      ],
+      "back": "patch",
+      "layers": [
+        {
+          "image": "assets/layer_big_open.png",
+          "rect": [
+            691,
+            822,
+            946,
+            751
+          ],
+          "if": "flag:_once:patch/big"
+        },
+        {
+          "image": "assets/layer_lantern_taken.png",
+          "rect": [
+            1603,
+            531,
+            363,
+            547
+          ],
+          "if": "flag:_once:patch/lantern"
+        },
+        {
+          "image": "assets/layer_medium_open.png",
+          "rect": [
+            1635,
+            1045,
+            597,
+            542
+          ],
+          "if": "flag:d_medium"
+        },
+        {
+          "image": "assets/layer_small_lit.png",
+          "rect": [
+            2200,
+            1295,
+            340,
+            328
+          ],
+          "if": "flag:d_small"
+        },
+        {
+          "image": "assets/layer_shed_open.png",
+          "rect": [
+            358,
+            386,
+            829,
+            1174
+          ],
+          "if": "solved:shed"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "lock",
+          "label": "Code lock",
+          "rect": [
+            689,
+            861,
+            161,
+            287
+          ],
+          "if": "!solved:shed",
+          "do": [
+            {
+              "puzzle": "shed"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open shed",
+          "rect": [
+            367,
+            494,
+            494,
+            907
+          ],
+          "if": "solved:shed",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "lantern": {
+      "name": "Lantern",
+      "icon": "assets/lantern.png",
+      "text": "A little lantern with a candle inside."
+    },
+    "trowel": {
+      "name": "Trowel",
+      "icon": "assets/trowel.png",
+      "text": "A small flat garden trowel."
+    }
+  },
+  "puzzles": {
+    "shed": {
+      "type": "code",
+      "title": "Shed lock",
+      "prompt": "Scratched on the lock: biggest pumpkin first, tiniest last.",
+      "answer": "7294",
+      "clue": [
+        "flag:d_big",
+        "flag:d_medium",
+        "flag:d_small",
+        "flag:d_tiny"
+      ],
+      "do": [
+        {
+          "sfx": "unlock"
+        },
+        {
+          "say": "Click! The shed door swings open."
+        }
+      ]
+    }
+  }
+}

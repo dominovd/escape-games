@@ -1,0 +1,28 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../data/site';
+---
+<Page title="Terms of Use" description="Terms for browsing Escape Games, playing games and using the site’s content.">
+  <p class="muted">Last updated: October 16, 2026</p>
+  <p>These terms explain the conditions for using {SITE.name}. Please read them before using the site. If you have a question, contact <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+  <h2>Using the site</h2>
+  <p>You may browse the catalog and play available games for personal entertainment. Use the site lawfully and avoid actions that interfere with other visitors or the site’s operation.</p>
+  <p>Do not attempt to access private systems, bypass access restrictions, introduce harmful code or disrupt the service with abusive automated requests.</p>
+  <h2>Games and availability</h2>
+  <p>Games may be added, updated or removed. A listing marked “Coming soon” is not yet available to play. Listings and cover illustrations may be previews; an illustration does not necessarily show actual gameplay.</p>
+  <p>Difficulty levels and playing times are estimates. Browser and device support may vary. We cannot promise that every game will work on every device or that the site will always be available without interruption.</p>
+  <h2>Progress and walkthroughs</h2>
+  <p>Save features depend on the game. Browser updates, cleared storage or a different device may affect saved progress. The site does not provide account-based backups.</p>
+  <p>Walkthroughs are there to help when you need a hint. They may contain spoilers, and their steps may change when a game is updated.</p>
+  <h2>Artwork and other content</h2>
+  <p>Games, illustrations, writing and other materials belong to their respective rights holders. Access to the site does not give you permission to republish, sell or redistribute those materials. Any separate license or permission provided for a game or asset still applies.</p>
+  <p>If you believe material on the site infringes your rights, use our <a href="/contact/">contact page</a> and identify the material and relevant page link so we can review the concern.</p>
+  <h2>Messages and suggestions</h2>
+  <p>Only send material you are entitled to share. We may use your message to investigate a bug, respond to feedback or consider a suggestion. Please do not include confidential information or sensitive personal details.</p>
+  <h2>Other websites</h2>
+  <p>Links to other websites are provided for convenience. We do not control their content or services. Check their terms and privacy policies before using them.</p>
+  <h2>Privacy</h2>
+  <p>Our <a href="/privacy/">Privacy Policy</a> describes how the site handles technical information, browser storage and messages you send us.</p>
+  <h2>Updates to these terms</h2>
+  <p>We may revise these terms as the site changes. The latest version will appear here with an updated date. For questions about these terms, email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+</Page>

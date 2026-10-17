@@ -1,0 +1,94 @@
+---
+// Плеер «click to play»: до клика грузится только постер, iframe с игрой создается по нажатию.
+import type { Game } from '../data/games';
+import Thumb from './Thumb.astro';
+import Icon from './Icon.astro';
+import { walkthroughUrl } from '../lib/catalog';
+
+interface Props { game: Game; }
+const { game } = Astro.props;
+const aspect = game.aspect ?? '16/9';
+---
+<div class="player-wrap">
+  <div class="player" style={`aspect-ratio:${aspect}`} data-player data-slug={game.slug} data-src={game.embedUrl ?? ''} data-title={game.title}>
+    <div class="poster">
+      <Thumb game={game} eager width={960} height={720} />
+      <div class="overlay">
+        {game.embedUrl ? (
+          <button class="play" type="button" data-play aria-label={`Play ${game.title}`}>
+            <Icon name="play" size={34} />
+            <span>Play</span>
+          </button>
+        ) : (
+          <span class="soon">Coming soon</span>
+        )}
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <button type="button" data-fullscreen disabled={!game.embedUrl}><Icon name="expand" size={18} />Fullscreen</button>
+    <button type="button" data-restart disabled={!game.embedUrl}><Icon name="restart" size={18} />Restart</button>
+    <button type="button" data-share><Icon name="share" size={18} />Share</button>
+    {game.walkthrough && <a href={walkthroughUrl(game.slug)}><Icon name="book" size={18} />Walkthrough</a>}
+  </div>
+  {game.aspect !== '4/3' && <p class="rotate muted">Tip: turn your phone sideways for a bigger view.</p>}
+</div>
+
+<script>
+  import { track } from '../scripts/stats';
+  document.querySelectorAll<HTMLElement>('[data-player]').forEach((player) => {
+    const wrap = player.closest('.player-wrap')!;
+    const src = player.dataset.src;
+    const start = () => {
+      if (!src || player.querySelector('iframe')) return;
+      track(player.dataset.slug!, 'play_click');
+      const f = document.createElement('iframe');
+      f.src = src;
+      f.title = player.dataset.title ?? 'Game';
+      f.allow = 'autoplay; fullscreen; gamepad';
+      f.setAttribute('allowfullscreen', '');
+      player.replaceChildren(f);
+      f.focus();
+    };
+    player.querySelector('[data-play]')?.addEventListener('click', start);
+    wrap.querySelector('[data-fullscreen]')?.addEventListener('click', () => {
+      start();
+      player.requestFullscreen?.().catch(() => {});
+    });
+    wrap.querySelector('[data-restart]')?.addEventListener('click', () => {
+      const f = player.querySelector('iframe');
+      if (f) f.src = src!;
+      else start();
+    });
+    wrap.querySelector('[data-share]')?.addEventListener('click', async () => {
+      const data = { title: document.title, url: location.href };
+      try {
+        if (navigator.share) await navigator.share(data);
+        else { await navigator.clipboard.writeText(location.href); alert('Link copied'); }
+      } catch {}
+    });
+  });
+</script>
+
+<style>
+  .player { position: relative; width: 100%; background: #000; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+  .player :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .poster { position: absolute; inset: 0; }
+  .poster :global(.thumb) { width: 100%; height: 100%; aspect-ratio: auto; filter: brightness(.55); }
+  .overlay { position: absolute; inset: 0; display: grid; place-items: center; }
+  .play {
+    display: inline-flex; align-items: center; gap: 10px; padding: 14px 30px 14px 24px; border-radius: 999px; border: 0;
+    background: var(--brand); color: #1a0d00; font-weight: 800; font-size: 1.25rem; cursor: pointer; box-shadow: 0 8px 30px rgba(0,0,0,.45);
+  }
+  .play:hover { transform: scale(1.04); }
+  .soon { padding: 10px 20px; border-radius: 999px; background: rgba(0,0,0,.6); border: 1px solid var(--line); font-weight: 700; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .controls button, .controls a {
+    display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 7px; border: 1px solid var(--line);
+    background: var(--bg-2); color: var(--text); font: inherit; font-size: .9rem; cursor: pointer; text-decoration: none;
+  }
+  .controls button:disabled { opacity: .45; cursor: default; }
+  .controls a { margin-left: auto; border-color: color-mix(in srgb, var(--brand) 50%, var(--line)); }
+  .rotate { font-size: .85rem; margin: 6px 0 0; }
+  @media (min-width: 860px) { .rotate { display: none; } }
+</style>
