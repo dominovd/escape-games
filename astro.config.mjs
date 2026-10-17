@@ -26,7 +26,7 @@ export default defineConfig({
   site: SITE_URL,
   trailingSlash: 'always',
   server: { port: 4322 },
-  build: { format: 'directory' },
+  build: { format: 'directory', inlineStylesheets: 'always' },
   integrations: [
     sitemap({
       filter: (page) => {
