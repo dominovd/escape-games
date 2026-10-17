@@ -12,7 +12,11 @@ const aspect = game.aspect ?? '16/9';
 <div class="player-wrap">
   <div class="player" style={`aspect-ratio:${aspect}`} data-player data-slug={game.slug} data-src={game.embedUrl ?? ''} data-title={game.title}>
     <div class="poster">
-      <Thumb game={game} eager width={960} height={720} />
+      {game.poster ? (
+        <img class="thumb" src={game.poster} alt={`${game.title} escape game`} width="1280" height="720" fetchpriority="high" decoding="async" />
+      ) : (
+        <Thumb game={game} eager width={960} height={720} />
+      )}
       <div class="overlay">
         {game.embedUrl ? (
           <button class="play" type="button" data-play aria-label={`Play ${game.title}`}>
@@ -38,8 +42,8 @@ const aspect = game.aspect ?? '16/9';
   import { track } from '../scripts/stats';
   document.querySelectorAll<HTMLElement>('[data-player]').forEach((player) => {
     const wrap = player.closest('.player-wrap')!;
-    const src = player.dataset.src;
     const start = () => {
+      const src = player.dataset.src;
       if (!src || player.querySelector('iframe')) return;
       track(player.dataset.slug!, 'play_click');
       const f = document.createElement('iframe');
@@ -57,8 +61,18 @@ const aspect = game.aspect ?? '16/9';
     });
     wrap.querySelector('[data-restart]')?.addEventListener('click', () => {
       const f = player.querySelector('iframe');
-      if (f) f.src = src!;
+      if (f) f.src = player.dataset.src!;
       else start();
+    });
+    // Комнаты: другой блок может попросить плеер загрузить другую комнату.
+    player.addEventListener('ek:load-room', (e) => {
+      const src = (e as CustomEvent<string>).detail;
+      if (!src) return;
+      player.dataset.src = src;
+      const f = player.querySelector('iframe');
+      if (f) f.src = src;
+      else start();
+      player.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
     wrap.querySelector('[data-share]')?.addEventListener('click', async () => {
       const data = { title: document.title, url: location.href };

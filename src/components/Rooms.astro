@@ -1,0 +1,76 @@
+---
+// Комнаты игры: текущая открыта, следующая видна заранее.
+// soon: подпись Coming soon. open: замок, пока не пройдена предыдущая комната (движок пишет ek:won:<gameId> в localStorage).
+import type { Game } from '../data/games';
+import Icon from './Icon.astro';
+
+interface Props { game: Game; }
+const { game } = Astro.props;
+const rooms = game.roomList ?? [];
+---
+{rooms.length > 1 && (
+  <section class="rooms" data-rooms data-slug={game.slug}>
+    <h2>Rooms</h2>
+    <ol class="room-list">
+      {rooms.map((r, i) => (
+        <li class="room" data-status={r.status} data-game-id={r.gameId ?? ''} data-src={r.embedUrl ?? ''}
+            data-prev={i > 0 ? rooms[i - 1].gameId ?? '' : ''} data-state={i === 0 ? 'open' : r.status === 'soon' ? 'soon' : 'locked'}>
+          <div class="pic">
+            {r.image && <img src={r.image} alt={`${game.title}, room ${i + 1}: ${r.title}`} width="800" height="450" loading="lazy" decoding="async" />}
+            <span class="badge b-soon"><Icon name="clock" size={16} />Coming soon</span>
+            <span class="badge b-locked"><Icon name="lock" size={16} />Finish room {i} to unlock</span>
+            <span class="badge b-done"><Icon name="check" size={16} />Completed</span>
+            <button class="go" type="button" data-go aria-label={`Play room ${i + 1}: ${r.title}`}><Icon name="play" size={22} />Play</button>
+          </div>
+          <p class="name"><span class="muted">Room {i + 1}</span> {r.title}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+)}
+
+<script>
+  const won = (id: string) => { try { return !!id && !!localStorage.getItem('ek:won:' + id); } catch { return false; } };
+  function refresh() {
+    document.querySelectorAll<HTMLElement>('[data-rooms] .room').forEach((li, i) => {
+      const status = li.dataset.status, id = li.dataset.gameId ?? '', prev = li.dataset.prev ?? '';
+      let state = 'open';
+      if (status === 'soon') state = 'soon';
+      else if (i > 0 && !won(prev)) state = 'locked';
+      li.dataset.state = state;
+      li.classList.toggle('done', won(id));
+    });
+  }
+  refresh();
+  window.addEventListener('message', (e) => { if (e.origin === location.origin && e.data?.type === 'ek:win') refresh(); });
+  window.addEventListener('storage', refresh);
+  document.querySelectorAll<HTMLElement>('[data-rooms] [data-go]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const li = btn.closest<HTMLElement>('.room')!;
+      if (li.dataset.state !== 'open') return;
+      const player = document.querySelector<HTMLElement>('[data-player]');
+      player?.dispatchEvent(new CustomEvent('ek:load-room', { detail: li.dataset.src }));
+    });
+  });
+</script>
+
+<style>
+  .rooms { margin: 18px 0 6px; }
+  .rooms h2 { font-size: 1.15rem; margin: 0 0 10px; }
+  .room-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; max-width: 760px; }
+  .pic { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #000; }
+  .pic img { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter .25s; }
+  .name { margin: 6px 2px 0; font-weight: 700; }
+  .name .muted { font-weight: 500; margin-right: 4px; }
+  .badge { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none; align-items: center; gap: 6px; white-space: nowrap;
+    padding: 7px 14px; border-radius: 999px; background: rgba(0,0,0,.65); border: 1px solid var(--line); font-weight: 700; font-size: .9rem; }
+  .b-done { top: auto; bottom: 10px; left: 10px; transform: none; color: #5ee08a; padding: 4px 10px; font-size: .8rem; }
+  .go { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none; align-items: center; gap: 6px; padding: 9px 20px 9px 16px;
+    border: 0; border-radius: 999px; background: var(--brand); color: #1a0d00; font: inherit; font-weight: 800; cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,.45); }
+  .go:hover { transform: translate(-50%, -50%) scale(1.05); }
+  .room[data-state='soon'] img { filter: brightness(.45) saturate(.6) blur(1.5px); }
+  .room[data-state='locked'] img { filter: brightness(.4) saturate(.5); }
+  .room[data-state='soon'] .b-soon, .room[data-state='locked'] .b-locked { display: inline-flex; }
+  .room[data-state='open'] .go { display: inline-flex; }
+  .room.done .b-done { display: inline-flex; }
+</style>

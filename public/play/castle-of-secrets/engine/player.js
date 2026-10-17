@@ -1,13 +1,11 @@
-// Escape Kit player. mountPlayer(root, game, { asset, saveKey, debug, onEvent })
+// Escape Kit player. mountPlayer(root, game, { asset, saveKey, debug })
 //   asset(path) -> URL for a file inside the game folder.
-//   onEvent(ev)  -> analytics callback. Inside an iframe the same events also go to the parent page
-//                   via postMessage: { source: 'escape-kit', game, event, detail?, ms? }.
 import * as core from './core.js';
 import { puzzleTypes, renderOption } from './puzzles/index.js';
 import { createAudio } from './audio.js';
 
 // Bump when engine styles change, so browsers fetch the new theme files.
-export const EK_VERSION = '20261014-3';
+export const EK_VERSION = '20261017-1';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -24,22 +22,8 @@ function store(key, val) {
 export function mountPlayer(root, game, opts = {}) {
   const asset = opts.asset || (p => p);
   const saveKey = opts.saveKey === false ? null : (opts.saveKey || 'ek:' + game.id);
-  const saved = saveKey && store(saveKey);
-  let state = saved || core.newState(game);
+  let state = (saveKey && store(saveKey)) || core.newState(game);
   if (!game.scenes[state.scene]) state = core.newState(game);
-  const resumed = !!saved && state === saved;
-
-  // ---------- analytics ----------
-  // Events: game_start, game_resume, scene, puzzle_open, puzzle_fail, puzzle_solve, hint_used, restart, game_complete.
-  const clockKey = saveKey ? saveKey + ':t0' : null;
-  const emit = (event, data = {}) => {
-    const ev = { source: 'escape-kit', game: game.id, event, ...data };
-    try { opts.onEvent && opts.onEvent(ev); } catch {}
-    try { if (window.parent !== window) window.parent.postMessage(ev, location.origin === 'null' ? '*' : location.origin); } catch {}
-  };
-  const startClock = () => { if (clockKey && !store(clockKey)) store(clockKey, Date.now()); };
-  const elapsed = () => { const t = clockKey && store(clockKey); return t ? Date.now() - t : undefined; };
-  const seenScenes = new Set([state.scene]);
   let selected = null, hintLevel = 0, hintTarget = null, debug = !!opts.debug, renderToken = 0;
 
   root.classList.add('ek');
@@ -247,7 +231,6 @@ export function mountPlayer(root, game, opts = {}) {
     for (const e of r.events) {
       if (e.type === 'sfx') sfx(e.name);
       if (e.type === 'goto' && !custom) sfx(game.scenes[e.scene] && game.scenes[e.scene].back ? 'zoom' : 'back');
-      if (e.type === 'goto' && !seenScenes.has(e.scene)) { seenScenes.add(e.scene); emit('scene', { detail: e.scene }); }
       if (e.type === 'solved' && !custom) sfx('solve');
       if (e.type === 'say') texts.push(e.text);
       if (e.type === 'give') texts.push(`You got: ${core.itemName(game, e.item)}`);
@@ -289,7 +272,6 @@ export function mountPlayer(root, game, opts = {}) {
   function openPuzzle(id) {
     const p = game.puzzles[id];
     const type = puzzleTypes[p.type];
-    emit('puzzle_open', { detail: id });
     openModal(p.title || 'Puzzle', (body, close, card) => {
       if (p.prompt) body.append(h('p', 'ek-prompt', esc(p.prompt)));
       if (p.image) { const im = h('img', 'ek-puzzle-img'); im.src = asset(p.image); im.alt = ''; body.append(im); }
@@ -297,19 +279,19 @@ export function mountPlayer(root, game, opts = {}) {
       body.append(area);
       if (!type) { area.textContent = `Unknown puzzle type "${p.type}"`; return; }
       area.addEventListener('click', e => { if (e.target.closest('button')) sfx('button', { rate: 0.95 + Math.random() * 0.1 }); });
-      const ui = { option: renderOption, fail: () => emit('puzzle_fail', { detail: id }) || sfx('fail') || card.animate([{ transform: 'translateX(-8px)' }, { transform: 'translateX(8px)' }, { transform: 'translateX(-4px)' }, { transform: 'none' }], 300) };
+      const ui = { option: renderOption, fail: () => sfx('fail') || card.animate([{ transform: 'translateX(-8px)' }, { transform: 'translateX(8px)' }, { transform: 'translateX(-4px)' }, { transform: 'none' }], 300) };
       type(area, p, () => {
         card.classList.add('solved');
-        emit('puzzle_solve', { detail: id, ms: elapsed() });
         setTimeout(() => { close(); apply(core.solvePuzzle(game, state, id)); }, 450);
       }, ui);
       setTimeout(() => area.focus && area.focus(), 0);
     });
   }
   function showWin(text) {
-    emit('game_complete', { ms: elapsed() });
     store(saveKey, null);
-    if (clockKey) store(clockKey, null);
+    // Remember the finished room so the site can unlock the next one.
+    try { localStorage.setItem('ek:won:' + game.id, String(Date.now())); } catch { /* storage unavailable */ }
+    try { if (window.parent !== window) window.parent.postMessage({ type: 'ek:win', id: game.id }, location.origin); } catch { /* cross-origin parent */ }
     sfx('win'); audio.finale();
     openModal(game.winTitle || 'You escaped!', (body, close) => {
       body.append(h('p', 'ek-prompt', esc(text || game.winText || 'Well done.')));
@@ -321,7 +303,6 @@ export function mountPlayer(root, game, opts = {}) {
 
   // ---------- hints ----------
   function hint() {
-    emit('hint_used', { detail: state.scene });
     const path = core.shortestWin(game, state);
     if (!path) return say('No hint available from here. Try restarting.');
     const isNav = n => n.move.kind === 'back' || (n.move.kind === 'click' && n.events.every(e => e.type === 'goto'));
@@ -340,8 +321,6 @@ export function mountPlayer(root, game, opts = {}) {
 
   function restart() {
     state = core.newState(game); selected = null; store(saveKey, null); audio.restartMusic();
-    if (clockKey) store(clockKey, null);
-    emit('restart'); startClock();
     renderScene(); renderInv(); say(game.intro || '');
   }
   back.onclick = () => apply(core.runActions(game, state, [{ goto: game.scenes[state.scene].back }]));
@@ -352,8 +331,6 @@ export function mountPlayer(root, game, opts = {}) {
 
   renderScene(); renderInv();
   if (game.intro && state.inv.length === 0 && !state.flags.length) say(game.intro);
-  startClock();
-  emit(resumed ? 'game_resume' : 'game_start', { detail: state.scene });
 
   return {
     get state() { return state; },

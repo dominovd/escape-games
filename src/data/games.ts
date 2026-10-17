@@ -9,6 +9,17 @@ export interface WalkthroughStep {
   coverIndex?: number; // /images/walkthrough/{slug}/step-1.webp
 }
 
+export interface Room {
+  title: string;
+  /** id игры в escape-kit (game.json id): по нему движок помечает комнату пройденной. */
+  gameId?: string;
+  /** open: можно играть; soon: показывается с подписью Coming soon. */
+  status: 'open' | 'soon';
+  /** 16:9 превью комнаты. */
+  image?: string;
+  embedUrl?: string;
+}
+
 export interface Game {
   slug: string;
   title: string;
@@ -35,6 +46,10 @@ export interface Game {
   image?: string;
   /** Cell in the 6 × 4 concept-cover atlas; not a gameplay screenshot. */
   coverIndex?: number;
+  /** 16:9 постер для плеера. */
+  poster?: string;
+  /** Комнаты игры по порядку. Следующая открывается только после прохождения предыдущей. */
+  roomList?: Room[];
   screenshots?: { src: string; alt: string }[];
   series?: { slug: string; name: string; part: number };
   walkthrough?: { intro: string; steps: WalkthroughStep[] };
@@ -126,8 +141,28 @@ export const games: Game[] = [
   { slug: 'secret-passage', title: 'Secret Passage', themes: ['kids'], difficulty: 'easy', minutes: 10, rooms: 1, mobile: true, added: '2026-07-30', featured: true, sample: true, description: ['Somewhere in this study is a bookcase that moves. Find the switch and follow the secret passage.'], ...std },
 ];
 
+// Игры с собственным артом: обложка 800x600, постер 16:9 и превью комнат в /images/games/.
+const realArt: Record<string, { gameId: string; room1: string; room2?: string }> = {
+  'castle-of-secrets': { gameId: 'hall', room1: 'The Great Hall', room2: 'The Grand Staircase' },
+  'midnight-manor': { gameId: 'ballroom', room1: 'The Ballroom', room2: 'The Library' },
+  'the-haunted-house': { gameId: 'parlor', room1: 'The Parlor', room2: 'The Upstairs Hall' },
+  'witchs-cabin': { gameId: 'cabin', room1: "The Witch's Cabin", room2: 'The Moonlit Forest' },
+  'pumpkin-puzzle': { gameId: 'patch', room1: 'The Pumpkin Patch' },
+  'trick-or-escape': { gameId: 'hallway', room1: 'The Hallway', room2: 'The Kitchen' },
+};
+
 // Atlas cells follow catalog order. Replace with individual game art when available.
 games.forEach((game, coverIndex) => {
+  const art = realArt[game.slug];
+  if (art) {
+    game.image = `/images/games/${game.slug}.webp`;
+    game.poster = `/images/games/${game.slug}-poster.webp`;
+    game.roomList = [
+      { title: art.room1, gameId: art.gameId, status: 'open', image: game.poster, embedUrl: game.embedUrl },
+      ...(art.room2 ? [{ title: art.room2, status: 'soon' as const, image: `/images/games/${game.slug}-room2.webp` }] : []),
+    ];
+    return;
+  }
   game.image = '/images/escape-covers-v1.png';
   game.coverIndex = coverIndex;
 });

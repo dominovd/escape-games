@@ -5,7 +5,7 @@ import { puzzleTypes, renderOption } from './puzzles/index.js';
 import { createAudio } from './audio.js';
 
 // Bump when engine styles change, so browsers fetch the new theme files.
-export const EK_VERSION = '20261014-3';
+export const EK_VERSION = '20261017-1';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -289,6 +289,9 @@ export function mountPlayer(root, game, opts = {}) {
   }
   function showWin(text) {
     store(saveKey, null);
+    // Remember the finished room so the site can unlock the next one.
+    try { localStorage.setItem('ek:won:' + game.id, String(Date.now())); } catch { /* storage unavailable */ }
+    try { if (window.parent !== window) window.parent.postMessage({ type: 'ek:win', id: game.id }, location.origin); } catch { /* cross-origin parent */ }
     sfx('win'); audio.finale();
     openModal(game.winTitle || 'You escaped!', (body, close) => {
       body.append(h('p', 'ek-prompt', esc(text || game.winText || 'Well done.')));

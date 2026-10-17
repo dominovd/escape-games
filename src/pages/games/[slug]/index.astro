@@ -3,6 +3,7 @@ import type { GetStaticPaths } from 'astro';
 import Base from '../../../layouts/Base.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import Player from '../../../components/Player.astro';
+import Rooms from '../../../components/Rooms.astro';
 import GameCard from '../../../components/GameCard.astro';
 import Difficulty from '../../../components/Difficulty.astro';
 import Faq from '../../../components/Faq.astro';
@@ -46,6 +47,7 @@ const faq = game.faq ?? [
 
     <Player game={game} />
     {game.embedUrl && <Vote slug={game.slug} title={game.title} />}
+    <Rooms game={game} />
 
     <ul class="facts">
       <li class="pill"><Difficulty level={game.difficulty} /></li>
