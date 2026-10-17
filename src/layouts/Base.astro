@@ -31,6 +31,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#121316" />
+    <meta name="google-site-verification" content="E8Q1dapND4s1Bnmgno8x1PrC3bouZ5LsOvKDwB3mcO8" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
@@ -43,6 +44,12 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     {ld.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
     {SITE.umamiWebsiteId && (
       <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id={SITE.umamiWebsiteId} data-domains={Astro.site?.hostname} />
+    )}
+    {import.meta.env.PROD && (
+      <Fragment>
+        <script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+        <script is:inline defer src="/_vercel/insights/script.js"></script>
+      </Fragment>
     )}
     <slot name="head" />
   </head>
