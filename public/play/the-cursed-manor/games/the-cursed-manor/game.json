@@ -1,0 +1,861 @@
+{
+  "id": "study",
+  "title": "The Cursed Manor: The Study",
+  "theme": "castle",
+  "start": "study",
+  "intro": "The Blackwood family study. Four ancestors watch from the wall, and the stairs to the crypt are sealed.",
+  "winTitle": "The crypt is open",
+  "winText": "The iron door groans open. Cold air rises from the stairs to the Blackwood crypt. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_study.mp3",
+    "ambience": "assets/audio/amb_study.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "page": "assets/audio/sfx_page.mp3",
+      "drawer": "assets/audio/sfx_drawer.mp3",
+      "ritual": "assets/audio/sfx_ritual.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3",
+      "door": "assets/audio/sfx_door.mp3"
+    }
+  },
+  "scenes": {
+    "study": {
+      "title": "Study",
+      "image": "assets/study.webp",
+      "layers": [
+        {
+          "image": "assets/layer_book_taken.png",
+          "rect": [
+            324,
+            758,
+            161,
+            257
+          ],
+          "if": "flag:_once:shelf/red_book"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1086,
+            1373,
+            531,
+            480
+          ],
+          "if": "solved:drawer"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [
+            2441,
+            1247,
+            1399,
+            675
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_slab_open.png",
+          "rect": [
+            2763,
+            1582,
+            675,
+            294
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3128,
+            494,
+            528,
+            1006
+          ],
+          "if": "solved:crypt"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "shelf",
+          "label": "Bookshelf",
+          "rect": [
+            0,
+            46,
+            735,
+            1608
+          ],
+          "do": [
+            {
+              "goto": "shelf"
+            }
+          ]
+        },
+        {
+          "id": "tree",
+          "label": "Family tree",
+          "rect": [
+            1527,
+            46,
+            1194,
+            735
+          ],
+          "do": [
+            {
+              "goto": "tree"
+            }
+          ]
+        },
+        {
+          "id": "desk",
+          "label": "Desk",
+          "rect": [
+            333,
+            1148,
+            1321,
+            666
+          ],
+          "do": [
+            {
+              "goto": "desk"
+            }
+          ]
+        },
+        {
+          "id": "mantel",
+          "label": "Fireplace",
+          "rect": [
+            1470,
+            861,
+            1286,
+            735
+          ],
+          "do": [
+            {
+              "say": "Cold ashes. Carved on the mantel: nine roses in three rows. Only the four corners and the very center are in bloom."
+            },
+            {
+              "set": "read_mantel"
+            }
+          ]
+        },
+        {
+          "id": "circle",
+          "label": "Ritual circle",
+          "rect": [
+            2389,
+            1470,
+            1451,
+            689
+          ],
+          "do": [
+            {
+              "goto": "circle"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Crypt door",
+          "rect": [
+            3135,
+            459,
+            459,
+            988
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        }
+      ]
+    },
+    "shelf": {
+      "title": "Bookshelf",
+      "image": "assets/study.webp",
+      "crop": [
+        0,
+        114,
+        2127,
+        1197
+      ],
+      "back": "study",
+      "layers": [
+        {
+          "image": "assets/layer_book_taken.png",
+          "rect": [
+            324,
+            758,
+            161,
+            257
+          ],
+          "if": "flag:_once:shelf/red_book"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1086,
+            1373,
+            531,
+            480
+          ],
+          "if": "solved:drawer"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [
+            2441,
+            1247,
+            1399,
+            675
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_slab_open.png",
+          "rect": [
+            2763,
+            1582,
+            675,
+            294
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3128,
+            494,
+            528,
+            1006
+          ],
+          "if": "solved:crypt"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "books",
+          "label": "Books",
+          "rect": [
+            115,
+            276,
+            574,
+            965
+          ],
+          "do": [
+            {
+              "say": "Sermons, ledgers and a thick layer of dust."
+            }
+          ]
+        },
+        {
+          "id": "red_book",
+          "label": "Red book",
+          "rect": [
+            333,
+            769,
+            138,
+            218
+          ],
+          "once": true,
+          "hint": "One book on the shelf has no dust on it.",
+          "do": [
+            {
+              "sfx": "page"
+            },
+            {
+              "say": "One book has no dust on it: the Blackwood Chronicle."
+            },
+            {
+              "give": "chronicle"
+            },
+            {
+              "inspect": "chronicle"
+            }
+          ]
+        }
+      ]
+    },
+    "desk": {
+      "title": "Desk",
+      "image": "assets/study.webp",
+      "crop": [
+        174,
+        1020,
+        1638,
+        921
+      ],
+      "back": "study",
+      "layers": [
+        {
+          "image": "assets/layer_book_taken.png",
+          "rect": [
+            324,
+            758,
+            161,
+            257
+          ],
+          "if": "flag:_once:shelf/red_book"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1086,
+            1373,
+            531,
+            480
+          ],
+          "if": "solved:drawer"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [
+            2441,
+            1247,
+            1399,
+            675
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_slab_open.png",
+          "rect": [
+            2763,
+            1582,
+            675,
+            294
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3128,
+            494,
+            528,
+            1006
+          ],
+          "if": "solved:crypt"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "ink",
+          "label": "Inkwell",
+          "rect": [
+            1160,
+            1206,
+            138,
+            115
+          ],
+          "do": [
+            {
+              "say": "The ink dried a century ago."
+            }
+          ]
+        },
+        {
+          "id": "drawer",
+          "label": "Drawer",
+          "rect": [
+            1148,
+            1378,
+            344,
+            344
+          ],
+          "if": "!solved:drawer",
+          "do": [
+            {
+              "puzzle": "drawer"
+            }
+          ]
+        },
+        {
+          "id": "drawer_done",
+          "label": "Drawer",
+          "rect": [
+            1148,
+            1378,
+            344,
+            344
+          ],
+          "if": "solved:drawer",
+          "do": [
+            {
+              "say": "The drawer is empty now."
+            }
+          ]
+        }
+      ]
+    },
+    "tree": {
+      "title": "Family tree",
+      "image": "assets/study.webp",
+      "crop": [
+        1314,
+        0,
+        1620,
+        911
+      ],
+      "back": "study",
+      "layers": [
+        {
+          "image": "assets/layer_book_taken.png",
+          "rect": [
+            324,
+            758,
+            161,
+            257
+          ],
+          "if": "flag:_once:shelf/red_book"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1086,
+            1373,
+            531,
+            480
+          ],
+          "if": "solved:drawer"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [
+            2441,
+            1247,
+            1399,
+            675
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_slab_open.png",
+          "rect": [
+            2763,
+            1582,
+            675,
+            294
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3128,
+            494,
+            528,
+            1006
+          ],
+          "if": "solved:crypt"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "edmund",
+          "label": "Edith",
+          "rect": [
+            1608,
+            230,
+            230,
+            436
+          ],
+          "do": [
+            {
+              "say": "Lady Edith Blackwood, 1721 to 1766. A crescent moon is carved under her portrait."
+            },
+            {
+              "set": "read_edmund"
+            }
+          ]
+        },
+        {
+          "id": "agatha",
+          "label": "Ambrose",
+          "rect": [
+            1872,
+            230,
+            230,
+            436
+          ],
+          "do": [
+            {
+              "say": "Lord Ambrose Blackwood, 1745 to 1790. A skull is carved under his portrait."
+            },
+            {
+              "set": "read_agatha"
+            }
+          ]
+        },
+        {
+          "id": "silas",
+          "label": "Selina",
+          "rect": [
+            2147,
+            230,
+            230,
+            436
+          ],
+          "do": [
+            {
+              "say": "Lady Selina Blackwood, 1690 to 1731. A serpent is carved under her portrait."
+            },
+            {
+              "set": "read_silas"
+            }
+          ]
+        },
+        {
+          "id": "morwenna",
+          "label": "Oliver",
+          "rect": [
+            2411,
+            230,
+            230,
+            436
+          ],
+          "do": [
+            {
+              "say": "Oliver Blackwood, 1702 to 1744. An owl is carved under his portrait."
+            },
+            {
+              "set": "read_morwenna"
+            }
+          ]
+        }
+      ]
+    },
+    "circle": {
+      "title": "Ritual circle",
+      "image": "assets/study.webp",
+      "crop": [
+        2041,
+        1148,
+        1799,
+        1012
+      ],
+      "back": "study",
+      "layers": [
+        {
+          "image": "assets/layer_book_taken.png",
+          "rect": [
+            324,
+            758,
+            161,
+            257
+          ],
+          "if": "flag:_once:shelf/red_book"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1086,
+            1373,
+            531,
+            480
+          ],
+          "if": "solved:drawer"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [
+            2441,
+            1247,
+            1399,
+            675
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_slab_open.png",
+          "rect": [
+            2763,
+            1582,
+            675,
+            294
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3128,
+            494,
+            528,
+            1006
+          ],
+          "if": "solved:crypt"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "candles",
+          "label": "Black candles",
+          "rect": [
+            2389,
+            1332,
+            1451,
+            758
+          ],
+          "if": "!solved:ritual",
+          "use": "matches",
+          "fail": "Four black candles in iron stands, each marked with a symbol. You have nothing to light them with.",
+          "hint": "The candles need a flame. Something on the desk might help.",
+          "do": [
+            {
+              "puzzle": "ritual"
+            }
+          ]
+        },
+        {
+          "id": "slab",
+          "label": "Open slab",
+          "rect": [
+            2802,
+            1608,
+            574,
+            218
+          ],
+          "if": "solved:ritual",
+          "once": true,
+          "do": [
+            {
+              "say": "Under the slab lies a heavy iron key."
+            },
+            {
+              "give": "crypt_key"
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Crypt door",
+      "image": "assets/study.webp",
+      "crop": [
+        1662,
+        340,
+        2178,
+        1225
+      ],
+      "back": "study",
+      "layers": [
+        {
+          "image": "assets/layer_book_taken.png",
+          "rect": [
+            324,
+            758,
+            161,
+            257
+          ],
+          "if": "flag:_once:shelf/red_book"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1086,
+            1373,
+            531,
+            480
+          ],
+          "if": "solved:drawer"
+        },
+        {
+          "image": "assets/layer_candles_lit.png",
+          "rect": [
+            2441,
+            1247,
+            1399,
+            675
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_slab_open.png",
+          "rect": [
+            2763,
+            1582,
+            675,
+            294
+          ],
+          "if": "solved:ritual"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3128,
+            494,
+            528,
+            1006
+          ],
+          "if": "solved:crypt"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "lock",
+          "label": "Iron lock",
+          "rect": [
+            3250,
+            746,
+            253,
+            379
+          ],
+          "if": "!flag:door_unlocked",
+          "use": "crypt_key",
+          "consume": true,
+          "fail": "A heavy iron lock with a four-digit dial beneath it.",
+          "do": [
+            {
+              "sfx": "unlock"
+            },
+            {
+              "say": "The key turns, but the door still will not move. The dial below holds it."
+            },
+            {
+              "set": "door_unlocked"
+            }
+          ]
+        },
+        {
+          "id": "dial",
+          "label": "Year dial",
+          "rect": [
+            3250,
+            746,
+            253,
+            379
+          ],
+          "if": [
+            "flag:door_unlocked",
+            "!solved:crypt"
+          ],
+          "do": [
+            {
+              "puzzle": "crypt"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            3135,
+            459,
+            459,
+            988
+          ],
+          "if": "solved:crypt",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "chronicle": {
+      "name": "Blackwood Chronicle",
+      "icon": "assets/chronicle.png",
+      "text": "The Blackwood Chronicle\n\nThe curse fell on the night the first of the four died, and the crypt has been sealed with that year ever since.\n\nTo quiet the four, light their candles in the order they were taken."
+    },
+    "matches": {
+      "name": "Box of matches",
+      "icon": "assets/matches.png",
+      "text": "Old, but a few still strike."
+    },
+    "crypt_key": {
+      "name": "Crypt key",
+      "icon": "assets/crypt_key.png",
+      "text": "Heavy, cold iron."
+    }
+  },
+  "puzzles": {
+    "drawer": {
+      "type": "switches",
+      "title": "Rose lock",
+      "prompt": "Nine carved roses. Press them to make them bloom.",
+      "rows": 3,
+      "cols": 3,
+      "start": "000000000",
+      "answer": "101010101",
+      "mode": "single",
+      "clue": "flag:read_mantel",
+      "do": [
+        {
+          "sfx": "drawer"
+        },
+        {
+          "say": "The drawer clicks open. Inside: a box of matches."
+        },
+        {
+          "give": "matches"
+        }
+      ]
+    },
+    "ritual": {
+      "type": "sequence",
+      "title": "Black candles",
+      "prompt": "Light the four candles. Order matters.",
+      "buttons": [
+        "🌙",
+        "💀",
+        "🐍",
+        "🦉"
+      ],
+      "answer": [
+        "🐍",
+        "🦉",
+        "🌙",
+        "💀"
+      ],
+      "clue": [
+        "has:chronicle",
+        "flag:read_edmund",
+        "flag:read_agatha",
+        "flag:read_silas",
+        "flag:read_morwenna"
+      ],
+      "do": [
+        {
+          "sfx": "ritual"
+        },
+        {
+          "say": "The four flames turn blue. With a grinding sound, a slab in the center of the circle slides aside."
+        }
+      ]
+    },
+    "crypt": {
+      "type": "code",
+      "title": "Year dial",
+      "prompt": "Four digits. A year.",
+      "answer": "1731",
+      "clue": [
+        "has:chronicle",
+        "flag:read_silas"
+      ],
+      "do": [
+        {
+          "sfx": "door"
+        },
+        {
+          "say": "1731, the year Selina died. The dial clicks and the door swings inward."
+        }
+      ]
+    }
+  }
+}

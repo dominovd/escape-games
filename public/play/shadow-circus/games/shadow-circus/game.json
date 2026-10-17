@@ -1,0 +1,622 @@
+{
+  "id": "bigtop",
+  "title": "Shadow Circus: The Big Top",
+  "theme": "castle",
+  "start": "bigtop",
+  "intro": "The circus came to town for one night only, and the tent flap has been laced shut with you inside. The show starts soon.",
+  "winTitle": "Out of the ring",
+  "winText": "The flap falls open onto a lantern-lit alley of wagons. Somewhere ahead, the ringmaster is laughing. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_bigtop.mp3",
+    "ambience": "assets/audio/amb_bigtop.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "crank": "assets/audio/sfx_crank.mp3",
+      "march": "assets/audio/sfx_march.mp3",
+      "trunk": "assets/audio/sfx_trunk.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3",
+      "flap": "assets/audio/sfx_flap.mp3"
+    }
+  },
+  "scenes": {
+    "bigtop": {
+      "title": "Big top",
+      "image": "assets/bigtop.webp",
+      "layers": [
+        {
+          "image": "assets/layer_hat_taken.png",
+          "rect": [
+            1598,
+            1121,
+            310,
+            255
+          ],
+          "if": "flag:_once:bigtop/hat"
+        },
+        {
+          "image": "assets/layer_lion_open.png",
+          "rect": [
+            2108,
+            613,
+            361,
+            455
+          ],
+          "if": "solved:march"
+        },
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            2712,
+            1063,
+            680,
+            351
+          ],
+          "if": "flag:trunk_open"
+        },
+        {
+          "image": "assets/layer_exit_open.png",
+          "rect": [
+            2993,
+            289,
+            847,
+            1311
+          ],
+          "if": "solved:buckle"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "poster",
+          "label": "Poster",
+          "rect": [
+            46,
+            402,
+            505,
+            804
+          ],
+          "do": [
+            {
+              "say": "TONIGHT! The Great Calliope March. Red, yellow, red, blue, and the ring comes alive!"
+            },
+            {
+              "set": "read_poster"
+            }
+          ]
+        },
+        {
+          "id": "calliope",
+          "label": "Calliope",
+          "rect": [
+            528,
+            425,
+            919,
+            1160
+          ],
+          "do": [
+            {
+              "goto": "calliope"
+            }
+          ]
+        },
+        {
+          "id": "podium",
+          "label": "Podium",
+          "rect": [
+            1527,
+            1332,
+            459,
+            344
+          ],
+          "do": [
+            {
+              "say": "Tonight's program is pinned to the podium. Every act is crossed out except one: \"The Locked Guest\"."
+            }
+          ]
+        },
+        {
+          "id": "hat",
+          "label": "Top hat",
+          "rect": [
+            1619,
+            1148,
+            276,
+            195
+          ],
+          "once": true,
+          "hint": "Check the ringmaster's hat on the podium.",
+          "do": [
+            {
+              "say": "No rabbit in the ringmaster's hat, but there is a brass crank handle."
+            },
+            {
+              "give": "crank"
+            }
+          ]
+        },
+        {
+          "id": "lion",
+          "label": "Lion automaton",
+          "rect": [
+            2090,
+            655,
+            655,
+            942
+          ],
+          "do": [
+            {
+              "goto": "lion"
+            }
+          ]
+        },
+        {
+          "id": "trunk",
+          "label": "Juggler's trunk",
+          "rect": [
+            2744,
+            1275,
+            563,
+            379
+          ],
+          "if": "!flag:trunk_open",
+          "use": "small_key",
+          "consume": true,
+          "fail": "A juggler's trunk, locked with a small brass padlock.",
+          "do": [
+            {
+              "sfx": "trunk"
+            },
+            {
+              "say": "The trunk opens. Inside: the ringmaster's key ring. Painted inside the lid: three juggling pins marked with a star, a moon and a sun, in that order."
+            },
+            {
+              "set": "trunk_open"
+            },
+            {
+              "give": "ring_keys"
+            }
+          ]
+        },
+        {
+          "id": "trunk_done",
+          "label": "Juggler's trunk",
+          "rect": [
+            2744,
+            1275,
+            563,
+            379
+          ],
+          "if": "flag:trunk_open",
+          "do": [
+            {
+              "say": "Painted inside the lid: a star, a moon and a sun, in that order."
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Exit flap",
+          "rect": [
+            3032,
+            322,
+            804,
+            1194
+          ],
+          "do": [
+            {
+              "goto": "exit"
+            }
+          ]
+        }
+      ]
+    },
+    "calliope": {
+      "title": "Calliope",
+      "image": "assets/bigtop.webp",
+      "crop": [
+        0,
+        286,
+        2557,
+        1438
+      ],
+      "back": "bigtop",
+      "layers": [
+        {
+          "image": "assets/layer_hat_taken.png",
+          "rect": [
+            1598,
+            1121,
+            310,
+            255
+          ],
+          "if": "flag:_once:bigtop/hat"
+        },
+        {
+          "image": "assets/layer_lion_open.png",
+          "rect": [
+            2108,
+            613,
+            361,
+            455
+          ],
+          "if": "solved:march"
+        },
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            2712,
+            1063,
+            680,
+            351
+          ],
+          "if": "flag:trunk_open"
+        },
+        {
+          "image": "assets/layer_exit_open.png",
+          "rect": [
+            2993,
+            289,
+            847,
+            1311
+          ],
+          "if": "solved:buckle"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "slot",
+          "label": "Crank slot",
+          "rect": [
+            1252,
+            1102,
+            172,
+            184
+          ],
+          "if": "!flag:cranked",
+          "use": "crank",
+          "consume": true,
+          "fail": "The calliope is silent. Its crank handle is missing.",
+          "do": [
+            {
+              "sfx": "crank"
+            },
+            {
+              "say": "The crank fits. Steam hisses into the pipes."
+            },
+            {
+              "set": "cranked"
+            }
+          ]
+        },
+        {
+          "id": "pipes_cold",
+          "label": "Pipes",
+          "rect": [
+            896,
+            425,
+            390,
+            528
+          ],
+          "if": "!flag:cranked",
+          "do": [
+            {
+              "say": "Red, yellow, blue and green pipes. Without steam they make no sound."
+            }
+          ]
+        },
+        {
+          "id": "pipes",
+          "label": "Pipes",
+          "rect": [
+            896,
+            425,
+            390,
+            528
+          ],
+          "if": [
+            "flag:cranked",
+            "!solved:march"
+          ],
+          "do": [
+            {
+              "puzzle": "march"
+            }
+          ]
+        }
+      ]
+    },
+    "lion": {
+      "title": "Lion automaton",
+      "image": "assets/bigtop.webp",
+      "crop": [
+        1297,
+        499,
+        2229,
+        1254
+      ],
+      "back": "bigtop",
+      "layers": [
+        {
+          "image": "assets/layer_hat_taken.png",
+          "rect": [
+            1598,
+            1121,
+            310,
+            255
+          ],
+          "if": "flag:_once:bigtop/hat"
+        },
+        {
+          "image": "assets/layer_lion_open.png",
+          "rect": [
+            2108,
+            613,
+            361,
+            455
+          ],
+          "if": "solved:march"
+        },
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            2712,
+            1063,
+            680,
+            351
+          ],
+          "if": "flag:trunk_open"
+        },
+        {
+          "image": "assets/layer_exit_open.png",
+          "rect": [
+            2993,
+            289,
+            847,
+            1311
+          ],
+          "if": "solved:buckle"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "mouth_shut",
+          "label": "Lion's mouth",
+          "rect": [
+            2136,
+            758,
+            218,
+            218
+          ],
+          "if": "!solved:march",
+          "do": [
+            {
+              "say": "The brass lion's jaws are clamped shut. It seems to be waiting for music."
+            }
+          ]
+        },
+        {
+          "id": "mouth",
+          "label": "Lion's mouth",
+          "rect": [
+            2136,
+            758,
+            218,
+            218
+          ],
+          "if": "solved:march",
+          "once": true,
+          "do": [
+            {
+              "say": "On the brass tongue lies a small key."
+            },
+            {
+              "give": "small_key"
+            }
+          ]
+        }
+      ]
+    },
+    "exit": {
+      "title": "Exit flap",
+      "image": "assets/bigtop.webp",
+      "crop": [
+        2169,
+        483,
+        1671,
+        940
+      ],
+      "back": "bigtop",
+      "layers": [
+        {
+          "image": "assets/layer_hat_taken.png",
+          "rect": [
+            1598,
+            1121,
+            310,
+            255
+          ],
+          "if": "flag:_once:bigtop/hat"
+        },
+        {
+          "image": "assets/layer_lion_open.png",
+          "rect": [
+            2108,
+            613,
+            361,
+            455
+          ],
+          "if": "solved:march"
+        },
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            2712,
+            1063,
+            680,
+            351
+          ],
+          "if": "flag:trunk_open"
+        },
+        {
+          "image": "assets/layer_exit_open.png",
+          "rect": [
+            2993,
+            289,
+            847,
+            1311
+          ],
+          "if": "solved:buckle"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "padlock",
+          "label": "Padlock",
+          "rect": [
+            3307,
+            930,
+            276,
+            264
+          ],
+          "if": "!flag:exit_unlocked",
+          "use": "ring_keys",
+          "consume": true,
+          "fail": "The flap is chained shut with a big padlock.",
+          "do": [
+            {
+              "sfx": "unlock"
+            },
+            {
+              "say": "One of the ringmaster's keys opens the padlock. The flap is still laced with a buckle of three symbol wheels."
+            },
+            {
+              "set": "exit_unlocked"
+            }
+          ]
+        },
+        {
+          "id": "buckle",
+          "label": "Symbol buckle",
+          "rect": [
+            3307,
+            930,
+            276,
+            264
+          ],
+          "if": [
+            "flag:exit_unlocked",
+            "!solved:buckle"
+          ],
+          "do": [
+            {
+              "puzzle": "buckle"
+            }
+          ]
+        },
+        {
+          "id": "out",
+          "label": "Open flap",
+          "rect": [
+            3032,
+            322,
+            804,
+            1194
+          ],
+          "if": "solved:buckle",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "crank": {
+      "name": "Crank handle",
+      "icon": "assets/crank.png",
+      "text": "A brass crank handle with a red wooden grip."
+    },
+    "small_key": {
+      "name": "Small key",
+      "icon": "assets/small_key.png",
+      "text": "A small brass key, still warm from the lion."
+    },
+    "ring_keys": {
+      "name": "Ringmaster's keys",
+      "icon": "assets/ring_keys.png",
+      "text": "A heavy ring of keys with a gold star charm."
+    }
+  },
+  "puzzles": {
+    "march": {
+      "type": "sequence",
+      "title": "Calliope pipes",
+      "prompt": "Play the march.",
+      "buttons": [
+        "🔴",
+        "🟡",
+        "🔵",
+        "🟢"
+      ],
+      "answer": [
+        "🔴",
+        "🟡",
+        "🔴",
+        "🔵"
+      ],
+      "clue": "flag:read_poster",
+      "do": [
+        {
+          "sfx": "march"
+        },
+        {
+          "say": "The calliope blasts the march. In the ring, the brass lion yawns wide open."
+        }
+      ]
+    },
+    "buckle": {
+      "type": "dials",
+      "title": "Symbol buckle",
+      "prompt": "Three wheels.",
+      "options": [
+        "♣",
+        "★",
+        "☾",
+        "☀",
+        "♦"
+      ],
+      "start": [
+        "♣",
+        "♣",
+        "♣"
+      ],
+      "answer": [
+        "★",
+        "☾",
+        "☀"
+      ],
+      "clue": "flag:trunk_open",
+      "do": [
+        {
+          "sfx": "flap"
+        },
+        {
+          "say": "Star, moon, sun. The buckle springs apart."
+        }
+      ]
+    }
+  }
+}
