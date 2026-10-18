@@ -53,7 +53,7 @@
             379,
             338
           ],
-          "if": "flag:_once:desk/lunchbox"
+          "if": "flag:lunchbox_open"
         },
         {
           "image": "assets/layer_door_open.png",
@@ -209,7 +209,7 @@
             379,
             338
           ],
-          "if": "flag:_once:desk/lunchbox"
+          "if": "flag:lunchbox_open"
         },
         {
           "image": "assets/layer_door_open.png",
@@ -250,16 +250,19 @@
             299,
             161
           ],
-          "once": true,
           "do": [
             {
+              "if": "!flag:lunchbox_open",
               "sfx": "lunchbox"
             },
             {
-              "say": "A sandwich, an apple and a note: \"Door code: 2580.\" You leave the sandwich."
+              "say": "A sandwich, an apple and a folded note tucked under the lid: \"Door code: 2580. Mike.\" You leave the sandwich."
             },
             {
               "set": "read_code"
+            },
+            {
+              "set": "lunchbox_open"
             }
           ]
         }
@@ -294,7 +297,7 @@
             379,
             338
           ],
-          "if": "flag:_once:desk/lunchbox"
+          "if": "flag:lunchbox_open"
         },
         {
           "image": "assets/layer_door_open.png",

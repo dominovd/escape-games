@@ -38,29 +38,29 @@
         {
           "image": "assets/layer_poster_off.png",
           "rect": [
-            1376,
+            1380,
             145,
-            547,
-            776
+            542,
+            774
           ],
           "if": "flag:poster_off"
         },
         {
           "image": "assets/layer_bricks_out.png",
           "rect": [
-            1592,
+            1587,
             305,
-            299,
-            255
+            305,
+            257
           ],
           "if": "flag:bricks_out"
         },
         {
           "image": "assets/layer_door_open.png",
           "rect": [
-            3027,
+            3022,
             7,
-            813,
+            818,
             2095
           ],
           "if": "flag:door_open"

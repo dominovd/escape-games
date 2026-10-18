@@ -56,10 +56,10 @@
         {
           "image": "assets/layer_door_open.png",
           "rect": [
-            2809,
-            170,
-            939,
-            1573
+            2777,
+            0,
+            1033,
+            1835
           ],
           "if": "solved:door"
         }
@@ -226,10 +226,10 @@
         {
           "image": "assets/layer_door_open.png",
           "rect": [
-            2809,
-            170,
-            939,
-            1573
+            2777,
+            0,
+            1033,
+            1835
           ],
           "if": "solved:door"
         }
