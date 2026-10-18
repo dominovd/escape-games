@@ -56,16 +56,6 @@
           "if": "solved:march"
         },
         {
-          "image": "assets/layer_trunk_open.png",
-          "rect": [
-            2712,
-            1063,
-            680,
-            351
-          ],
-          "if": "flag:trunk_open"
-        },
-        {
           "image": "assets/layer_exit_open.png",
           "rect": [
             2993,
@@ -74,6 +64,16 @@
             1311
           ],
           "if": "solved:buckle"
+        },
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            2873,
+            905,
+            606,
+            441
+          ],
+          "if": "flag:trunk_open"
         }
       ],
       "hotspots": [
@@ -253,16 +253,6 @@
           "if": "solved:march"
         },
         {
-          "image": "assets/layer_trunk_open.png",
-          "rect": [
-            2712,
-            1063,
-            680,
-            351
-          ],
-          "if": "flag:trunk_open"
-        },
-        {
           "image": "assets/layer_exit_open.png",
           "rect": [
             2993,
@@ -271,6 +261,16 @@
             1311
           ],
           "if": "solved:buckle"
+        },
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            2873,
+            905,
+            606,
+            441
+          ],
+          "if": "flag:trunk_open"
         }
       ],
       "hotspots": [
@@ -368,16 +368,6 @@
           "if": "solved:march"
         },
         {
-          "image": "assets/layer_trunk_open.png",
-          "rect": [
-            2712,
-            1063,
-            680,
-            351
-          ],
-          "if": "flag:trunk_open"
-        },
-        {
           "image": "assets/layer_exit_open.png",
           "rect": [
             2993,
@@ -386,6 +376,16 @@
             1311
           ],
           "if": "solved:buckle"
+        },
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            2873,
+            905,
+            606,
+            441
+          ],
+          "if": "flag:trunk_open"
         }
       ],
       "hotspots": [
@@ -459,16 +459,6 @@
           "if": "solved:march"
         },
         {
-          "image": "assets/layer_trunk_open.png",
-          "rect": [
-            2712,
-            1063,
-            680,
-            351
-          ],
-          "if": "flag:trunk_open"
-        },
-        {
           "image": "assets/layer_exit_open.png",
           "rect": [
             2993,
@@ -477,6 +467,16 @@
             1311
           ],
           "if": "solved:buckle"
+        },
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            2873,
+            905,
+            606,
+            441
+          ],
+          "if": "flag:trunk_open"
         }
       ],
       "hotspots": [
