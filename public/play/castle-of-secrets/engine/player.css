@@ -116,3 +116,39 @@
 .ek-view{background:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 45%,#00000080 100%)}
 .ek-view::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 50% 50%,#ffb45a0d,transparent 70%)}
 .ek-frame{z-index:1}
+
+/* ---------- ambient motion (engine/fx.js) ---------- */
+.ek-light,.ek-flame,.ek-particles{position:absolute;pointer-events:none}
+.ek-light{border-radius:50%;background:radial-gradient(circle,var(--c) 0%,color-mix(in srgb,var(--c) 45%,transparent) 28%,transparent 68%);mix-blend-mode:screen;opacity:var(--s)}
+.ek-light.flicker{animation:ek-light-flicker 2s infinite}
+@keyframes ek-light-flicker{
+  0%{opacity:var(--s);transform:scale(1)}
+  13%{opacity:calc(var(--s) * (1 - .22 * var(--f)));transform:scale(.985)}
+  27%{opacity:calc(var(--s) * (1 + .12 * var(--f)))}
+  41%{opacity:calc(var(--s) * (1 - .08 * var(--f)));transform:scale(1.01)}
+  58%{opacity:calc(var(--s) * (1 - .28 * var(--f)))}
+  71%{opacity:calc(var(--s) * (1 + .1 * var(--f)));transform:scale(.99)}
+  86%{opacity:calc(var(--s) * (1 - .14 * var(--f)))}
+  100%{opacity:var(--s);transform:scale(1)}
+}
+.ek-flame{overflow:hidden;transform-origin:50% 100%;animation:ek-flame 1s infinite ease-in-out;
+  -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 55%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 55%,#000 55%,transparent 100%)}
+@keyframes ek-flame{
+  0%,100%{transform:scale(1,1) skewX(0deg);filter:brightness(1)}
+  25%{transform:scale(calc(1 - .01 * var(--amp)),calc(1 + .045 * var(--amp))) skewX(calc(1.6deg * var(--amp)));filter:brightness(1.12)}
+  50%{transform:scale(1,calc(1 + .015 * var(--amp))) skewX(calc(-.8deg * var(--amp)));filter:brightness(1.04)}
+  75%{transform:scale(calc(1 + .01 * var(--amp)),calc(1 + .055 * var(--amp))) skewX(calc(-1.8deg * var(--amp)));filter:brightness(1.16)}
+}
+.ek-flame img{position:absolute;max-width:none}
+.ek-particles{display:block}
+.ek-anim{animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+.ek-anim-sway{animation-name:ek-sway}
+.ek-anim-bob{animation-name:ek-bob}
+.ek-anim-flicker{animation-name:ek-flicker;transform-origin:50% 100%}
+.ek-anim-pulse{animation-name:ek-pulse}
+@keyframes ek-sway{0%,100%{transform:rotate(calc(-2.5deg * var(--amp)))}50%{transform:rotate(calc(2.5deg * var(--amp)))}}
+@keyframes ek-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(-2% * var(--amp)))}}
+@keyframes ek-flicker{0%,100%{opacity:1;transform:scaleY(1)}30%{opacity:.86;transform:scaleY(calc(1 + .04 * var(--amp)))}60%{opacity:.95;transform:scaleY(calc(1 - .02 * var(--amp)))}}
+@keyframes ek-pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(calc(1 + .35 * var(--amp)))}}
+.ek-fly{position:absolute;z-index:20;pointer-events:none;object-fit:contain;filter:drop-shadow(0 6px 14px #000a)}
+@media (prefers-reduced-motion:reduce){.ek-light,.ek-flame,.ek-anim{animation:none!important}}

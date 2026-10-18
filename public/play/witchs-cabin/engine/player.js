@@ -3,9 +3,10 @@
 import * as core from './core.js';
 import { puzzleTypes, renderOption } from './puzzles/index.js';
 import { createAudio } from './audio.js';
+import * as fx from './fx.js';
 
 // Bump when engine styles change, so browsers fetch the new theme files.
-export const EK_VERSION = '20261017-1';
+export const EK_VERSION = '20261019-1';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -111,9 +112,11 @@ export function mountPlayer(root, game, opts = {}) {
   }
 
   // ---------- scene ----------
-  let shownScene = null;
+  let shownScene = null, shownLayers = new Set(), enters = [];
+  const fxCache = new Map();
   async function renderScene() {
     const token = ++renderToken;
+    enters = [];
     const sc = game.scenes[state.scene];
     const url = asset(sc.image);
     let W, H;
@@ -126,11 +129,21 @@ export function mountPlayer(root, game, opts = {}) {
     const pct = ([x, y, w, hh]) => ({ left: x / W * 100 + '%', top: y / H * 100 + '%', width: w / W * 100 + '%', height: hh / H * 100 + '%' });
     const base = h('img', 'ek-base'); base.src = url; base.alt = sc.title || ''; base.draggable = false;
     canvas.append(base);
+    // Ambient motion: flames sit on the picture, glows and particles above the state layers.
+    const amb = fx.renderAmbient(fx.ambientFor(game, sc.image, c => core.check(c, state)), W, H, url, h, fxCache, asset);
+    const under = e => e.classList.contains('ek-flame') && !e.classList.contains('on-layer');
+    canvas.append(...amb.filter(under));
+    const sameScene = shownScene === state.scene;
+    const nowLayers = new Set();
     for (const l of core.visibleLayers(game, state)) {
       const li = h('img', 'ek-layer'); li.src = asset(l.image); li.alt = ''; li.draggable = false;
       Object.assign(li.style, pct(l.rect || [0, 0, W, H]));
+      if (l.anim) fx.animateLayer(li, l);
+      nowLayers.add(l.image);
+      if (sameScene && !shownLayers.has(l.image)) enters.push([li, l]);
       canvas.append(li);
     }
+    canvas.append(...amb.filter(e => !under(e)));
     for (const hs of core.visibleHotspots(game, state)) {
       const b = h('button', 'ek-hot');
       b.setAttribute('aria-label', hs.label || hs.id);
@@ -146,6 +159,8 @@ export function mountPlayer(root, game, opts = {}) {
     await Promise.race([Promise.all(imgs.map(i => i.decode().catch(() => {}))), new Promise(r => setTimeout(r, 600))]);
     if (token !== renderToken) return;
     sceneEl.replaceChildren(canvas);
+    for (const [li, l] of enters) fx.enterLayer(li, l);
+    shownLayers = nowLayers;
     sceneEl.classList.toggle('debug', debug);
     back.hidden = !sc.back;
     fit();
@@ -214,7 +229,9 @@ export function mountPlayer(root, game, opts = {}) {
   }
 
   // ---------- interaction ----------
+  let fromRect = null;
   function click(hs, el) {
+    fromRect = el ? el.getBoundingClientRect() : null;
     const r = core.clickHotspot(game, state, hs, selected);
     if (r.blocked) { sfx('locked'); el && el.animate([{ transform: 'translateX(-3px)' }, { transform: 'translateX(3px)' }, { transform: 'none' }], 180); }
     else if (hs.use) selected = null;
@@ -245,6 +262,12 @@ export function mountPlayer(root, game, opts = {}) {
     renderInv();
     if (r.events.some(e => e.type === 'give')) { if (!custom) sfx('pickup'); } else if (r.ok === false) sfx('locked');
     if (r.events.some(e => e.type === 'give')) inv.animate([{ boxShadow: '0 0 0 2px #ffc874' }, { boxShadow: '0 0 0 0 transparent' }], 700);
+    const slotEls = inv.querySelectorAll('.ek-slot');
+    for (const e of r.events) if (e.type === 'give' && fromRect) {
+      const it = game.items[e.item] || {};
+      fx.flyToSlot(root, fromRect, slotEls[state.inv.indexOf(e.item)], it.icon && asset(it.icon));
+    }
+    fromRect = null;
     if (look) inspect(look);
     if (puzzle) openPuzzle(puzzle);
     if (win) showWin(win.text);

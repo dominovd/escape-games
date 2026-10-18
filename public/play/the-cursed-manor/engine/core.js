@@ -272,6 +272,10 @@ export function lint(game) {
     }
     for (const l of sc.layers || []) checkCond(l.if, `scene "${sid}" layer`);
   }
+  for (const a of game.ambient || []) {
+    checkCond(a.if, `ambient ${a.type || 'effect'}`);
+    if (!['light', 'flame', 'particles'].includes(a.type)) warn(`ambient effect has unknown type "${a.type}"`);
+  }
   for (const [id, it] of Object.entries(items)) {
     if (it.combine) {
       if (!items[it.combine.with]) err(`item "${id}" combines with unknown item "${it.combine.with}"`);
