@@ -1,0 +1,571 @@
+{
+  "id": "cell",
+  "title": "Prison Break: The Cell",
+  "theme": "prison",
+  "start": "cell",
+  "intro": "Cell 7. Lights out, the guard is on his round, and you have until the morning count to get out of here.",
+  "winTitle": "Out of the cell",
+  "winText": "The bolt slides back without a sound. The corridor is dark and the guard is at the far end. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_cell.mp3",
+    "ambience": "assets/audio/amb_cell.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "locker": "assets/audio/sfx_locker.mp3",
+      "vent": "assets/audio/sfx_vent.mp3",
+      "buzz": "assets/audio/sfx_buzz.mp3"
+    }
+  },
+  "scenes": {
+    "cell": {
+      "title": "Cell 7",
+      "image": "assets/cell.webp",
+      "layers": [
+        {
+          "image": "assets/layer_mattress_flipped.png",
+          "rect": [
+            165,
+            857,
+            1649,
+            859
+          ],
+          "if": "flag:_once:bunk/mattress"
+        },
+        {
+          "image": "assets/layer_leg_taken.png",
+          "rect": [
+            280,
+            1270,
+            379,
+            606
+          ],
+          "if": "flag:_once:bunk/leg"
+        },
+        {
+          "image": "assets/layer_locker_open.png",
+          "rect": [
+            664,
+            1353,
+            565,
+            404
+          ],
+          "if": "solved:locker"
+        },
+        {
+          "image": "assets/layer_vent_open.png",
+          "rect": [
+            1615,
+            113,
+            370,
+            459
+          ],
+          "if": "flag:vent_open"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3078,
+            0,
+            749,
+            1902
+          ],
+          "if": "solved:panel"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "tally",
+          "label": "Tally marks",
+          "rect": [
+            207,
+            299,
+            597,
+            344
+          ],
+          "do": [
+            {
+              "say": "Four weeks of tally marks, five to a week. Under each week, scratched much smaller: 2, 7, 1, 9."
+            },
+            {
+              "set": "read_tally"
+            }
+          ]
+        },
+        {
+          "id": "bunk",
+          "label": "Bunk bed",
+          "rect": [
+            69,
+            712,
+            1539,
+            1148
+          ],
+          "do": [
+            {
+              "goto": "bunk"
+            }
+          ]
+        },
+        {
+          "id": "vent",
+          "label": "Air vent",
+          "rect": [
+            1658,
+            110,
+            326,
+            294
+          ],
+          "if": "!flag:vent_open",
+          "use": "bed_leg",
+          "fail": "An air vent high on the wall, held by four rusty screws. You need something to pry it with.",
+          "do": [
+            {
+              "sfx": "vent"
+            },
+            {
+              "say": "You jam the bed leg under the cover and lever it off."
+            },
+            {
+              "set": "vent_open"
+            }
+          ]
+        },
+        {
+          "id": "vent_in",
+          "label": "Open vent",
+          "rect": [
+            1658,
+            110,
+            326,
+            294
+          ],
+          "if": "flag:vent_open",
+          "once": true,
+          "do": [
+            {
+              "say": "Someone hid a metal spoon in the vent."
+            },
+            {
+              "give": "spoon"
+            }
+          ]
+        },
+        {
+          "id": "sink",
+          "label": "Sink",
+          "rect": [
+            1745,
+            827,
+            344,
+            413
+          ],
+          "do": [
+            {
+              "say": "The tap drips. Steel sink, steel toilet, steel everything."
+            }
+          ]
+        },
+        {
+          "id": "shelf",
+          "label": "Shelf",
+          "rect": [
+            2389,
+            666,
+            540,
+            253
+          ],
+          "do": [
+            {
+              "say": "A tin cup and a Bible with half the pages missing. On page 13 someone doodled three card suits in the margin: a heart, a club, a spade."
+            },
+            {
+              "set": "read_bible"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Cell door",
+          "rect": [
+            3078,
+            0,
+            712,
+            1929
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        }
+      ]
+    },
+    "bunk": {
+      "title": "Bunk bed",
+      "image": "assets/cell.webp",
+      "crop": [
+        0,
+        574,
+        2531,
+        1424
+      ],
+      "back": "cell",
+      "layers": [
+        {
+          "image": "assets/layer_mattress_flipped.png",
+          "rect": [
+            165,
+            857,
+            1649,
+            859
+          ],
+          "if": "flag:_once:bunk/mattress"
+        },
+        {
+          "image": "assets/layer_leg_taken.png",
+          "rect": [
+            280,
+            1270,
+            379,
+            606
+          ],
+          "if": "flag:_once:bunk/leg"
+        },
+        {
+          "image": "assets/layer_locker_open.png",
+          "rect": [
+            664,
+            1353,
+            565,
+            404
+          ],
+          "if": "solved:locker"
+        },
+        {
+          "image": "assets/layer_vent_open.png",
+          "rect": [
+            1615,
+            113,
+            370,
+            459
+          ],
+          "if": "flag:vent_open"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3078,
+            0,
+            749,
+            1902
+          ],
+          "if": "solved:panel"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "mattress",
+          "label": "Mattress",
+          "rect": [
+            138,
+            919,
+            1424,
+            425
+          ],
+          "once": true,
+          "hint": "Prisoners hide things in their mattresses.",
+          "do": [
+            {
+              "sfx": "paper"
+            },
+            {
+              "say": "Inside a slit in the mattress: a folded note."
+            },
+            {
+              "give": "note"
+            },
+            {
+              "inspect": "note"
+            }
+          ]
+        },
+        {
+          "id": "locker",
+          "label": "Footlocker",
+          "rect": [
+            551,
+            1378,
+            643,
+            322
+          ],
+          "if": "!solved:locker",
+          "do": [
+            {
+              "puzzle": "locker"
+            }
+          ]
+        },
+        {
+          "id": "leg",
+          "label": "Loose leg",
+          "rect": [
+            367,
+            1355,
+            207,
+            482
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "The leg wobbles. You twist it off the frame and prop the bunk up on a stack of old books."
+            },
+            {
+              "give": "bed_leg"
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Cell door",
+      "image": "assets/cell.webp",
+      "crop": [
+        1005,
+        0,
+        2835,
+        1595
+      ],
+      "back": "cell",
+      "layers": [
+        {
+          "image": "assets/layer_mattress_flipped.png",
+          "rect": [
+            165,
+            857,
+            1649,
+            859
+          ],
+          "if": "flag:_once:bunk/mattress"
+        },
+        {
+          "image": "assets/layer_leg_taken.png",
+          "rect": [
+            280,
+            1270,
+            379,
+            606
+          ],
+          "if": "flag:_once:bunk/leg"
+        },
+        {
+          "image": "assets/layer_locker_open.png",
+          "rect": [
+            664,
+            1353,
+            565,
+            404
+          ],
+          "if": "solved:locker"
+        },
+        {
+          "image": "assets/layer_vent_open.png",
+          "rect": [
+            1615,
+            113,
+            370,
+            459
+          ],
+          "if": "flag:vent_open"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3078,
+            0,
+            749,
+            1902
+          ],
+          "if": "solved:panel"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "bars",
+          "label": "Bars",
+          "rect": [
+            3135,
+            184,
+            436,
+            1608
+          ],
+          "do": [
+            {
+              "say": "Through the bars: an empty corridor and the guard's footsteps fading away."
+            }
+          ]
+        },
+        {
+          "id": "panel_far",
+          "label": "Door keypad",
+          "rect": [
+            3583,
+            533,
+            129,
+            218
+          ],
+          "if": "!flag:reached",
+          "use": "reach_tool",
+          "consume": true,
+          "fail": "The keypad is on the outside wall, a hand's length beyond your reach.",
+          "hint": "Make something long enough to reach the keypad.",
+          "do": [
+            {
+              "say": "With the long tool you can just press the keys through the bars."
+            },
+            {
+              "set": "reached"
+            }
+          ]
+        },
+        {
+          "id": "panel",
+          "label": "Door keypad",
+          "rect": [
+            3583,
+            533,
+            129,
+            218
+          ],
+          "if": [
+            "flag:reached",
+            "!solved:panel"
+          ],
+          "do": [
+            {
+              "puzzle": "panel"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            3078,
+            0,
+            712,
+            1929
+          ],
+          "if": "solved:panel",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "note": {
+      "name": "Folded note",
+      "icon": "assets/note.png",
+      "text": "The footlocker opens to the three suits marked in the Good Book, in the order they are drawn."
+    },
+    "map": {
+      "name": "Torn map",
+      "icon": "assets/map.png",
+      "text": "Cell 7. Corridor B. Laundry. Watchtower.\n\nScribbled in the margin: \"The door code is where the last tenant counted his days.\""
+    },
+    "bed_leg": {
+      "name": "Bed leg",
+      "icon": "assets/bed_leg.png",
+      "text": "A hollow steel leg from the bunk. Long and stiff.",
+      "combine": {
+        "with": "spoon",
+        "into": "reach_tool",
+        "text": "You jam the spoon into the hollow leg. Now it reaches much further."
+      }
+    },
+    "spoon": {
+      "name": "Spoon",
+      "icon": "assets/spoon.png",
+      "text": "A bent metal spoon."
+    },
+    "reach_tool": {
+      "name": "Long reach tool",
+      "icon": "assets/reach_tool.png",
+      "text": "Bed leg plus spoon. Good for pressing buttons you cannot reach."
+    }
+  },
+  "puzzles": {
+    "locker": {
+      "type": "dials",
+      "title": "Footlocker",
+      "prompt": "Three wheels with card suits.",
+      "options": [
+        "♦",
+        "♥",
+        "♣",
+        "♠"
+      ],
+      "start": [
+        "♦",
+        "♦",
+        "♦"
+      ],
+      "answer": [
+        "♥",
+        "♣",
+        "♠"
+      ],
+      "clue": [
+        "has:note",
+        "flag:read_bible"
+      ],
+      "do": [
+        {
+          "sfx": "locker"
+        },
+        {
+          "say": "The footlocker lid pops up. Under a spare shirt: a torn map."
+        },
+        {
+          "give": "map"
+        },
+        {
+          "inspect": "map"
+        }
+      ]
+    },
+    "panel": {
+      "type": "code",
+      "title": "Door keypad",
+      "prompt": "Four digits.",
+      "answer": "2719",
+      "clue": [
+        "has:map",
+        "flag:read_tally"
+      ],
+      "do": [
+        {
+          "sfx": "buzz"
+        },
+        {
+          "say": "The keypad beeps green and the bolt slides back."
+        }
+      ]
+    }
+  }
+}

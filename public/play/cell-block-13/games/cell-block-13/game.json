@@ -1,0 +1,353 @@
+{
+  "id": "cell12",
+  "title": "Cell Block 13: Cell 12",
+  "theme": "prison",
+  "start": "cell12",
+  "intro": "The break went wrong. They put you in cell 12, right next to cell 13, the one that is always empty.",
+  "winTitle": "Out of cell 12",
+  "winText": "The card reader blinks green. You step into Cell Block 13's corridor. Cell 13's door stands ajar. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_cell12.mp3",
+    "ambience": "assets/audio/amb_cell12.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "whisper": "assets/audio/sfx_whisper.mp3",
+      "peel": "assets/audio/sfx_peel.mp3",
+      "scrape": "assets/audio/sfx_scrape.mp3",
+      "tin": "assets/audio/sfx_tin.mp3",
+      "card": "assets/audio/sfx_card.mp3"
+    }
+  },
+  "scenes": {
+    "cell12": {
+      "title": "Cell 12",
+      "image": "assets/cell12.webp",
+      "layers": [
+        {
+          "image": "assets/layer_poster_off.png",
+          "rect": [
+            1376,
+            145,
+            547,
+            776
+          ],
+          "if": "flag:poster_off"
+        },
+        {
+          "image": "assets/layer_bricks_out.png",
+          "rect": [
+            1592,
+            305,
+            299,
+            255
+          ],
+          "if": "flag:bricks_out"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3027,
+            7,
+            813,
+            2095
+          ],
+          "if": "flag:door_open"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "joe",
+          "label": "Joe in cell 11",
+          "rect": [
+            0,
+            299,
+            758,
+            1424
+          ],
+          "if": "!flag:traded",
+          "use": "chocolate",
+          "consume": true,
+          "fail": "\"Psst. New guy. Got anything sweet? Then we can talk,\" whispers Joe from the next cell.",
+          "do": [
+            {
+              "sfx": "whisper"
+            },
+            {
+              "say": "\"Ahh, real chocolate.\" Joe slips you a bent wire. \"Rocco from 13 hid his stash behind the poster. Box was locked with the days he did in there. He counted them under the bunk.\""
+            },
+            {
+              "set": "traded"
+            },
+            {
+              "give": "wire"
+            }
+          ]
+        },
+        {
+          "id": "joe_done",
+          "label": "Joe in cell 11",
+          "rect": [
+            0,
+            299,
+            758,
+            1424
+          ],
+          "if": "flag:traded",
+          "do": [
+            {
+              "say": "\"Behind the poster. Days under the bunk. Now let me eat in peace.\""
+            }
+          ]
+        },
+        {
+          "id": "poster",
+          "label": "Beach poster",
+          "rect": [
+            1056,
+            207,
+            689,
+            666
+          ],
+          "if": "!flag:poster_off",
+          "do": [
+            {
+              "sfx": "peel"
+            },
+            {
+              "say": "You peel the poster back. Behind it, a patch of loose bricks with crumbling mortar."
+            },
+            {
+              "set": "poster_off"
+            }
+          ]
+        },
+        {
+          "id": "bricks",
+          "label": "Loose bricks",
+          "rect": [
+            1585,
+            322,
+            310,
+            253
+          ],
+          "if": [
+            "flag:poster_off",
+            "!flag:bricks_out"
+          ],
+          "use": "wire",
+          "fail": "The mortar is soft, but your fingers are not enough. Something thin and hard would scrape it out.",
+          "do": [
+            {
+              "sfx": "scrape"
+            },
+            {
+              "say": "You scrape out the mortar with the wire and pull out two bricks. Behind them: a dented tin box with a three-digit lock."
+            },
+            {
+              "set": "bricks_out"
+            }
+          ]
+        },
+        {
+          "id": "box",
+          "label": "Tin box",
+          "rect": [
+            1585,
+            322,
+            310,
+            253
+          ],
+          "if": [
+            "flag:bricks_out",
+            "!solved:box"
+          ],
+          "do": [
+            {
+              "puzzle": "box"
+            }
+          ]
+        },
+        {
+          "id": "bunk",
+          "label": "Bunk",
+          "rect": [
+            781,
+            1033,
+            1745,
+            574
+          ],
+          "do": [
+            {
+              "say": "You crawl under the bunk. Scratched into the frame: 48 tally marks and the letter R."
+            },
+            {
+              "set": "read_marks"
+            }
+          ]
+        },
+        {
+          "id": "tray",
+          "label": "Food tray",
+          "rect": [
+            2503,
+            1520,
+            459,
+            184
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "Cold beans, stale bread and a chocolate bar nobody wanted."
+            },
+            {
+              "give": "chocolate"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Cell door",
+          "rect": [
+            3032,
+            46,
+            804,
+            1654
+          ],
+          "if": [
+            "!flag:door_open",
+            "!flag:card_in"
+          ],
+          "use": "keycard",
+          "fail": "A steel door with a card reader on the wall beside it. The light is red.",
+          "do": [
+            {
+              "say": "The reader blinks yellow and four shape buttons light up under it."
+            },
+            {
+              "set": "card_in"
+            }
+          ]
+        },
+        {
+          "id": "reader",
+          "label": "Card reader",
+          "rect": [
+            3032,
+            46,
+            804,
+            1654
+          ],
+          "if": [
+            "flag:card_in",
+            "!flag:door_open"
+          ],
+          "do": [
+            {
+              "puzzle": "reader"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            3032,
+            46,
+            804,
+            1654
+          ],
+          "if": "flag:door_open",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "chocolate": {
+      "name": "Chocolate bar",
+      "icon": "assets/chocolate.png",
+      "text": "Worth more than money in here."
+    },
+    "wire": {
+      "name": "Bent wire",
+      "icon": "assets/wire.png",
+      "text": "Thin, stiff and sharp at one end."
+    },
+    "keycard": {
+      "name": "Guard keycard",
+      "icon": "assets/keycard.png",
+      "text": "An old staff keycard with a faded photo. Rocco must have lifted it years ago, and nobody cancelled it.\nScratched on the back: triangle, circle, square, circle."
+    }
+  },
+  "puzzles": {
+    "box": {
+      "type": "code",
+      "title": "Tin box",
+      "prompt": "Three digits.",
+      "answer": "048",
+      "clue": [
+        "flag:traded",
+        "flag:read_marks"
+      ],
+      "do": [
+        {
+          "sfx": "tin"
+        },
+        {
+          "say": "The tin pops open. Inside, wrapped in a sock: a guard keycard."
+        },
+        {
+          "give": "keycard"
+        },
+        {
+          "inspect": "keycard"
+        }
+      ]
+    },
+    "reader": {
+      "type": "sequence",
+      "title": "Card reader",
+      "prompt": "Tap the shapes.",
+      "buttons": [
+        "▲",
+        "●",
+        "■",
+        "★"
+      ],
+      "answer": [
+        "▲",
+        "●",
+        "■",
+        "●"
+      ],
+      "clue": "has:keycard",
+      "do": [
+        {
+          "sfx": "card"
+        },
+        {
+          "say": "Beep. The reader turns green and the door rolls open."
+        },
+        {
+          "set": "door_open"
+        }
+      ]
+    }
+  }
+}

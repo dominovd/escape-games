@@ -20,5 +20,5 @@ export const SITE = {
   minPlaysToShow: 10,
   minVotesToShow: 5,
   // Website ID из cloud.umami.is. Пусто = Umami не подключается.
-  umamiWebsiteId: '',
+  umamiWebsiteId: '76c7f8ea-56e4-4238-8579-06fe82274ad9',
 };

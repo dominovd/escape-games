@@ -1,0 +1,408 @@
+{
+  "id": "guardroom",
+  "title": "The Guard Room",
+  "theme": "prison",
+  "start": "guardroom",
+  "intro": "The guards went out for lunch and left their room unlocked. Find the way out before they come back.",
+  "winTitle": "Out before lunch ends",
+  "winText": "Key turned, code entered, door open. You slip out before anyone comes back from lunch.",
+  "audio": {
+    "music": "assets/audio/music_guardroom.mp3",
+    "ambience": "assets/audio/amb_guardroom.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "cabinet": "assets/audio/sfx_cabinet.mp3",
+      "radio": "assets/audio/sfx_radio.mp3",
+      "lunchbox": "assets/audio/sfx_lunchbox.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3",
+      "beep": "assets/audio/sfx_beep.mp3"
+    }
+  },
+  "scenes": {
+    "guardroom": {
+      "title": "Guard room",
+      "image": "assets/guardroom.webp",
+      "layers": [
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            834,
+            407,
+            579,
+            597
+          ],
+          "if": "flag:cabinet_open"
+        },
+        {
+          "image": "assets/layer_lunchbox_open.png",
+          "rect": [
+            1403,
+            969,
+            379,
+            338
+          ],
+          "if": "flag:_once:desk/lunchbox"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2841,
+            113,
+            999,
+            2049
+          ],
+          "if": "solved:keypad"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "coat",
+          "label": "Guard jacket",
+          "rect": [
+            344,
+            413,
+            482,
+            1309
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "In the jacket pocket: a small key."
+            },
+            {
+              "give": "small_key"
+            }
+          ]
+        },
+        {
+          "id": "cabinet",
+          "label": "Key cabinet",
+          "rect": [
+            1011,
+            448,
+            425,
+            494
+          ],
+          "if": "!flag:cabinet_open",
+          "use": "small_key",
+          "consume": true,
+          "fail": "A metal key cabinet with a small lock.",
+          "do": [
+            {
+              "sfx": "cabinet"
+            },
+            {
+              "say": "The cabinet opens. One hook is labeled EXIT. You take that key."
+            },
+            {
+              "set": "cabinet_open"
+            },
+            {
+              "give": "exit_key"
+            }
+          ]
+        },
+        {
+          "id": "cabinet_done",
+          "label": "Key cabinet",
+          "rect": [
+            1011,
+            448,
+            425,
+            494
+          ],
+          "if": "flag:cabinet_open",
+          "do": [
+            {
+              "say": "Rows of keys. You already have the one marked EXIT."
+            }
+          ]
+        },
+        {
+          "id": "monitor",
+          "label": "CCTV monitor",
+          "rect": [
+            1658,
+            379,
+            781,
+            540
+          ],
+          "do": [
+            {
+              "say": "A sticky note on the screen: \"Door code changed! New one is in my lunchbox. Don't eat my sandwich. Mike\""
+            },
+            {
+              "set": "read_note"
+            }
+          ]
+        },
+        {
+          "id": "desk",
+          "label": "Desk",
+          "rect": [
+            1206,
+            988,
+            1504,
+            850
+          ],
+          "do": [
+            {
+              "goto": "desk"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Exit door",
+          "rect": [
+            2813,
+            230,
+            873,
+            1447
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        }
+      ]
+    },
+    "desk": {
+      "title": "Desk",
+      "image": "assets/guardroom.webp",
+      "crop": [
+        1021,
+        886,
+        1874,
+        1054
+      ],
+      "back": "guardroom",
+      "layers": [
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            834,
+            407,
+            579,
+            597
+          ],
+          "if": "flag:cabinet_open"
+        },
+        {
+          "image": "assets/layer_lunchbox_open.png",
+          "rect": [
+            1403,
+            969,
+            379,
+            338
+          ],
+          "if": "flag:_once:desk/lunchbox"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2841,
+            113,
+            999,
+            2049
+          ],
+          "if": "solved:keypad"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "radio",
+          "label": "Radio",
+          "rect": [
+            2154,
+            988,
+            119,
+            264
+          ],
+          "do": [
+            {
+              "sfx": "radio"
+            },
+            {
+              "say": "\"...lunch runs long today, boys...\" Good news."
+            }
+          ]
+        },
+        {
+          "id": "lunchbox",
+          "label": "Lunchbox",
+          "rect": [
+            1435,
+            1114,
+            299,
+            161
+          ],
+          "once": true,
+          "do": [
+            {
+              "sfx": "lunchbox"
+            },
+            {
+              "say": "A sandwich, an apple and a note: \"Door code: 2580.\" You leave the sandwich."
+            },
+            {
+              "set": "read_code"
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Exit door",
+      "image": "assets/guardroom.webp",
+      "crop": [
+        650,
+        56,
+        3190,
+        1794
+      ],
+      "back": "guardroom",
+      "layers": [
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            834,
+            407,
+            579,
+            597
+          ],
+          "if": "flag:cabinet_open"
+        },
+        {
+          "image": "assets/layer_lunchbox_open.png",
+          "rect": [
+            1403,
+            969,
+            379,
+            338
+          ],
+          "if": "flag:_once:desk/lunchbox"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2841,
+            113,
+            999,
+            2049
+          ],
+          "if": "solved:keypad"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "lock",
+          "label": "Key lock",
+          "rect": [
+            3417,
+            1107,
+            101,
+            115
+          ],
+          "if": "!flag:unlocked",
+          "use": "exit_key",
+          "consume": true,
+          "fail": "The door has a key lock and a keypad. Both are locked.",
+          "do": [
+            {
+              "sfx": "unlock"
+            },
+            {
+              "say": "The key turns. Now the keypad."
+            },
+            {
+              "set": "unlocked"
+            }
+          ]
+        },
+        {
+          "id": "keypad",
+          "label": "Keypad",
+          "rect": [
+            3486,
+            891,
+            124,
+            175
+          ],
+          "if": "!solved:keypad",
+          "do": [
+            {
+              "if": "!flag:unlocked",
+              "say": "The keypad stays dark until the key lock is open."
+            },
+            {
+              "if": "flag:unlocked",
+              "puzzle": "keypad"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            2813,
+            230,
+            873,
+            1447
+          ],
+          "if": "solved:keypad",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "small_key": {
+      "name": "Small key",
+      "icon": "assets/small_key.png",
+      "text": "A small key from the guard jacket."
+    },
+    "exit_key": {
+      "name": "Exit key",
+      "icon": "assets/exit_key.png",
+      "text": "A big key with a tag: EXIT."
+    }
+  },
+  "puzzles": {
+    "keypad": {
+      "type": "code",
+      "title": "Keypad",
+      "prompt": "Four digits.",
+      "answer": "2580",
+      "clue": [
+        "flag:read_note",
+        "flag:read_code"
+      ],
+      "do": [
+        {
+          "sfx": "beep"
+        },
+        {
+          "say": "Beep beep. The door clicks open."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "id": "solitary",
+  "title": "Solitary",
+  "theme": "prison",
+  "start": "solitary",
+  "intro": "Solitary confinement. One cot, one bucket, one barred window, and a message scratched into the wall by the last prisoner.",
+  "winTitle": "Free",
+  "winText": "The last wheel clicks and the heavy door swings outward. The last prisoner was right: the moon knew the way. You escaped.",
+  "audio": {
+    "music": "assets/audio/music_solitary.mp3",
+    "ambience": "assets/audio/amb_solitary.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "tile": "assets/audio/sfx_tile.mp3",
+      "shimmer": "assets/audio/sfx_shimmer.mp3",
+      "bolt": "assets/audio/sfx_bolt.mp3"
+    }
+  },
+  "scenes": {
+    "solitary": {
+      "title": "Solitary",
+      "image": "assets/solitary.webp",
+      "layers": [
+        {
+          "image": "assets/layer_tile_up.png",
+          "rect": [
+            1562,
+            1596,
+            958,
+            429
+          ],
+          "if": "flag:tile_up"
+        },
+        {
+          "image": "assets/layer_symbols.png",
+          "rect": [
+            1835,
+            558,
+            1029,
+            446
+          ],
+          "if": "flag:saw_symbols"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2809,
+            170,
+            939,
+            1573
+          ],
+          "if": "solved:door"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "message",
+          "label": "Scratched message",
+          "rect": [
+            0,
+            184,
+            781,
+            919
+          ],
+          "do": [
+            {
+              "say": "Among hundreds of tally marks, someone scratched a message: \"The moon knows the way out. Give it a mirror. K.\""
+            },
+            {
+              "set": "read_message"
+            }
+          ]
+        },
+        {
+          "id": "cot",
+          "label": "Cot",
+          "rect": [
+            0,
+            1125,
+            1194,
+            827
+          ],
+          "once": true,
+          "do": [
+            {
+              "say": "The thin mattress is torn. You work a steel spring loose from the frame."
+            },
+            {
+              "give": "spring"
+            }
+          ]
+        },
+        {
+          "id": "beam",
+          "label": "Moonlit tile",
+          "rect": [
+            1608,
+            1688,
+            517,
+            195
+          ],
+          "if": "!flag:tile_up",
+          "use": "spring",
+          "fail": "The moonlight falls on one floor tile. Its edges are not sealed like the others.",
+          "hint": "The tile in the moonlight is loose. Something thin could lift it.",
+          "do": [
+            {
+              "sfx": "tile"
+            },
+            {
+              "say": "You lever the tile up with the spring. Underneath: a shard of mirror."
+            },
+            {
+              "set": "tile_up"
+            },
+            {
+              "give": "mirror"
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "label": "Window",
+          "rect": [
+            1389,
+            92,
+            459,
+            379
+          ],
+          "if": "!flag:saw_symbols",
+          "use": "mirror",
+          "consume": true,
+          "fail": "A narrow barred window. A beam of moonlight shines through it.",
+          "do": [
+            {
+              "sfx": "shimmer"
+            },
+            {
+              "say": "You catch the moonbeam in the mirror and sweep it across the bare wall. Four faint symbols light up: a moon, a key, a star, an eye."
+            },
+            {
+              "set": "saw_symbols"
+            }
+          ]
+        },
+        {
+          "id": "wall",
+          "label": "Bare wall",
+          "rect": [
+            1837,
+            574,
+            988,
+            390
+          ],
+          "do": [
+            {
+              "if": "!flag:saw_symbols",
+              "say": "Bare concrete. In the dark you can almost see faint scratches."
+            },
+            {
+              "if": "flag:saw_symbols",
+              "say": "In the reflected moonlight: a moon, a key, a star, an eye."
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Door",
+          "rect": [
+            3055,
+            69,
+            712,
+            1677
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Door",
+      "image": "assets/solitary.webp",
+      "crop": [
+        143,
+        0,
+        3697,
+        2079
+      ],
+      "back": "solitary",
+      "layers": [
+        {
+          "image": "assets/layer_tile_up.png",
+          "rect": [
+            1562,
+            1596,
+            958,
+            429
+          ],
+          "if": "flag:tile_up"
+        },
+        {
+          "image": "assets/layer_symbols.png",
+          "rect": [
+            1835,
+            558,
+            1029,
+            446
+          ],
+          "if": "flag:saw_symbols"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2809,
+            170,
+            939,
+            1573
+          ],
+          "if": "solved:door"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "dials",
+          "label": "Symbol dials",
+          "rect": [
+            3181,
+            845,
+            517,
+            207
+          ],
+          "if": "!solved:door",
+          "do": [
+            {
+              "puzzle": "door"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            3055,
+            69,
+            712,
+            1677
+          ],
+          "if": "solved:door",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "spring": {
+      "name": "Steel spring",
+      "icon": "assets/spring.png",
+      "text": "A coiled steel spring from the cot. The end is flat and stiff."
+    },
+    "mirror": {
+      "name": "Mirror shard",
+      "icon": "assets/mirror.png",
+      "text": "A sharp piece of mirror. It catches every bit of light."
+    }
+  },
+  "puzzles": {
+    "door": {
+      "type": "dials",
+      "title": "Symbol dials",
+      "prompt": "Four old wheels on the inside of the bolt.",
+      "options": [
+        "☀",
+        "◎",
+        "≋",
+        "✚",
+        "☾",
+        "🗝️",
+        "★",
+        "👁️"
+      ],
+      "start": [
+        "☀",
+        "◎",
+        "≋",
+        "✚"
+      ],
+      "answer": [
+        "☾",
+        "🗝️",
+        "★",
+        "👁️"
+      ],
+      "clue": [
+        "flag:read_message",
+        "flag:saw_symbols"
+      ],
+      "do": [
+        {
+          "sfx": "bolt"
+        },
+        {
+          "say": "Moon, key, star, eye. The bolt grinds back."
+        }
+      ]
+    }
+  }
+}
