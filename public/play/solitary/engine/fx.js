@@ -11,7 +11,7 @@ export function keepPhase(el, durMs) { el.style.animationDelay = -(now() % durMs
 
 // Ambient entries live at game level and apply to every scene that shows the same picture.
 //   { "type": "light", "at": [x, y], "r": 600, "color": "#ff9a3c", "strength": 0.35, "flicker": 1 }
-//   { "type": "flame", "rect": [x, y, w, h], "amp": 1 }   (optional "src": a layer image, "srcRect": that layer's rect)
+//   { "type": "flame", "rect": [x, y, w, h], "amp": 1, "dur": 1000 }   (optional "src": a layer image, "srcRect": that layer's rect)
 //   { "type": "particles", "kind": "embers|dust|fireflies|snow|bubbles|mist", "rect": [x, y, w, h], "count": 30, "color": "#ffb060" }
 // Each entry can have "if" (same conditions as layers) and "image" (defaults to the start scene's picture).
 export function ambientFor(game, sceneImage, check) {
@@ -43,7 +43,7 @@ export function renderAmbient(list, W, H, baseUrl, h, cache = new Map(), asset =
       Object.assign(im.style, { left: (sx - x) / w * 100 + '%', top: (sy - y) / hh * 100 + '%', width: sw / w * 100 + '%', height: sh / hh * 100 + '%' });
       el.append(im);
       el.style.setProperty('--amp', a.amp ?? 1);
-      const dur = 800 + (a._i * 211) % 600;
+      const dur = a.dur || 800 + (a._i * 211) % 600;
       el.style.animationDuration = dur + 'ms'; keepPhase(el, dur);
       out.push(el);
     } else if (a.type === 'particles') {
