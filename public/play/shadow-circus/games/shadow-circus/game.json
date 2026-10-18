@@ -68,10 +68,10 @@
         {
           "image": "assets/layer_trunk_open.png",
           "rect": [
-            2873,
-            905,
-            606,
-            441
+            2712,
+            889,
+            643,
+            510
           ],
           "if": "flag:trunk_open"
         }
@@ -265,10 +265,10 @@
         {
           "image": "assets/layer_trunk_open.png",
           "rect": [
-            2873,
-            905,
-            606,
-            441
+            2712,
+            889,
+            643,
+            510
           ],
           "if": "flag:trunk_open"
         }
@@ -380,10 +380,10 @@
         {
           "image": "assets/layer_trunk_open.png",
           "rect": [
-            2873,
-            905,
-            606,
-            441
+            2712,
+            889,
+            643,
+            510
           ],
           "if": "flag:trunk_open"
         }
@@ -471,10 +471,10 @@
         {
           "image": "assets/layer_trunk_open.png",
           "rect": [
-            2873,
-            905,
-            606,
-            441
+            2712,
+            889,
+            643,
+            510
           ],
           "if": "flag:trunk_open"
         }
