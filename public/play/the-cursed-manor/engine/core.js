@@ -330,13 +330,13 @@ export function validate(game, opts = {}) {
   for (const id of Object.keys(game.items || {})) if (!seen.items.has(id)) issues.push({ level: 'warn', msg: `item "${id}" is never obtained` });
   for (const id of Object.keys(game.puzzles || {})) if (!seen.puzzles.has(id)) issues.push({ level: 'warn', msg: `puzzle "${id}" is never solved` });
 
-  let walkthrough = [];
+  let walkthrough = [], path = [];
   if (wins.length) {
-    const best = wins.map(k => pathTo(nodes, k)).sort((a, b) => a.length - b.length)[0];
-    walkthrough = best.map(n => describeMove(game, n.move, n.events));
+    path = wins.map(k => pathTo(nodes, k)).sort((a, b) => a.length - b.length)[0];
+    walkthrough = path.map(n => describeMove(game, n.move, n.events));
   }
   return {
-    ok: !issues.some(i => i.level === 'error'), issues, walkthrough,
+    ok: !issues.some(i => i.level === 'error'), issues, walkthrough, path,
     stats: { states: nodes.size, steps: walkthrough.length, scenes: Object.keys(game.scenes).length, puzzles: Object.keys(game.puzzles || {}).length, items: Object.keys(game.items || {}).length }
   };
 }

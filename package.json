@@ -4,10 +4,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/rate-games.mjs",
     "dev": "astro dev",
+    "prebuild": "node scripts/rate-games.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "rate": "node scripts/rate-games.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

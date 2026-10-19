@@ -1,3 +1,4 @@
+import rated from './rated.json';
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
 export interface WalkthroughStep {
@@ -154,6 +155,17 @@ const realArt: Record<string, { gameId: string; room1: string; room2?: string }>
 };
 
 // Atlas cells follow catalog order. Replace with individual game art when available.
+// Playable games: difficulty and time come from scripts/rate-games.mjs (worked out from game.json), not by hand.
+const ratings = rated as Record<string, { difficulty: Difficulty; minutes: number }>;
+games.forEach((game) => {
+  const r = ratings[game.slug];
+  if (!r) return;
+  game.difficulty = r.difficulty; game.minutes = r.minutes;
+  // The "Hard" theme page lists exactly the games rated hard.
+  game.themes = game.themes.filter((t) => t !== 'hard');
+  if (r.difficulty === 'hard') game.themes.push('hard');
+});
+
 games.forEach((game, coverIndex) => {
   const art = realArt[game.slug];
   if (art) {

@@ -2,10 +2,10 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Catalog from '../components/Catalog.astro';
-import { newestGames } from '../lib/catalog';
+import { newestGames, isPlayable } from '../lib/catalog';
 import { breadcrumbLd, itemListLd } from '../lib/schema';
 
-const list = newestGames(48);
+const list = newestGames().filter(isPlayable).slice(0, 48);
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'New Escape Games', href: '/new/' }];
 ---
 <Base

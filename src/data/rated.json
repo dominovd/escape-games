@@ -1,0 +1,80 @@
+{
+  "castle-of-secrets": {
+    "difficulty": "hard",
+    "score": 19.3,
+    "minutes": 25,
+    "tasks": 15
+  },
+  "cell-block-13": {
+    "difficulty": "medium",
+    "score": 9,
+    "minutes": 15,
+    "tasks": 9
+  },
+  "midnight-manor": {
+    "difficulty": "medium",
+    "score": 11.5,
+    "minutes": 15,
+    "tasks": 9
+  },
+  "prison-break": {
+    "difficulty": "medium",
+    "score": 14.1,
+    "minutes": 20,
+    "tasks": 11
+  },
+  "pumpkin-puzzle": {
+    "difficulty": "medium",
+    "score": 9.5,
+    "minutes": 15,
+    "tasks": 8
+  },
+  "shadow-circus": {
+    "difficulty": "medium",
+    "score": 12,
+    "minutes": 20,
+    "tasks": 9
+  },
+  "solitary": {
+    "difficulty": "easy",
+    "score": 7.3,
+    "minutes": 10,
+    "tasks": 6
+  },
+  "the-cursed-manor": {
+    "difficulty": "hard",
+    "score": 15.8,
+    "minutes": 25,
+    "tasks": 12
+  },
+  "the-guard-room": {
+    "difficulty": "easy",
+    "score": 8.8,
+    "minutes": 10,
+    "tasks": 7
+  },
+  "the-haunted-house": {
+    "difficulty": "medium",
+    "score": 11.4,
+    "minutes": 20,
+    "tasks": 9
+  },
+  "the-locked-attic": {
+    "difficulty": "easy",
+    "score": 8.5,
+    "minutes": 10,
+    "tasks": 6
+  },
+  "trick-or-escape": {
+    "difficulty": "easy",
+    "score": 8.8,
+    "minutes": 10,
+    "tasks": 8
+  },
+  "witchs-cabin": {
+    "difficulty": "medium",
+    "score": 11.5,
+    "minutes": 15,
+    "tasks": 10
+  }
+}

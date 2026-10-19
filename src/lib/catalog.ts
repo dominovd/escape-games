@@ -22,7 +22,12 @@ export const primaryTheme = (g: Game): Theme | undefined => {
   return themeBySlug(live ?? g.themes[0]);
 };
 
+/** The game can be played (it has a build); games without one are shown as Coming soon. */
+export const isPlayable = (g: Game) => Boolean(g.embedUrl);
+
+// NEW only on games that are out: an unreleased game is not new, it is coming soon.
 export const isNew = (g: Game, now = new Date()) => {
+  if (!isPlayable(g)) return false;
   const days = (now.getTime() - new Date(g.added).getTime()) / 86_400_000;
   return days >= 0 && days <= SITE.newBadgeDays;
 };
