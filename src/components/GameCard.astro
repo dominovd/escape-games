@@ -1,17 +1,19 @@
 ---
 import type { Game } from '../data/games';
-import { gameUrl, walkthroughUrl, isNew } from '../lib/catalog';
+import { gameUrl, walkthroughUrl, isNew, isPlayable } from '../lib/catalog';
 import Thumb from './Thumb.astro';
 import Difficulty from './Difficulty.astro';
 import Icon from './Icon.astro';
 
 interface Props { game: Game; eager?: boolean; }
 const { game, eager = false } = Astro.props;
+const soon = !isPlayable(game);
 ---
-<article class="card" data-difficulty={game.difficulty} data-minutes={game.minutes} data-mobile={game.mobile ? '1' : '0'}>
+<article class:list={["card", { soon }]} data-soon={soon ? '1' : '0'} data-difficulty={game.difficulty} data-minutes={game.minutes} data-mobile={game.mobile ? '1' : '0'}>
   <a class="cover" href={gameUrl(game.slug)} tabindex="-1" aria-hidden="true">
     <Thumb game={game} eager={eager} />
     {isNew(game) && <span class="badge">NEW</span>}
+    {soon && <span class="badge badge-soon">COMING SOON</span>}
   </a>
   <div class="body">
     <h3><a href={gameUrl(game.slug)}>{game.title}</a></h3>
@@ -31,6 +33,10 @@ const { game, eager = false } = Astro.props;
   .card:hover { border-color: #4a4d57; transform: translateY(-2px); }
   .cover { position: relative; display: block; }
   .badge { position: absolute; top: 8px; right: 8px; background: var(--brand); color: #1a0d00; font-size: .7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; letter-spacing: .05em; }
+  .badge-soon { background: rgba(14, 15, 19, .82); color: #d9dbe2; border: 1px solid #5a5e6a; }
+  .soon .cover :global(.thumb) { filter: grayscale(.55) brightness(.62); transition: filter .15s; }
+  .soon:hover .cover :global(.thumb) { filter: grayscale(.3) brightness(.8); }
+  .soon h3 a { color: #b9bcc6; }
   .body { padding: 9px 10px 11px; display: flex; flex-direction: column; gap: 6px; }
   h3 { font-size: .98rem; margin: 0; font-weight: 650; line-height: 1.25; }
   h3 a { text-decoration: none; }

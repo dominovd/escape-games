@@ -2,7 +2,8 @@ import { games, type Game, type Difficulty } from '../data/games';
 import { themes, themeBySlug, type Theme } from '../data/themes';
 import { SITE } from '../data/site';
 
-export const byNewest = (a: Game, b: Game) => b.added.localeCompare(a.added);
+// Games you can play come first, Coming soon ones go to the end; inside each group, newest first.
+export const byNewest = (a: Game, b: Game) => Number(Boolean(b.embedUrl)) - Number(Boolean(a.embedUrl)) || b.added.localeCompare(a.added);
 
 export const gamesInTheme = (slug: string) => games.filter((g) => g.themes.includes(slug)).sort(byNewest);
 
@@ -44,7 +45,7 @@ export const newestGames = (n = games.length) => games.slice().sort(byNewest).sl
 export const relatedGames = (g: Game, n = 8) => {
   const scored = games
     .filter((o) => o.slug !== g.slug)
-    .map((o) => ({ o, s: o.themes.filter((t) => g.themes.includes(t)).length + (o.difficulty === g.difficulty ? 0.5 : 0) }))
+    .map((o) => ({ o, s: o.themes.filter((t) => g.themes.includes(t)).length + (o.difficulty === g.difficulty ? 0.5 : 0) + (o.embedUrl ? 2 : 0) }))
     .filter((x) => x.s > 0)
     .sort((a, b) => b.s - a.s || byNewest(a.o, b.o));
   return scored.slice(0, n).map((x) => x.o);

@@ -33,6 +33,10 @@ const pageUrl = (n: number) => (n === 1 ? baseUrl : `${baseUrl}${n}/`);
       <legend>Device</legend>
       <label><input type="checkbox" name="mobile" value="1" /> Plays on mobile</label>
     </fieldset>
+    <fieldset>
+      <legend>Show</legend>
+      <label><input type="checkbox" name="ready" value="1" /> Playable now</label>
+    </fieldset>
   </form>
 
   <div class="grid" data-grid>
@@ -63,6 +67,7 @@ const pageUrl = (n: number) => (n === 1 ? baseUrl : `${baseUrl}${n}/`);
     const diffs = data.getAll('difficulty') as string[];
     const len = (data.get('length') as string) || '';
     const mobile = data.get('mobile') === '1';
+    const ready = data.get('ready') === '1';
     const [min, max] = len ? len.split('-').map(Number) : [0, Infinity];
     let shown = 0;
     cards.forEach((c) => {
@@ -70,7 +75,8 @@ const pageUrl = (n: number) => (n === 1 ? baseUrl : `${baseUrl}${n}/`);
       const ok =
         (!diffs.length || diffs.includes(c.dataset.difficulty!)) &&
         m >= min && m <= max &&
-        (!mobile || c.dataset.mobile === '1');
+        (!mobile || c.dataset.mobile === '1') &&
+        (!ready || c.dataset.soon !== '1');
       c.hidden = !ok;
       if (ok) shown++;
     });
