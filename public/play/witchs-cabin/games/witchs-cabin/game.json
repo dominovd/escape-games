@@ -618,5 +618,228 @@
         }
       ]
     }
-  }
+  },
+  "ambient": [
+    {
+      "type": "flame",
+      "rect": [
+        132,
+        484,
+        40,
+        70
+      ],
+      "amp": 1.4
+    },
+    {
+      "type": "flame",
+      "rect": [
+        864,
+        560,
+        40,
+        70
+      ],
+      "amp": 1.4
+    },
+    {
+      "type": "flame",
+      "rect": [
+        860,
+        990,
+        40,
+        70
+      ],
+      "amp": 1.4
+    },
+    {
+      "type": "flame",
+      "rect": [
+        144,
+        1100,
+        40,
+        70
+      ],
+      "amp": 1.4
+    },
+    {
+      "type": "flame",
+      "rect": [
+        236,
+        1230,
+        40,
+        70
+      ],
+      "amp": 1.4
+    },
+    {
+      "type": "flame",
+      "rect": [
+        2588,
+        230,
+        40,
+        70
+      ],
+      "amp": 1.4
+    },
+    {
+      "type": "flame",
+      "rect": [
+        2664,
+        320,
+        40,
+        70
+      ],
+      "amp": 1.4
+    },
+    {
+      "type": "light",
+      "at": [
+        152,
+        524
+      ],
+      "r": 200,
+      "color": "#ffb05a",
+      "strength": 0.42
+    },
+    {
+      "type": "light",
+      "at": [
+        884,
+        600
+      ],
+      "r": 200,
+      "color": "#ffb05a",
+      "strength": 0.42
+    },
+    {
+      "type": "light",
+      "at": [
+        880,
+        1030
+      ],
+      "r": 200,
+      "color": "#ffb05a",
+      "strength": 0.42
+    },
+    {
+      "type": "light",
+      "at": [
+        164,
+        1140
+      ],
+      "r": 200,
+      "color": "#ffb05a",
+      "strength": 0.42
+    },
+    {
+      "type": "light",
+      "at": [
+        256,
+        1270
+      ],
+      "r": 200,
+      "color": "#ffb05a",
+      "strength": 0.42
+    },
+    {
+      "type": "light",
+      "at": [
+        2608,
+        270
+      ],
+      "r": 200,
+      "color": "#ffb05a",
+      "strength": 0.42
+    },
+    {
+      "type": "light",
+      "at": [
+        2684,
+        360
+      ],
+      "r": 200,
+      "color": "#ffb05a",
+      "strength": 0.42
+    },
+    {
+      "type": "light",
+      "at": [
+        1710,
+        1600
+      ],
+      "r": 750,
+      "color": "#ff7a2a",
+      "strength": 0.38
+    },
+    {
+      "type": "light",
+      "at": [
+        1930,
+        830
+      ],
+      "r": 130,
+      "color": "#7fb2ff",
+      "strength": 0.45,
+      "flicker": 0.4,
+      "if": "!flag:_once:cabin/moonwater"
+    },
+    {
+      "type": "light",
+      "at": [
+        3510,
+        900
+      ],
+      "r": 560,
+      "color": "#5dff9a",
+      "strength": 0.26,
+      "flicker": 0.5,
+      "if": "!flag:door_open"
+    },
+    {
+      "type": "light",
+      "at": [
+        1700,
+        1130
+      ],
+      "r": 420,
+      "color": "#7dff9a",
+      "strength": 0.3,
+      "flicker": 0.6,
+      "if": "solved:potion"
+    },
+    {
+      "type": "particles",
+      "kind": "bubbles",
+      "rect": [
+        1500,
+        1020,
+        420,
+        160
+      ],
+      "count": 10,
+      "color": "#d8e4ff"
+    },
+    {
+      "type": "particles",
+      "kind": "mist",
+      "rect": [
+        1480,
+        640,
+        460,
+        460
+      ],
+      "count": 7,
+      "color": "#c9c0e0"
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        200,
+        150,
+        3000,
+        1300
+      ],
+      "count": 22
+    }
+  ]
 }

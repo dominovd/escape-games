@@ -43,7 +43,13 @@
             627,
             1378
           ],
-          "if": "flag:fortune"
+          "if": "flag:fortune",
+          "anim": {
+            "type": "pulse",
+            "amp": 0.6,
+            "dur": 2200
+          },
+          "enter": "flash"
         },
         {
           "image": "assets/layer_dog_moved.png",
@@ -53,7 +59,8 @@
             1350,
             1121
           ],
-          "if": "flag:dog_moved"
+          "if": "flag:dog_moved",
+          "enter": "fade"
         },
         {
           "image": "assets/layer_skeleton_empty.png",
@@ -73,7 +80,8 @@
             870,
             1474
           ],
-          "if": "flag:door_open"
+          "if": "flag:door_open",
+          "enter": "fade"
         }
       ],
       "hotspots": [
@@ -232,7 +240,13 @@
             627,
             1378
           ],
-          "if": "flag:fortune"
+          "if": "flag:fortune",
+          "anim": {
+            "type": "pulse",
+            "amp": 0.6,
+            "dur": 2200
+          },
+          "enter": "flash"
         },
         {
           "image": "assets/layer_dog_moved.png",
@@ -242,7 +256,8 @@
             1350,
             1121
           ],
-          "if": "flag:dog_moved"
+          "if": "flag:dog_moved",
+          "enter": "fade"
         },
         {
           "image": "assets/layer_skeleton_empty.png",
@@ -262,7 +277,8 @@
             870,
             1474
           ],
-          "if": "flag:door_open"
+          "if": "flag:door_open",
+          "enter": "fade"
         }
       ],
       "hotspots": [
@@ -366,7 +382,13 @@
             627,
             1378
           ],
-          "if": "flag:fortune"
+          "if": "flag:fortune",
+          "anim": {
+            "type": "pulse",
+            "amp": 0.6,
+            "dur": 2200
+          },
+          "enter": "flash"
         },
         {
           "image": "assets/layer_dog_moved.png",
@@ -376,7 +398,8 @@
             1350,
             1121
           ],
-          "if": "flag:dog_moved"
+          "if": "flag:dog_moved",
+          "enter": "fade"
         },
         {
           "image": "assets/layer_skeleton_empty.png",
@@ -396,7 +419,8 @@
             870,
             1474
           ],
-          "if": "flag:door_open"
+          "if": "flag:door_open",
+          "enter": "fade"
         }
       ],
       "hotspots": [
@@ -516,5 +540,73 @@
         }
       ]
     }
-  }
+  },
+  "ambient": [
+    {
+      "type": "light",
+      "at": [
+        84,
+        290
+      ],
+      "r": 300,
+      "color": "#ffc070",
+      "strength": 0.3,
+      "flicker": 0.5
+    },
+    {
+      "type": "light",
+      "at": [
+        1394,
+        300
+      ],
+      "r": 300,
+      "color": "#ffc070",
+      "strength": 0.3,
+      "flicker": 0.5
+    },
+    {
+      "type": "light",
+      "at": [
+        2440,
+        320
+      ],
+      "r": 300,
+      "color": "#ffc070",
+      "strength": 0.3,
+      "flicker": 0.5
+    },
+    {
+      "type": "light",
+      "at": [
+        3800,
+        300
+      ],
+      "r": 300,
+      "color": "#ffc070",
+      "strength": 0.3,
+      "flicker": 0.5
+    },
+    {
+      "type": "light",
+      "at": [
+        690,
+        840
+      ],
+      "r": 170,
+      "color": "#c9a8ff",
+      "strength": 0.3,
+      "flicker": 0.7
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        300,
+        200,
+        3300,
+        1200
+      ],
+      "count": 18
+    }
+  ]
 }

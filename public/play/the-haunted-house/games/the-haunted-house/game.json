@@ -63,7 +63,13 @@
             455,
             905
           ],
-          "if": "flag:lullaby"
+          "if": "flag:lullaby",
+          "anim": {
+            "type": "bob",
+            "amp": 1.6,
+            "dur": 4200
+          },
+          "enter": "fade"
         },
         {
           "image": "assets/layer_door_open.png",
@@ -219,7 +225,13 @@
             455,
             905
           ],
-          "if": "flag:lullaby"
+          "if": "flag:lullaby",
+          "anim": {
+            "type": "bob",
+            "amp": 1.6,
+            "dur": 4200
+          },
+          "enter": "fade"
         },
         {
           "image": "assets/layer_door_open.png",
@@ -330,7 +342,13 @@
             455,
             905
           ],
-          "if": "flag:lullaby"
+          "if": "flag:lullaby",
+          "anim": {
+            "type": "bob",
+            "amp": 1.6,
+            "dur": 4200
+          },
+          "enter": "fade"
         },
         {
           "image": "assets/layer_door_open.png",
@@ -448,7 +466,13 @@
             455,
             905
           ],
-          "if": "flag:lullaby"
+          "if": "flag:lullaby",
+          "anim": {
+            "type": "bob",
+            "amp": 1.6,
+            "dur": 4200
+          },
+          "enter": "fade"
         },
         {
           "image": "assets/layer_door_open.png",
@@ -554,7 +578,13 @@
             455,
             905
           ],
-          "if": "flag:lullaby"
+          "if": "flag:lullaby",
+          "anim": {
+            "type": "bob",
+            "amp": 1.6,
+            "dur": 4200
+          },
+          "enter": "fade"
         },
         {
           "image": "assets/layer_door_open.png",
@@ -673,5 +703,72 @@
         }
       ]
     }
-  }
+  },
+  "ambient": [
+    {
+      "type": "flame",
+      "rect": [
+        1994,
+        1040,
+        44,
+        100
+      ],
+      "amp": 1.3
+    },
+    {
+      "type": "light",
+      "at": [
+        2016,
+        1110
+      ],
+      "r": 650,
+      "color": "#ff9a3c",
+      "strength": 0.36
+    },
+    {
+      "type": "light",
+      "at": [
+        1984,
+        660
+      ],
+      "r": 110,
+      "color": "#ffb05a",
+      "strength": 0.28
+    },
+    {
+      "type": "light",
+      "at": [
+        2780,
+        480
+      ],
+      "r": 750,
+      "color": "#6f8cff",
+      "strength": 0.16,
+      "flicker": 0.25
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        2420,
+        180,
+        700,
+        1250
+      ],
+      "count": 14,
+      "color": "#cfd8ff"
+    },
+    {
+      "type": "particles",
+      "kind": "mist",
+      "rect": [
+        0,
+        1450,
+        3840,
+        650
+      ],
+      "count": 10,
+      "color": "#8f9cff"
+    }
+  ]
 }

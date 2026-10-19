@@ -602,5 +602,60 @@
         }
       ]
     }
-  }
+  },
+  "ambient": [
+    {
+      "type": "light",
+      "at": [
+        1260,
+        1280
+      ],
+      "r": 360,
+      "color": "#ffc040",
+      "strength": 0.36
+    },
+    {
+      "type": "light",
+      "at": [
+        1900,
+        1360
+      ],
+      "r": 250,
+      "color": "#ffc040",
+      "strength": 0.32
+    },
+    {
+      "type": "light",
+      "at": [
+        1770,
+        770
+      ],
+      "r": 300,
+      "color": "#ffcf6a",
+      "strength": 0.48,
+      "if": "!flag:_once:patch/lantern"
+    },
+    {
+      "type": "light",
+      "at": [
+        2330,
+        1400
+      ],
+      "r": 220,
+      "color": "#ffc040",
+      "strength": 0.34,
+      "if": "flag:d_small"
+    },
+    {
+      "type": "particles",
+      "kind": "fireflies",
+      "rect": [
+        900,
+        500,
+        2900,
+        950
+      ],
+      "count": 14
+    }
+  ]
 }
