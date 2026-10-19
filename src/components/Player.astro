@@ -51,7 +51,12 @@ const aspect = game.aspect ?? '16/9';
       f.title = player.dataset.title ?? 'Game';
       f.allow = 'autoplay; fullscreen; gamepad';
       f.setAttribute('allowfullscreen', '');
-      player.replaceChildren(f);
+      // A way back out of fullscreen: phones in landscape have no visible browser controls.
+      const exit = document.createElement('button');
+      exit.type = 'button'; exit.className = 'exit-fs'; exit.setAttribute('aria-label', 'Exit fullscreen');
+      exit.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+      exit.addEventListener('click', () => { if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); });
+      player.replaceChildren(f, exit);
       f.focus();
     };
     // Phones: fullscreen in landscape is the only comfortable way to play a 16:9 room.
@@ -72,6 +77,9 @@ const aspect = game.aspect ?? '16/9';
         if (document.fullscreenElement && innerHeight > innerWidth) document.exitFullscreen().catch(() => {});
       }, 400);
     };
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) { try { (screen.orientation as ScreenOrientation & { unlock?: () => void }).unlock?.(); } catch {} }
+    });
     player.querySelector('[data-play]')?.addEventListener('click', () => { start(); if (phone()) goFull(true); });
     wrap.querySelector('[data-fullscreen]')?.addEventListener('click', () => { start(); goFull(); });
     wrap.querySelector('[data-restart]')?.addEventListener('click', () => {
@@ -107,6 +115,11 @@ const aspect = game.aspect ?? '16/9';
     .player[style*="16/9"] { aspect-ratio: auto !important; height: calc(100cqw * 9 / 16 + 84px); }
   }
   .player:fullscreen { border: 0; border-radius: 0; }
+  .player :global(.exit-fs) {
+    display: none; position: absolute; bottom: 6px; left: 8px; z-index: 5; width: 36px; height: 36px; place-items: center;
+    border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.6); color: #fff; cursor: pointer; padding: 0;
+  }
+  .player:fullscreen :global(.exit-fs) { display: grid; }
   .player :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .poster { position: absolute; inset: 0; }
   .poster :global(.thumb) { width: 100%; height: 100%; aspect-ratio: auto; filter: brightness(.55); }
