@@ -7,7 +7,7 @@ import * as fx from './fx.js';
 import * as actors from './actors.js';
 
 // Bump when engine styles change, so browsers fetch the new theme files.
-export const EK_VERSION = '20261019-3';
+export const EK_VERSION = '20261019-4';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

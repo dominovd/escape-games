@@ -697,7 +697,13 @@
       },
       "fps": 12,
       "face": "left",
-      "idle": "sniff"
+      "idle": "sniff",
+      "shadow": {
+        "opacity": 0.85,
+        "width": 0.85,
+        "height": 0.22
+      },
+      "filter": "brightness(.72) saturate(.8)"
     },
     {
       "id": "spider",

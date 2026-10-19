@@ -14,7 +14,9 @@
 //   "if": "!flag:mouse_scared",
 //   "exit": { "path": [[x, y], ...], "speed": 900,      // where it runs off when "if" stops being true
 //             "frames": [...], "hop": 1 },             // optional running frames for the exit only (a sitting mouse that runs)
-//   "thread": [x, y], "threadAt": 10                  // a spider's thread from a fixed point to the actor's top (+ threadAt px down)
+//   "thread": [x, y], "threadAt": 10,                 // a spider's thread from a fixed point to the actor's top (+ threadAt px down)
+//   "shadow": 0.55,                                    // soft contact shadow under the feet (its darkness), or {"opacity", "width", "height"} as parts of the size
+//   "filter": "brightness(.7) saturate(.8)"            // CSS filter to fit a separately drawn picture into the room's light
 // }]
 // A hotspot with "actor": "mouse" sticks to the actor and moves with it.
 import { reducedMotion } from './fx.js';
@@ -58,6 +60,15 @@ function build(a, W, H, h, asset) {
   img.src = asset((a.frames && a.frames[0]) || a.image);
   if (a.hop) { img.classList.add('ek-hop'); img.style.setProperty('--amp', a.hop); }
   if (a.idle && a.path.length < 2) img.classList.add('ek-idle-' + a.idle);
+  if (a.filter) img.style.filter = a.filter;
+  if (a.shadow) {
+    const s = typeof a.shadow === 'number' ? { opacity: a.shadow } : a.shadow;
+    const sh = h('div', 'ek-shadow');
+    sh.style.setProperty('--o', s.opacity ?? .5);
+    sh.style.width = (s.width ?? .8) * 100 + '%'; sh.style.left = (1 - (s.width ?? .8)) / 2 * 100 + '%';
+    sh.style.height = (s.height ?? .16) * 100 + '%'; sh.style.bottom = -(s.height ?? .16) / 2 * 100 + '%';
+    el.append(sh);
+  }
   flipper.append(img); el.append(flipper);
   // A spider's thread: a line from a fixed point ("thread": [x, y]) down to the top of the actor.
   if (a.thread) {
