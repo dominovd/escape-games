@@ -35,7 +35,7 @@ const aspect = game.aspect ?? '16/9';
     <button type="button" data-share><Icon name="share" size={18} />Share</button>
     {game.walkthrough && <a href={walkthroughUrl(game.slug)}><Icon name="book" size={18} />Walkthrough</a>}
   </div>
-  {game.aspect !== '4/3' && <p class="rotate muted">Tip: turn your phone sideways for a bigger view.</p>}
+  {game.aspect !== '4/3' && <p class="rotate muted">Tip: tap Fullscreen and turn your phone sideways for the best view.</p>}
 </div>
 
 <script>
@@ -54,11 +54,26 @@ const aspect = game.aspect ?? '16/9';
       player.replaceChildren(f);
       f.focus();
     };
-    player.querySelector('[data-play]')?.addEventListener('click', start);
-    wrap.querySelector('[data-fullscreen]')?.addEventListener('click', () => {
-      start();
-      player.requestFullscreen?.().catch(() => {});
-    });
+    // Phones: fullscreen in landscape is the only comfortable way to play a 16:9 room.
+    const phone = () => matchMedia('(pointer: coarse) and (max-width: 860px)').matches;
+    // auto: started by Play; if the phone will not turn to landscape, stay in the page instead of a tall fullscreen.
+    const goFull = async (auto = false) => {
+      const el = player as HTMLElement & { webkitRequestFullscreen?: () => void };
+      try {
+        if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: 'hide' });
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+        else return;
+      } catch { return; }
+      try {
+        await (screen.orientation as ScreenOrientation & { lock?: (o: string) => Promise<void> }).lock?.('landscape');
+      } catch {}
+      // Still portrait after the lock attempt: a tall fullscreen is worse than the page, so step back out.
+      if (auto) setTimeout(() => {
+        if (document.fullscreenElement && innerHeight > innerWidth) document.exitFullscreen().catch(() => {});
+      }, 400);
+    };
+    player.querySelector('[data-play]')?.addEventListener('click', () => { start(); if (phone()) goFull(true); });
+    wrap.querySelector('[data-fullscreen]')?.addEventListener('click', () => { start(); goFull(); });
     wrap.querySelector('[data-restart]')?.addEventListener('click', () => {
       const f = player.querySelector('iframe');
       if (f) f.src = player.dataset.src!;
@@ -85,7 +100,13 @@ const aspect = game.aspect ?? '16/9';
 </script>
 
 <style>
+  .player-wrap { container-type: inline-size; }
   .player { position: relative; width: 100%; background: #000; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+  /* Phone in portrait: the game has a header and an inventory bar around a 16:9 scene, so give it that much extra height. */
+  @media (max-width: 860px) and (orientation: portrait) {
+    .player[style*="16/9"] { aspect-ratio: auto !important; height: calc(100cqw * 9 / 16 + 84px); }
+  }
+  .player:fullscreen { border: 0; border-radius: 0; }
   .player :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .poster { position: absolute; inset: 0; }
   .poster :global(.thumb) { width: 100%; height: 100%; aspect-ratio: auto; filter: brightness(.55); }

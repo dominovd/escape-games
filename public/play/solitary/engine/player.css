@@ -177,3 +177,29 @@
 .ek-idle-jelly{transform-origin:50% 12%;animation:ek-jelly 6s infinite ease-in-out}
 @keyframes ek-jelly{0%,100%{transform:translate(0,0) rotate(0deg) skewX(0deg) scaleY(1)}25%{transform:translate(1%,-1.6%) rotate(1deg) skewX(2.6deg) scaleY(1.012)}50%{transform:translate(0,-2.8%) rotate(0deg) skewX(0deg) scaleY(.99)}75%{transform:translate(-1%,-1.4%) rotate(-1deg) skewX(-2.6deg) scaleY(1.01)}}
 @keyframes ek-sniff{0%,40%,100%{transform:none}48%{transform:translateY(-2%) rotate(-2deg)}56%{transform:translateY(0) rotate(1deg)}64%{transform:translateY(-1.5%) rotate(-1deg)}72%{transform:none}}
+
+/* ---------- compact mode: a short player (phone in portrait inside a page, or a phone in landscape) ----------
+   Header and inventory shrink so the scene gets the height. Doubled .ek.ek beats the theme rules. */
+@media (max-height:460px){
+  .ek.ek .ek-top{padding:3px 8px;gap:6px;min-height:0}
+  .ek.ek .ek-title{font-size:13px!important;letter-spacing:.06em}
+  .ek.ek .ek-actions{gap:4px}
+  .ek.ek .ek-top .ek-btn{font-size:10px!important;padding:3px 8px!important;line-height:1.4;box-shadow:none}
+  .ek.ek .ek-top .ek-sound{width:26px;height:22px;padding:0!important}
+  .ek.ek .ek-top .ek-sound svg{width:14px;height:14px}
+  .ek.ek .ek-view{padding:2px}
+  .ek.ek .ek-scene{border-radius:4px}
+  .ek.ek .ek-inv{padding:3px 8px;gap:6px}
+  .ek.ek .ek-slot{width:38px;height:38px;padding:3px;border-radius:6px}
+  .ek.ek .ek-inv .ek-btn{font-size:10px!important;padding:3px 8px!important;box-shadow:none}
+  .ek.ek .ek-msg{bottom:50px;font-size:12px!important;line-height:1.35;padding:5px 12px!important;max-width:calc(100% - 16px)}
+  .ek.ek .ek-back{width:34px;height:34px;bottom:6px}
+  .ek.ek .ek-back svg{width:18px;height:18px}
+  .ek.ek .ek-modal{padding:6px}
+  .ek.ek .ek-card{max-height:calc(100% - 4px)}
+}
+@media (max-height:300px){
+  .ek.ek .ek-title{display:none}
+  .ek.ek .ek-top{justify-content:flex-end}
+  .ek.ek .ek-slot{width:32px;height:32px}
+}

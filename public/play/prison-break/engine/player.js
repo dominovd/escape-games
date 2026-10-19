@@ -7,7 +7,7 @@ import * as fx from './fx.js';
 import * as actors from './actors.js';
 
 // Bump when engine styles change, so browsers fetch the new theme files.
-export const EK_VERSION = '20261019-8';
+export const EK_VERSION = '20261019-10';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -24,8 +24,15 @@ function store(key, val) {
 export function mountPlayer(root, game, opts = {}) {
   const asset = opts.asset || (p => p);
   const saveKey = opts.saveKey === false ? null : (opts.saveKey || 'ek:' + game.id);
-  let state = (saveKey && store(saveKey)) || core.newState(game);
+  const saved = saveKey && store(saveKey);
+  let state = saved || core.newState(game);
   if (!game.scenes[state.scene]) state = core.newState(game);
+  // Events for the hosting page (play counts, completions, where players get stuck). Same-origin parent only.
+  const t0 = Date.now();
+  const emit = (event, detail) => {
+    try { if (window.parent !== window) window.parent.postMessage({ source: 'escape-kit', event, game: game.id, detail, ms: Date.now() - t0 }, location.origin); } catch { /* cross-origin parent */ }
+  };
+  emit(saved && game.scenes[saved.scene] ? 'game_resume' : 'game_start');
   let selected = null, hintLevel = 0, hintTarget = null, debug = !!opts.debug, renderToken = 0;
 
   root.classList.add('ek');
@@ -262,6 +269,7 @@ export function mountPlayer(root, game, opts = {}) {
     for (const e of r.events) {
       if (e.type === 'sfx') sfx(e.name);
       if (e.type === 'goto' && !custom) sfx(game.scenes[e.scene] && game.scenes[e.scene].back ? 'zoom' : 'back');
+      if (e.type === 'solved') emit('puzzle_solve', e.id);
       if (e.type === 'solved' && !custom) sfx('solve');
       if (e.type === 'say') texts.push(e.text);
       if (e.type === 'give') texts.push(`You got: ${core.itemName(game, e.item)}`);
@@ -324,6 +332,7 @@ export function mountPlayer(root, game, opts = {}) {
   }
   function openPuzzle(id) {
     const p = game.puzzles[id];
+    emit('puzzle_open', id);
     const type = puzzleTypes[p.type];
     openModal(p.title || 'Puzzle', (body, close, card) => {
       if (p.prompt) body.append(h('p', 'ek-prompt', esc(p.prompt)));
@@ -332,7 +341,7 @@ export function mountPlayer(root, game, opts = {}) {
       body.append(area);
       if (!type) { area.textContent = `Unknown puzzle type "${p.type}"`; return; }
       area.addEventListener('click', e => { if (e.target.closest('button')) sfx('button', { rate: 0.95 + Math.random() * 0.1 }); });
-      const ui = { option: renderOption, fail: () => sfx('fail') || card.animate([{ transform: 'translateX(-8px)' }, { transform: 'translateX(8px)' }, { transform: 'translateX(-4px)' }, { transform: 'none' }], 300) };
+      const ui = { option: renderOption, fail: () => emit('puzzle_fail', id) || sfx('fail') || card.animate([{ transform: 'translateX(-8px)' }, { transform: 'translateX(8px)' }, { transform: 'translateX(-4px)' }, { transform: 'none' }], 300) };
       type(area, p, () => {
         card.classList.add('solved');
         setTimeout(() => { close(); apply(core.solvePuzzle(game, state, id)); }, 450);
@@ -345,6 +354,7 @@ export function mountPlayer(root, game, opts = {}) {
     // Remember the finished room so the site can unlock the next one.
     try { localStorage.setItem('ek:won:' + game.id, String(Date.now())); } catch { /* storage unavailable */ }
     try { if (window.parent !== window) window.parent.postMessage({ type: 'ek:win', id: game.id }, location.origin); } catch { /* cross-origin parent */ }
+    emit('game_complete');
     sfx('win'); audio.finale();
     openModal(game.winTitle || 'You escaped!', (body, close) => {
       body.append(h('p', 'ek-prompt', esc(text || game.winText || 'Well done.')));
@@ -356,6 +366,7 @@ export function mountPlayer(root, game, opts = {}) {
 
   // ---------- hints ----------
   function hint() {
+    emit('hint_used', state.scene);
     const path = core.shortestWin(game, state);
     if (!path) return say('No hint available from here. Try restarting.');
     const isNav = n => n.move.kind === 'back' || (n.move.kind === 'click' && n.events.every(e => e.type === 'goto'));
@@ -373,6 +384,7 @@ export function mountPlayer(root, game, opts = {}) {
   }
 
   function restart() {
+    emit('restart');
     state = core.newState(game); selected = null; store(saveKey, null); audio.restartMusic();
     renderScene(); renderInv(); say(game.intro || '');
   }
