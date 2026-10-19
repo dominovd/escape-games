@@ -58,7 +58,8 @@ export function runActions(game, state, actions, opts = {}) {
     if (a.say) events.push({ type: 'say', text: a.say });
     if (a.sfx) events.push({ type: 'sfx', name: a.sfx });
     if (a.inspect) events.push({ type: 'inspect', item: a.inspect });
-    if (a.give) { add(s.inv, a.give); events.push({ type: 'give', item: a.give }); }
+    if (a.play) events.push({ type: 'play', id: a.play });
+    if (a.give) { add(s.inv, a.give); events.push({ type: 'give', item: a.give, from: a.from, delay: a.delay }); }
     if (a.take) { remove(s.inv, a.take); events.push({ type: 'take', item: a.take }); }
     if (a.set) for (const f of [].concat(a.set)) add(s.flags, f);
     if (a.unset) for (const f of [].concat(a.unset)) remove(s.flags, f);
@@ -272,9 +273,20 @@ export function lint(game) {
     }
     for (const l of sc.layers || []) checkCond(l.if, `scene "${sid}" layer`);
   }
+  const animIds = new Set([...(game.actors || []).map(a => a.id), ...Object.values(scenes).flatMap(sc => (sc.layers || []).map(l => l.id).filter(Boolean))]);
+  for (const a of game.actors || []) {
+    if (!a.id) err('an actor has no id');
+    if (!Array.isArray(a.path) || !a.path.length) err(`actor "${a.id}" has no path`);
+    if (!Array.isArray(a.size) || a.size.length !== 2) err(`actor "${a.id}": size must be [w, h]`);
+    checkCond(a.if, `actor "${a.id}"`);
+  }
+  for (const [sid, sc] of Object.entries(scenes)) for (const hs of sc.hotspots || []) {
+    if (hs.actor && !(game.actors || []).some(a => a.id === hs.actor)) err(`scene "${sid}" hotspot "${hs.id}": unknown actor "${hs.actor}"`);
+    for (const a of hs.do || []) if (a.play && !animIds.has(a.play)) warn(`scene "${sid}" hotspot "${hs.id}": plays unknown "${a.play}"`);
+  }
   for (const a of game.ambient || []) {
     checkCond(a.if, `ambient ${a.type || 'effect'}`);
-    if (!['light', 'flame', 'particles'].includes(a.type)) warn(`ambient effect has unknown type "${a.type}"`);
+    if (!['light', 'flame', 'sway', 'particles'].includes(a.type)) warn(`ambient effect has unknown type "${a.type}"`);
   }
   for (const [id, it] of Object.entries(items)) {
     if (it.combine) {

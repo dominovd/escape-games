@@ -12,7 +12,10 @@ export function keepPhase(el, durMs) { el.style.animationDelay = -(now() % durMs
 // Ambient entries live at game level and apply to every scene that shows the same picture.
 //   { "type": "light", "at": [x, y], "r": 600, "color": "#ff9a3c", "strength": 0.35, "flicker": 1 }
 //   { "type": "flame", "rect": [x, y, w, h], "amp": 1, "dur": 1000 }   (optional "src": a layer image, "srcRect": that layer's rect)
-//   { "type": "particles", "kind": "embers|dust|fireflies|snow|bubbles|mist", "rect": [x, y, w, h], "count": 30, "color": "#ffb060" }
+//   { "type": "sway", "rect": [x, y, w, h], "pivot": [x, y], "amp": 1, "dur": 5000 }   a patch of the picture (a cobweb,
+//     a hanging cloth) that sways gently around "pivot" (where it hangs from), edges feathered into the picture
+//   { "type": "particles", "kind": "embers|dust|fireflies|snow|bubbles|mist", "rect": [x, y, w, h], "count": 30, "color": "#ffb060",
+//     "speed": 1, "size": 1, "alpha": 0.5, "wobble": 1 }   (multipliers for the kind's defaults)
 // Each entry can have "if" (same conditions as layers) and "image" (defaults to the start scene's picture).
 export function ambientFor(game, sceneImage, check) {
   const def = game.scenes[game.start] && game.scenes[game.start].image;
@@ -45,6 +48,23 @@ export function renderAmbient(list, W, H, baseUrl, h, cache = new Map(), asset =
       el.style.setProperty('--amp', a.amp ?? 1);
       const dur = a.dur || 800 + (a._i * 211) % 600;
       el.style.animationDuration = dur + 'ms'; keepPhase(el, dur);
+      out.push(el);
+    } else if (a.type === 'sway') {
+      // A patch of the picture that sways around the point it hangs from. The patch edge is feathered and fixed,
+      // only the picture inside it moves, so the seam never shows.
+      const [x, y, w, hh] = a.rect;
+      const [px, py] = a.pivot || [x + w / 2, y];
+      const el = h('div', 'ek-sway' + (a.src ? ' on-layer' : ''));
+      Object.assign(el.style, pct(a.rect));
+      const inner = h('div', 'ek-sway-in');
+      inner.style.transformOrigin = `${(px - x) / w * 100}% ${(py - y) / hh * 100}%`;
+      const [sx, sy, sw, sh] = a.srcRect || [0, 0, W, H];
+      const im = h('img'); im.alt = ''; im.draggable = false; im.src = a.src ? asset(a.src) : baseUrl;
+      Object.assign(im.style, { left: (sx - x) / w * 100 + '%', top: (sy - y) / hh * 100 + '%', width: sw / w * 100 + '%', height: sh / hh * 100 + '%' });
+      inner.append(im); el.append(inner);
+      inner.style.setProperty('--amp', a.amp ?? 1);
+      const dur = a.dur || 4200 + (a._i * 617) % 1800;
+      inner.style.animationDuration = dur + 'ms'; keepPhase(inner, dur);
       out.push(el);
     } else if (a.type === 'particles') {
       if (reducedMotion()) continue;
@@ -91,8 +111,13 @@ export function enterLayer(el, l) {
 }
 
 // Item flies from where it was found to its inventory slot.
-export function flyToSlot(root, fromRect, slotEl, iconUrl) {
+export function flyToSlot(root, fromRect, slotEl, iconUrl, delay = 0) {
   if (!fromRect || !slotEl || !iconUrl || reducedMotion()) return;
+  if (delay) {
+    const si = slotEl.querySelector('img'); if (si) si.style.opacity = '0';
+    setTimeout(() => flyToSlot(root, fromRect, slotEl.isConnected ? slotEl : null, iconUrl), delay);
+    return;
+  }
   const to = slotEl.getBoundingClientRect(), rr = root.getBoundingClientRect();
   const size = Math.min(96, Math.max(48, Math.min(fromRect.width, fromRect.height)));
   const im = document.createElement('img');
@@ -126,6 +151,10 @@ const rnd = (a, b) => a + Math.random() * (b - a);
 function particleCanvas(a) {
   const cfg = { ...KINDS[a.kind] || KINDS.dust };
   if (a.color) cfg.color = a.color;
+  if (a.speed) cfg.speed = cfg.speed.map(v => v * a.speed);
+  if (a.size) cfg.size = cfg.size.map(v => v * a.size);
+  if (a.alpha) cfg.alpha = a.alpha;
+  if (a.wobble) cfg.wobble = cfg.wobble * a.wobble;
   const cv = document.createElement('canvas');
   cv.className = 'ek-particles';
   const sys = { cv, cfg, count: a.count || 30, parts: [], w: 0, h: 0, ctx: cv.getContext('2d') };

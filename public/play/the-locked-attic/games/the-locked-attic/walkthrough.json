@@ -1,0 +1,17 @@
+{
+  "id": "attic",
+  "title": "The Locked Attic",
+  "steps": [
+    "The attic: open Toys",
+    "Toys: Rocking horse → get Winding key",
+    "Go back to The attic",
+    "The attic: Mouse → get Tiny key",
+    "The attic: open Old trunk",
+    "Old trunk: use Tiny key on Tiny padlock",
+    "Old trunk: use Winding key on Music box",
+    "Go back to The attic",
+    "The attic: open Little door",
+    "Little door: Painted bells → solve \"Painted bells\" (answer: 🔴 🟡 🔵 🟡 🟢)",
+    "Little door: Open door"
+  ]
+}

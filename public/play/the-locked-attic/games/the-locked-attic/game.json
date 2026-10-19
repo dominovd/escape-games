@@ -1,0 +1,869 @@
+{
+  "id": "attic",
+  "title": "The Locked Attic",
+  "theme": "castle",
+  "start": "attic",
+  "intro": "The hatch slammed shut behind you. Grandma’s attic is dark and dusty, the little door on the far side has no keyhole, only a row of painted bells. On the floor, a little mouse watches you, holding something shiny.",
+  "winTitle": "Out of the attic",
+  "winText": "The bells ring Grandma’s lullaby and the little door creaks open onto the stairs. You made it out!",
+  "audio": {
+    "music": "assets/audio/music_attic.mp3",
+    "ambience": "assets/audio/amb_attic.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "squeak": "assets/audio/sfx_squeak.mp3",
+      "creak": "assets/audio/sfx_creak.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3",
+      "melody": "assets/audio/sfx_melody.mp3",
+      "chime": "assets/audio/sfx_chime.mp3"
+    }
+  },
+  "scenes": {
+    "attic": {
+      "title": "The attic",
+      "image": "assets/attic.webp",
+      "layers": [
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            0,
+            668,
+            870,
+            691
+          ],
+          "if": "flag:trunk_open",
+          "enter": "rise"
+        },
+        {
+          "image": "assets/layer_ballerina.png",
+          "rect": [
+            498,
+            898,
+            92,
+            149
+          ],
+          "if": [
+            "flag:trunk_open",
+            "!flag:music"
+          ]
+        },
+        {
+          "image": "assets/layer_horse.png",
+          "rect": [
+            1677,
+            792,
+            804,
+            767
+          ],
+          "id": "horse",
+          "play": {
+            "type": "rock",
+            "amp": 6,
+            "dur": 2400,
+            "pivot": [
+              2078,
+              1534
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3117,
+            535,
+            723,
+            1038
+          ],
+          "if": "solved:bells"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "trunk",
+          "label": "Old trunk",
+          "rect": [
+            57,
+            930,
+            781,
+            609
+          ],
+          "do": [
+            {
+              "goto": "trunk"
+            }
+          ]
+        },
+        {
+          "id": "toys",
+          "label": "Toys",
+          "rect": [
+            1102,
+            781,
+            1401,
+            758
+          ],
+          "do": [
+            {
+              "goto": "toys"
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "label": "Round window",
+          "rect": [
+            2400,
+            195,
+            574,
+            517
+          ],
+          "do": [
+            {
+              "say": "A round window full of moon. Dust drifts slowly through the light."
+            }
+          ]
+        },
+        {
+          "id": "spider",
+          "label": "Spider",
+          "rect": [
+            3105,
+            413,
+            138,
+            207
+          ],
+          "do": [
+            {
+              "play": "spider"
+            },
+            {
+              "say": "A tiny spider bobs on its thread. You poke it and it scurries up a little. It means no harm."
+            }
+          ],
+          "actor": "spider"
+        },
+        {
+          "id": "hole",
+          "label": "Mouse hole",
+          "rect": [
+            896,
+            1282,
+            110,
+            156
+          ],
+          "do": [
+            {
+              "if": "!flag:mouse_scared",
+              "say": "A little hole in the skirting board. Its owner is sitting right out on the floor."
+            },
+            {
+              "if": "flag:mouse_scared",
+              "say": "Two tiny eyes blink at you from the dark."
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Little door",
+          "rect": [
+            3089,
+            551,
+            746,
+            919
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        },
+        {
+          "id": "mouse",
+          "label": "Mouse",
+          "rect": [
+            2886,
+            1349,
+            200,
+            102
+          ],
+          "if": "!flag:mouse_scared",
+          "hint": "The little mouse on the floor seems to want to play. Try clicking it.",
+          "do": [
+            {
+              "sfx": "squeak"
+            },
+            {
+              "say": "Squeak! The mouse dashes into its hole. A moment later a tiny brass key rolls out of it. A gift!"
+            },
+            {
+              "set": "mouse_scared"
+            },
+            {
+              "give": "tiny_key",
+              "from": [
+                949,
+                1378
+              ],
+              "delay": 1939
+            }
+          ],
+          "actor": "mouse"
+        }
+      ]
+    },
+    "trunk": {
+      "title": "Old trunk",
+      "image": "assets/attic.webp",
+      "crop": [
+        0,
+        602,
+        1862,
+        1048
+      ],
+      "back": "attic",
+      "layers": [
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            0,
+            668,
+            870,
+            691
+          ],
+          "if": "flag:trunk_open",
+          "enter": "rise"
+        },
+        {
+          "image": "assets/layer_ballerina.png",
+          "rect": [
+            498,
+            898,
+            92,
+            149
+          ],
+          "if": [
+            "flag:trunk_open",
+            "!flag:music"
+          ]
+        },
+        {
+          "image": "assets/layer_horse.png",
+          "rect": [
+            1677,
+            792,
+            804,
+            767
+          ],
+          "id": "horse",
+          "play": {
+            "type": "rock",
+            "amp": 6,
+            "dur": 2400,
+            "pivot": [
+              2078,
+              1534
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3117,
+            535,
+            723,
+            1038
+          ],
+          "if": "solved:bells"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "padlock",
+          "label": "Tiny padlock",
+          "rect": [
+            547,
+            1093,
+            106,
+            138
+          ],
+          "if": "!flag:trunk_open",
+          "use": "tiny_key",
+          "consume": true,
+          "fail": "A heavy old trunk with a tiny brass padlock. The keyhole is no bigger than a grain of rice.",
+          "do": [
+            {
+              "sfx": "unlock"
+            },
+            {
+              "say": "The tiny key fits. The lid creaks up: old photos, lace and a music box."
+            },
+            {
+              "set": "trunk_open"
+            }
+          ]
+        },
+        {
+          "id": "photos",
+          "label": "Old photos",
+          "rect": [
+            138,
+            900,
+            241,
+            161
+          ],
+          "if": "flag:trunk_open",
+          "do": [
+            {
+              "say": "Grandma as a girl, standing by the little attic door. Above her head hangs a row of bells."
+            }
+          ]
+        },
+        {
+          "id": "musicbox",
+          "label": "Music box",
+          "rect": [
+            367,
+            861,
+            363,
+            241
+          ],
+          "if": [
+            "flag:trunk_open",
+            "!flag:music"
+          ],
+          "use": "winding_key",
+          "consume": true,
+          "fail": "A music box with a tiny ballerina inside. The winding key is missing.",
+          "hint": "The music box needs its winding key. Toys like to hide things.",
+          "do": [
+            {
+              "sfx": "melody"
+            },
+            {
+              "say": "You wind the music box. The ballerina turns and Grandma’s lullaby plays. The little bells inside are painted: red, yellow, blue, yellow, green."
+            },
+            {
+              "set": "music"
+            }
+          ]
+        },
+        {
+          "id": "musicbox_play",
+          "label": "Music box",
+          "rect": [
+            367,
+            861,
+            363,
+            241
+          ],
+          "if": "flag:music",
+          "do": [
+            {
+              "sfx": "melody"
+            },
+            {
+              "say": "The lullaby plays again. The painted bells ring in order: red, yellow, blue, yellow, green."
+            }
+          ]
+        }
+      ]
+    },
+    "toys": {
+      "title": "Toys",
+      "image": "assets/attic.webp",
+      "crop": [
+        934,
+        672,
+        1736,
+        977
+      ],
+      "back": "attic",
+      "layers": [
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            0,
+            668,
+            870,
+            691
+          ],
+          "if": "flag:trunk_open",
+          "enter": "rise"
+        },
+        {
+          "image": "assets/layer_ballerina.png",
+          "rect": [
+            498,
+            898,
+            92,
+            149
+          ],
+          "if": [
+            "flag:trunk_open",
+            "!flag:music"
+          ]
+        },
+        {
+          "image": "assets/layer_horse.png",
+          "rect": [
+            1677,
+            792,
+            804,
+            767
+          ],
+          "id": "horse",
+          "play": {
+            "type": "rock",
+            "amp": 6,
+            "dur": 2400,
+            "pivot": [
+              2078,
+              1534
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3117,
+            535,
+            723,
+            1038
+          ],
+          "if": "solved:bells"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "teddy",
+          "label": "Teddy bear",
+          "rect": [
+            1125,
+            1045,
+            379,
+            413
+          ],
+          "do": [
+            {
+              "say": "A note is pinned to the teddy’s bow: \"My little door sings only for my lullaby. The music box remembers it. Grandma\""
+            }
+          ]
+        },
+        {
+          "id": "horse_first",
+          "label": "Rocking horse",
+          "rect": [
+            1688,
+            792,
+            792,
+            769
+          ],
+          "once": true,
+          "do": [
+            {
+              "sfx": "creak"
+            },
+            {
+              "play": "horse"
+            },
+            {
+              "say": "You give the rocking horse a push. It creaks back and forth, and something falls out of its mane: a little winding key!"
+            },
+            {
+              "give": "winding_key"
+            }
+          ]
+        },
+        {
+          "id": "horse",
+          "label": "Rocking horse",
+          "rect": [
+            1688,
+            792,
+            792,
+            769
+          ],
+          "if": "flag:_once:toys/horse_first",
+          "do": [
+            {
+              "sfx": "creak"
+            },
+            {
+              "play": "horse"
+            },
+            {
+              "say": "Creak, creak. The old horse rocks happily."
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Little door",
+      "image": "assets/attic.webp",
+      "crop": [
+        1732,
+        429,
+        2108,
+        1186
+      ],
+      "back": "attic",
+      "layers": [
+        {
+          "image": "assets/layer_trunk_open.png",
+          "rect": [
+            0,
+            668,
+            870,
+            691
+          ],
+          "if": "flag:trunk_open",
+          "enter": "rise"
+        },
+        {
+          "image": "assets/layer_ballerina.png",
+          "rect": [
+            498,
+            898,
+            92,
+            149
+          ],
+          "if": [
+            "flag:trunk_open",
+            "!flag:music"
+          ]
+        },
+        {
+          "image": "assets/layer_horse.png",
+          "rect": [
+            1677,
+            792,
+            804,
+            767
+          ],
+          "id": "horse",
+          "play": {
+            "type": "rock",
+            "amp": 6,
+            "dur": 2400,
+            "pivot": [
+              2078,
+              1534
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3117,
+            535,
+            723,
+            1038
+          ],
+          "if": "solved:bells"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "bells",
+          "label": "Painted bells",
+          "rect": [
+            3227,
+            923,
+            436,
+            172
+          ],
+          "if": "!solved:bells",
+          "do": [
+            {
+              "puzzle": "bells"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            3089,
+            551,
+            746,
+            919
+          ],
+          "if": "solved:bells",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "tiny_key": {
+      "name": "Tiny key",
+      "icon": "assets/tiny_key.png",
+      "text": "A brass key no longer than a fingernail. The mouse was very proud of it."
+    },
+    "winding_key": {
+      "name": "Winding key",
+      "icon": "assets/winding_key.png",
+      "text": "A little butterfly-shaped key for winding something up."
+    }
+  },
+  "puzzles": {
+    "bells": {
+      "type": "sequence",
+      "title": "Painted bells",
+      "prompt": "Ring the bells.",
+      "buttons": [
+        "🔴",
+        "🟡",
+        "🔵",
+        "🟢"
+      ],
+      "answer": [
+        "🔴",
+        "🟡",
+        "🔵",
+        "🟡",
+        "🟢"
+      ],
+      "clue": "flag:music",
+      "do": [
+        {
+          "sfx": "chime"
+        },
+        {
+          "say": "Ding, ding, dong, ding, dong. The latch clicks and the little door swings open."
+        }
+      ]
+    }
+  },
+  "actors": [
+    {
+      "id": "mouse",
+      "image": "assets/mouse_2.png",
+      "size": [
+        200,
+        102
+      ],
+      "path": [
+        [
+          2986,
+          1451
+        ]
+      ],
+      "if": "!flag:mouse_scared",
+      "exit": {
+        "path": [
+          [
+            2480,
+            1562
+          ],
+          [
+            1745,
+            1571
+          ],
+          [
+            1079,
+            1488
+          ],
+          [
+            949,
+            1431
+          ]
+        ],
+        "speed": 1300,
+        "frames": [
+          "assets/mouse_1.png",
+          "assets/mouse_2.png",
+          "assets/mouse_3.png",
+          "assets/mouse_4.png"
+        ],
+        "hop": 0.6
+      },
+      "fps": 12,
+      "face": "left",
+      "idle": "sniff"
+    },
+    {
+      "id": "spider",
+      "image": "assets/spider.png",
+      "size": [
+        124,
+        147
+      ],
+      "path": [
+        [
+          3172,
+          579
+        ],
+        [
+          3172,
+          730
+        ],
+        [
+          3172,
+          579
+        ]
+      ],
+      "speed": 38,
+      "wait": 2200,
+      "flip": false,
+      "thread": [
+        3169,
+        34
+      ],
+      "threadAt": 14,
+      "play": {
+        "type": "jump",
+        "amp": 45,
+        "dur": 1100
+      }
+    },
+    {
+      "id": "ballerina",
+      "frames": [
+        "assets/ballerina_1.png",
+        "assets/ballerina_2.png",
+        "assets/ballerina_3.png",
+        "assets/ballerina_4.png",
+        "assets/ballerina_5.png",
+        "assets/ballerina_6.png",
+        "assets/ballerina_7.png",
+        "assets/ballerina_8.png"
+      ],
+      "fps": 5,
+      "size": [
+        92,
+        149
+      ],
+      "path": [
+        [
+          544,
+          1047
+        ]
+      ],
+      "flip": false,
+      "if": "flag:music"
+    }
+  ],
+  "ambient": [
+    {
+      "type": "sway",
+      "rect": [
+        441,
+        110,
+        494,
+        517
+      ],
+      "pivot": [
+        609,
+        133
+      ],
+      "amp": 1,
+      "dur": 5200
+    },
+    {
+      "type": "sway",
+      "rect": [
+        1350,
+        501,
+        303,
+        367
+      ],
+      "pivot": [
+        1493,
+        514
+      ],
+      "amp": 1.2,
+      "dur": 4300
+    },
+    {
+      "type": "sway",
+      "rect": [
+        3303,
+        87,
+        501,
+        517
+      ],
+      "pivot": [
+        3583,
+        101
+      ],
+      "amp": 1,
+      "dur": 5800
+    },
+    {
+      "type": "light",
+      "at": [
+        1798,
+        367
+      ],
+      "r": 690,
+      "color": "#ffb05a",
+      "strength": 0.36
+    },
+    {
+      "type": "flame",
+      "rect": [
+        1768,
+        294,
+        62,
+        133
+      ],
+      "amp": 1.2
+    },
+    {
+      "type": "light",
+      "at": [
+        2676,
+        448
+      ],
+      "r": 560,
+      "color": "#8fa8ff",
+      "strength": 0.2,
+      "flicker": 0.35
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        1883,
+        413,
+        1033,
+        1011
+      ],
+      "count": 55,
+      "color": "#e8eeff",
+      "speed": 3,
+      "size": 1.3,
+      "alpha": 0.75,
+      "wobble": 2.2
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        138,
+        92,
+        3560,
+        1286
+      ],
+      "count": 14
+    }
+  ]
+}

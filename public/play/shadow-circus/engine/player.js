@@ -4,9 +4,10 @@ import * as core from './core.js';
 import { puzzleTypes, renderOption } from './puzzles/index.js';
 import { createAudio } from './audio.js';
 import * as fx from './fx.js';
+import * as actors from './actors.js';
 
 // Bump when engine styles change, so browsers fetch the new theme files.
-export const EK_VERSION = '20261019-1';
+export const EK_VERSION = '20261019-3';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -112,8 +113,9 @@ export function mountPlayer(root, game, opts = {}) {
   }
 
   // ---------- scene ----------
-  let shownScene = null, shownLayers = new Set(), enters = [];
+  let shownScene = null, shownLayers = new Set(), enters = [], shownActors = new Map();
   const fxCache = new Map();
+  let sceneSize = null;
   async function renderScene() {
     const token = ++renderToken;
     enters = [];
@@ -123,6 +125,7 @@ export function mountPlayer(root, game, opts = {}) {
     try { [W, H] = await imageSize(url); } catch (e) { sceneEl.innerHTML = `<div class="ek-error">${esc(e.message)}</div>`; return; }
     if (token !== renderToken) return;
     const [cx, cy, cw, ch] = sc.crop || [0, 0, W, H];
+    sceneSize = [W, H];
     sceneEl.dataset.aspect = cw / ch;
     const canvas = h('div', 'ek-canvas');
     Object.assign(canvas.style, { width: (W / cw * 100) + '%', height: (H / ch * 100) + '%', left: (-cx / cw * 100) + '%', top: (-cy / ch * 100) + '%' });
@@ -131,7 +134,7 @@ export function mountPlayer(root, game, opts = {}) {
     canvas.append(base);
     // Ambient motion: flames sit on the picture, glows and particles above the state layers.
     const amb = fx.renderAmbient(fx.ambientFor(game, sc.image, c => core.check(c, state)), W, H, url, h, fxCache, asset);
-    const under = e => e.classList.contains('ek-flame') && !e.classList.contains('on-layer');
+    const under = e => (e.classList.contains('ek-flame') || e.classList.contains('ek-sway')) && !e.classList.contains('on-layer');
     canvas.append(...amb.filter(under));
     const sameScene = shownScene === state.scene;
     const nowLayers = new Set();
@@ -139,20 +142,27 @@ export function mountPlayer(root, game, opts = {}) {
       const li = h('img', 'ek-layer'); li.src = asset(l.image); li.alt = ''; li.draggable = false;
       Object.assign(li.style, pct(l.rect || [0, 0, W, H]));
       if (l.anim) fx.animateLayer(li, l);
+      if (l.id) li.dataset.id = l.id;
       nowLayers.add(l.image);
       if (sameScene && !shownLayers.has(l.image)) enters.push([li, l]);
       canvas.append(li);
     }
+    const actorDefs = actors.actorDefsFor(game, sc.image);
+    const liveActors = actorDefs.filter(a => core.check(a.if, state));
+    const actorEls = actors.renderActors(liveActors, W, H, h, asset);
+    canvas.append(...actorEls.values());
+    const exits = sameScene ? actorDefs.filter(a => a.exit && shownActors.has(a.id) && !actorEls.has(a.id)).map(a => [a, actors.actorPoint(a, shownActors.get(a.id), W, H)]) : [];
     canvas.append(...amb.filter(e => !under(e)));
     for (const hs of core.visibleHotspots(game, state)) {
       const b = h('button', 'ek-hot');
       b.setAttribute('aria-label', hs.label || hs.id);
       b.title = debug ? hs.id : '';
-      Object.assign(b.style, pct(hs.rect));
+      if (hs.actor) { if (!actorEls.has(hs.actor)) continue; b.classList.add('ek-hot-actor'); }
+      else Object.assign(b.style, pct(hs.rect));
       if (hs.cursor) b.dataset.cursor = hs.cursor;
       else if ((hs.do || []).some(a => a.goto) && !hs.use) b.dataset.cursor = 'zoom';
       b.onclick = e => { e.stopPropagation(); click(hs, b); };
-      canvas.append(b);
+      (hs.actor ? actorEls.get(hs.actor) : canvas).append(b);
     }
     // Decode new pictures before swapping, so nothing blinks; fade only when the scene itself changes.
     const imgs = [...canvas.querySelectorAll('img')];
@@ -160,6 +170,8 @@ export function mountPlayer(root, game, opts = {}) {
     if (token !== renderToken) return;
     sceneEl.replaceChildren(canvas);
     for (const [li, l] of enters) fx.enterLayer(li, l);
+    for (const [a, p] of exits) actors.exitActor(a, p, canvas, W, H, h, asset);
+    shownActors = actorEls;
     shownLayers = nowLayers;
     sceneEl.classList.toggle('debug', debug);
     back.hidden = !sc.back;
@@ -258,19 +270,35 @@ export function mountPlayer(root, game, opts = {}) {
     if (selected && !state.inv.includes(selected)) selected = null;
     save();
     if (texts.length) say(texts.join('  '));
-    if (core.stateKey(state) !== prevKey) renderScene();
+    const plays = r.events.filter(e => e.type === 'play').map(e => e.id);
+    const runPlays = () => plays.forEach(playAnim);
+    if (core.stateKey(state) !== prevKey) renderScene().then(runPlays); else runPlays();
     renderInv();
     if (r.events.some(e => e.type === 'give')) { if (!custom) sfx('pickup'); } else if (r.ok === false) sfx('locked');
     if (r.events.some(e => e.type === 'give')) inv.animate([{ boxShadow: '0 0 0 2px #ffc874' }, { boxShadow: '0 0 0 0 transparent' }], 700);
     const slotEls = inv.querySelectorAll('.ek-slot');
-    for (const e of r.events) if (e.type === 'give' && fromRect) {
+    for (const e of r.events) if (e.type === 'give' && (fromRect || e.from)) {
       const it = game.items[e.item] || {};
-      fx.flyToSlot(root, fromRect, slotEls[state.inv.indexOf(e.item)], it.icon && asset(it.icon));
+      // "from": [x, y] in picture pixels makes the item come out of that spot (e.g. a mouse hole), "delay" in ms.
+      let from = fromRect;
+      const cv = sceneEl.querySelector('.ek-canvas');
+      if (e.from && cv && sceneSize) {
+        const cr = cv.getBoundingClientRect(), x = cr.left + e.from[0] / sceneSize[0] * cr.width, y = cr.top + e.from[1] / sceneSize[1] * cr.height;
+        from = { left: x - 40, top: y - 40, width: 80, height: 80 };
+      }
+      fx.flyToSlot(root, from, slotEls[state.inv.indexOf(e.item)], it.icon && asset(it.icon), e.delay || 0);
     }
     fromRect = null;
     if (look) inspect(look);
     if (puzzle) openPuzzle(puzzle);
     if (win) showWin(win.text);
+  }
+
+  function playAnim(id) {
+    const sc = game.scenes[state.scene];
+    const l = (sc.layers || []).find(x => x.id === id), a = (game.actors || []).find(x => x.id === id);
+    const el = sceneEl.querySelector(`[data-id="${id}"]`) || sceneEl.querySelector(`[data-actor="${id}"] .ek-actor-flip`);
+    actors.playOnce(el, (l && l.play) || (a && a.play) || 'shake', l && l.rect);
   }
 
   // ---------- modal & puzzles ----------
