@@ -11,6 +11,12 @@
     "minutes": 15,
     "tasks": 9
   },
+  "forgotten-lab": {
+    "difficulty": "hard",
+    "score": 23.6,
+    "minutes": 35,
+    "tasks": 16
+  },
   "midnight-manor": {
     "difficulty": "medium",
     "score": 11.5,

@@ -7,7 +7,7 @@ import * as fx from './fx.js';
 import * as actors from './actors.js';
 
 // Bump when engine styles change, so browsers fetch the new theme files.
-export const EK_VERSION = '20261019-4';
+export const EK_VERSION = '20261019-8';
 
 const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -171,6 +171,8 @@ export function mountPlayer(root, game, opts = {}) {
     sceneEl.replaceChildren(canvas);
     for (const [li, l] of enters) fx.enterLayer(li, l);
     for (const [a, p] of exits) actors.exitActor(a, p, canvas, W, H, h, asset);
+    // An actor with "delay" that just appeared waits that long before fading in (e.g. until another actor's exit run ends).
+    if (sameScene) for (const a of liveActors) if (a.delay && !shownActors.has(a.id)) actors.delayIn(actorEls.get(a.id), a.delay);
     shownActors = actorEls;
     shownLayers = nowLayers;
     sceneEl.classList.toggle('debug', debug);
@@ -245,7 +247,7 @@ export function mountPlayer(root, game, opts = {}) {
   function click(hs, el) {
     fromRect = el ? el.getBoundingClientRect() : null;
     const r = core.clickHotspot(game, state, hs, selected);
-    if (r.blocked) { sfx('locked'); el && el.animate([{ transform: 'translateX(-3px)' }, { transform: 'translateX(3px)' }, { transform: 'none' }], 180); }
+    if (r.blocked) { if (!r.quiet) sfx('locked'); el && el.animate([{ transform: 'translateX(-3px)' }, { transform: 'translateX(3px)' }, { transform: 'none' }], 180); }
     else if (hs.use) selected = null;
     if (!r.blocked && selected && !hs.use) selected = null;
     apply(r);
@@ -298,7 +300,7 @@ export function mountPlayer(root, game, opts = {}) {
     const sc = game.scenes[state.scene];
     const l = (sc.layers || []).find(x => x.id === id), a = (game.actors || []).find(x => x.id === id);
     const el = sceneEl.querySelector(`[data-id="${id}"]`) || sceneEl.querySelector(`[data-actor="${id}"] .ek-actor-flip`);
-    actors.playOnce(el, (l && l.play) || (a && a.play) || 'shake', l && l.rect);
+    actors.playOnce(el, (l && l.play) || (a && a.play) || 'shake', l && l.rect, asset);
   }
 
   // ---------- modal & puzzles ----------

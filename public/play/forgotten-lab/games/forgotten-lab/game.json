@@ -1,0 +1,1852 @@
+{
+  "id": "lab",
+  "title": "Forgotten Lab",
+  "theme": "lab",
+  "start": "lab",
+  "intro": "The night shift was supposed to be quiet. Then the alarm went off, the doors sealed and the lights dropped to emergency red. In the corner, the big tank is still glowing, and whatever floats inside it is awake. Shut the experiment down and the lockdown should lift.",
+  "winTitle": "Lockdown lifted",
+  "winText": "The tank goes dark, the subject curls up to sleep and the steel door hisses open. Whatever Dr. Hale was working on, it can wait until morning.",
+  "audio": {
+    "music": "assets/audio/music_lab.mp3",
+    "ambience": "assets/audio/amb_lab.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "uv": "assets/audio/sfx_uv.mp3",
+      "clock": "assets/audio/sfx_clock.mp3",
+      "fuse": "assets/audio/sfx_fuse.mp3",
+      "pour": "assets/audio/sfx_pour.mp3",
+      "vent": "assets/audio/sfx_vent.mp3",
+      "beep": "assets/audio/sfx_beep.mp3",
+      "drawer": "assets/audio/sfx_drawer.mp3",
+      "terminal": "assets/audio/sfx_terminal.mp3",
+      "creature": "assets/audio/sfx_creature.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3",
+      "card": "assets/audio/sfx_card.mp3",
+      "shutdown": "assets/audio/sfx_shutdown.mp3"
+    }
+  },
+  "scenes": {
+    "lab": {
+      "title": "The lab",
+      "image": "assets/lab.webp",
+      "layers": [
+        {
+          "image": "assets/layer_mug.png",
+          "rect": [
+            1837,
+            1102,
+            103,
+            103
+          ],
+          "if": "!flag:mug_taken"
+        },
+        {
+          "image": "assets/layer_power_on.png",
+          "rect": [
+            1137,
+            23,
+            1952,
+            161
+          ],
+          "if": "flag:power",
+          "enter": "flash"
+        },
+        {
+          "image": "assets/layer_screen_on.png",
+          "rect": [
+            1608,
+            953,
+            241,
+            195
+          ],
+          "if": "flag:power",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1964,
+            1206,
+            356,
+            207
+          ],
+          "if": "flag:drawer_open"
+        },
+        {
+          "image": "assets/layer_whiteboard_uv.png",
+          "rect": [
+            1412,
+            436,
+            758,
+            528
+          ],
+          "if": "flag:uv_board",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:card_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_cabinet_open_empty.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": "flag:card_taken"
+        },
+        {
+          "image": "assets/layer_spill.png",
+          "rect": [
+            2021,
+            1608,
+            689,
+            253
+          ],
+          "if": [
+            "flag:spill",
+            "!flag:fuse_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_tank_off.png",
+          "rect": [
+            0,
+            195,
+            792,
+            1966
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2951,
+            0,
+            889,
+            2161
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            2889,
+            850,
+            211,
+            409
+          ],
+          "if": "flag:panel_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "tank",
+          "label": "Specimen tank",
+          "rect": [
+            57,
+            230,
+            574,
+            1378
+          ],
+          "do": [
+            {
+              "goto": "tank"
+            }
+          ]
+        },
+        {
+          "id": "cabinet",
+          "label": "Chemical cabinet",
+          "rect": [
+            666,
+            459,
+            620,
+            1102
+          ],
+          "do": [
+            {
+              "goto": "cabinet"
+            }
+          ]
+        },
+        {
+          "id": "desk",
+          "label": "Desk",
+          "rect": [
+            1298,
+            942,
+            1022,
+            643
+          ],
+          "do": [
+            {
+              "goto": "desk"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Exit door",
+          "rect": [
+            3055,
+            494,
+            528,
+            1045
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        },
+        {
+          "id": "whiteboard",
+          "label": "Whiteboard",
+          "rect": [
+            1373,
+            420,
+            873,
+            563
+          ],
+          "if": "!flag:uv_board",
+          "use": "uv_lamp",
+          "fail": "Equations, arrows and a smiley squid. In the corner, in Dr. Hale's handwriting: \"Cabinet combo is on here, in the usual ink. You know where my lamp is.\"",
+          "hint": "Dr. Hale wrote the cabinet combination in ink you can only see under a special light.",
+          "do": [
+            {
+              "sfx": "uv"
+            },
+            {
+              "say": "Under the violet light, four numbers scrawled in invisible ink glow between the equations: 7, 1, 9, 3."
+            },
+            {
+              "set": "uv_board"
+            }
+          ]
+        },
+        {
+          "id": "whiteboard_lit",
+          "label": "Whiteboard",
+          "rect": [
+            1373,
+            420,
+            873,
+            563
+          ],
+          "if": "flag:uv_board",
+          "do": [
+            {
+              "say": "The hidden numbers still glow faintly: 7, 1, 9, 3."
+            }
+          ]
+        },
+        {
+          "id": "clock",
+          "label": "Wall clock",
+          "rect": [
+            2304,
+            390,
+            195,
+            230
+          ],
+          "once": true,
+          "do": [
+            {
+              "sfx": "clock"
+            },
+            {
+              "say": "You take the clock off the wall and pop the back open. Two batteries. The hands stop at 3:17."
+            },
+            {
+              "give": "batteries"
+            }
+          ]
+        },
+        {
+          "id": "clock_empty",
+          "label": "Wall clock",
+          "rect": [
+            2304,
+            390,
+            195,
+            230
+          ],
+          "if": "flag:_once:lab/clock",
+          "do": [
+            {
+              "say": "Stopped at 3:17, for good."
+            }
+          ]
+        },
+        {
+          "id": "fusebox",
+          "label": "Fuse box",
+          "rect": [
+            2320,
+            700,
+            218,
+            276
+          ],
+          "if": "!flag:power",
+          "use": "fuse",
+          "consume": true,
+          "fail": "The main fuse slot is empty. Someone pulled it out. Or something did.",
+          "hint": "The main fuse is missing. Something in this room keeps moving it around.",
+          "do": [
+            {
+              "sfx": "fuse"
+            },
+            {
+              "say": "You push the fuse in. Relays clack and the ceiling lights flicker on, one by one."
+            },
+            {
+              "set": "power"
+            }
+          ]
+        },
+        {
+          "id": "fusebox_on",
+          "label": "Fuse box",
+          "rect": [
+            2320,
+            700,
+            218,
+            276
+          ],
+          "if": "flag:power",
+          "do": [
+            {
+              "say": "Humming quietly. Full power."
+            }
+          ]
+        },
+        {
+          "id": "floor",
+          "label": "Floor",
+          "rect": [
+            2021,
+            1608,
+            735,
+            276
+          ],
+          "if": "!flag:spill",
+          "use": "mug",
+          "consume": true,
+          "fail": "Spotless. The little cleaning robot makes sure of that, it attacks every speck of dirt.",
+          "hint": "The cleaning robot will stop for anything dirty on the floor.",
+          "do": [
+            {
+              "sfx": "pour"
+            },
+            {
+              "say": "You pour the cold coffee on the floor. Somewhere behind you, the robot beeps with excitement."
+            },
+            {
+              "set": "spill"
+            }
+          ]
+        },
+        {
+          "id": "coat",
+          "label": "Lab coat",
+          "rect": [
+            2618,
+            735,
+            195,
+            643
+          ],
+          "do": [
+            {
+              "say": "Dr. Hale's lab coat. In the pocket: a candy wrapper and a doodle of the same smiling squid."
+            }
+          ]
+        },
+        {
+          "id": "vent",
+          "label": "Floor vent",
+          "rect": [
+            2526,
+            1412,
+            299,
+            126
+          ],
+          "do": [
+            {
+              "sfx": "vent"
+            },
+            {
+              "say": "Cold air, and a faint scratching from somewhere deep inside. Better not."
+            }
+          ]
+        },
+        {
+          "id": "robot",
+          "label": "Cleaning robot",
+          "rect": [
+            2021,
+            1608,
+            735,
+            276
+          ],
+          "if": "!flag:spill",
+          "hint": "A glass fuse is stuck under the robot's bumper. Give it something to clean.",
+          "do": [
+            {
+              "sfx": "pour"
+            },
+            {
+              "say": "You pour the cold coffee on the floor right in front of the robot. It brakes, beeping with excitement."
+            },
+            {
+              "set": "spill"
+            }
+          ],
+          "actor": "robot",
+          "use": "mug",
+          "consume": true,
+          "fail": "The little cleaning robot beeps angrily and swerves away. Something glints under its bumper: a glass fuse.",
+          "failDo": [
+            {
+              "sfx": "beep"
+            },
+            {
+              "play": "robot"
+            }
+          ]
+        },
+        {
+          "id": "robot_clean",
+          "label": "Cleaning robot",
+          "rect": [
+            2021,
+            1608,
+            735,
+            276
+          ],
+          "if": [
+            "flag:spill",
+            "!flag:fuse_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "While it scrubs the coffee, you pull the fuse from under its bumper. It does not even notice."
+            },
+            {
+              "set": "fuse_taken"
+            },
+            {
+              "give": "fuse"
+            }
+          ],
+          "actor": "robot_clean"
+        },
+        {
+          "id": "robot_dock",
+          "label": "Cleaning robot",
+          "rect": [
+            2848,
+            1470,
+            230,
+            138
+          ],
+          "if": "flag:fuse_taken",
+          "do": [
+            {
+              "sfx": "beep"
+            },
+            {
+              "say": "Back on its charger, blinking happily. The floor is spotless again."
+            }
+          ],
+          "actor": "robot_dock"
+        }
+      ]
+    },
+    "desk": {
+      "title": "Desk",
+      "image": "assets/lab.webp",
+      "crop": [
+        1134,
+        878,
+        1350,
+        759
+      ],
+      "back": "lab",
+      "layers": [
+        {
+          "image": "assets/layer_mug.png",
+          "rect": [
+            1837,
+            1102,
+            103,
+            103
+          ],
+          "if": "!flag:mug_taken"
+        },
+        {
+          "image": "assets/layer_power_on.png",
+          "rect": [
+            1137,
+            23,
+            1952,
+            161
+          ],
+          "if": "flag:power",
+          "enter": "flash"
+        },
+        {
+          "image": "assets/layer_screen_on.png",
+          "rect": [
+            1608,
+            953,
+            241,
+            195
+          ],
+          "if": "flag:power",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1964,
+            1206,
+            356,
+            207
+          ],
+          "if": "flag:drawer_open"
+        },
+        {
+          "image": "assets/layer_whiteboard_uv.png",
+          "rect": [
+            1412,
+            436,
+            758,
+            528
+          ],
+          "if": "flag:uv_board",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:card_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_cabinet_open_empty.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": "flag:card_taken"
+        },
+        {
+          "image": "assets/layer_spill.png",
+          "rect": [
+            2021,
+            1608,
+            689,
+            253
+          ],
+          "if": [
+            "flag:spill",
+            "!flag:fuse_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_tank_off.png",
+          "rect": [
+            0,
+            195,
+            792,
+            1966
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2951,
+            0,
+            889,
+            2161
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            2889,
+            850,
+            211,
+            409
+          ],
+          "if": "flag:panel_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "terminal_dead",
+          "label": "Terminal",
+          "rect": [
+            1534,
+            953,
+            299,
+            241
+          ],
+          "if": "!flag:power",
+          "do": [
+            {
+              "say": "The screen is dead. The whole lab is running on emergency power."
+            }
+          ]
+        },
+        {
+          "id": "terminal",
+          "label": "Terminal",
+          "rect": [
+            1534,
+            953,
+            299,
+            241
+          ],
+          "if": [
+            "flag:power",
+            "!solved:login"
+          ],
+          "do": [
+            {
+              "puzzle": "login"
+            }
+          ]
+        },
+        {
+          "id": "terminal_log",
+          "label": "Terminal",
+          "rect": [
+            1534,
+            953,
+            299,
+            241
+          ],
+          "if": "solved:login",
+          "do": [
+            {
+              "sfx": "terminal"
+            },
+            {
+              "say": "Hale's last log: \"Shutdown needs my card and 0417's own sequence. Shine UV on it and it flashes its colours, always in the same order.\""
+            }
+          ]
+        },
+        {
+          "id": "mug",
+          "label": "Coffee mug",
+          "rect": [
+            1837,
+            1102,
+            103,
+            103
+          ],
+          "if": "!flag:mug_taken",
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "Cold coffee, half full. Someone left in a hurry."
+            },
+            {
+              "set": "mug_taken"
+            },
+            {
+              "give": "mug"
+            }
+          ]
+        },
+        {
+          "id": "drawer",
+          "label": "Drawer",
+          "rect": [
+            1998,
+            1206,
+            299,
+            161
+          ],
+          "once": true,
+          "do": [
+            {
+              "sfx": "drawer"
+            },
+            {
+              "say": "Inside the drawer: a small UV flashlight. It does not turn on, the battery slot is empty."
+            },
+            {
+              "set": "drawer_open"
+            },
+            {
+              "give": "uv_torch"
+            }
+          ]
+        },
+        {
+          "id": "photo",
+          "label": "Photo",
+          "rect": [
+            2131,
+            1075,
+            126,
+            119
+          ],
+          "do": [
+            {
+              "say": "Dr. Hale and her team, smiling in front of the tank. On the back: \"Day one. 0417 waved at us!\""
+            }
+          ]
+        }
+      ]
+    },
+    "tank": {
+      "title": "Specimen tank",
+      "image": "assets/lab.webp",
+      "crop": [
+        0,
+        119,
+        2927,
+        1646
+      ],
+      "back": "lab",
+      "layers": [
+        {
+          "image": "assets/layer_mug.png",
+          "rect": [
+            1837,
+            1102,
+            103,
+            103
+          ],
+          "if": "!flag:mug_taken"
+        },
+        {
+          "image": "assets/layer_power_on.png",
+          "rect": [
+            1137,
+            23,
+            1952,
+            161
+          ],
+          "if": "flag:power",
+          "enter": "flash"
+        },
+        {
+          "image": "assets/layer_screen_on.png",
+          "rect": [
+            1608,
+            953,
+            241,
+            195
+          ],
+          "if": "flag:power",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1964,
+            1206,
+            356,
+            207
+          ],
+          "if": "flag:drawer_open"
+        },
+        {
+          "image": "assets/layer_whiteboard_uv.png",
+          "rect": [
+            1412,
+            436,
+            758,
+            528
+          ],
+          "if": "flag:uv_board",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:card_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_cabinet_open_empty.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": "flag:card_taken"
+        },
+        {
+          "image": "assets/layer_spill.png",
+          "rect": [
+            2021,
+            1608,
+            689,
+            253
+          ],
+          "if": [
+            "flag:spill",
+            "!flag:fuse_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_tank_off.png",
+          "rect": [
+            0,
+            195,
+            792,
+            1966
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2951,
+            0,
+            889,
+            2161
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            2889,
+            850,
+            211,
+            409
+          ],
+          "if": "flag:panel_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "tag",
+          "label": "ID plate",
+          "rect": [
+            271,
+            1355,
+            184,
+            115
+          ],
+          "do": [
+            {
+              "say": "A steel plate on the base of the tank: SUBJECT 0417. PHASE 3. DO NOT TAP THE GLASS."
+            },
+            {
+              "set": "saw_tag"
+            }
+          ]
+        },
+        {
+          "id": "creature",
+          "label": "Subject 0417",
+          "rect": [
+            195,
+            620,
+            310,
+            574
+          ],
+          "if": "!solved:panel",
+          "use": "uv_lamp",
+          "fail": "It drifts up to the glass and watches you with big, calm eyes. It seems to be waiting for something.",
+          "hint": "Dr. Hale's log says the subject answers UV light.",
+          "do": [
+            {
+              "sfx": "creature"
+            },
+            {
+              "play": "creature"
+            },
+            {
+              "say": "The creature turns towards the violet light and flashes its spots in order: green, blue, green, violet, red."
+            },
+            {
+              "set": "pattern"
+            }
+          ],
+          "actor": "creature"
+        },
+        {
+          "id": "creature_sleep",
+          "label": "Subject 0417",
+          "rect": [
+            195,
+            620,
+            310,
+            574
+          ],
+          "if": "solved:panel",
+          "do": [
+            {
+              "say": "Curled up at the bottom of the dark tank, fast asleep."
+            }
+          ],
+          "actor": "creature_sleep"
+        }
+      ]
+    },
+    "cabinet": {
+      "title": "Chemical cabinet",
+      "image": "assets/lab.webp",
+      "crop": [
+        0,
+        367,
+        2286,
+        1286
+      ],
+      "back": "lab",
+      "layers": [
+        {
+          "image": "assets/layer_mug.png",
+          "rect": [
+            1837,
+            1102,
+            103,
+            103
+          ],
+          "if": "!flag:mug_taken"
+        },
+        {
+          "image": "assets/layer_power_on.png",
+          "rect": [
+            1137,
+            23,
+            1952,
+            161
+          ],
+          "if": "flag:power",
+          "enter": "flash"
+        },
+        {
+          "image": "assets/layer_screen_on.png",
+          "rect": [
+            1608,
+            953,
+            241,
+            195
+          ],
+          "if": "flag:power",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1964,
+            1206,
+            356,
+            207
+          ],
+          "if": "flag:drawer_open"
+        },
+        {
+          "image": "assets/layer_whiteboard_uv.png",
+          "rect": [
+            1412,
+            436,
+            758,
+            528
+          ],
+          "if": "flag:uv_board",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:card_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_cabinet_open_empty.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": "flag:card_taken"
+        },
+        {
+          "image": "assets/layer_spill.png",
+          "rect": [
+            2021,
+            1608,
+            689,
+            253
+          ],
+          "if": [
+            "flag:spill",
+            "!flag:fuse_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_tank_off.png",
+          "rect": [
+            0,
+            195,
+            792,
+            1966
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2951,
+            0,
+            889,
+            2161
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            2889,
+            850,
+            211,
+            409
+          ],
+          "if": "flag:panel_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "padlock",
+          "label": "Dial padlock",
+          "rect": [
+            919,
+            976,
+            119,
+            138
+          ],
+          "if": "!solved:cabinet",
+          "do": [
+            {
+              "puzzle": "cabinet"
+            }
+          ]
+        },
+        {
+          "id": "keycard",
+          "label": "Keycard",
+          "rect": [
+            873,
+            850,
+            172,
+            103
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:card_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "Behind the bottles: Dr. Hale's keycard. LEVEL 3 ACCESS."
+            },
+            {
+              "set": "card_taken"
+            },
+            {
+              "give": "keycard"
+            }
+          ]
+        },
+        {
+          "id": "shelf",
+          "label": "Shelves",
+          "rect": [
+            712,
+            528,
+            528,
+            965
+          ],
+          "if": "flag:card_taken",
+          "do": [
+            {
+              "say": "Rows of bottles with faded labels. Nothing you want to open."
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Exit door",
+      "image": "assets/lab.webp",
+      "crop": [
+        1279,
+        245,
+        2561,
+        1440
+      ],
+      "back": "lab",
+      "layers": [
+        {
+          "image": "assets/layer_mug.png",
+          "rect": [
+            1837,
+            1102,
+            103,
+            103
+          ],
+          "if": "!flag:mug_taken"
+        },
+        {
+          "image": "assets/layer_power_on.png",
+          "rect": [
+            1137,
+            23,
+            1952,
+            161
+          ],
+          "if": "flag:power",
+          "enter": "flash"
+        },
+        {
+          "image": "assets/layer_screen_on.png",
+          "rect": [
+            1608,
+            953,
+            241,
+            195
+          ],
+          "if": "flag:power",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1964,
+            1206,
+            356,
+            207
+          ],
+          "if": "flag:drawer_open"
+        },
+        {
+          "image": "assets/layer_whiteboard_uv.png",
+          "rect": [
+            1412,
+            436,
+            758,
+            528
+          ],
+          "if": "flag:uv_board",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:card_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_cabinet_open_empty.png",
+          "rect": [
+            643,
+            436,
+            678,
+            1125
+          ],
+          "if": "flag:card_taken"
+        },
+        {
+          "image": "assets/layer_spill.png",
+          "rect": [
+            2021,
+            1608,
+            689,
+            253
+          ],
+          "if": [
+            "flag:spill",
+            "!flag:fuse_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_tank_off.png",
+          "rect": [
+            0,
+            195,
+            792,
+            1966
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2951,
+            0,
+            889,
+            2161
+          ],
+          "if": "solved:panel",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            2889,
+            850,
+            211,
+            409
+          ],
+          "if": "flag:panel_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "door_sealed",
+          "label": "Exit door",
+          "rect": [
+            3055,
+            494,
+            528,
+            1045
+          ],
+          "if": "!solved:panel",
+          "do": [
+            {
+              "say": "Solid steel, sealed by the lockdown. It will not open while the experiment is running."
+            }
+          ]
+        },
+        {
+          "id": "reader_dead",
+          "label": "Card reader",
+          "rect": [
+            2947,
+            854,
+            103,
+            184
+          ],
+          "if": "!flag:power",
+          "do": [
+            {
+              "say": "The card reader is dark. No power."
+            }
+          ]
+        },
+        {
+          "id": "reader",
+          "label": "Card reader",
+          "rect": [
+            2947,
+            854,
+            103,
+            184
+          ],
+          "if": [
+            "flag:power",
+            "!flag:panel_open"
+          ],
+          "use": "keycard",
+          "fail": "A red light blinks: LEVEL 3 CARD REQUIRED.",
+          "do": [
+            {
+              "sfx": "card"
+            },
+            {
+              "say": "Beep. The light turns green and a small panel below slides open: five coloured buttons."
+            },
+            {
+              "set": "panel_open"
+            }
+          ]
+        },
+        {
+          "id": "panel",
+          "label": "Shutdown panel",
+          "rect": [
+            2898,
+            1056,
+            149,
+            195
+          ],
+          "if": [
+            "flag:panel_open",
+            "!solved:panel"
+          ],
+          "do": [
+            {
+              "puzzle": "panel"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            3055,
+            494,
+            528,
+            1045
+          ],
+          "if": "solved:panel",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "mug": {
+      "name": "Coffee mug",
+      "icon": "assets/mug.png",
+      "text": "Half a mug of cold coffee."
+    },
+    "fuse": {
+      "name": "Glass fuse",
+      "icon": "assets/fuse.png",
+      "text": "A big glass fuse, a little sticky."
+    },
+    "batteries": {
+      "name": "Batteries",
+      "icon": "assets/batteries.png",
+      "text": "Two batteries from the wall clock."
+    },
+    "uv_torch": {
+      "name": "UV flashlight",
+      "icon": "assets/uv_torch.png",
+      "text": "A small UV flashlight with an empty battery slot.",
+      "combine": {
+        "with": "batteries",
+        "into": "uv_lamp",
+        "text": "You slot the batteries in. The flashlight hums and glows violet."
+      }
+    },
+    "uv_lamp": {
+      "name": "Working UV flashlight",
+      "icon": "assets/uv_lamp.png",
+      "text": "It glows violet. Things look very different under it."
+    },
+    "keycard": {
+      "name": "Keycard",
+      "icon": "assets/keycard.png",
+      "text": "Dr. Hale's keycard. LEVEL 3 ACCESS."
+    }
+  },
+  "puzzles": {
+    "cabinet": {
+      "type": "dials",
+      "title": "Dial padlock",
+      "prompt": "Four number wheels.",
+      "wheels": [
+        [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ]
+      ],
+      "start": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "answer": [
+        "7",
+        "1",
+        "9",
+        "3"
+      ],
+      "clue": "flag:uv_board",
+      "do": [
+        {
+          "sfx": "unlock"
+        },
+        {
+          "say": "7, 1, 9, 3. The padlock clicks and the cabinet doors swing open."
+        }
+      ]
+    },
+    "login": {
+      "type": "code",
+      "title": "Terminal",
+      "prompt": "LOGIN: SUBJECT NUMBER",
+      "answer": "0417",
+      "clue": "flag:saw_tag",
+      "do": [
+        {
+          "sfx": "terminal"
+        },
+        {
+          "say": "ACCESS GRANTED. Hale's last log: \"Shutdown needs my card and 0417's own sequence. Shine UV on it and it flashes its colours, always in the same order.\""
+        }
+      ]
+    },
+    "panel": {
+      "type": "sequence",
+      "title": "Shutdown panel",
+      "prompt": "Enter the shutdown sequence.",
+      "buttons": [
+        "🟢",
+        "🔵",
+        "🟣",
+        "🔴",
+        "🟡"
+      ],
+      "answer": [
+        "🟢",
+        "🔵",
+        "🟢",
+        "🟣",
+        "🔴"
+      ],
+      "clue": [
+        "flag:pattern",
+        "solved:login"
+      ],
+      "do": [
+        {
+          "sfx": "shutdown"
+        },
+        {
+          "say": "The pumps wind down and the tank lights fade. 0417 curls up at the bottom and goes to sleep. With a long hiss, the lockdown lifts."
+        }
+      ]
+    }
+  },
+  "actors": [
+    {
+      "id": "robot",
+      "frames": [
+        "assets/robot_drive_1.png",
+        "assets/robot_drive_2.png",
+        "assets/robot_drive_3.png",
+        "assets/robot_drive_4.png"
+      ],
+      "fps": 10,
+      "size": [
+        442,
+        207
+      ],
+      "path": [
+        [
+          1470,
+          1814
+        ],
+        [
+          2067,
+          1837
+        ],
+        [
+          2710,
+          1796
+        ],
+        [
+          2067,
+          1837
+        ],
+        [
+          1470,
+          1814
+        ]
+      ],
+      "speed": 230,
+      "wait": 1400,
+      "shadow": {
+        "opacity": 0.85,
+        "width": 0.62,
+        "height": 0.14
+      },
+      "filter": "brightness(.82) saturate(.9)",
+      "if": "!flag:spill",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/robot_jump_1.png",
+          "assets/robot_jump_2.png"
+        ],
+        "fps": 5
+      },
+      "exit": {
+        "path": [
+          [
+            2331,
+            1780
+          ]
+        ],
+        "speed": 520,
+        "fade": false
+      }
+    },
+    {
+      "id": "robot_clean",
+      "frames": [
+        "assets/robot_clean_1.png",
+        "assets/robot_clean_2.png",
+        "assets/robot_clean_3.png"
+      ],
+      "fps": 8,
+      "size": [
+        442,
+        207
+      ],
+      "path": [
+        [
+          2331,
+          1780
+        ]
+      ],
+      "shadow": {
+        "opacity": 0.85,
+        "width": 0.62,
+        "height": 0.14
+      },
+      "filter": "brightness(.82) saturate(.9)",
+      "if": [
+        "flag:spill",
+        "!flag:fuse_taken"
+      ],
+      "delay": 1600,
+      "exit": {
+        "path": [
+          [
+            2641,
+            1654
+          ],
+          [
+            2963,
+            1585
+          ]
+        ],
+        "speed": 420,
+        "frames": [
+          "assets/robot_drive_1.png",
+          "assets/robot_drive_2.png",
+          "assets/robot_drive_3.png",
+          "assets/robot_drive_4.png"
+        ],
+        "fade": false
+      }
+    },
+    {
+      "id": "robot_dock",
+      "frames": [
+        "assets/robot_dock_1.png",
+        "assets/robot_dock_2.png"
+      ],
+      "fps": 1.2,
+      "size": [
+        376,
+        176
+      ],
+      "path": [
+        [
+          2963,
+          1585
+        ]
+      ],
+      "shadow": {
+        "opacity": 0.85,
+        "width": 0.62,
+        "height": 0.14
+      },
+      "filter": "brightness(.82) saturate(.9)",
+      "if": "flag:fuse_taken",
+      "delay": 2600
+    },
+    {
+      "id": "creature",
+      "frames": [
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_idle_1.png",
+        "assets/creature_blink.png"
+      ],
+      "fps": 3,
+      "idle": "jelly",
+      "size": [
+        405,
+        810
+      ],
+      "path": [
+        [
+          344,
+          1426
+        ]
+      ],
+      "if": "!solved:panel",
+      "filter": "opacity(.9)",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/creature_react_1.png",
+          "assets/creature_react_2.png",
+          "assets/creature_react_3.png",
+          "assets/creature_react_4.png",
+          "assets/creature_react_5.png"
+        ],
+        "fps": 2.5,
+        "hold": 2500
+      }
+    },
+    {
+      "id": "creature_sleep",
+      "image": "assets/creature_sleep.png",
+      "size": [
+        405,
+        810
+      ],
+      "path": [
+        [
+          344,
+          1426
+        ]
+      ],
+      "if": "solved:panel",
+      "idle": "float",
+      "filter": "opacity(.8) brightness(.75)"
+    }
+  ],
+  "ambient": [
+    {
+      "type": "sway",
+      "rect": [
+        2813,
+        0,
+        138,
+        574
+      ],
+      "pivot": [
+        2882,
+        0
+      ],
+      "amp": 1.4,
+      "dur": 4200
+    },
+    {
+      "type": "light",
+      "at": [
+        3411,
+        367
+      ],
+      "r": 620,
+      "color": "#ff2a2a",
+      "strength": 0.42,
+      "flicker": 1,
+      "if": "!flag:power"
+    },
+    {
+      "type": "light",
+      "at": [
+        2067,
+        92
+      ],
+      "r": 1700,
+      "color": "#d8ecff",
+      "strength": 0.16,
+      "flicker": 0.2,
+      "if": "flag:power"
+    },
+    {
+      "type": "light",
+      "at": [
+        322,
+        919
+      ],
+      "r": 760,
+      "color": "#3dff8a",
+      "strength": 0.3,
+      "flicker": 0.25,
+      "if": "!solved:panel"
+    },
+    {
+      "type": "light",
+      "at": [
+        1688,
+        1045
+      ],
+      "r": 300,
+      "color": "#5dffa0",
+      "strength": 0.25,
+      "flicker": 0.15,
+      "if": "flag:power"
+    },
+    {
+      "type": "particles",
+      "kind": "bubbles",
+      "rect": [
+        115,
+        482,
+        413,
+        758
+      ],
+      "count": 26,
+      "if": "!solved:panel"
+    },
+    {
+      "type": "particles",
+      "kind": "mist",
+      "rect": [
+        2193,
+        69,
+        299,
+        299
+      ],
+      "count": 6
+    },
+    {
+      "type": "particles",
+      "kind": "embers",
+      "rect": [
+        2829,
+        494,
+        115,
+        161
+      ],
+      "count": 7,
+      "color": "#a8dcff",
+      "speed": 1.6,
+      "size": 0.6
+    }
+  ]
+}

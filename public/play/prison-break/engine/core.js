@@ -85,7 +85,10 @@ export function runActions(game, state, actions, opts = {}) {
 export function clickHotspot(game, state, hs, selected = null, opts = {}) {
   if (hs.use) {
     if (selected !== hs.use) {
-      return { state, events: [{ type: 'say', text: hs.fail || (selected ? 'That doesn’t work here.' : 'It won’t budge.') }], blocked: true };
+      const text = hs.fail || (selected ? 'That doesn’t work here.' : 'It won’t budge.');
+      // "failDo": sounds and animations for a click without the right item (a robot that beeps and jumps). The state never changes.
+      if (hs.failDo) return { state, events: [...runActions(game, state, hs.failDo).events.filter(e => e.type === 'sfx' || e.type === 'play'), { type: 'say', text }], blocked: true, quiet: true };
+      return { state, events: [{ type: 'say', text }], blocked: true };
     }
   } else if (selected && hs.wrongItem) {
     return { state, events: [{ type: 'say', text: hs.wrongItem }], blocked: true };

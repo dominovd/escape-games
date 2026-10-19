@@ -16,7 +16,11 @@
 //             "frames": [...], "hop": 1 },             // optional running frames for the exit only (a sitting mouse that runs)
 //   "thread": [x, y], "threadAt": 10,                 // a spider's thread from a fixed point to the actor's top (+ threadAt px down)
 //   "shadow": 0.55,                                    // soft contact shadow under the feet (its darkness), or {"opacity", "width", "height"} as parts of the size
-//   "filter": "brightness(.7) saturate(.8)"            // CSS filter to fit a separately drawn picture into the room's light
+//   "filter": "brightness(.7) saturate(.8)",           // CSS filter to fit a separately drawn picture into the room's light
+//   "blend": true,                                     // crossfade between frames (slow, soft creatures); or the fade time in ms
+//   "idle": "float",                                   // idle motion for a standing actor: "sniff", "float" (slow drift in water or air) or "jelly" (drift with a soft sway of the lower body)
+//   "delay": 1500,                                     // when it appears during play, wait this long and fade in (after another actor's exit run)
+//   "play": { "type": "frames", "frames": [...], "fps": 8, "hold": 600 }   // one-shot frame sequence for the "play" action
 // }]
 // A hotspot with "actor": "mouse" sticks to the actor and moves with it.
 import { reducedMotion } from './fx.js';
@@ -45,12 +49,23 @@ const pos = ([x, y], [w, h], W, H) => ({ left: (x - w / 2) / W * 100 + '%', top:
 
 function frameLoop(img, a, asset) {
   if (!a.frames || a.frames.length < 2) return;
+  img.classList.add('ek-looping');
   const urls = a.frames.map(asset), fps = a.fps || 8;
   for (const u of urls) { const i = new Image(); i.src = u; }
+  const top = img._top;   // "blend": the next frame fades in over the current one instead of a hard swap
+  let shown = -1;
   const t = setInterval(() => {
     if (!img.isConnected) { clearInterval(t); return; }
-    img.src = urls[Math.floor(now() / (1000 / fps)) % urls.length];
-  }, 1000 / fps / 2);
+    if (img._hold) { if (top) top.style.opacity = 0; return; }
+    const k = Math.floor(now() / (1000 / fps)) % urls.length;
+    if (k === shown) return;
+    if (!top || shown < 0) { img.src = urls[k]; shown = k; return; }
+    shown = k;
+    top.src = urls[k];
+    const ms = Math.min(a.blend === true ? 0.8 * 1000 / fps : a.blend, 1000 / fps);
+    top.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms, easing: 'ease-in-out' }).onfinish = () => { img.src = urls[k]; top.style.opacity = 0; };
+    top.style.opacity = 1;
+  }, Math.min(100, 1000 / fps / 2));
 }
 
 function build(a, W, H, h, asset) {
@@ -59,8 +74,15 @@ function build(a, W, H, h, asset) {
   const img = h('img'); img.alt = ''; img.draggable = false;
   img.src = asset((a.frames && a.frames[0]) || a.image);
   if (a.hop) { img.classList.add('ek-hop'); img.style.setProperty('--amp', a.hop); }
-  if (a.idle && a.path.length < 2) img.classList.add('ek-idle-' + a.idle);
-  if (a.filter) img.style.filter = a.filter;
+  let body = img;
+  if (a.blend && a.frames && a.frames.length > 1) {
+    // two stacked pictures for crossfading frames, moved together by the idle motion
+    body = h('div', 'ek-actor-body');
+    const top = h('img'); top.alt = ''; top.draggable = false; top.style.opacity = 0;
+    img._top = top; body.append(img, top);
+  }
+  if (a.idle && a.path.length < 2) body.classList.add('ek-idle-' + a.idle);
+  if (a.filter) (body === img ? img : body).style.filter = a.filter;
   if (a.shadow) {
     const s = typeof a.shadow === 'number' ? { opacity: a.shadow } : a.shadow;
     const sh = h('div', 'ek-shadow');
@@ -69,7 +91,7 @@ function build(a, W, H, h, asset) {
     sh.style.height = (s.height ?? .16) * 100 + '%'; sh.style.bottom = -(s.height ?? .16) / 2 * 100 + '%';
     el.append(sh);
   }
-  flipper.append(img); el.append(flipper);
+  flipper.append(body); el.append(flipper);
   // A spider's thread: a line from a fixed point ("thread": [x, y]) down to the top of the actor.
   if (a.thread) {
     const t = h('div', 'ek-thread'); el.append(t); el._thread = t;
@@ -159,9 +181,26 @@ const ONE_SHOT = {
   spin: () => [{ transform: 'rotate(0)' }, { transform: 'rotate(360deg)' }],
   pop: amp => [{ transform: 'scale(1)' }, { transform: `scale(${1 + amp / 100})`, offset: .4 }, { transform: 'scale(1)' }],
 };
-export function playOnce(el, spec, rect) {
+export function delayIn(el, ms) {
+  if (!el || reducedMotion()) return;
+  el.animate([{ opacity: 0 }, { opacity: 0, offset: ms / (ms + 350) }, { opacity: 1 }], { duration: ms + 350 });
+}
+
+// A sequence of pictures played once (a creature turning to look at you), then back to the actor's own loop.
+function playFrames(el, s, asset) {
+  const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+  if (!img || !s.frames || !s.frames.length) return;
+  const urls = s.frames.map(asset), step = 1000 / (s.fps || 8), back = img.src;
+  for (const u of urls) { const i = new Image(); i.src = u; }
+  img._hold = true;
+  urls.forEach((u, i) => setTimeout(() => { img.src = u; }, i * step));
+  setTimeout(() => { img._hold = false; if (!img.classList.contains('ek-looping')) img.src = back; }, urls.length * step + (s.hold || 0));
+}
+
+export function playOnce(el, spec, rect, asset = p => p) {
   if (!el || reducedMotion()) return;
   const s = typeof spec === 'string' ? { type: spec } : spec || {};
+  if (s.type === 'frames') return playFrames(el, s, asset);
   const make = ONE_SHOT[s.type || 'shake'];
   if (!make) return;
   const amp = s.amp ?? { rock: 9, shake: 2, jump: 12, pop: 8 }[s.type || 'shake'] ?? 5;
