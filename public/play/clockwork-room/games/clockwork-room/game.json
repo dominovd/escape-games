@@ -1,0 +1,2010 @@
+{
+  "id": "workshop",
+  "title": "Clockwork Room",
+  "theme": "castle",
+  "start": "workshop",
+  "intro": "Master Ottavio’s workshop smells of brass and machine oil. Every clock in it has stopped, and the door has no keyhole: a rod runs from its lock into the great gear train on the wall. Get the mechanism moving and set the right hour.",
+  "winTitle": "The mechanism turns",
+  "winText": "The great clock strikes a quarter past four, the rod slides back and the door swings open. Somewhere behind you, the little brass bird sings once more.",
+  "audio": {
+    "music": "assets/audio/music_workshop.mp3",
+    "ambience": "assets/audio/amb_workshop.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "drawer": "assets/audio/sfx_drawer.mp3",
+      "bird": "assets/audio/sfx_bird.mp3",
+      "gears": "assets/audio/sfx_gears.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3",
+      "chime": "assets/audio/sfx_chime.mp3"
+    }
+  },
+  "scenes": {
+    "workshop": {
+      "title": "The workshop",
+      "image": "assets/workshop.webp",
+      "layers": [
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 9000
+          }
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 8100
+          }
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 7500
+          }
+        },
+        {
+          "image": "assets/layer_gear_new.png",
+          "rect": [
+            986,
+            384,
+            224,
+            224
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": 1,
+            "dur": 6000
+          },
+          "enter": "pop"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "sway",
+            "amp": 1.4,
+            "dur": 2000,
+            "pivot": [
+              480,
+              689
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_oilcan.png",
+          "rect": [
+            2223,
+            367,
+            177,
+            248
+          ],
+          "if": "!has:oilcan"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1378,
+            1240,
+            758,
+            253
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_case_open.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": [
+            "flag:running",
+            "!flag:watch_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_case_open_empty.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": "flag:watch_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "!has:crank"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_toolbox_open_empty.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "has:crank"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3112,
+            138,
+            728,
+            2023
+          ],
+          "if": "solved:clock",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "clock",
+          "label": "Grandfather clock",
+          "rect": [
+            276,
+            184,
+            436,
+            1447
+          ],
+          "do": [
+            {
+              "goto": "clockcase"
+            }
+          ]
+        },
+        {
+          "id": "gears",
+          "label": "Gear train",
+          "rect": [
+            746,
+            115,
+            712,
+            689
+          ],
+          "do": [
+            {
+              "goto": "wall"
+            }
+          ]
+        },
+        {
+          "id": "bench",
+          "label": "Workbench",
+          "rect": [
+            1102,
+            804,
+            1378,
+            896
+          ],
+          "do": [
+            {
+              "goto": "bench"
+            }
+          ]
+        },
+        {
+          "id": "case",
+          "label": "Display case",
+          "rect": [
+            2515,
+            919,
+            563,
+            666
+          ],
+          "do": [
+            {
+              "goto": "case"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Door",
+          "rect": [
+            3100,
+            149,
+            735,
+            1447
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        },
+        {
+          "id": "shelf",
+          "label": "Shelf",
+          "rect": [
+            1493,
+            402,
+            735,
+            276
+          ],
+          "do": [
+            {
+              "say": "Jars of tiny screws, springs and cogs, all sorted by size. Ottavio was a tidy man."
+            }
+          ]
+        },
+        {
+          "id": "oilcan",
+          "label": "Oil can",
+          "rect": [
+            2209,
+            367,
+            195,
+            241
+          ],
+          "if": "!has:oilcan",
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A little brass oil can, still half full."
+            },
+            {
+              "give": "oilcan"
+            }
+          ]
+        },
+        {
+          "id": "blueprint",
+          "label": "Blueprint",
+          "rect": [
+            2503,
+            436,
+            528,
+            448
+          ],
+          "do": [
+            {
+              "sfx": "paper"
+            },
+            {
+              "say": "A blueprint of a toolbox lock. Three cogs are stamped with signs, left to right: a star, a gear and a moon."
+            },
+            {
+              "set": "blueprint"
+            }
+          ]
+        }
+      ]
+    },
+    "clockcase": {
+      "title": "Grandfather clock",
+      "image": "assets/workshop.webp",
+      "crop": [
+        0,
+        47,
+        3019,
+        1698
+      ],
+      "back": "workshop",
+      "layers": [
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 9000
+          }
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 8100
+          }
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 7500
+          }
+        },
+        {
+          "image": "assets/layer_gear_new.png",
+          "rect": [
+            986,
+            384,
+            224,
+            224
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": 1,
+            "dur": 6000
+          },
+          "enter": "pop"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "sway",
+            "amp": 1.4,
+            "dur": 2000,
+            "pivot": [
+              480,
+              689
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_oilcan.png",
+          "rect": [
+            2223,
+            367,
+            177,
+            248
+          ],
+          "if": "!has:oilcan"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1378,
+            1240,
+            758,
+            253
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_case_open.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": [
+            "flag:running",
+            "!flag:watch_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_case_open_empty.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": "flag:watch_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "!has:crank"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_toolbox_open_empty.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "has:crank"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3112,
+            138,
+            728,
+            2023
+          ],
+          "if": "solved:clock",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "pendulum",
+          "label": "Pendulum",
+          "rect": [
+            409,
+            735,
+            147,
+            632
+          ],
+          "do": [
+            {
+              "if": "!flag:running",
+              "say": "The pendulum hangs still. Nothing in this room is turning."
+            },
+            {
+              "if": "flag:running",
+              "say": "Tick, tock. The pendulum swings with the gears on the wall."
+            }
+          ]
+        },
+        {
+          "id": "face",
+          "label": "Clock face",
+          "rect": [
+            344,
+            402,
+            276,
+            287
+          ],
+          "if": "!solved:clock",
+          "use": "crank",
+          "fail": "The hands are stuck at twelve. Under the face there is a small square hole, just right for a crank.",
+          "hint": "Set the great clock with the crank, once the gears are turning.",
+          "do": [
+            {
+              "if": "!flag:running",
+              "say": "The crank fits, but the hands will not move. The clock is not running."
+            },
+            {
+              "if": "flag:running",
+              "puzzle": "clock"
+            }
+          ]
+        },
+        {
+          "id": "face_done",
+          "label": "Clock face",
+          "rect": [
+            344,
+            402,
+            276,
+            287
+          ],
+          "if": "solved:clock",
+          "do": [
+            {
+              "say": "A quarter past four. The door is open."
+            }
+          ]
+        }
+      ]
+    },
+    "wall": {
+      "title": "Gear train",
+      "image": "assets/workshop.webp",
+      "crop": [
+        348,
+        24,
+        1509,
+        849
+      ],
+      "back": "workshop",
+      "layers": [
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 9000
+          }
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 8100
+          }
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 7500
+          }
+        },
+        {
+          "image": "assets/layer_gear_new.png",
+          "rect": [
+            986,
+            384,
+            224,
+            224
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": 1,
+            "dur": 6000
+          },
+          "enter": "pop"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "sway",
+            "amp": 1.4,
+            "dur": 2000,
+            "pivot": [
+              480,
+              689
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_oilcan.png",
+          "rect": [
+            2223,
+            367,
+            177,
+            248
+          ],
+          "if": "!has:oilcan"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1378,
+            1240,
+            758,
+            253
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_case_open.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": [
+            "flag:running",
+            "!flag:watch_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_case_open_empty.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": "flag:watch_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "!has:crank"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_toolbox_open_empty.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "has:crank"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3112,
+            138,
+            728,
+            2023
+          ],
+          "if": "solved:clock",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "spindle",
+          "label": "Empty spindle",
+          "rect": [
+            1011,
+            402,
+            184,
+            184
+          ],
+          "if": "!flag:running",
+          "use": "gear",
+          "consume": true,
+          "fail": "Three brass gears and one empty spindle between them. One gear is missing, and nothing can turn without it.",
+          "hint": "The gear train is missing one gear. Something small and brass is holding on to it.",
+          "do": [
+            {
+              "sfx": "gears"
+            },
+            {
+              "say": "The gear clicks onto the spindle. With a shudder the whole train starts to turn, the pendulum swings and the display case slides open."
+            },
+            {
+              "set": "running"
+            }
+          ]
+        },
+        {
+          "id": "gears_run",
+          "label": "Gear train",
+          "rect": [
+            746,
+            115,
+            712,
+            689
+          ],
+          "if": "flag:running",
+          "do": [
+            {
+              "say": "Every gear turns its neighbour. A long rod runs from them to the door."
+            }
+          ]
+        }
+      ]
+    },
+    "bench": {
+      "title": "Workbench",
+      "image": "assets/workshop.webp",
+      "crop": [
+        994,
+        654,
+        1595,
+        897
+      ],
+      "back": "workshop",
+      "layers": [
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 9000
+          }
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 8100
+          }
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 7500
+          }
+        },
+        {
+          "image": "assets/layer_gear_new.png",
+          "rect": [
+            986,
+            384,
+            224,
+            224
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": 1,
+            "dur": 6000
+          },
+          "enter": "pop"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "sway",
+            "amp": 1.4,
+            "dur": 2000,
+            "pivot": [
+              480,
+              689
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_oilcan.png",
+          "rect": [
+            2223,
+            367,
+            177,
+            248
+          ],
+          "if": "!has:oilcan"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1378,
+            1240,
+            758,
+            253
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_case_open.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": [
+            "flag:running",
+            "!flag:watch_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_case_open_empty.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": "flag:watch_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "!has:crank"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_toolbox_open_empty.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "has:crank"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3112,
+            138,
+            728,
+            2023
+          ],
+          "if": "solved:clock",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "drawer",
+          "label": "Drawer",
+          "rect": [
+            1527,
+            1259,
+            494,
+            133
+          ],
+          "if": "!flag:drawer_open",
+          "use": "oilcan",
+          "fail": "The drawer is rusted shut. It will not budge.",
+          "hint": "Rusty things open more easily with a little oil.",
+          "do": [
+            {
+              "sfx": "drawer"
+            },
+            {
+              "say": "A few drops of oil and the drawer slides out. Inside: a tiny winding key with a bird on its bow."
+            },
+            {
+              "set": "drawer_open"
+            },
+            {
+              "give": "bird_key"
+            }
+          ]
+        },
+        {
+          "id": "drawer_empty",
+          "label": "Drawer",
+          "rect": [
+            1527,
+            1259,
+            494,
+            133
+          ],
+          "if": "flag:drawer_open",
+          "do": [
+            {
+              "say": "Empty now, apart from sawdust."
+            }
+          ]
+        },
+        {
+          "id": "bird",
+          "label": "Brass bird",
+          "rect": [
+            1695,
+            815,
+            285,
+            402
+          ],
+          "if": "!flag:bird_sang",
+          "use": "bird_key",
+          "fail": "A clockwork bird on a little perch. It turns its head to watch you, but its spring is unwound. There is a keyhole in its back.",
+          "hint": "The brass bird needs winding.",
+          "do": [
+            {
+              "sfx": "bird"
+            },
+            {
+              "play": "bird"
+            },
+            {
+              "say": "You wind the bird. It flaps its wings and sings four clear notes, then opens its beak: a small brass gear drops onto the bench."
+            },
+            {
+              "set": "bird_sang"
+            },
+            {
+              "give": "gear",
+              "delay": 1600,
+              "from": [
+                1837,
+                1079
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bird_again",
+          "label": "Brass bird",
+          "rect": [
+            1695,
+            815,
+            285,
+            402
+          ],
+          "if": "flag:bird_sang",
+          "do": [
+            {
+              "sfx": "bird"
+            },
+            {
+              "play": "bird"
+            },
+            {
+              "say": "Four notes again. Always four."
+            }
+          ]
+        },
+        {
+          "id": "toolbox",
+          "label": "Toolbox",
+          "rect": [
+            1971,
+            976,
+            478,
+            230
+          ],
+          "if": "!solved:toolbox",
+          "do": [
+            {
+              "puzzle": "toolbox"
+            }
+          ]
+        },
+        {
+          "id": "crank",
+          "label": "Crank",
+          "rect": [
+            1971,
+            873,
+            478,
+            333
+          ],
+          "if": [
+            "solved:toolbox",
+            "!has:crank",
+            "!flag:clock_set"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A brass crank with a square end."
+            },
+            {
+              "give": "crank"
+            }
+          ]
+        }
+      ]
+    },
+    "case": {
+      "title": "Display case",
+      "image": "assets/workshop.webp",
+      "crop": [
+        2230,
+        701,
+        1143,
+        643
+      ],
+      "back": "workshop",
+      "layers": [
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 9000
+          }
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 8100
+          }
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 7500
+          }
+        },
+        {
+          "image": "assets/layer_gear_new.png",
+          "rect": [
+            986,
+            384,
+            224,
+            224
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": 1,
+            "dur": 6000
+          },
+          "enter": "pop"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "sway",
+            "amp": 1.4,
+            "dur": 2000,
+            "pivot": [
+              480,
+              689
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_oilcan.png",
+          "rect": [
+            2223,
+            367,
+            177,
+            248
+          ],
+          "if": "!has:oilcan"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1378,
+            1240,
+            758,
+            253
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_case_open.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": [
+            "flag:running",
+            "!flag:watch_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_case_open_empty.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": "flag:watch_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "!has:crank"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_toolbox_open_empty.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "has:crank"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3112,
+            138,
+            728,
+            2023
+          ],
+          "if": "solved:clock",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "case_closed",
+          "label": "Display case",
+          "rect": [
+            2526,
+            930,
+            540,
+            322
+          ],
+          "if": "!flag:running",
+          "do": [
+            {
+              "say": "A glass case with no lock and no handle. A thin rod runs from its base to the gears on the wall."
+            }
+          ]
+        },
+        {
+          "id": "watch",
+          "label": "Pocket watch",
+          "rect": [
+            2705,
+            1029,
+            170,
+            156
+          ],
+          "if": [
+            "flag:running",
+            "!flag:watch_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A silver pocket watch. Engraved inside the lid: \"A quarter past. Always a quarter past. O.\""
+            },
+            {
+              "set": "watch_taken"
+            },
+            {
+              "give": "watch"
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Door",
+      "image": "assets/workshop.webp",
+      "crop": [
+        730,
+        0,
+        3110,
+        1749
+      ],
+      "back": "workshop",
+      "layers": [
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_a.png",
+          "rect": [
+            792,
+            116,
+            334,
+            334
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 9000
+          }
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_b.png",
+          "rect": [
+            751,
+            482,
+            302,
+            302
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 8100
+          }
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_gear_c.png",
+          "rect": [
+            1150,
+            480,
+            280,
+            280
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": -1,
+            "dur": 7500
+          }
+        },
+        {
+          "image": "assets/layer_gear_new.png",
+          "rect": [
+            986,
+            384,
+            224,
+            224
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "spin",
+            "amp": 1,
+            "dur": 6000
+          },
+          "enter": "pop"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "!flag:running"
+        },
+        {
+          "image": "assets/layer_pendulum.png",
+          "rect": [
+            390,
+            678,
+            184,
+            689
+          ],
+          "if": "flag:running",
+          "anim": {
+            "type": "sway",
+            "amp": 1.4,
+            "dur": 2000,
+            "pivot": [
+              480,
+              689
+            ]
+          }
+        },
+        {
+          "image": "assets/layer_oilcan.png",
+          "rect": [
+            2223,
+            367,
+            177,
+            248
+          ],
+          "if": "!has:oilcan"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1378,
+            1240,
+            758,
+            253
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_case_open.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": [
+            "flag:running",
+            "!flag:watch_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_case_open_empty.png",
+          "rect": [
+            2515,
+            781,
+            563,
+            505
+          ],
+          "if": "flag:watch_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "!has:crank"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_toolbox_open_empty.png",
+          "rect": [
+            1952,
+            850,
+            517,
+            367
+          ],
+          "if": [
+            "solved:toolbox",
+            "has:crank"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3112,
+            138,
+            728,
+            2023
+          ],
+          "if": "solved:clock",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "door_locked",
+          "label": "Door",
+          "rect": [
+            3112,
+            149,
+            723,
+            1447
+          ],
+          "if": "!solved:clock",
+          "do": [
+            {
+              "say": "No keyhole, no handle. A rod from the great clock disappears into the lock."
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Open door",
+          "rect": [
+            3112,
+            149,
+            723,
+            1447
+          ],
+          "if": "solved:clock",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "oilcan": {
+      "name": "Oil can",
+      "icon": "assets/oilcan.png",
+      "text": "A little brass oil can."
+    },
+    "bird_key": {
+      "name": "Bird key",
+      "icon": "assets/bird_key.png",
+      "text": "A tiny winding key with a bird on its bow."
+    },
+    "gear": {
+      "name": "Brass gear",
+      "icon": "assets/gear.png",
+      "text": "A small brass gear, still warm from the bird’s beak."
+    },
+    "watch": {
+      "name": "Pocket watch",
+      "icon": "assets/watch.png",
+      "text": "Engraved inside the lid: \"A quarter past. Always a quarter past. O.\""
+    },
+    "crank": {
+      "name": "Crank",
+      "icon": "assets/crank.png",
+      "text": "A brass crank with a square end."
+    }
+  },
+  "puzzles": {
+    "toolbox": {
+      "type": "dials",
+      "title": "Toolbox lock",
+      "prompt": "Three dials with signs.",
+      "options": [
+        "⭐",
+        "⚙️",
+        "🌙",
+        "🔔",
+        "🗝️"
+      ],
+      "start": [
+        "🔔",
+        "🔔",
+        "🔔"
+      ],
+      "answer": [
+        "⭐",
+        "⚙️",
+        "🌙"
+      ],
+      "clue": "flag:blueprint",
+      "do": [
+        {
+          "sfx": "unlock"
+        },
+        {
+          "say": "Star, gear, moon. The lid of the toolbox springs open."
+        }
+      ]
+    },
+    "clock": {
+      "type": "dials",
+      "title": "Set the clock",
+      "prompt": "Turn the crank to set the hour and the minutes.",
+      "wheels": [
+        [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        ],
+        [
+          "00",
+          "15",
+          "30",
+          "45"
+        ]
+      ],
+      "start": [
+        "12",
+        "00"
+      ],
+      "answer": [
+        "4",
+        "15"
+      ],
+      "clue": [
+        "flag:bird_sang",
+        "flag:watch_taken"
+      ],
+      "do": [
+        {
+          "sfx": "chime"
+        },
+        {
+          "say": "Four chimes ring out. The rod in the wall slides back and the door unlocks."
+        },
+        {
+          "set": "clock_set"
+        }
+      ]
+    }
+  },
+  "actors": [
+    {
+      "id": "bird",
+      "frames": [
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_2.png",
+        "assets/bird_idle_2.png",
+        "assets/bird_idle_2.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_3.png",
+        "assets/bird_idle_3.png",
+        "assets/bird_idle_3.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_1.png",
+        "assets/bird_idle_4.png"
+      ],
+      "fps": 4,
+      "size": [
+        613,
+        479
+      ],
+      "path": [
+        [
+          1837,
+          1210
+        ]
+      ],
+      "flip": false,
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/bird_sing_1.png",
+          "assets/bird_sing_2.png",
+          "assets/bird_sing_3.png",
+          "assets/bird_sing_4.png",
+          "assets/bird_sing_3.png",
+          "assets/bird_sing_2.png",
+          "assets/bird_sing_3.png",
+          "assets/bird_sing_4.png"
+        ],
+        "fps": 6,
+        "hold": 250
+      }
+    }
+  ],
+  "ambient": [
+    {
+      "type": "light",
+      "at": [
+        1470,
+        896
+      ],
+      "r": 800,
+      "color": "#ffb455",
+      "strength": 0.36,
+      "flicker": 0.15
+    },
+    {
+      "type": "light",
+      "at": [
+        161,
+        230
+      ],
+      "r": 480,
+      "color": "#7f9cff",
+      "strength": 0.16,
+      "flicker": 0
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        1148,
+        873,
+        735,
+        459
+      ],
+      "count": 16
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        46,
+        92,
+        689,
+        1148
+      ],
+      "count": 8,
+      "color": "#b8c8ff"
+    }
+  ]
+}

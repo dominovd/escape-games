@@ -1,0 +1,42 @@
+{
+  "id": "workshop",
+  "title": "Clockwork Room",
+  "difficulty": "medium",
+  "score": 13,
+  "minutes": 20,
+  "rooms": 1,
+  "factors": {
+    "tasks": 10,
+    "actions": 10,
+    "scenes": 6,
+    "puzzles": 2,
+    "clueAway": 2,
+    "clueNear": 0,
+    "itemsCarried": 3,
+    "combines": 0,
+    "hidden": 0,
+    "tiny": 1,
+    "decoys": 8
+  },
+  "steps": [
+    "The workshop: Oil can → get Oil can",
+    "The workshop: look at Blueprint",
+    "The workshop: open Workbench",
+    "Workbench: use Oil can on Drawer → get Bird key",
+    "Workbench: use Bird key on Brass bird → get Brass gear",
+    "Workbench: Toolbox → solve \"Toolbox lock\" (answer: ⭐ ⚙️ 🌙)",
+    "Workbench: Crank → get Crank",
+    "Go back to The workshop",
+    "The workshop: open Gear train",
+    "Gear train: use Brass gear on Empty spindle",
+    "Go back to The workshop",
+    "The workshop: open Display case",
+    "Display case: Pocket watch → get Pocket watch",
+    "Go back to The workshop",
+    "The workshop: open Grandfather clock",
+    "Grandfather clock: use Crank on Clock face → solve \"Set the clock\" (answer: 4 15)",
+    "Go back to The workshop",
+    "The workshop: open Door",
+    "Door: Open door"
+  ]
+}
