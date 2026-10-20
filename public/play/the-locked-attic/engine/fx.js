@@ -78,7 +78,7 @@ export function renderAmbient(list, W, H, baseUrl, h, cache = new Map(), asset =
   return out;
 }
 
-// Looping layer animation: "anim": { "type": "sway|bob|flicker|pulse", "amp": 1, "dur": 3000, "pivot": [x, y] }
+// Looping layer animation: "anim": { "type": "sway|bob|flicker|pulse|twirl|spin", "amp": 1, "dur": 3000, "pivot": [x, y] }
 export function animateLayer(el, l) {
   const a = typeof l.anim === 'string' ? { type: l.anim } : l.anim;
   if (!a || !a.type) return;
@@ -86,6 +86,8 @@ export function animateLayer(el, l) {
   const dur = a.dur || { sway: 3200, bob: 3600, flicker: 1100, pulse: 2400 }[a.type] || 3000;
   el.style.animationDuration = dur + 'ms'; keepPhase(el, dur);
   el.style.setProperty('--amp', a.amp ?? 1);
+  // "spin": a gear or a wheel turning around its centre (or "pivot"); negative "amp" turns it the other way.
+  if (a.type === 'spin' && (a.amp ?? 1) < 0) el.style.animationDirection = 'reverse';
   if (a.pivot && l.rect) {
     const [x, y, w, hh] = l.rect;
     el.style.transformOrigin = `${(a.pivot[0] - x) / w * 100}% ${(a.pivot[1] - y) / hh * 100}%`;

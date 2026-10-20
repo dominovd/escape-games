@@ -11,6 +11,12 @@
     "minutes": 15,
     "tasks": 9
   },
+  "clockwork-room": {
+    "difficulty": "medium",
+    "score": 13,
+    "minutes": 20,
+    "tasks": 10
+  },
   "forgotten-lab": {
     "difficulty": "hard",
     "score": 23.6,

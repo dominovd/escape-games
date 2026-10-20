@@ -160,7 +160,7 @@
 @keyframes ek-flicker{0%,100%{opacity:1;transform:scaleY(1)}30%{opacity:.86;transform:scaleY(calc(1 + .04 * var(--amp)))}60%{opacity:.95;transform:scaleY(calc(1 - .02 * var(--amp)))}}
 @keyframes ek-pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(calc(1 + .35 * var(--amp)))}}
 .ek-fly{position:absolute;z-index:20;pointer-events:none;object-fit:contain;filter:drop-shadow(0 6px 14px #000a)}
-@media (prefers-reduced-motion:reduce){.ek-light,.ek-flame,.ek-sway-in,.ek-anim,.ek-idle-float,.ek-idle-jelly{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.ek-light,.ek-flame,.ek-sway-in,.ek-anim,.ek-idle-float,.ek-idle-jelly,.ek-idle-scrub{animation:none!important}}
 .ek-actor{position:absolute;pointer-events:none;z-index:1}
 .ek-shadow{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,var(--o)),rgba(0,0,0,calc(var(--o) * .45)) 55%,transparent)}
 .ek-actor-flip,.ek-actor-flip img,.ek-actor-body{position:absolute;inset:0;width:100%;height:100%}
@@ -169,6 +169,8 @@
 @keyframes ek-hop{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(-6% * var(--amp)))}}
 .ek-hot.ek-hot-actor{position:absolute;inset:-25%;width:150%;height:150%;pointer-events:auto;border-radius:50%}
 .ek-anim-twirl{animation-name:ek-twirl;animation-timing-function:linear}
+.ek-anim-spin{animation-name:ek-spin;animation-timing-function:linear}
+@keyframes ek-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes ek-twirl{0%{transform:scaleX(1)}25%{transform:scaleX(.08)}50%{transform:scaleX(-1)}75%{transform:scaleX(.08)}100%{transform:scaleX(1)}}
 .ek-thread{position:absolute;width:2px;margin-left:-1px;background:linear-gradient(#e8e4ff00,#e8e4ffaa 12%);pointer-events:none}
 .ek-idle-sniff{transform-origin:50% 100%;animation:ek-sniff 2.4s infinite ease-in-out}
@@ -176,6 +178,8 @@
 @keyframes ek-float{0%,100%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(1.2%,-2%) rotate(1.4deg)}50%{transform:translate(0,-3.2%) rotate(0deg)}75%{transform:translate(-1.2%,-1.6%) rotate(-1.4deg)}}
 .ek-idle-jelly{transform-origin:50% 12%;animation:ek-jelly 6s infinite ease-in-out}
 @keyframes ek-jelly{0%,100%{transform:translate(0,0) rotate(0deg) skewX(0deg) scaleY(1)}25%{transform:translate(1%,-1.6%) rotate(1deg) skewX(2.6deg) scaleY(1.012)}50%{transform:translate(0,-2.8%) rotate(0deg) skewX(0deg) scaleY(.99)}75%{transform:translate(-1%,-1.4%) rotate(-1deg) skewX(-2.6deg) scaleY(1.01)}}
+.ek-idle-scrub{transform-origin:50% 100%;animation:ek-scrub .42s infinite ease-in-out}
+@keyframes ek-scrub{0%,100%{transform:translateX(0) rotate(0deg)}25%{transform:translateX(-1.6%) rotate(-.5deg)}75%{transform:translateX(1.6%) rotate(.5deg)}}
 @keyframes ek-sniff{0%,40%,100%{transform:none}48%{transform:translateY(-2%) rotate(-2deg)}56%{transform:translateY(0) rotate(1deg)}64%{transform:translateY(-1.5%) rotate(-1deg)}72%{transform:none}}
 
 /* ---------- compact mode: a short player (phone in portrait inside a page, or a phone in landscape) ----------
