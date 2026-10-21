@@ -14,7 +14,7 @@ export function keepPhase(el, durMs) { el.style.animationDelay = -(now() % durMs
 //   { "type": "flame", "rect": [x, y, w, h], "amp": 1, "dur": 1000 }   (optional "src": a layer image, "srcRect": that layer's rect)
 //   { "type": "sway", "rect": [x, y, w, h], "pivot": [x, y], "amp": 1, "dur": 5000 }   a patch of the picture (a cobweb,
 //     a hanging cloth) that sways gently around "pivot" (where it hangs from), edges feathered into the picture
-//   { "type": "particles", "kind": "embers|dust|fireflies|snow|bubbles|mist", "rect": [x, y, w, h], "count": 30, "color": "#ffb060",
+//   { "type": "particles", "kind": "embers|dust|fireflies|snow|bubbles|mist|rain", "rect": [x, y, w, h], "count": 30, "color": "#ffb060",
 //     "speed": 1, "size": 1, "alpha": 0.5, "wobble": 1 }   (multipliers for the kind's defaults)
 // Each entry can have "if" (same conditions as layers) and "image" (defaults to the start scene's picture).
 export function ambientFor(game, sceneImage, check) {
@@ -144,6 +144,7 @@ const KINDS = {
   fireflies: { color: '#e9ff8a', size: [1.6, 3], speed: [6, 14], life: [4, 8], dir: 0, wobble: 20, glow: true, spawn: 'any', blink: true },
   snow: { color: '#ffffff', size: [1, 3], speed: [16, 34], life: [6, 9], dir: 1, wobble: 10, glow: false, spawn: 'top', alpha: .85 },
   bubbles: { color: '#c8ffd8', size: [2, 5], speed: [14, 30], life: [1.4, 2.6], dir: -1, wobble: 6, glow: false, spawn: 'bottom', ring: true },
+  rain: { color: '#d6e4ff', size: [0.5, 1], speed: [70, 130], life: [1.2, 2.4], dir: 1, wobble: 0.5, glow: false, spawn: 'top', alpha: .3, streak: 9 },
   mist: { color: '#c9d4ff', size: [40, 90], speed: [3, 7], life: [10, 16], dir: 0, wobble: 2, glow: false, spawn: 'any', alpha: .07, soft: true },
 };
 const systems = new Set();
@@ -209,6 +210,9 @@ function tick(t) {
         const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rr);
         g.addColorStop(0, cfg.color); g.addColorStop(cfg.soft ? 1 : .35, cfg.soft ? 'transparent' : cfg.color + '88'); g.addColorStop(1, 'transparent');
         ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, rr, 0, 6.283); ctx.fill();
+      } else if (cfg.streak) {
+        ctx.strokeStyle = cfg.color; ctx.lineWidth = Math.max(1, p.r); ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(p.x, p.y - p.r * cfg.streak); ctx.lineTo(p.x, p.y); ctx.stroke();
       } else if (cfg.ring) {
         ctx.strokeStyle = cfg.color; ctx.lineWidth = Math.max(1, p.r * .3); ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.stroke();
       } else {

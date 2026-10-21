@@ -23,6 +23,12 @@
     "minutes": 35,
     "tasks": 16
   },
+  "lost-in-the-library": {
+    "difficulty": "medium",
+    "score": 14.3,
+    "minutes": 20,
+    "tasks": 11
+  },
   "midnight-manor": {
     "difficulty": "medium",
     "score": 11.5,

@@ -1,0 +1,1411 @@
+{
+  "id": "library",
+  "title": "Lost in the Library",
+  "theme": "castle",
+  "start": "library",
+  "intro": "You fell asleep over a book, and when you woke up the Hartwell Library was dark and locked. Mrs Hartwell, the librarian, always said the way out is written in the books. Tonight you will have to find out which ones.",
+  "winTitle": "Out of the reading room",
+  "winText": "The iron key turns and the old oak door creaks open. Beyond it a narrow stair leads down to the archive, and somewhere below a lamp is still burning. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_library.mp3",
+    "ambience": "assets/audio/amb_library.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "bell": "assets/audio/sfx_bell.mp3",
+      "secret": "assets/audio/sfx_secret.mp3",
+      "drawer": "assets/audio/sfx_drawer.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3",
+      "book": "assets/audio/sfx_book.mp3"
+    }
+  },
+  "scenes": {
+    "library": {
+      "title": "The reading room",
+      "image": "assets/library.webp",
+      "layers": [
+        {
+          "image": "assets/layer_bell.png",
+          "rect": [
+            2871,
+            1045,
+            218,
+            154
+          ],
+          "if": "!flag:bell_taken"
+        },
+        {
+          "image": "assets/layer_compartment_open.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": [
+            "solved:books",
+            "!flag:key_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_compartment_empty.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": "flag:key_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2515,
+            1176,
+            604,
+            243
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:book_open"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open_book.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": "flag:book_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3303,
+            119,
+            537,
+            1925
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "bookcase",
+          "label": "Bookcase",
+          "rect": [
+            11,
+            23,
+            838,
+            1665
+          ],
+          "do": [
+            {
+              "goto": "shelves"
+            }
+          ]
+        },
+        {
+          "id": "globe",
+          "label": "Globe",
+          "rect": [
+            827,
+            719,
+            452,
+            781
+          ],
+          "do": [
+            {
+              "goto": "globe"
+            }
+          ]
+        },
+        {
+          "id": "table",
+          "label": "Reading table",
+          "rect": [
+            1256,
+            1148,
+            1224,
+            597
+          ],
+          "do": [
+            {
+              "goto": "table"
+            }
+          ]
+        },
+        {
+          "id": "cabinet",
+          "label": "Rare books",
+          "rect": [
+            2418,
+            92,
+            751,
+            857
+          ],
+          "do": [
+            {
+              "goto": "cabinet"
+            }
+          ]
+        },
+        {
+          "id": "desk",
+          "label": "Librarian's desk",
+          "rect": [
+            2526,
+            994,
+            705,
+            581
+          ],
+          "do": [
+            {
+              "goto": "desk"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Door",
+          "rect": [
+            3353,
+            184,
+            487,
+            1408
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "label": "Window",
+          "rect": [
+            1394,
+            11,
+            689,
+            1056
+          ],
+          "do": [
+            {
+              "say": "Rain runs down the tall window. The street lamps outside are already off."
+            }
+          ]
+        }
+      ]
+    },
+    "shelves": {
+      "title": "Bookcase",
+      "image": "assets/library.webp",
+      "crop": [
+        0,
+        217,
+        1967,
+        1107
+      ],
+      "back": "library",
+      "layers": [
+        {
+          "image": "assets/layer_bell.png",
+          "rect": [
+            2871,
+            1045,
+            218,
+            154
+          ],
+          "if": "!flag:bell_taken"
+        },
+        {
+          "image": "assets/layer_compartment_open.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": [
+            "solved:books",
+            "!flag:key_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_compartment_empty.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": "flag:key_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2515,
+            1176,
+            604,
+            243
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:book_open"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open_book.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": "flag:book_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3303,
+            119,
+            537,
+            1925
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "ladder",
+          "label": "Ladder",
+          "rect": [
+            627,
+            338,
+            246,
+            1210
+          ],
+          "do": [
+            {
+              "say": "The ladder rolls along a brass rail. Up on the top shelves there is nothing but dust."
+            }
+          ]
+        },
+        {
+          "id": "books",
+          "label": "Coloured books",
+          "rect": [
+            108,
+            494,
+            402,
+            282
+          ],
+          "if": "!solved:books",
+          "hint": "Someone left a note about which books go back first.",
+          "do": [
+            {
+              "puzzle": "books"
+            }
+          ]
+        },
+        {
+          "id": "key",
+          "label": "Small key",
+          "rect": [
+            108,
+            494,
+            402,
+            282
+          ],
+          "if": [
+            "solved:books",
+            "!flag:key_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A small brass key with a paper tag: \"Desk\"."
+            },
+            {
+              "set": "key_taken"
+            },
+            {
+              "give": "small_key"
+            }
+          ]
+        },
+        {
+          "id": "compartment",
+          "label": "Hidden compartment",
+          "rect": [
+            108,
+            494,
+            402,
+            282
+          ],
+          "if": "flag:key_taken",
+          "do": [
+            {
+              "say": "An empty hollow behind the books."
+            }
+          ]
+        }
+      ]
+    },
+    "globe": {
+      "title": "Globe",
+      "image": "assets/library.webp",
+      "crop": [
+        371,
+        602,
+        1372,
+        772
+      ],
+      "back": "library",
+      "layers": [
+        {
+          "image": "assets/layer_bell.png",
+          "rect": [
+            2871,
+            1045,
+            218,
+            154
+          ],
+          "if": "!flag:bell_taken"
+        },
+        {
+          "image": "assets/layer_compartment_open.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": [
+            "solved:books",
+            "!flag:key_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_compartment_empty.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": "flag:key_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2515,
+            1176,
+            604,
+            243
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:book_open"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open_book.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": "flag:book_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3303,
+            119,
+            537,
+            1925
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "sphere",
+          "label": "Globe",
+          "rect": [
+            852,
+            751,
+            404,
+            413
+          ],
+          "if": "!flag:globe_read",
+          "use": "magnifier",
+          "fail": "An old globe, faded brown and blue. Some of the islands carry tiny ink marks, far too small to read.",
+          "hint": "The tiny marks on the globe need a closer look.",
+          "do": [
+            {
+              "sfx": "paper"
+            },
+            {
+              "say": "Under the glass the ink marks turn into numbers. Three islands are marked, from west to east: 2, 7 and 4."
+            },
+            {
+              "set": "globe_read"
+            },
+            {
+              "inspect": "globe_marks"
+            }
+          ]
+        },
+        {
+          "id": "sphere_read",
+          "label": "Globe",
+          "rect": [
+            852,
+            751,
+            404,
+            413
+          ],
+          "if": "flag:globe_read",
+          "do": [
+            {
+              "inspect": "globe_marks"
+            }
+          ]
+        }
+      ]
+    },
+    "table": {
+      "title": "Reading table",
+      "image": "assets/library.webp",
+      "crop": [
+        1163,
+        697,
+        1440,
+        810
+      ],
+      "back": "library",
+      "layers": [
+        {
+          "image": "assets/layer_bell.png",
+          "rect": [
+            2871,
+            1045,
+            218,
+            154
+          ],
+          "if": "!flag:bell_taken"
+        },
+        {
+          "image": "assets/layer_compartment_open.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": [
+            "solved:books",
+            "!flag:key_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_compartment_empty.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": "flag:key_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2515,
+            1176,
+            604,
+            243
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:book_open"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open_book.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": "flag:book_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3303,
+            119,
+            537,
+            1925
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "cat",
+          "label": "Cat",
+          "rect": [
+            1757,
+            1079,
+            436,
+            184
+          ],
+          "if": "!flag:cat_gone",
+          "use": "bell",
+          "fail": "The library cat is fast asleep on an open ledger. It flicks an ear at you and does not move.",
+          "hint": "Something loud would wake the cat.",
+          "do": [
+            {
+              "sfx": "bell"
+            },
+            {
+              "say": "Ding! The cat jumps up, glares at you and dashes off into the dark."
+            },
+            {
+              "set": "cat_gone"
+            }
+          ],
+          "failDo": [
+            {
+              "play": "cat"
+            }
+          ],
+          "consume": true
+        },
+        {
+          "id": "ledger",
+          "label": "Returns ledger",
+          "rect": [
+            1608,
+            1144,
+            613,
+            133
+          ],
+          "if": "flag:cat_gone",
+          "do": [
+            {
+              "sfx": "paper"
+            },
+            {
+              "say": "The last entry in the returns ledger: \"Back to the shelf, in this order.\" Four coloured dots: blue, red, gold, green."
+            },
+            {
+              "set": "ledger_read"
+            },
+            {
+              "inspect": "ledger_page"
+            }
+          ]
+        },
+        {
+          "id": "lamp",
+          "label": "Lamp",
+          "rect": [
+            1403,
+            935,
+            287,
+            322
+          ],
+          "do": [
+            {
+              "say": "A green reading lamp. The only light left on in the building."
+            }
+          ]
+        }
+      ]
+    },
+    "cabinet": {
+      "title": "Rare books",
+      "image": "assets/library.webp",
+      "crop": [
+        1876,
+        14,
+        1830,
+        1029
+      ],
+      "back": "library",
+      "layers": [
+        {
+          "image": "assets/layer_bell.png",
+          "rect": [
+            2871,
+            1045,
+            218,
+            154
+          ],
+          "if": "!flag:bell_taken"
+        },
+        {
+          "image": "assets/layer_compartment_open.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": [
+            "solved:books",
+            "!flag:key_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_compartment_empty.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": "flag:key_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2515,
+            1176,
+            604,
+            243
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:book_open"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open_book.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": "flag:book_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3303,
+            119,
+            537,
+            1925
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "glass",
+          "label": "Glass doors",
+          "rect": [
+            2418,
+            92,
+            751,
+            857
+          ],
+          "if": "!solved:cabinet",
+          "do": [
+            {
+              "puzzle": "cabinet"
+            }
+          ]
+        },
+        {
+          "id": "book",
+          "label": "Rare book",
+          "rect": [
+            2627,
+            338,
+            296,
+            338
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:book_open"
+          ],
+          "do": [
+            {
+              "sfx": "book"
+            },
+            {
+              "say": "You open the heavy book. The pages are hollowed out, and inside lies a big iron key."
+            },
+            {
+              "set": "book_open"
+            },
+            {
+              "give": "door_key"
+            }
+          ]
+        },
+        {
+          "id": "book_open",
+          "label": "Rare book",
+          "rect": [
+            2627,
+            338,
+            296,
+            338
+          ],
+          "if": "flag:book_open",
+          "do": [
+            {
+              "say": "A book with a hole where its story should be."
+            }
+          ]
+        }
+      ]
+    },
+    "desk": {
+      "title": "Librarian's desk",
+      "image": "assets/library.webp",
+      "crop": [
+        2356,
+        887,
+        1051,
+        591
+      ],
+      "back": "library",
+      "layers": [
+        {
+          "image": "assets/layer_bell.png",
+          "rect": [
+            2871,
+            1045,
+            218,
+            154
+          ],
+          "if": "!flag:bell_taken"
+        },
+        {
+          "image": "assets/layer_compartment_open.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": [
+            "solved:books",
+            "!flag:key_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_compartment_empty.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": "flag:key_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2515,
+            1176,
+            604,
+            243
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:book_open"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open_book.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": "flag:book_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3303,
+            119,
+            537,
+            1925
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "bell",
+          "label": "Service bell",
+          "rect": [
+            2882,
+            1033,
+            211,
+            152
+          ],
+          "if": "!flag:bell_taken",
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A brass service bell. \"Please ring for assistance.\""
+            },
+            {
+              "set": "bell_taken"
+            },
+            {
+              "set": "bell_taken"
+            },
+            {
+              "set": "bell_taken"
+            },
+            {
+              "set": "bell_taken"
+            },
+            {
+              "set": "bell_taken"
+            },
+            {
+              "set": "bell_taken"
+            },
+            {
+              "set": "bell_taken"
+            },
+            {
+              "set": "bell_taken"
+            },
+            {
+              "give": "bell"
+            }
+          ]
+        },
+        {
+          "id": "drawer",
+          "label": "Drawer",
+          "rect": [
+            2588,
+            1148,
+            505,
+            119
+          ],
+          "if": "!flag:drawer_open",
+          "use": "small_key",
+          "consume": true,
+          "fail": "The desk drawer is locked. There is a small keyhole.",
+          "hint": "The desk key is hidden in the bookcase.",
+          "do": [
+            {
+              "sfx": "drawer"
+            },
+            {
+              "say": "The drawer slides open. Among pencils and stamps lies a magnifying glass."
+            },
+            {
+              "set": "drawer_open"
+            },
+            {
+              "give": "magnifier"
+            }
+          ]
+        },
+        {
+          "id": "drawer_empty",
+          "label": "Drawer",
+          "rect": [
+            2588,
+            1148,
+            505,
+            119
+          ],
+          "if": "flag:drawer_open",
+          "do": [
+            {
+              "say": "Pencils, rubber stamps and a dried-up ink pad."
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Door",
+      "image": "assets/library.webp",
+      "crop": [
+        638,
+        0,
+        3202,
+        1801
+      ],
+      "back": "library",
+      "layers": [
+        {
+          "image": "assets/layer_bell.png",
+          "rect": [
+            2871,
+            1045,
+            218,
+            154
+          ],
+          "if": "!flag:bell_taken"
+        },
+        {
+          "image": "assets/layer_compartment_open.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": [
+            "solved:books",
+            "!flag:key_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_compartment_empty.png",
+          "rect": [
+            156,
+            482,
+            404,
+            331
+          ],
+          "if": "flag:key_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2515,
+            1176,
+            604,
+            243
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": [
+            "solved:cabinet",
+            "!flag:book_open"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_cabinet_open_book.png",
+          "rect": [
+            2320,
+            119,
+            928,
+            753
+          ],
+          "if": "flag:book_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            3303,
+            119,
+            537,
+            1925
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "door_locked",
+          "label": "Door",
+          "rect": [
+            3353,
+            184,
+            487,
+            1408
+          ],
+          "if": "!flag:door_open",
+          "use": "door_key",
+          "consume": true,
+          "fail": "A heavy oak door with a big iron lock. Mrs Hartwell keeps the key somewhere \"safe between the pages\".",
+          "hint": "The door key is hidden in a book.",
+          "do": [
+            {
+              "sfx": "unlock"
+            },
+            {
+              "say": "The iron key turns with a loud clunk."
+            },
+            {
+              "set": "door_open"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Go through",
+          "rect": [
+            3353,
+            184,
+            487,
+            1408
+          ],
+          "if": "flag:door_open",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "bell": {
+      "name": "Service bell",
+      "icon": "assets/bell.png",
+      "text": "A brass service bell. Very loud."
+    },
+    "small_key": {
+      "name": "Small key",
+      "icon": "assets/small_key.png",
+      "text": "A small brass key with a paper tag: \"Desk\"."
+    },
+    "magnifier": {
+      "name": "Magnifying glass",
+      "icon": "assets/magnifier.png",
+      "text": "A magnifying glass with a bone handle."
+    },
+    "door_key": {
+      "name": "Iron key",
+      "icon": "assets/door_key.png",
+      "text": "A big iron key from the hollow book."
+    },
+    "ledger_page": {
+      "name": "Returns ledger",
+      "text": "Back to the shelf, in this order: blue, red, gold, green.",
+      "image": "assets/ledger_page.jpg"
+    },
+    "globe_marks": {
+      "name": "Globe",
+      "text": "Three islands, marked from west to east: 2, 7, 4.",
+      "image": "assets/globe_marks.jpg"
+    }
+  },
+  "puzzles": {
+    "books": {
+      "type": "sequence",
+      "title": "Coloured books",
+      "prompt": "Push the books back into the shelf.",
+      "buttons": [
+        "#b03a2e",
+        "#2e7d4f",
+        "#6c3483",
+        "#2c5aa0",
+        "#6b4226",
+        "#d4a017"
+      ],
+      "answer": [
+        "#2c5aa0",
+        "#b03a2e",
+        "#d4a017",
+        "#2e7d4f"
+      ],
+      "clue": "flag:ledger_read",
+      "do": [
+        {
+          "sfx": "secret"
+        },
+        {
+          "say": "The last book clicks into place and a panel behind the row swings open."
+        }
+      ]
+    },
+    "cabinet": {
+      "type": "code",
+      "title": "Cabinet lock",
+      "prompt": "A brass lock with three number wheels.",
+      "answer": "274",
+      "clue": "flag:globe_read",
+      "do": [
+        {
+          "sfx": "unlock"
+        },
+        {
+          "say": "2, 7, 4. The glass doors of the cabinet swing open."
+        }
+      ]
+    }
+  },
+  "actors": [
+    {
+      "id": "cat",
+      "frames": [
+        "assets/cat_sleep_1.png"
+      ],
+      "fps": 3,
+      "size": [
+        711,
+        323
+      ],
+      "path": [
+        [
+          1962,
+          1254
+        ]
+      ],
+      "idle": "breathe",
+      "flip": false,
+      "if": "!flag:cat_gone",
+      "shadow": {
+        "opacity": 0.55,
+        "width": 0.5,
+        "height": 0.07
+      },
+      "filter": "brightness(.8) saturate(.92)",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/cat_eye_half.png",
+          "assets/cat_eye_open.png",
+          "assets/cat_eye_open.png",
+          "assets/cat_eye_open.png",
+          "assets/cat_eye_open.png",
+          "assets/cat_eye_open.png",
+          "assets/cat_eye_open.png",
+          "assets/cat_eye_open.png",
+          "assets/cat_eye_open.png",
+          "assets/cat_eye_open.png",
+          "assets/cat_eye_half.png"
+        ],
+        "fps": 6,
+        "hold": 0
+      },
+      "exit": {
+        "lead": {
+          "frames": [
+            "assets/cat_wake_1.png",
+            "assets/cat_wake_1.png",
+            "assets/cat_wake_2.png",
+            "assets/cat_wake_2.png",
+            "assets/cat_wake_3.png"
+          ],
+          "fps": 6,
+          "hold": 0
+        },
+        "frames": [
+          "assets/cat_run_1.png",
+          "assets/cat_run_2.png",
+          "assets/cat_run_3.png",
+          "assets/cat_run_4.png"
+        ],
+        "fps": 13,
+        "hop": 0,
+        "easing": "cubic-bezier(.35,0,.85,1)",
+        "path": [
+          [
+            2200,
+            1262
+          ],
+          [
+            2440,
+            1250
+          ],
+          [
+            2620,
+            1300
+          ],
+          [
+            2760,
+            1470
+          ],
+          [
+            2860,
+            1610
+          ],
+          [
+            3250,
+            1660
+          ],
+          [
+            3700,
+            1660
+          ]
+        ],
+        "speed": 1250
+      }
+    }
+  ],
+  "ambient": [
+    {
+      "type": "light",
+      "at": [
+        1585,
+        988
+      ],
+      "r": 700,
+      "color": "#ffc46a",
+      "strength": 0.3,
+      "flicker": 0.06
+    },
+    {
+      "type": "light",
+      "at": [
+        1739,
+        344
+      ],
+      "r": 520,
+      "color": "#7f9cff",
+      "strength": 0.14,
+      "flicker": 0
+    },
+    {
+      "type": "particles",
+      "kind": "rain",
+      "rect": [
+        1406,
+        34,
+        666,
+        988
+      ],
+      "count": 40
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        1286,
+        689,
+        758,
+        574
+      ],
+      "count": 14
+    }
+  ]
+}

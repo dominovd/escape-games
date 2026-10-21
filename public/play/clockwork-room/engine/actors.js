@@ -13,12 +13,14 @@
 //   "hop": 1,                                          // small bouncing while it moves
 //   "if": "!flag:mouse_scared",
 //   "exit": { "path": [[x, y], ...], "speed": 900,      // where it runs off when "if" stops being true
-//             "frames": [...], "hop": 1 },             // optional running frames for the exit only (a sitting mouse that runs)
+//             "frames": [...], "hop": 1,              // optional running frames for the exit only (a sitting mouse that runs)
+//             "fps": 14, "easing": "linear",          // running frame rate and the speed curve of the run (default ease-in)
+//             "lead": { "frames": [...], "fps": 6, "hold": 0 } },  // played in place before the run (a sleeping cat wakes up first)
 //   "thread": [x, y], "threadAt": 10,                 // a spider's thread from a fixed point to the actor's top (+ threadAt px down)
 //   "shadow": 0.55,                                    // soft contact shadow under the feet (its darkness), or {"opacity", "width", "height"} as parts of the size
 //   "filter": "brightness(.7) saturate(.8)",           // CSS filter to fit a separately drawn picture into the room's light
 //   "blend": true,                                     // crossfade between frames (slow, soft creatures); or the fade time in ms
-//   "idle": "float",                                   // idle motion for a standing actor: "sniff", "float" (slow drift in water or air) "jelly" (drift with a soft sway of the lower body) or "scrub" (quick side-to-side, a robot cleaning)
+//   "idle": "float",                                   // idle motion for a standing actor: "breathe" (a sleeping animal), "sniff", "float" (slow drift in water or air) "jelly" (drift with a soft sway of the lower body) or "scrub" (quick side-to-side, a robot cleaning)
 //   "delay": 1500,                                     // when it appears during play, wait this long and fade in (after another actor's exit run)
 //   "play": { "type": "frames", "frames": [...], "fps": 8, "hold": 600 }   // one-shot frame sequence for the "play" action
 // }]
@@ -101,6 +103,8 @@ function build(a, W, H, h, asset) {
   }
   place(el, a.path[0], a.size, W, H);
   frameLoop(img, a, asset);
+  // load the run-off pictures in advance, so the exit starts at once instead of after a blank pause
+  if (a.exit) for (const f of [...(a.exit.frames || []), ...((a.exit.lead && a.exit.lead.frames) || [])]) { const i = new Image(); i.src = asset(f); }
   return { el, flipper, img };
 }
 
@@ -162,24 +166,31 @@ export function actorPoint(a, el, W, H) {
 // An actor that just left the state runs off along its exit path from wherever it was.
 export function exitActor(a, start, canvas, W, H, h, asset) {
   if (!a.exit || !start || reducedMotion()) return;
-  const { el, flipper } = build({ ...a, idle: null, frames: a.exit.frames || a.frames, hop: a.exit.hop ?? a.hop }, W, H, h, asset);
+  const { el, flipper, img } = build({ ...a, idle: null, frames: a.exit.frames || a.frames, fps: a.exit.fps || a.fps, hop: a.exit.hop ?? a.hop }, W, H, h, asset);
   canvas.append(el);
   const pts = [start, ...a.exit.path];
+  place(el, start, a.size, W, H);
   const ea = { ...a, speed: a.exit.speed || (a.speed || 300) * 2.5, wait: 0, dur: a.exit.dur };
   const { times, total } = timeline(ea, pts);
-  el.animate(pts.map((p, i) => ({ ...pos(p, a.size, W, H), offset: times[i] / total })), { duration: total, easing: 'ease-in', fill: 'forwards' })
+  // "lead": frames played in place before the run starts (wake up, stretch).
+  const lead = a.exit.lead, delay = lead ? lead.frames.length * 1000 / (lead.fps || 8) + (lead.hold || 0) : 0;
+  if (lead) { img.src = asset(lead.frames[0]); playFrames(img, lead, asset); }
+  el.animate(pts.map((p, i) => ({ ...pos(p, a.size, W, H), offset: times[i] / total })), { duration: total, delay, easing: a.exit.easing || 'ease-in', fill: 'both' })
     .onfinish = () => el.remove();
   if (a.flip !== false) flipper.style.transform = `scaleX(${pts[1][0] < pts[0][0] ? -1 : 1})`;
-  el.animate([{ opacity: 1 }, { opacity: 1, offset: .8 }, { opacity: a.exit.fade === false ? 1 : 0 }], { duration: total, fill: 'forwards' });
+  el.animate([{ opacity: 1 }, { opacity: 1, offset: .8 }, { opacity: a.exit.fade === false ? 1 : 0 }], { duration: total, delay, fill: 'both' });
 }
 
 // One-shot animations for the "play" action: { "play": "horse" } on a layer or actor with that "id".
+// Types: rock, shake, jump, spin, pop, stir (a sleeping animal shrugs), or "frames".
 const ONE_SHOT = {
   rock: amp => [0, amp, -amp * .8, amp * .6, -amp * .4, amp * .2, 0].map(r => ({ transform: `rotate(${r}deg)` })),
   shake: amp => [0, amp, -amp, amp, -amp, 0].map(x => ({ transform: `translateX(${x}%)` })),
   jump: amp => [{ transform: 'none' }, { transform: `translateY(${-amp}%)`, offset: .35 }, { transform: 'none', offset: .7 }, { transform: `translateY(${-amp * .25}%)`, offset: .85 }, { transform: 'none' }],
   spin: () => [{ transform: 'rotate(0)' }, { transform: 'rotate(360deg)' }],
   pop: amp => [{ transform: 'scale(1)' }, { transform: `scale(${1 + amp / 100})`, offset: .4 }, { transform: 'scale(1)' }],
+  // "stir": a sleeping animal shrugs off a touch without changing its pose (squash and settle from the bottom)
+  stir: amp => [{ transform: 'none' }, { transform: `scale(${1 + amp / 200}, ${1 - amp / 100})`, offset: .22 }, { transform: `scale(${1 - amp / 300}, ${1 + amp / 80})`, offset: .5 }, { transform: `scale(1, ${1 - amp / 300})`, offset: .78 }, { transform: 'none' }],
 };
 export function delayIn(el, ms) {
   if (!el || reducedMotion()) return;
@@ -204,6 +215,7 @@ export function playOnce(el, spec, rect, asset = p => p) {
   const make = ONE_SHOT[s.type || 'shake'];
   if (!make) return;
   const amp = s.amp ?? { rock: 9, shake: 2, jump: 12, pop: 8 }[s.type || 'shake'] ?? 5;
+  if (s.type === 'stir') el.style.transformOrigin = '50% 100%';
   if (s.pivot && rect) el.style.transformOrigin = `${(s.pivot[0] - rect[0]) / rect[2] * 100}% ${(s.pivot[1] - rect[1]) / rect[3] * 100}%`;
   el.animate(make(amp), { duration: s.dur || 2200, easing: 'ease-in-out' });
 }
