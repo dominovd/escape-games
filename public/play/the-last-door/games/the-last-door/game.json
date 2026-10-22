@@ -51,10 +51,10 @@
         {
           "image": "assets/layer_smallkey.png",
           "rect": [
-            804,
-            413,
-            92,
-            188
+            792,
+            436,
+            115,
+            257
           ],
           "if": "!flag:smallkey_taken"
         },
@@ -280,10 +280,10 @@
         {
           "image": "assets/layer_smallkey.png",
           "rect": [
-            804,
-            413,
-            92,
-            188
+            792,
+            436,
+            115,
+            257
           ],
           "if": "!flag:smallkey_taken"
         },
@@ -447,10 +447,10 @@
         {
           "image": "assets/layer_smallkey.png",
           "rect": [
-            804,
-            413,
-            92,
-            188
+            792,
+            436,
+            115,
+            257
           ],
           "if": "!flag:smallkey_taken"
         },
@@ -587,10 +587,10 @@
         {
           "image": "assets/layer_smallkey.png",
           "rect": [
-            804,
-            413,
-            92,
-            188
+            792,
+            436,
+            115,
+            257
           ],
           "if": "!flag:smallkey_taken"
         },
@@ -731,10 +731,10 @@
         {
           "image": "assets/layer_smallkey.png",
           "rect": [
-            804,
-            413,
-            92,
-            188
+            792,
+            436,
+            115,
+            257
           ],
           "if": "!flag:smallkey_taken"
         },
@@ -864,10 +864,10 @@
         {
           "image": "assets/layer_smallkey.png",
           "rect": [
-            804,
-            413,
-            92,
-            188
+            792,
+            436,
+            115,
+            257
           ],
           "if": "!flag:smallkey_taken"
         },
@@ -1024,10 +1024,10 @@
         {
           "image": "assets/layer_smallkey.png",
           "rect": [
-            804,
-            413,
-            92,
-            188
+            792,
+            436,
+            115,
+            257
           ],
           "if": "!flag:smallkey_taken"
         },
@@ -1113,7 +1113,7 @@
               "sfx": "pickup"
             },
             {
-              "say": "You pull the dust cloth off. Under it stands a tall hourglass, every grain of sand already at the bottom."
+              "say": "You pull the dust cloth off. Under it stands a tall hourglass. The sand is still running, grain by grain, though the top never seems to empty."
             },
             {
               "set": "cloth_taken"
@@ -1135,7 +1135,7 @@
           "if": "flag:cloth_taken",
           "do": [
             {
-              "say": "All the sand has run out. Whatever time this room had, it is over."
+              "say": "The sand keeps running. However long you watch, it never runs out."
             }
           ]
         }
@@ -1165,10 +1165,10 @@
         {
           "image": "assets/layer_smallkey.png",
           "rect": [
-            804,
-            413,
-            92,
-            188
+            792,
+            436,
+            115,
+            257
           ],
           "if": "!flag:smallkey_taken"
         },
@@ -1275,6 +1275,39 @@
             },
             {
               "set": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
             },
             {
               "play": "lion_ring"
@@ -1672,6 +1705,24 @@
   ],
   "ambient": [
     {
+      "type": "flame",
+      "rect": [
+        2088,
+        100,
+        58,
+        104
+      ],
+      "src": "assets/layer_flame.png",
+      "srcRect": [
+        2088,
+        100,
+        58,
+        104
+      ],
+      "amp": 0.7,
+      "dur": 1700
+    },
+    {
       "type": "light",
       "at": [
         1585,
@@ -1679,8 +1730,8 @@
       ],
       "r": 750,
       "color": "#ffad55",
-      "strength": 0.3,
-      "flicker": 0.14
+      "strength": 0.34,
+      "flicker": 0.22
     },
     {
       "type": "light",
@@ -1697,24 +1748,48 @@
       "type": "particles",
       "kind": "dust",
       "rect": [
-        1378,
-        138,
-        1378,
-        1148
+        1745,
+        161,
+        758,
+        988
       ],
-      "count": 16
+      "count": 22,
+      "size": 0.4,
+      "alpha": 0.4,
+      "speed": 0.45,
+      "color": "#ffd9a0"
     },
     {
       "type": "particles",
       "kind": "dust",
       "rect": [
-        2871,
-        344,
-        804,
-        1033
+        2687,
+        390,
+        1011,
+        1240
       ],
-      "count": 10,
-      "color": "#b8c8ff"
+      "count": 22,
+      "size": 0.4,
+      "alpha": 0.4,
+      "speed": 0.45,
+      "color": "#c9d8ff"
+    },
+    {
+      "type": "particles",
+      "kind": "sand",
+      "rect": [
+        3611,
+        944,
+        6,
+        84
+      ],
+      "count": 20,
+      "size": 12,
+      "speed": 3.5,
+      "alpha": 0.85,
+      "color": "#e8d6ab",
+      "wobble": 0.01,
+      "if": "flag:cloth_taken"
     }
   ]
 }
