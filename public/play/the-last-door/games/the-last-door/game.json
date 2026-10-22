@@ -1,0 +1,1720 @@
+{
+  "id": "antechamber",
+  "title": "The Last Door",
+  "theme": "castle",
+  "start": "antechamber",
+  "intro": "Ninety-nine doors are behind you, every one of them opened. This is the hundredth: a black oak door with a bronze lion on it, a dial of moons and a keyhole. The keeper of this room left long ago, but he left a few things behind.",
+  "winTitle": "The hundredth door",
+  "winText": "The moon dial clicks, the key turns and the lion closes its eyes. The last door swings open onto cold night air and a staircase going up. You made it through all one hundred.",
+  "audio": {
+    "music": "assets/audio/music_antechamber.mp3",
+    "ambience": "assets/audio/amb_antechamber.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "ash": "assets/audio/sfx_ash.mp3",
+      "lion": "assets/audio/sfx_lion.mp3",
+      "wipe": "assets/audio/sfx_wipe.mp3",
+      "chest": "assets/audio/sfx_chest.mp3",
+      "drawer": "assets/audio/sfx_drawer.mp3",
+      "dial": "assets/audio/sfx_dial.mp3",
+      "unlock": "assets/audio/sfx_unlock.mp3",
+      "door": "assets/audio/sfx_door.mp3"
+    }
+  },
+  "scenes": {
+    "antechamber": {
+      "title": "The antechamber",
+      "image": "assets/antechamber.webp",
+      "layers": [
+        {
+          "image": "assets/layer_poker.png",
+          "rect": [
+            655,
+            1045,
+            191,
+            604
+          ],
+          "if": "!has:poker"
+        },
+        {
+          "image": "assets/layer_smallkey.png",
+          "rect": [
+            804,
+            413,
+            92,
+            188
+          ],
+          "if": "!flag:smallkey_taken"
+        },
+        {
+          "image": "assets/layer_cloth.png",
+          "rect": [
+            3411,
+            655,
+            407,
+            907
+          ],
+          "if": "!flag:cloth_taken"
+        },
+        {
+          "image": "assets/layer_mirror_clean.png",
+          "rect": [
+            1061,
+            519,
+            333,
+            818
+          ],
+          "if": "flag:mirror_clean",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_chest_open.png",
+          "rect": [
+            827,
+            1102,
+            717,
+            372
+          ],
+          "if": "solved:chest",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2641,
+            983,
+            723,
+            390
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_dial_open.png",
+          "rect": [
+            1888,
+            758,
+            432,
+            441
+          ],
+          "if": "solved:dial",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1672,
+            243,
+            859,
+            1520
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "fireplace",
+          "label": "Fireplace",
+          "rect": [
+            0,
+            643,
+            873,
+            1073
+          ],
+          "do": [
+            {
+              "goto": "fireplace"
+            }
+          ]
+        },
+        {
+          "id": "rack",
+          "label": "Key rack",
+          "rect": [
+            76,
+            260,
+            751,
+            397
+          ],
+          "do": [
+            {
+              "goto": "rack"
+            }
+          ]
+        },
+        {
+          "id": "mirror",
+          "label": "Mirror",
+          "rect": [
+            1011,
+            475,
+            443,
+            841
+          ],
+          "do": [
+            {
+              "goto": "mirror"
+            }
+          ]
+        },
+        {
+          "id": "chest",
+          "label": "Chest",
+          "rect": [
+            857,
+            1316,
+            664,
+            384
+          ],
+          "do": [
+            {
+              "goto": "chest"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "The last door",
+          "rect": [
+            1716,
+            276,
+            781,
+            1286
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "label": "Stained glass",
+          "rect": [
+            2940,
+            46,
+            613,
+            613
+          ],
+          "do": [
+            {
+              "sfx": "paper"
+            },
+            {
+              "say": "Four moons in coloured glass around a single small star."
+            },
+            {
+              "set": "window_seen"
+            },
+            {
+              "inspect": "window_view"
+            }
+          ]
+        },
+        {
+          "id": "desk",
+          "label": "Keeper's desk",
+          "rect": [
+            2634,
+            1086,
+            797,
+            535
+          ],
+          "do": [
+            {
+              "goto": "desk"
+            }
+          ]
+        },
+        {
+          "id": "hourglass",
+          "label": "Hourglass",
+          "rect": [
+            3445,
+            678,
+            338,
+            1038
+          ],
+          "do": [
+            {
+              "goto": "hourglass"
+            }
+          ]
+        }
+      ]
+    },
+    "fireplace": {
+      "title": "Fireplace",
+      "image": "assets/antechamber.webp",
+      "crop": [
+        0,
+        267,
+        2561,
+        1440
+      ],
+      "back": "antechamber",
+      "layers": [
+        {
+          "image": "assets/layer_poker.png",
+          "rect": [
+            655,
+            1045,
+            191,
+            604
+          ],
+          "if": "!has:poker"
+        },
+        {
+          "image": "assets/layer_smallkey.png",
+          "rect": [
+            804,
+            413,
+            92,
+            188
+          ],
+          "if": "!flag:smallkey_taken"
+        },
+        {
+          "image": "assets/layer_cloth.png",
+          "rect": [
+            3411,
+            655,
+            407,
+            907
+          ],
+          "if": "!flag:cloth_taken"
+        },
+        {
+          "image": "assets/layer_mirror_clean.png",
+          "rect": [
+            1061,
+            519,
+            333,
+            818
+          ],
+          "if": "flag:mirror_clean",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_chest_open.png",
+          "rect": [
+            827,
+            1102,
+            717,
+            372
+          ],
+          "if": "solved:chest",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2641,
+            983,
+            723,
+            390
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_dial_open.png",
+          "rect": [
+            1888,
+            758,
+            432,
+            441
+          ],
+          "if": "solved:dial",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1672,
+            243,
+            859,
+            1520
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "poker",
+          "label": "Poker",
+          "rect": [
+            666,
+            1061,
+            161,
+            574
+          ],
+          "if": "!has:poker",
+          "once": true,
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A heavy iron poker."
+            },
+            {
+              "give": "poker"
+            }
+          ]
+        },
+        {
+          "id": "ash",
+          "label": "Ash",
+          "rect": [
+            108,
+            1286,
+            521,
+            260
+          ],
+          "if": "!flag:ring_found",
+          "use": "poker",
+          "fail": "Cold grey ash, a hand deep. Something small glints under it, but you are not putting your hand in there.",
+          "hint": "Something shines under the ash. Dig with something long.",
+          "do": [
+            {
+              "sfx": "ash"
+            },
+            {
+              "say": "You rake the ash aside. Under it lies a heavy bronze ring, black with soot."
+            },
+            {
+              "set": "ring_found"
+            },
+            {
+              "give": "ring"
+            }
+          ]
+        },
+        {
+          "id": "ash_done",
+          "label": "Ash",
+          "rect": [
+            108,
+            1286,
+            521,
+            260
+          ],
+          "if": "flag:ring_found",
+          "do": [
+            {
+              "say": "Only ash now."
+            }
+          ]
+        }
+      ]
+    },
+    "rack": {
+      "title": "Key rack",
+      "image": "assets/antechamber.webp",
+      "crop": [
+        0,
+        162,
+        978,
+        550
+      ],
+      "back": "antechamber",
+      "layers": [
+        {
+          "image": "assets/layer_poker.png",
+          "rect": [
+            655,
+            1045,
+            191,
+            604
+          ],
+          "if": "!has:poker"
+        },
+        {
+          "image": "assets/layer_smallkey.png",
+          "rect": [
+            804,
+            413,
+            92,
+            188
+          ],
+          "if": "!flag:smallkey_taken"
+        },
+        {
+          "image": "assets/layer_cloth.png",
+          "rect": [
+            3411,
+            655,
+            407,
+            907
+          ],
+          "if": "!flag:cloth_taken"
+        },
+        {
+          "image": "assets/layer_mirror_clean.png",
+          "rect": [
+            1061,
+            519,
+            333,
+            818
+          ],
+          "if": "flag:mirror_clean",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_chest_open.png",
+          "rect": [
+            827,
+            1102,
+            717,
+            372
+          ],
+          "if": "solved:chest",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2641,
+            983,
+            723,
+            390
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_dial_open.png",
+          "rect": [
+            1888,
+            758,
+            432,
+            441
+          ],
+          "if": "solved:dial",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1672,
+            243,
+            859,
+            1520
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "keys",
+          "label": "Keys",
+          "rect": [
+            76,
+            260,
+            735,
+            397
+          ],
+          "do": [
+            {
+              "say": "Keys from the doors behind you, each with its tag. None of them fits the last one."
+            }
+          ]
+        },
+        {
+          "id": "smallkey",
+          "label": "Small key",
+          "rect": [
+            804,
+            413,
+            92,
+            188
+          ],
+          "if": "!flag:smallkey_taken",
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "Every key on the rack has a paper tag from one of the doors behind you. This small one has none."
+            },
+            {
+              "set": "smallkey_taken"
+            },
+            {
+              "give": "small_key"
+            }
+          ]
+        }
+      ]
+    },
+    "mirror": {
+      "title": "Mirror",
+      "image": "assets/antechamber.webp",
+      "crop": [
+        280,
+        355,
+        1921,
+        1081
+      ],
+      "back": "antechamber",
+      "layers": [
+        {
+          "image": "assets/layer_poker.png",
+          "rect": [
+            655,
+            1045,
+            191,
+            604
+          ],
+          "if": "!has:poker"
+        },
+        {
+          "image": "assets/layer_smallkey.png",
+          "rect": [
+            804,
+            413,
+            92,
+            188
+          ],
+          "if": "!flag:smallkey_taken"
+        },
+        {
+          "image": "assets/layer_cloth.png",
+          "rect": [
+            3411,
+            655,
+            407,
+            907
+          ],
+          "if": "!flag:cloth_taken"
+        },
+        {
+          "image": "assets/layer_mirror_clean.png",
+          "rect": [
+            1061,
+            519,
+            333,
+            818
+          ],
+          "if": "flag:mirror_clean",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_chest_open.png",
+          "rect": [
+            827,
+            1102,
+            717,
+            372
+          ],
+          "if": "solved:chest",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2641,
+            983,
+            723,
+            390
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_dial_open.png",
+          "rect": [
+            1888,
+            758,
+            432,
+            441
+          ],
+          "if": "solved:dial",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1672,
+            243,
+            859,
+            1520
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "glass",
+          "label": "Mirror",
+          "rect": [
+            1073,
+            535,
+            305,
+            781
+          ],
+          "if": "!flag:mirror_clean",
+          "use": "cloth",
+          "fail": "The glass is grey with dust. You can just make out your own shape in it.",
+          "hint": "The mirror needs a good wipe.",
+          "do": [
+            {
+              "sfx": "wipe"
+            },
+            {
+              "say": "You wipe the dust away. In the mirror, on the wall behind you, there are digits scratched in soot."
+            },
+            {
+              "set": "mirror_clean"
+            },
+            {
+              "inspect": "mirror_view"
+            }
+          ]
+        },
+        {
+          "id": "glass_clean",
+          "label": "Mirror",
+          "rect": [
+            1073,
+            535,
+            305,
+            781
+          ],
+          "if": "flag:mirror_clean",
+          "do": [
+            {
+              "inspect": "mirror_view"
+            }
+          ]
+        }
+      ]
+    },
+    "chest": {
+      "title": "Chest",
+      "image": "assets/antechamber.webp",
+      "crop": [
+        692,
+        1026,
+        1006,
+        566
+      ],
+      "back": "antechamber",
+      "layers": [
+        {
+          "image": "assets/layer_poker.png",
+          "rect": [
+            655,
+            1045,
+            191,
+            604
+          ],
+          "if": "!has:poker"
+        },
+        {
+          "image": "assets/layer_smallkey.png",
+          "rect": [
+            804,
+            413,
+            92,
+            188
+          ],
+          "if": "!flag:smallkey_taken"
+        },
+        {
+          "image": "assets/layer_cloth.png",
+          "rect": [
+            3411,
+            655,
+            407,
+            907
+          ],
+          "if": "!flag:cloth_taken"
+        },
+        {
+          "image": "assets/layer_mirror_clean.png",
+          "rect": [
+            1061,
+            519,
+            333,
+            818
+          ],
+          "if": "flag:mirror_clean",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_chest_open.png",
+          "rect": [
+            827,
+            1102,
+            717,
+            372
+          ],
+          "if": "solved:chest",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2641,
+            983,
+            723,
+            390
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_dial_open.png",
+          "rect": [
+            1888,
+            758,
+            432,
+            441
+          ],
+          "if": "solved:dial",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1672,
+            243,
+            859,
+            1520
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "lock",
+          "label": "Chest lock",
+          "rect": [
+            857,
+            1316,
+            664,
+            384
+          ],
+          "if": "!solved:chest",
+          "hint": "The code is on the wall behind you, but only the mirror shows it. Mirrors swap left and right.",
+          "do": [
+            {
+              "puzzle": "chest"
+            }
+          ]
+        },
+        {
+          "id": "chest_empty",
+          "label": "Chest",
+          "rect": [
+            857,
+            1316,
+            664,
+            384
+          ],
+          "if": "solved:chest",
+          "do": [
+            {
+              "say": "Old blankets and nothing else."
+            }
+          ]
+        }
+      ]
+    },
+    "desk": {
+      "title": "Keeper's desk",
+      "image": "assets/antechamber.webp",
+      "crop": [
+        2437,
+        929,
+        1189,
+        669
+      ],
+      "back": "antechamber",
+      "layers": [
+        {
+          "image": "assets/layer_poker.png",
+          "rect": [
+            655,
+            1045,
+            191,
+            604
+          ],
+          "if": "!has:poker"
+        },
+        {
+          "image": "assets/layer_smallkey.png",
+          "rect": [
+            804,
+            413,
+            92,
+            188
+          ],
+          "if": "!flag:smallkey_taken"
+        },
+        {
+          "image": "assets/layer_cloth.png",
+          "rect": [
+            3411,
+            655,
+            407,
+            907
+          ],
+          "if": "!flag:cloth_taken"
+        },
+        {
+          "image": "assets/layer_mirror_clean.png",
+          "rect": [
+            1061,
+            519,
+            333,
+            818
+          ],
+          "if": "flag:mirror_clean",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_chest_open.png",
+          "rect": [
+            827,
+            1102,
+            717,
+            372
+          ],
+          "if": "solved:chest",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2641,
+            983,
+            723,
+            390
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_dial_open.png",
+          "rect": [
+            1888,
+            758,
+            432,
+            441
+          ],
+          "if": "solved:dial",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1672,
+            243,
+            859,
+            1520
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "desk_top",
+          "label": "Desk",
+          "rect": [
+            2634,
+            1086,
+            797,
+            535
+          ],
+          "do": [
+            {
+              "say": "A pen, a dry inkwell and a note in the keeper's hand: \"The lion will not talk with an empty mouth.\""
+            }
+          ]
+        },
+        {
+          "id": "drawer",
+          "label": "Drawer",
+          "rect": [
+            2694,
+            1183,
+            673,
+            138
+          ],
+          "if": "!flag:drawer_open",
+          "use": "small_key",
+          "consume": true,
+          "fail": "The drawer is locked. A small keyhole, no number on it.",
+          "hint": "One key on the rack has no number.",
+          "do": [
+            {
+              "sfx": "drawer"
+            },
+            {
+              "say": "The drawer opens. Inside lies the long shaft of a big key, with no bow."
+            },
+            {
+              "set": "drawer_open"
+            },
+            {
+              "give": "key_shaft"
+            }
+          ]
+        },
+        {
+          "id": "drawer_empty",
+          "label": "Drawer",
+          "rect": [
+            2694,
+            1183,
+            673,
+            138
+          ],
+          "if": "flag:drawer_open",
+          "do": [
+            {
+              "say": "Empty."
+            }
+          ]
+        }
+      ]
+    },
+    "hourglass": {
+      "title": "Hourglass",
+      "image": "assets/antechamber.webp",
+      "crop": [
+        1737,
+        534,
+        2103,
+        1183
+      ],
+      "back": "antechamber",
+      "layers": [
+        {
+          "image": "assets/layer_poker.png",
+          "rect": [
+            655,
+            1045,
+            191,
+            604
+          ],
+          "if": "!has:poker"
+        },
+        {
+          "image": "assets/layer_smallkey.png",
+          "rect": [
+            804,
+            413,
+            92,
+            188
+          ],
+          "if": "!flag:smallkey_taken"
+        },
+        {
+          "image": "assets/layer_cloth.png",
+          "rect": [
+            3411,
+            655,
+            407,
+            907
+          ],
+          "if": "!flag:cloth_taken"
+        },
+        {
+          "image": "assets/layer_mirror_clean.png",
+          "rect": [
+            1061,
+            519,
+            333,
+            818
+          ],
+          "if": "flag:mirror_clean",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_chest_open.png",
+          "rect": [
+            827,
+            1102,
+            717,
+            372
+          ],
+          "if": "solved:chest",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2641,
+            983,
+            723,
+            390
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_dial_open.png",
+          "rect": [
+            1888,
+            758,
+            432,
+            441
+          ],
+          "if": "solved:dial",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1672,
+            243,
+            859,
+            1520
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "cloth",
+          "label": "Dust cloth",
+          "rect": [
+            3433,
+            666,
+            367,
+            884
+          ],
+          "if": "!flag:cloth_taken",
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "You pull the dust cloth off. Under it stands a tall hourglass, every grain of sand already at the bottom."
+            },
+            {
+              "set": "cloth_taken"
+            },
+            {
+              "give": "cloth"
+            }
+          ]
+        },
+        {
+          "id": "glass_h",
+          "label": "Hourglass",
+          "rect": [
+            3433,
+            666,
+            367,
+            884
+          ],
+          "if": "flag:cloth_taken",
+          "do": [
+            {
+              "say": "All the sand has run out. Whatever time this room had, it is over."
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "The last door",
+      "image": "assets/antechamber.webp",
+      "crop": [
+        696,
+        145,
+        2835,
+        1595
+      ],
+      "back": "antechamber",
+      "layers": [
+        {
+          "image": "assets/layer_poker.png",
+          "rect": [
+            655,
+            1045,
+            191,
+            604
+          ],
+          "if": "!has:poker"
+        },
+        {
+          "image": "assets/layer_smallkey.png",
+          "rect": [
+            804,
+            413,
+            92,
+            188
+          ],
+          "if": "!flag:smallkey_taken"
+        },
+        {
+          "image": "assets/layer_cloth.png",
+          "rect": [
+            3411,
+            655,
+            407,
+            907
+          ],
+          "if": "!flag:cloth_taken"
+        },
+        {
+          "image": "assets/layer_mirror_clean.png",
+          "rect": [
+            1061,
+            519,
+            333,
+            818
+          ],
+          "if": "flag:mirror_clean",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_chest_open.png",
+          "rect": [
+            827,
+            1102,
+            717,
+            372
+          ],
+          "if": "solved:chest",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            2641,
+            983,
+            723,
+            390
+          ],
+          "if": "flag:drawer_open",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_dial_open.png",
+          "rect": [
+            1888,
+            758,
+            432,
+            441
+          ],
+          "if": "solved:dial",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            1672,
+            243,
+            859,
+            1520
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "door_shut",
+          "label": "The last door",
+          "rect": [
+            1716,
+            276,
+            781,
+            1286
+          ],
+          "if": "!flag:door_open",
+          "do": [
+            {
+              "say": "Three locks: a lion with no ring, a dial of moons and a keyhole. All three have to give."
+            }
+          ]
+        },
+        {
+          "id": "lion",
+          "label": "Lion knocker",
+          "rect": [
+            1952,
+            390,
+            333,
+            413
+          ],
+          "if": "!flag:lion_ring",
+          "use": "ring",
+          "consume": true,
+          "fail": "A bronze lion's head with an empty mouth. It blinks at you. The ring that should hang from its jaws is gone.",
+          "hint": "The lion needs its ring back. Look where things get burned.",
+          "do": [
+            {
+              "sfx": "lion"
+            },
+            {
+              "set": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "say": "The ring clicks into the lion's jaws. Its eyes glow, and a low voice rolls out of the bronze: \"Start at the star and walk against the sun. Read the moons as you meet them.\""
+            },
+            {
+              "set": "lion_spoke"
+            }
+          ],
+          "failDo": [
+            {
+              "sfx": "lion"
+            },
+            {
+              "play": "lion"
+            }
+          ]
+        },
+        {
+          "id": "lion_again",
+          "label": "Lion knocker",
+          "rect": [
+            1952,
+            390,
+            333,
+            413
+          ],
+          "if": "flag:lion_ring",
+          "do": [
+            {
+              "sfx": "lion"
+            },
+            {
+              "play": "lion_ring"
+            },
+            {
+              "say": "\"Start at the star and walk against the sun. Read the moons as you meet them.\""
+            }
+          ]
+        },
+        {
+          "id": "dial",
+          "label": "Moon dial",
+          "rect": [
+            1913,
+            781,
+            384,
+            390
+          ],
+          "if": "!solved:dial",
+          "hint": "The window shows the moons; the lion tells you where to start and which way to go.",
+          "do": [
+            {
+              "puzzle": "dial"
+            }
+          ]
+        },
+        {
+          "id": "dial_done",
+          "label": "Moon dial",
+          "rect": [
+            1913,
+            781,
+            384,
+            390
+          ],
+          "if": "solved:dial",
+          "do": [
+            {
+              "say": "The moon dial is unlocked."
+            }
+          ]
+        },
+        {
+          "id": "keyhole",
+          "label": "Keyhole",
+          "rect": [
+            2028,
+            1187,
+            154,
+            253
+          ],
+          "if": "!flag:key_turned",
+          "use": "iron_key",
+          "consume": true,
+          "fail": "A big keyhole. None of the ninety-nine keys would fit it.",
+          "hint": "The last key is in two halves.",
+          "do": [
+            {
+              "sfx": "unlock"
+            },
+            {
+              "if": "!solved:dial",
+              "say": "The key turns all the way round. One lock is left: the moon dial."
+            },
+            {
+              "set": "key_turned"
+            },
+            {
+              "if": "solved:dial",
+              "set": "door_open"
+            },
+            {
+              "if": "solved:dial",
+              "sfx": "door"
+            },
+            {
+              "if": "solved:dial",
+              "say": "The key turns all the way round, and the last door swings open."
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Go through",
+          "rect": [
+            1716,
+            276,
+            781,
+            1286
+          ],
+          "if": "flag:door_open",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "poker": {
+      "name": "Poker",
+      "icon": "assets/poker.png",
+      "text": "A heavy iron poker."
+    },
+    "ring": {
+      "name": "Bronze ring",
+      "icon": "assets/ring.png",
+      "text": "A heavy bronze ring, black with soot. Just the size for a door knocker."
+    },
+    "cloth": {
+      "name": "Dust cloth",
+      "icon": "assets/cloth.png",
+      "text": "A grey dust cloth."
+    },
+    "small_key": {
+      "name": "Small key",
+      "icon": "assets/small_key.png",
+      "text": "A small key with no number tag."
+    },
+    "key_bow": {
+      "name": "Key bow",
+      "icon": "assets/key_bow.png",
+      "text": "The ornate head of a big iron key. The shaft is missing.",
+      "combine": {
+        "with": "key_shaft",
+        "into": "iron_key",
+        "text": "The shaft screws into the bow. One heavy iron key."
+      }
+    },
+    "key_shaft": {
+      "name": "Key shaft",
+      "icon": "assets/key_shaft.png",
+      "text": "The long shaft of a big key, with a thread at one end."
+    },
+    "iron_key": {
+      "name": "Iron key",
+      "icon": "assets/iron_key.png",
+      "text": "The key to the last door."
+    },
+    "window_view": {
+      "name": "Stained glass",
+      "text": "Four moons around a small star.",
+      "image": "assets/window_view.jpg"
+    },
+    "mirror_view": {
+      "name": "In the mirror",
+      "text": "Digits scratched in soot on the wall behind you, seen in the mirror.",
+      "image": "assets/mirror_view.jpg"
+    }
+  },
+  "puzzles": {
+    "dial": {
+      "type": "dials",
+      "title": "Moon dial",
+      "prompt": "Four rings, each with the phases of the moon.",
+      "wheels": [
+        [
+          "🌑",
+          "🌒",
+          "🌓",
+          "🌔",
+          "🌕",
+          "🌖",
+          "🌗",
+          "🌘"
+        ],
+        [
+          "🌑",
+          "🌒",
+          "🌓",
+          "🌔",
+          "🌕",
+          "🌖",
+          "🌗",
+          "🌘"
+        ],
+        [
+          "🌑",
+          "🌒",
+          "🌓",
+          "🌔",
+          "🌕",
+          "🌖",
+          "🌗",
+          "🌘"
+        ],
+        [
+          "🌑",
+          "🌒",
+          "🌓",
+          "🌔",
+          "🌕",
+          "🌖",
+          "🌗",
+          "🌘"
+        ]
+      ],
+      "start": [
+        "🌑",
+        "🌑",
+        "🌑",
+        "🌑"
+      ],
+      "answer": [
+        "🌒",
+        "🌓",
+        "🌘",
+        "🌕"
+      ],
+      "clue": [
+        "flag:window_seen",
+        "flag:lion_spoke"
+      ],
+      "do": [
+        {
+          "sfx": "dial"
+        },
+        {
+          "if": "!flag:key_turned",
+          "say": "The four moons line up and a bolt inside the door slides back. One lock is left: the keyhole."
+        },
+        {
+          "if": "flag:key_turned",
+          "set": "door_open"
+        },
+        {
+          "if": "flag:key_turned",
+          "sfx": "door"
+        },
+        {
+          "if": "flag:key_turned",
+          "say": "The four moons line up, the last bolt slides back and the door swings open."
+        }
+      ]
+    },
+    "chest": {
+      "type": "code",
+      "title": "Chest lock",
+      "prompt": "Four number wheels.",
+      "answer": "5283",
+      "clue": "flag:mirror_clean",
+      "do": [
+        {
+          "sfx": "chest"
+        },
+        {
+          "say": "The lid creaks open. On top of the old blankets lies the bow of a big iron key."
+        },
+        {
+          "give": "key_bow"
+        }
+      ]
+    }
+  },
+  "actors": [
+    {
+      "id": "lion",
+      "frames": [
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_idle.png",
+        "assets/lion_blink.png"
+      ],
+      "fps": 4,
+      "size": [
+        381,
+        519
+      ],
+      "path": [
+        [
+          2115,
+          859
+        ]
+      ],
+      "flip": false,
+      "if": "!flag:lion_ring",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/lion_growl.png",
+          "assets/lion_growl.png",
+          "assets/lion_growl.png",
+          "assets/lion_growl.png",
+          "assets/lion_growl.png"
+        ],
+        "fps": 4,
+        "hold": 0
+      }
+    },
+    {
+      "id": "lion_ring",
+      "frames": [
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring.png",
+        "assets/lion_ring_blink.png"
+      ],
+      "fps": 4,
+      "size": [
+        381,
+        519
+      ],
+      "path": [
+        [
+          2115,
+          859
+        ]
+      ],
+      "flip": false,
+      "if": [
+        "flag:lion_ring",
+        "!flag:door_open"
+      ],
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/lion_glow.png",
+          "assets/lion_glow.png",
+          "assets/lion_glow.png",
+          "assets/lion_glow.png",
+          "assets/lion_glow.png",
+          "assets/lion_glow.png",
+          "assets/lion_glow.png",
+          "assets/lion_glow.png",
+          "assets/lion_glow.png",
+          "assets/lion_glow.png"
+        ],
+        "fps": 4,
+        "hold": 0
+      }
+    }
+  ],
+  "ambient": [
+    {
+      "type": "light",
+      "at": [
+        1585,
+        138
+      ],
+      "r": 750,
+      "color": "#ffad55",
+      "strength": 0.3,
+      "flicker": 0.14
+    },
+    {
+      "type": "light",
+      "at": [
+        3238,
+        276
+      ],
+      "r": 520,
+      "color": "#7f9cff",
+      "strength": 0.16,
+      "flicker": 0
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        1378,
+        138,
+        1378,
+        1148
+      ],
+      "count": 16
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        2871,
+        344,
+        804,
+        1033
+      ],
+      "count": 10,
+      "color": "#b8c8ff"
+    }
+  ]
+}

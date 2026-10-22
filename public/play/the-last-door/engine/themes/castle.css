@@ -1,0 +1,149 @@
+/* Escape Kit theme: castle. Parchment, dark oak and gilt.
+   Enable with "theme": "castle" in game.json. Every rule is scoped to .ek.theme-castle. */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IM+Fell+English:ital@0;1&display=swap');
+
+.ek.theme-castle{
+  --c-ink:#2b1a10; --c-ink-soft:#5b4330; --c-gold:#d4ae5c; --c-gold-hi:#f1d892; --c-gold-lo:#8a6a2e;
+  --c-wood:#24120b; --c-wood-2:#3a1d12; --c-wine:#6b1d24; --c-parch:#ecdcb8; --c-parch-2:#d9c194;
+  --ek-bg:#0d0a10; --ek-text:#f1e2bd; --ek-dim:#bfa982; --ek-accent:var(--c-gold); --ek-line:#d4ae5c33;
+  --c-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  --c-display:'Cinzel',Georgia,serif; --c-hand:'IM Fell English',Georgia,serif;
+  background:radial-gradient(120% 90% at 50% 40%,#1c1420 0%,#0d0a10 70%,#060407 100%);
+}
+
+/* ---------- top bar and inventory: dark oak with a gilt hairline ---------- */
+.ek.theme-castle .ek-top,
+.ek.theme-castle .ek-inv{
+  background:var(--c-grain),linear-gradient(#2c160e,#1a0c07);
+  background-blend-mode:soft-light,normal;
+  border-color:transparent;
+  box-shadow:inset 0 -1px 0 #0008;
+}
+.ek.theme-castle .ek-top{border-bottom:1px solid var(--c-gold-lo);box-shadow:0 1px 0 #f1d89222,0 6px 18px #0009}
+.ek.theme-castle .ek-inv{border-top:1px solid var(--c-gold-lo);box-shadow:0 -1px 0 #f1d89222,0 -6px 18px #0009}
+.ek.theme-castle .ek-title{
+  font:600 19px/1.2 var(--c-display);letter-spacing:.08em;text-transform:uppercase;
+  background:linear-gradient(180deg,var(--c-gold-hi),var(--c-gold) 55%,#a57d34);-webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 1px 0 #0000;
+}
+
+/* ---------- buttons: gilt-trimmed oak, gold leaf for the main action ---------- */
+.ek.theme-castle .ek-btn.ghost{
+  font:600 12.5px var(--c-display)!important;letter-spacing:.08em;text-transform:uppercase;
+  color:#f1dcae!important;border:1px solid #d4ae5c99;border-radius:3px;padding:8px 14px;
+  background:linear-gradient(#3e2014,#24110b);
+  box-shadow:inset 0 1px 0 #f1d89233,inset 0 -2px 0 #0006,0 2px 6px #0007;
+}
+.ek.theme-castle .ek-btn.ghost:hover:not(:disabled){border-color:var(--c-gold-hi);color:#fff3d0!important;box-shadow:inset 0 1px 0 #f1d89255,0 0 14px #d4ae5c55}
+.ek.theme-castle .ek-btn.ghost:disabled{opacity:.45}
+.ek.theme-castle .ek-btn:not(.ghost){
+  font:700 14px var(--c-display)!important;letter-spacing:.1em;text-transform:uppercase;border-radius:3px;padding:11px 26px;
+  color:#2b1608!important;border:1px solid #7a5a22;
+  background:linear-gradient(180deg,#f6e3a6 0%,#d9b766 45%,#b58b3a 100%);
+  box-shadow:inset 0 1px 0 #fff6d0,inset 0 -2px 0 #8a6a2e,0 3px 10px #0008;
+}
+.ek.theme-castle .ek-btn:not(.ghost):hover{filter:brightness(1.08)}
+.ek.theme-castle .ek-sound{width:38px;padding:0!important}
+.ek.theme-castle .ek-sound.off{color:#9b8664!important}
+.ek.theme-castle button:focus-visible{outline:2px solid var(--c-gold-hi);outline-offset:2px}
+
+/* ---------- the scene: a thin gilt frame ---------- */
+.ek.theme-castle .ek-scene{
+  border-radius:3px;
+  box-shadow:0 0 0 2px #b8913e,0 24px 60px #000c;
+}
+
+/* back: a brass medallion */
+.ek.theme-castle .ek-back{
+  width:54px;height:54px;color:#2b1608;border:1px solid #7a5a22;
+  background:radial-gradient(circle at 35% 30%,#fbecb8 0%,#d9b766 40%,#9c7330 100%);
+  box-shadow:inset 0 1px 0 #fff6d0,inset 0 -3px 6px #6b4c1a,0 4px 14px #000b;backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.ek.theme-castle .ek-back:hover{background:radial-gradient(circle at 35% 30%,#fff3c8 0%,#e3c274 40%,#a87d35 100%)}
+
+/* messages: a strip of parchment */
+.ek.theme-castle .ek-msg{
+  font:italic 18px/1.35 var(--c-hand);color:var(--c-ink);
+  background:var(--c-grain),linear-gradient(180deg,#f2e4c3,#dcc69a);background-blend-mode:multiply,normal;
+  border:1px solid #8a6a2e;border-radius:2px;padding:9px 22px;
+  box-shadow:0 0 0 3px #f2e4c322,0 10px 28px #000c;
+}
+.ek.theme-castle .ek-msg .dim{color:var(--c-ink-soft)}
+.ek.theme-castle .ek-msg .hint{color:var(--c-wine)}
+
+/* ---------- inventory slots: carved recesses ---------- */
+.ek.theme-castle .ek-slot{
+  border-radius:4px;border:1px solid #8a6a2e;
+  background:radial-gradient(circle at 50% 40%,#2e1c14 0%,#140a06 80%);
+  box-shadow:inset 0 2px 6px #000c,inset 0 0 0 1px #0007,0 1px 0 #f1d89218;
+}
+.ek.theme-castle .ek-slot:disabled{opacity:.55;background:radial-gradient(circle at 50% 40%,#22140e,#100805)}
+.ek.theme-castle .ek-slot.sel{
+  border-color:var(--c-gold-hi);
+  background:radial-gradient(circle at 50% 45%,#5a3a1c 0%,#24130a 80%);
+  box-shadow:inset 0 2px 6px #0008,0 0 0 1px #f1d89288,0 0 18px #f0b45a88;
+}
+.ek.theme-castle .ek-slot img{filter:drop-shadow(0 2px 3px #000b)}
+
+/* ---------- windows: parchment with a gilt inner rule ---------- */
+.ek.theme-castle .ek-modal{background:radial-gradient(80% 80% at 50% 50%,#0c060888,#060305e6);backdrop-filter:blur(2px)}
+.ek.theme-castle .ek-card{
+  color:var(--c-ink);border:0;border-radius:3px;position:relative;
+  background:var(--c-grain),radial-gradient(130% 110% at 50% 40%,#f3e6c7 0%,#e4cf9f 60%,#c9ab72 100%);
+  background-blend-mode:multiply,normal;
+  box-shadow:0 0 0 1px #6b4c1a,0 0 0 4px #24120b,0 0 0 5px #b8913e,0 30px 80px #000d;
+}
+.ek.theme-castle .ek-card::before{
+  content:'';position:absolute;inset:8px;border:1px solid #8a6a2e99;pointer-events:none;
+  box-shadow:inset 0 0 0 3px #f3e6c700,inset 0 0 0 4px #8a6a2e44;
+}
+.ek.theme-castle .ek-card.solved{box-shadow:0 0 0 1px #6b4c1a,0 0 0 4px #24120b,0 0 0 5px var(--c-gold-hi),0 0 60px #f0c46a99}
+.ek.theme-castle .ek-card-head{padding:18px 20px 0 26px}
+.ek.theme-castle .ek-card-head h2{font:700 21px var(--c-display);letter-spacing:.06em;color:var(--c-wine)}
+.ek.theme-castle .ek-close{color:var(--c-ink-soft)!important;position:relative;z-index:1}
+.ek.theme-castle .ek-close:hover{background:#2b1a1012;color:var(--c-ink)!important}
+.ek.theme-castle .ek-card-body{padding:10px 26px 28px}
+.ek.theme-castle .ek-prompt{font:italic 18px/1.4 var(--c-hand);color:var(--c-ink-soft)}
+.ek.theme-castle .ek-note{font:20px/1.55 var(--c-hand);color:var(--c-ink);background:transparent;border:0;border-top:1px solid #8a6a2e66;border-bottom:1px solid #8a6a2e66;border-radius:0;padding:12px 6px}
+.ek.theme-castle .ek-inspect-img{filter:drop-shadow(0 6px 10px #5b3d1a88)}
+.ek.theme-castle .ek-inspect-full{filter:drop-shadow(0 10px 22px #3a240f99)}
+
+/* ---------- puzzles on parchment ---------- */
+.ek.theme-castle .ek-code-cell{
+  border-radius:3px;border:1px solid #6b4c1a;color:var(--c-gold-hi);font:700 28px var(--c-display);
+  background:linear-gradient(#2a150c,#170a05);box-shadow:inset 0 2px 5px #000b;
+}
+.ek.theme-castle .ek-code-cell.filled{border-color:#b8913e;text-shadow:0 0 10px #f0c46a88}
+.ek.theme-castle .ek-key,
+.ek.theme-castle .ek-seq-btn{
+  color:#2b1608;font:700 20px var(--c-display)!important;border:1px solid #6b4c1a;
+  background:radial-gradient(circle at 35% 30%,#fbecb8 0%,#d9b766 45%,#a07633 100%);
+  box-shadow:inset 0 1px 0 #fff6d0,inset 0 -3px 5px #7a561d,0 3px 6px #5b3d1a88;
+}
+.ek.theme-castle .ek-key{border-radius:50%;width:56px;height:56px;justify-self:center}
+.ek.theme-castle .ek-keypad{grid-template-columns:repeat(3,62px);gap:10px}
+.ek.theme-castle .ek-key:hover,.ek.theme-castle .ek-seq-btn:hover{filter:brightness(1.08)}
+.ek.theme-castle .ek-key:active,.ek.theme-castle .ek-seq-btn:active{transform:translateY(1px);box-shadow:inset 0 2px 4px #7a561d}
+.ek.theme-castle .ek-dial-face{
+  border-radius:50%;width:84px;height:84px;border:2px solid #b8913e;
+  background:radial-gradient(circle at 40% 35%,#6a6470 0%,#3a3540 55%,#1f1b24 100%);
+  box-shadow:inset 0 2px 6px #fff2,inset 0 -6px 12px #0009,0 4px 10px #3a240f88;
+}
+.ek.theme-castle .ek-dial-arrow{color:var(--c-ink-soft)!important}
+.ek.theme-castle .ek-dial-arrow:hover{background:#2b1a1012;color:var(--c-ink)!important}
+.ek.theme-castle .ek-progress i{background:#8a6a2e55;box-shadow:inset 0 1px 2px #0004}
+.ek.theme-castle .ek-progress i.on{background:radial-gradient(#fff1b8,#e0a842);box-shadow:0 0 8px #f0b45a}
+.ek.theme-castle .ek-switch{border-radius:4px;border:1px solid #6b4c1a;background:linear-gradient(#2a150c,#170a05);box-shadow:inset 0 2px 5px #000b}
+.ek.theme-castle .ek-switch.on{background:radial-gradient(#fff1b8,#e0a842 60%,#a8701f);box-shadow:0 0 16px #f0b45a,inset 0 1px 0 #fff6d0}
+.ek.theme-castle .ek-btn.ghost.ek-inspect{padding:8px 14px}
+
+@media (max-width:560px){
+  .ek.theme-castle .ek-title{font-size:15px}
+  .ek.theme-castle .ek-msg{font-size:16px}
+  .ek.theme-castle .ek-keypad{grid-template-columns:repeat(3,56px)}
+  .ek.theme-castle .ek-key{width:50px;height:50px}
+}
+
+/* Warm glow from the scene into the dark around it. */
+.ek.theme-castle .ek-view{background:radial-gradient(ellipse 72% 68% at 50% 50%,transparent 40%,#000000a8 100%)}
+.ek.theme-castle .ek-scene{box-shadow:0 0 0 2px #b8913e,0 24px 60px #000c,0 0 140px #f0a04a1f}

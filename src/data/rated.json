@@ -77,6 +77,12 @@
     "minutes": 20,
     "tasks": 9
   },
+  "the-last-door": {
+    "difficulty": "hard",
+    "score": 16.6,
+    "minutes": 25,
+    "tasks": 13
+  },
   "the-locked-attic": {
     "difficulty": "easy",
     "score": 8.5,
