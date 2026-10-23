@@ -17,6 +17,12 @@
     "minutes": 20,
     "tasks": 10
   },
+  "escape-the-garage": {
+    "difficulty": "easy",
+    "score": 8.3,
+    "minutes": 10,
+    "tasks": 7
+  },
   "forgotten-lab": {
     "difficulty": "hard",
     "score": 23.6,

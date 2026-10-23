@@ -1,0 +1,1016 @@
+{
+  "id": "garage",
+  "title": "Escape the Garage",
+  "theme": "castle",
+  "start": "garage",
+  "intro": "Grandpa's garage. You came in to fetch your bike, the side door clicked shut behind you, and the big garage door will not budge. Grandpa's old red car sits in the middle, and Biscuit the dog is very happy to see you.",
+  "winTitle": "Out you drive",
+  "winText": "The engine coughs, then purrs. You roll Grandpa's red car out into the sunshine, and Biscuit rides in the back with his ball. Grandpa is going to be very surprised.",
+  "audio": {
+    "music": "assets/audio/music_garage.mp3",
+    "ambience": "assets/audio/amb_garage.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "bark": "assets/audio/sfx_bark.mp3",
+      "toolbox": "assets/audio/sfx_toolbox.mp3",
+      "wrench": "assets/audio/sfx_wrench.mp3",
+      "door": "assets/audio/sfx_door.mp3",
+      "charge": "assets/audio/sfx_charge.mp3",
+      "engine": "assets/audio/sfx_engine.mp3"
+    }
+  },
+  "scenes": {
+    "garage": {
+      "title": "The garage",
+      "image": "assets/garage.webp",
+      "layers": [
+        {
+          "image": "assets/layer_ball.png",
+          "rect": [
+            1350,
+            340,
+            142,
+            119
+          ],
+          "if": "!flag:ball_taken"
+        },
+        {
+          "image": "assets/layer_charger.png",
+          "rect": [
+            0,
+            152,
+            464,
+            427
+          ],
+          "if": "!flag:charger_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            64,
+            712,
+            459,
+            276
+          ],
+          "if": "flag:toolbox_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2751,
+            0,
+            1089,
+            2159
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_car_charged.png",
+          "rect": [
+            2591,
+            519,
+            1249,
+            1213
+          ],
+          "if": "flag:charged",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "shelf",
+          "label": "Shelf",
+          "rect": [
+            0,
+            168,
+            1500,
+            413
+          ],
+          "do": [
+            {
+              "goto": "shelf"
+            }
+          ]
+        },
+        {
+          "id": "bench",
+          "label": "Workbench",
+          "rect": [
+            0,
+            586,
+            1011,
+            896
+          ],
+          "do": [
+            {
+              "goto": "bench"
+            }
+          ]
+        },
+        {
+          "id": "car",
+          "label": "Car",
+          "rect": [
+            1102,
+            627,
+            2182,
+            889
+          ],
+          "do": [
+            {
+              "goto": "car"
+            }
+          ]
+        },
+        {
+          "id": "dog",
+          "label": "Biscuit",
+          "rect": [
+            46,
+            1286,
+            1056,
+            689
+          ],
+          "do": [
+            {
+              "goto": "dog"
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "label": "Garage door",
+          "rect": [
+            3307,
+            0,
+            533,
+            1592
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "label": "Window",
+          "rect": [
+            1617,
+            177,
+            827,
+            361
+          ],
+          "do": [
+            {
+              "say": "Sunshine and the garden outside. The window is far too small to climb through."
+            }
+          ]
+        }
+      ]
+    },
+    "shelf": {
+      "title": "Shelf",
+      "image": "assets/garage.webp",
+      "crop": [
+        0,
+        0,
+        1749,
+        984
+      ],
+      "back": "garage",
+      "layers": [
+        {
+          "image": "assets/layer_ball.png",
+          "rect": [
+            1350,
+            340,
+            142,
+            119
+          ],
+          "if": "!flag:ball_taken"
+        },
+        {
+          "image": "assets/layer_charger.png",
+          "rect": [
+            0,
+            152,
+            464,
+            427
+          ],
+          "if": "!flag:charger_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            64,
+            712,
+            459,
+            276
+          ],
+          "if": "flag:toolbox_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2751,
+            0,
+            1089,
+            2159
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_car_charged.png",
+          "rect": [
+            2591,
+            519,
+            1249,
+            1213
+          ],
+          "if": "flag:charged",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "shelf_stuff",
+          "label": "Shelf",
+          "rect": [
+            0,
+            168,
+            1500,
+            413
+          ],
+          "do": [
+            {
+              "say": "Paint tins, jars of screws and an old radio."
+            }
+          ]
+        },
+        {
+          "id": "ball",
+          "label": "Tennis ball",
+          "rect": [
+            1369,
+            340,
+            129,
+            119
+          ],
+          "if": "!flag:ball_taken",
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A chewed yellow tennis ball. Somebody's favourite."
+            },
+            {
+              "set": "ball_taken"
+            },
+            {
+              "give": "ball"
+            }
+          ]
+        },
+        {
+          "id": "charger",
+          "label": "Battery charger",
+          "rect": [
+            76,
+            168,
+            299,
+            367
+          ],
+          "if": "!flag:charger_taken",
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A car battery charger with a red and a black clamp."
+            },
+            {
+              "set": "charger_taken"
+            },
+            {
+              "give": "charger"
+            }
+          ]
+        }
+      ]
+    },
+    "dog": {
+      "title": "Biscuit",
+      "image": "assets/garage.webp",
+      "crop": [
+        0,
+        1096,
+        1738,
+        978
+      ],
+      "back": "garage",
+      "layers": [
+        {
+          "image": "assets/layer_ball.png",
+          "rect": [
+            1350,
+            340,
+            142,
+            119
+          ],
+          "if": "!flag:ball_taken"
+        },
+        {
+          "image": "assets/layer_charger.png",
+          "rect": [
+            0,
+            152,
+            464,
+            427
+          ],
+          "if": "!flag:charger_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            64,
+            712,
+            459,
+            276
+          ],
+          "if": "flag:toolbox_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2751,
+            0,
+            1089,
+            2159
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_car_charged.png",
+          "rect": [
+            2591,
+            519,
+            1249,
+            1213
+          ],
+          "if": "flag:charged",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "biscuit",
+          "label": "Biscuit",
+          "rect": [
+            46,
+            1286,
+            1056,
+            689
+          ],
+          "if": "!flag:dog_played",
+          "use": "ball",
+          "consume": true,
+          "fail": "Biscuit wags his tail and holds a little key in his mouth. He will not let go of it. Maybe he wants to swap?",
+          "hint": "Biscuit will swap the key for his favourite toy.",
+          "do": [
+            {
+              "sfx": "bark"
+            },
+            {
+              "set": "dog_played"
+            },
+            {
+              "say": "Biscuit drops the key and grabs his ball. Best swap ever!"
+            },
+            {
+              "give": "small_key",
+              "from": [
+                735,
+                1527
+              ]
+            }
+          ],
+          "failDo": [
+            {
+              "sfx": "bark"
+            },
+            {
+              "play": "dog"
+            }
+          ]
+        },
+        {
+          "id": "biscuit_happy",
+          "label": "Biscuit",
+          "rect": [
+            46,
+            1286,
+            1056,
+            689
+          ],
+          "if": "flag:dog_played",
+          "do": [
+            {
+              "sfx": "bark"
+            },
+            {
+              "play": "dog_ball"
+            },
+            {
+              "say": "Biscuit chews his ball happily."
+            }
+          ]
+        }
+      ]
+    },
+    "bench": {
+      "title": "Workbench",
+      "image": "assets/garage.webp",
+      "crop": [
+        0,
+        483,
+        1509,
+        849
+      ],
+      "back": "garage",
+      "layers": [
+        {
+          "image": "assets/layer_ball.png",
+          "rect": [
+            1350,
+            340,
+            142,
+            119
+          ],
+          "if": "!flag:ball_taken"
+        },
+        {
+          "image": "assets/layer_charger.png",
+          "rect": [
+            0,
+            152,
+            464,
+            427
+          ],
+          "if": "!flag:charger_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            64,
+            712,
+            459,
+            276
+          ],
+          "if": "flag:toolbox_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2751,
+            0,
+            1089,
+            2159
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_car_charged.png",
+          "rect": [
+            2591,
+            519,
+            1249,
+            1213
+          ],
+          "if": "flag:charged",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "bench_top",
+          "label": "Workbench",
+          "rect": [
+            0,
+            586,
+            1011,
+            896
+          ],
+          "do": [
+            {
+              "say": "Grandpa's workbench. Everything has its place, except the things you need."
+            }
+          ]
+        },
+        {
+          "id": "toolbox",
+          "label": "Toolbox",
+          "rect": [
+            147,
+            804,
+            358,
+            184
+          ],
+          "if": "!flag:toolbox_open",
+          "use": "small_key",
+          "consume": true,
+          "fail": "A red toolbox with a little keyhole. It is locked.",
+          "hint": "The toolbox key is somewhere close and furry.",
+          "do": [
+            {
+              "sfx": "toolbox"
+            },
+            {
+              "say": "Click! Inside the toolbox lies a big spanner."
+            },
+            {
+              "set": "toolbox_open"
+            },
+            {
+              "give": "wrench"
+            }
+          ]
+        },
+        {
+          "id": "toolbox_empty",
+          "label": "Toolbox",
+          "rect": [
+            147,
+            804,
+            358,
+            184
+          ],
+          "if": "flag:toolbox_open",
+          "do": [
+            {
+              "say": "Only some old screws left."
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Garage door",
+      "image": "assets/garage.webp",
+      "crop": [
+        547,
+        0,
+        3293,
+        1852
+      ],
+      "back": "garage",
+      "layers": [
+        {
+          "image": "assets/layer_ball.png",
+          "rect": [
+            1350,
+            340,
+            142,
+            119
+          ],
+          "if": "!flag:ball_taken"
+        },
+        {
+          "image": "assets/layer_charger.png",
+          "rect": [
+            0,
+            152,
+            464,
+            427
+          ],
+          "if": "!flag:charger_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            64,
+            712,
+            459,
+            276
+          ],
+          "if": "flag:toolbox_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2751,
+            0,
+            1089,
+            2159
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_car_charged.png",
+          "rect": [
+            2591,
+            519,
+            1249,
+            1213
+          ],
+          "if": "flag:charged",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "door_shut",
+          "label": "Garage door",
+          "rect": [
+            3307,
+            0,
+            533,
+            1592
+          ],
+          "if": "!flag:door_open",
+          "do": [
+            {
+              "say": "The big door is stuck. On the left rail a bolt has come loose and the door is jammed on it."
+            }
+          ]
+        },
+        {
+          "id": "track",
+          "label": "Loose bolt",
+          "rect": [
+            3204,
+            602,
+            184,
+            184
+          ],
+          "if": "!flag:door_open",
+          "use": "wrench",
+          "fail": "A big loose bolt. You cannot turn it with your fingers.",
+          "hint": "A spanner would tighten that bolt.",
+          "do": [
+            {
+              "sfx": "wrench"
+            },
+            {
+              "say": "A few turns of the spanner and the bolt is tight. You lift the door and it rolls up with a rattle!"
+            },
+            {
+              "sfx": "door"
+            },
+            {
+              "set": "door_open"
+            }
+          ]
+        },
+        {
+          "id": "door_up",
+          "label": "Open door",
+          "rect": [
+            3307,
+            0,
+            533,
+            1592
+          ],
+          "if": "flag:door_open",
+          "do": [
+            {
+              "say": "The door is open, but it is a long way to walk. Grandpa's car would be faster, if it started."
+            }
+          ]
+        }
+      ]
+    },
+    "car": {
+      "title": "Car",
+      "image": "assets/garage.webp",
+      "crop": [
+        602,
+        227,
+        2906,
+        1635
+      ],
+      "back": "garage",
+      "layers": [
+        {
+          "image": "assets/layer_ball.png",
+          "rect": [
+            1350,
+            340,
+            142,
+            119
+          ],
+          "if": "!flag:ball_taken"
+        },
+        {
+          "image": "assets/layer_charger.png",
+          "rect": [
+            0,
+            152,
+            464,
+            427
+          ],
+          "if": "!flag:charger_taken"
+        },
+        {
+          "image": "assets/layer_toolbox_open.png",
+          "rect": [
+            64,
+            712,
+            459,
+            276
+          ],
+          "if": "flag:toolbox_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            2751,
+            0,
+            1089,
+            2159
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_car_charged.png",
+          "rect": [
+            2591,
+            519,
+            1249,
+            1213
+          ],
+          "if": "flag:charged",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "car_body",
+          "label": "Car",
+          "rect": [
+            797,
+            627,
+            2480,
+            889
+          ],
+          "do": [
+            {
+              "say": "Grandpa's old red car. The key is in it, but the battery is flat."
+            }
+          ]
+        },
+        {
+          "id": "hood",
+          "label": "Hood",
+          "rect": [
+            2549,
+            758,
+            735,
+            322
+          ],
+          "if": "!flag:charged",
+          "use": "charger",
+          "consume": true,
+          "fail": "Under the hood sits the car battery. It is completely flat.",
+          "hint": "The battery needs charging. There is a charger on the shelf.",
+          "do": [
+            {
+              "sfx": "charge"
+            },
+            {
+              "say": "Red clamp on red, black clamp on black. The charger hums, a green light comes on and the headlights flicker to life."
+            },
+            {
+              "set": "charged"
+            }
+          ]
+        },
+        {
+          "id": "hood_done",
+          "label": "Hood",
+          "rect": [
+            2549,
+            758,
+            735,
+            322
+          ],
+          "if": "flag:charged",
+          "do": [
+            {
+              "say": "The battery is full again."
+            }
+          ]
+        },
+        {
+          "id": "cardoor",
+          "label": "Drive",
+          "rect": [
+            1959,
+            689,
+            581,
+            627
+          ],
+          "do": [
+            {
+              "if": "!flag:charged",
+              "say": "You turn the key. Click. Nothing. The battery is flat."
+            },
+            {
+              "if": [
+                "flag:charged",
+                "!flag:door_open"
+              ],
+              "say": "The engine starts! But the garage door is still shut."
+            },
+            {
+              "if": [
+                "flag:charged",
+                "flag:door_open"
+              ],
+              "sfx": "engine"
+            },
+            {
+              "if": [
+                "flag:charged",
+                "flag:door_open"
+              ],
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "ball": {
+      "name": "Tennis ball",
+      "icon": "assets/ball.png",
+      "text": "A chewed yellow tennis ball."
+    },
+    "small_key": {
+      "name": "Little key",
+      "icon": "assets/small_key.png",
+      "text": "A little key, a bit wet from Biscuit."
+    },
+    "wrench": {
+      "name": "Spanner",
+      "icon": "assets/wrench.png",
+      "text": "A big spanner."
+    },
+    "charger": {
+      "name": "Battery charger",
+      "icon": "assets/charger.png",
+      "text": "A car battery charger with a red and a black clamp."
+    }
+  },
+  "puzzles": {},
+  "actors": [
+    {
+      "fps": 4,
+      "size": [
+        1148,
+        742
+      ],
+      "path": [
+        [
+          574,
+          1993
+        ]
+      ],
+      "flip": false,
+      "blend": 110,
+      "id": "dog",
+      "frames": [
+        "assets/dog_key_0.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_wag.png",
+        "assets/dog_key_0.png",
+        "assets/dog_key_wag.png",
+        "assets/dog_key_0.png"
+      ],
+      "if": "!flag:dog_played",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/dog_key_wag.png",
+          "assets/dog_key_0.png",
+          "assets/dog_key_wag.png",
+          "assets/dog_key_0.png",
+          "assets/dog_key_wag.png",
+          "assets/dog_key_0.png",
+          "assets/dog_key_wag.png"
+        ],
+        "fps": 6,
+        "hold": 150
+      }
+    },
+    {
+      "fps": 4,
+      "size": [
+        1148,
+        742
+      ],
+      "path": [
+        [
+          574,
+          1993
+        ]
+      ],
+      "flip": false,
+      "blend": 110,
+      "id": "dog_ball",
+      "frames": [
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_wag.png",
+        "assets/dog_ball_0.png",
+        "assets/dog_ball_wag.png",
+        "assets/dog_ball_0.png"
+      ],
+      "if": "flag:dog_played",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/dog_ball_wag.png",
+          "assets/dog_ball_0.png",
+          "assets/dog_ball_wag.png",
+          "assets/dog_ball_0.png",
+          "assets/dog_ball_wag.png",
+          "assets/dog_ball_0.png",
+          "assets/dog_ball_wag.png"
+        ],
+        "fps": 6,
+        "hold": 150
+      }
+    }
+  ],
+  "ambient": [
+    {
+      "type": "light",
+      "at": [
+        2021,
+        344
+      ],
+      "r": 900,
+      "color": "#fff0c8",
+      "strength": 0.18,
+      "flicker": 0
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        1654,
+        390,
+        1194,
+        965
+      ],
+      "count": 20,
+      "size": 0.45,
+      "alpha": 0.4,
+      "speed": 0.5,
+      "color": "#fff3d6"
+    }
+  ]
+}
