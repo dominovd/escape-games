@@ -1,0 +1,2794 @@
+{
+  "id": "tower",
+  "title": "The Crooked Tower",
+  "theme": "castle",
+  "start": "tower",
+  "intro": "On Halloween night you climbed to the top of the crooked tower, and the trapdoor slammed shut behind you. Three ghosts drift around the room. They used to live here, and they will let you go only when the great beacon on the tower is lit again, so lost souls can find their way.",
+  "winTitle": "The beacon burns",
+  "winText": "The beacon blazes over the crooked town, the three ghosts swirl around it and the trapdoor drops open. You climb down the spiral stairs into the misty night. Behind you a raven caws, with a silver spoon in its beak.",
+  "audio": {
+    "music": "assets/audio/music_tower.mp3",
+    "ambience": "assets/audio/amb_tower.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "bat": "assets/audio/sfx_bat.mp3",
+      "panel": "assets/audio/sfx_panel.mp3",
+      "blow": "assets/audio/sfx_blow.mp3",
+      "match": "assets/audio/sfx_match.mp3",
+      "cabinet": "assets/audio/sfx_cabinet.mp3",
+      "organ": "assets/audio/sfx_organ.mp3",
+      "lens": "assets/audio/sfx_lens.mp3",
+      "caw": "assets/audio/sfx_caw.mp3",
+      "beacon": "assets/audio/sfx_beacon.mp3",
+      "winch": "assets/audio/sfx_winch.mp3"
+    }
+  },
+  "scenes": {
+    "tower": {
+      "title": "The tower room",
+      "image": "assets/tower.webp",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "portraits",
+          "label": "Portraits",
+          "rect": [
+            92,
+            34,
+            1148,
+            735
+          ],
+          "do": [
+            {
+              "goto": "portraits"
+            }
+          ]
+        },
+        {
+          "id": "cabinet",
+          "label": "Cabinet",
+          "rect": [
+            34,
+            781,
+            609,
+            965
+          ],
+          "do": [
+            {
+              "goto": "cabinet"
+            }
+          ]
+        },
+        {
+          "id": "panel",
+          "label": "Bat carving",
+          "rect": [
+            730,
+            815,
+            666,
+            379
+          ],
+          "do": [
+            {
+              "goto": "panel"
+            }
+          ]
+        },
+        {
+          "id": "table",
+          "label": "Candle",
+          "rect": [
+            758,
+            1160,
+            574,
+            689
+          ],
+          "do": [
+            {
+              "goto": "table"
+            }
+          ]
+        },
+        {
+          "id": "organ",
+          "label": "Organ",
+          "rect": [
+            1424,
+            379,
+            965,
+            1275
+          ],
+          "do": [
+            {
+              "goto": "organ"
+            }
+          ]
+        },
+        {
+          "id": "beacon",
+          "label": "Beacon",
+          "rect": [
+            1975,
+            0,
+            413,
+            689
+          ],
+          "do": [
+            {
+              "goto": "beacon"
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "label": "Window",
+          "rect": [
+            2526,
+            46,
+            988,
+            1240
+          ],
+          "do": [
+            {
+              "say": "A twisting hill rises into the mist, with a little graveyard on top. Too far to make out the tombstones."
+            }
+          ]
+        },
+        {
+          "id": "telescope",
+          "label": "Telescope",
+          "rect": [
+            2480,
+            815,
+            528,
+            827
+          ],
+          "do": [
+            {
+              "goto": "telescope"
+            }
+          ]
+        },
+        {
+          "id": "raven",
+          "label": "Raven",
+          "rect": [
+            3399,
+            425,
+            436,
+            643
+          ],
+          "do": [
+            {
+              "goto": "raven"
+            }
+          ]
+        },
+        {
+          "id": "trapdoor",
+          "label": "Trapdoor",
+          "rect": [
+            2434,
+            1711,
+            1194,
+            448
+          ],
+          "do": [
+            {
+              "goto": "trapdoor"
+            }
+          ]
+        },
+        {
+          "id": "bat_1",
+          "label": "Something small",
+          "rect": [
+            1688,
+            678,
+            172,
+            115
+          ],
+          "if": "!flag:bat_1",
+          "do": [
+            {
+              "sfx": "bat"
+            },
+            {
+              "set": "bat_1"
+            },
+            {
+              "count": {
+                "prefix": "bat_",
+                "of": 5,
+                "text": "A little carved bat! {n} of {of} found."
+              }
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "say": "With the fifth bat a panel in the wall clicks and swings open."
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "sfx": "panel"
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "set": "panel_open"
+            }
+          ]
+        },
+        {
+          "id": "bat_2",
+          "label": "Something small",
+          "rect": [
+            280,
+            969,
+            165,
+            110
+          ],
+          "if": [
+            "!flag:bat_2",
+            "!solved:cabinet"
+          ],
+          "do": [
+            {
+              "sfx": "bat"
+            },
+            {
+              "set": "bat_2"
+            },
+            {
+              "count": {
+                "prefix": "bat_",
+                "of": 5,
+                "text": "A little carved bat! {n} of {of} found."
+              }
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "say": "With the fifth bat a panel in the wall clicks and swings open."
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "sfx": "panel"
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "set": "panel_open"
+            }
+          ]
+        },
+        {
+          "id": "bat_3",
+          "label": "Something small",
+          "rect": [
+            2898,
+            57,
+            179,
+            96
+          ],
+          "if": "!flag:bat_3",
+          "do": [
+            {
+              "sfx": "bat"
+            },
+            {
+              "set": "bat_3"
+            },
+            {
+              "count": {
+                "prefix": "bat_",
+                "of": 5,
+                "text": "A little carved bat! {n} of {of} found."
+              }
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "say": "With the fifth bat a panel in the wall clicks and swings open."
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "sfx": "panel"
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "set": "panel_open"
+            }
+          ]
+        },
+        {
+          "id": "bat_4",
+          "label": "Something small",
+          "rect": [
+            1865,
+            1957,
+            184,
+            101
+          ],
+          "if": "!flag:bat_4",
+          "do": [
+            {
+              "sfx": "bat"
+            },
+            {
+              "set": "bat_4"
+            },
+            {
+              "count": {
+                "prefix": "bat_",
+                "of": 5,
+                "text": "A little carved bat! {n} of {of} found."
+              }
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "say": "With the fifth bat a panel in the wall clicks and swings open."
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "sfx": "panel"
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "set": "panel_open"
+            }
+          ]
+        },
+        {
+          "id": "bat_5",
+          "label": "Something small",
+          "rect": [
+            2255,
+            188,
+            138,
+            92
+          ],
+          "if": "!flag:bat_5",
+          "do": [
+            {
+              "sfx": "bat"
+            },
+            {
+              "set": "bat_5"
+            },
+            {
+              "count": {
+                "prefix": "bat_",
+                "of": 5,
+                "text": "A little carved bat! {n} of {of} found."
+              }
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "say": "With the fifth bat a panel in the wall clicks and swings open."
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "sfx": "panel"
+            },
+            {
+              "if": [
+                "flag:bat_1",
+                "flag:bat_2",
+                "flag:bat_3",
+                "flag:bat_4",
+                "flag:bat_5",
+                "!flag:panel_open"
+              ],
+              "set": "panel_open"
+            }
+          ]
+        }
+      ]
+    },
+    "portraits": {
+      "title": "Portraits",
+      "image": "assets/tower.webp",
+      "crop": [
+        0,
+        0,
+        1555,
+        875
+      ],
+      "back": "tower",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "p1",
+          "label": "Portrait in a bonnet",
+          "rect": [
+            115,
+            46,
+            379,
+            666
+          ],
+          "do": [
+            {
+              "say": "A stern old lady in a lace bonnet. Under the frame: a brass plate with three studs."
+            },
+            {
+              "set": "portrait_1"
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "label": "Portrait in a top hat",
+          "rect": [
+            524,
+            92,
+            344,
+            643
+          ],
+          "do": [
+            {
+              "say": "A thin gentleman in a tall top hat. Under the frame: a brass plate with one stud."
+            },
+            {
+              "set": "portrait_2"
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "label": "Portrait in a nightcap",
+          "rect": [
+            907,
+            184,
+            310,
+            597
+          ],
+          "do": [
+            {
+              "say": "A sleepy boy in a striped nightcap. Under the frame: a brass plate with two studs."
+            },
+            {
+              "set": "portrait_3"
+            }
+          ]
+        }
+      ]
+    },
+    "cabinet": {
+      "title": "Cabinet",
+      "image": "assets/tower.webp",
+      "crop": [
+        0,
+        672,
+        2103,
+        1183
+      ],
+      "back": "tower",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "lock",
+          "label": "Cabinet lock",
+          "rect": [
+            46,
+            781,
+            574,
+            965
+          ],
+          "if": "!solved:cabinet",
+          "hint": "Each ghost carries a number, but only in the dark. The portraits tell you whose number comes first.",
+          "do": [
+            {
+              "puzzle": "cabinet"
+            }
+          ]
+        },
+        {
+          "id": "cabinet_empty",
+          "label": "Cabinet",
+          "rect": [
+            46,
+            781,
+            574,
+            965
+          ],
+          "if": "solved:cabinet",
+          "do": [
+            {
+              "say": "Cobwebs and an empty jam jar."
+            }
+          ]
+        }
+      ]
+    },
+    "panel": {
+      "title": "Bat carving",
+      "image": "assets/tower.webp",
+      "crop": [
+        634,
+        721,
+        1029,
+        579
+      ],
+      "back": "tower",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "panel_shut",
+          "label": "Bat carving",
+          "rect": [
+            730,
+            815,
+            666,
+            379
+          ],
+          "if": "!flag:panel_open",
+          "hint": "Little bats are carved all over the room. Find all five.",
+          "do": [
+            {
+              "say": "A wooden panel with a big carved bat. Next to it, five little empty bat shapes, as if waiting for something."
+            }
+          ]
+        },
+        {
+          "id": "lens",
+          "label": "Lens",
+          "rect": [
+            831,
+            845,
+            287,
+            333
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A round glass lens in a brass ring."
+            },
+            {
+              "set": "lens_taken"
+            },
+            {
+              "give": "lens"
+            }
+          ]
+        },
+        {
+          "id": "panel_empty",
+          "label": "Hollow",
+          "rect": [
+            831,
+            845,
+            287,
+            333
+          ],
+          "if": "flag:lens_taken",
+          "do": [
+            {
+              "say": "An empty hollow behind the panel."
+            }
+          ]
+        }
+      ]
+    },
+    "table": {
+      "title": "Candle",
+      "image": "assets/tower.webp",
+      "crop": [
+        233,
+        1006,
+        1647,
+        926
+      ],
+      "back": "tower",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "candle_lit",
+          "label": "Candle",
+          "rect": [
+            942,
+            1160,
+            184,
+            241
+          ],
+          "if": [
+            "!flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "do": [
+            {
+              "sfx": "blow"
+            },
+            {
+              "say": "You blow the candle out. In the dark the ghosts glow brighter, and something shows on their chests."
+            },
+            {
+              "set": "dark"
+            }
+          ]
+        },
+        {
+          "id": "candle_out",
+          "label": "Candle",
+          "rect": [
+            942,
+            1160,
+            184,
+            241
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "use": "matches",
+          "fail": "The candle is out. You need something to light it again.",
+          "do": [
+            {
+              "sfx": "match"
+            },
+            {
+              "say": "The candle flickers back to life."
+            },
+            {
+              "unset": "dark"
+            }
+          ]
+        },
+        {
+          "id": "candle_done",
+          "label": "Candle",
+          "rect": [
+            942,
+            1160,
+            184,
+            241
+          ],
+          "if": "flag:beacon_lit",
+          "do": [
+            {
+              "say": "Nobody needs the candle now: the beacon lights everything."
+            }
+          ]
+        }
+      ]
+    },
+    "organ": {
+      "title": "Organ",
+      "image": "assets/tower.webp",
+      "crop": [
+        638,
+        290,
+        2561,
+        1440
+      ],
+      "back": "tower",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "keys_unknown",
+          "label": "Organ keys",
+          "rect": [
+            1543,
+            1194,
+            746,
+            211
+          ],
+          "if": "!flag:lens_in",
+          "hint": "The keys carry the same signs as something far away. You need a closer look at it first.",
+          "do": [
+            {
+              "say": "Six keys, each with a little sign: a skull, a moon, a bat, a pumpkin, a cat and a spider. Pressing them at random only makes the organ wheeze. Somewhere there must be a hint which ones to play."
+            }
+          ]
+        },
+        {
+          "id": "keys",
+          "label": "Organ keys",
+          "rect": [
+            1543,
+            1194,
+            746,
+            211
+          ],
+          "if": [
+            "!solved:organ",
+            "flag:lens_in"
+          ],
+          "hint": "The keys carry the same signs as something far away. Look closer.",
+          "do": [
+            {
+              "puzzle": "organ"
+            }
+          ]
+        },
+        {
+          "id": "organ_done",
+          "label": "Organ",
+          "rect": [
+            1470,
+            390,
+            896,
+            1240
+          ],
+          "if": "solved:organ",
+          "do": [
+            {
+              "say": "The organ wheezes a happy little tune."
+            }
+          ]
+        }
+      ]
+    },
+    "telescope": {
+      "title": "Telescope",
+      "image": "assets/tower.webp",
+      "crop": [
+        1842,
+        703,
+        1830,
+        1029
+      ],
+      "back": "tower",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "scope",
+          "label": "Telescope",
+          "rect": [
+            2480,
+            815,
+            528,
+            827
+          ],
+          "if": "!flag:lens_in",
+          "use": "lens",
+          "consume": true,
+          "fail": "A brass telescope pointed at the hill. The front lens is missing.",
+          "hint": "The telescope needs its lens. The bats know where it is.",
+          "do": [
+            {
+              "sfx": "lens"
+            },
+            {
+              "say": "The lens clicks in. Through the telescope you see the graveyard on the hill: four tombstones, each with a carved sign."
+            },
+            {
+              "set": "lens_in"
+            },
+            {
+              "inspect": "scope_view"
+            }
+          ]
+        },
+        {
+          "id": "scope_look",
+          "label": "Telescope",
+          "rect": [
+            2480,
+            815,
+            528,
+            827
+          ],
+          "if": "flag:lens_in",
+          "do": [
+            {
+              "inspect": "scope_view"
+            }
+          ]
+        }
+      ]
+    },
+    "raven": {
+      "title": "Raven",
+      "image": "assets/tower.webp",
+      "crop": [
+        2468,
+        326,
+        1372,
+        772
+      ],
+      "back": "tower",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "raven_wick",
+          "label": "Raven",
+          "rect": [
+            3399,
+            425,
+            436,
+            643
+          ],
+          "if": "!flag:raven_traded",
+          "use": "spoon",
+          "consume": true,
+          "fail": "A big black raven with a beacon wick in its beak. It tilts its head and eyes your pockets. Ravens love shiny things.",
+          "hint": "The raven will trade the wick for something shiny.",
+          "do": [
+            {
+              "sfx": "caw"
+            },
+            {
+              "say": "The raven drops the wick and snatches the silver spoon. A fair trade."
+            },
+            {
+              "set": "raven_traded"
+            },
+            {
+              "give": "wick"
+            }
+          ],
+          "failDo": [
+            {
+              "sfx": "caw"
+            },
+            {
+              "play": "raven"
+            }
+          ]
+        },
+        {
+          "id": "raven_spoon",
+          "label": "Raven",
+          "rect": [
+            3399,
+            425,
+            436,
+            643
+          ],
+          "if": "flag:raven_traded",
+          "do": [
+            {
+              "sfx": "caw"
+            },
+            {
+              "if": "!flag:beacon_lit",
+              "play": "raven_spoon"
+            },
+            {
+              "if": "flag:beacon_lit",
+              "play": "raven_spoon_lit"
+            },
+            {
+              "say": "The raven admires its spoon."
+            }
+          ]
+        }
+      ]
+    },
+    "beacon": {
+      "title": "Beacon",
+      "image": "assets/tower.webp",
+      "crop": [
+        1450,
+        0,
+        1463,
+        823
+      ],
+      "back": "tower",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "beacon_empty",
+          "label": "Beacon",
+          "rect": [
+            1975,
+            0,
+            413,
+            689
+          ],
+          "if": "!flag:wick_in",
+          "use": "wick",
+          "consume": true,
+          "fail": "A great iron lantern with an empty wick holder.",
+          "hint": "The beacon has no wick. Someone with feathers took it.",
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "The wick fits snugly in the holder."
+            },
+            {
+              "set": "wick_in"
+            }
+          ]
+        },
+        {
+          "id": "beacon_wick",
+          "label": "Beacon",
+          "rect": [
+            1975,
+            0,
+            413,
+            689
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "use": "matches",
+          "fail": "The wick is in. Now it needs a flame.",
+          "hint": "You need a flame for the wick.",
+          "do": [
+            {
+              "sfx": "beacon"
+            },
+            {
+              "say": "The beacon roars into light! The three ghosts swirl around it, and somewhere below a lock clicks."
+            },
+            {
+              "set": "beacon_lit"
+            },
+            {
+              "unset": "dark"
+            },
+            {
+              "unset": "dark"
+            },
+            {
+              "unset": "dark"
+            },
+            {
+              "unset": "dark"
+            },
+            {
+              "unset": "dark"
+            },
+            {
+              "unset": "dark"
+            },
+            {
+              "unset": "dark"
+            },
+            {
+              "unset": "dark"
+            },
+            {
+              "unset": "dark"
+            },
+            {
+              "unset": "dark"
+            }
+          ]
+        },
+        {
+          "id": "beacon_lit",
+          "label": "Beacon",
+          "rect": [
+            1975,
+            0,
+            413,
+            689
+          ],
+          "if": "flag:beacon_lit",
+          "do": [
+            {
+              "say": "The beacon blazes over the crooked town."
+            }
+          ]
+        }
+      ]
+    },
+    "trapdoor": {
+      "title": "Trapdoor",
+      "image": "assets/tower.webp",
+      "crop": [
+        2102,
+        1182,
+        1738,
+        978
+      ],
+      "back": "tower",
+      "layers": [
+        {
+          "image": "assets/layer_panel_open.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": [
+            "flag:panel_open",
+            "!flag:lens_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_panel_open_empty.png",
+          "rect": [
+            723,
+            799,
+            838,
+            413
+          ],
+          "if": "flag:lens_taken"
+        },
+        {
+          "image": "assets/layer_cabinet_open.png",
+          "rect": [
+            34,
+            815,
+            774,
+            866
+          ],
+          "if": "solved:cabinet",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_organ_open.png",
+          "rect": [
+            1534,
+            1412,
+            659,
+            322
+          ],
+          "if": "solved:organ",
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_beacon_wick.png",
+          "rect": [
+            2101,
+            390,
+            149,
+            218
+          ],
+          "if": [
+            "flag:wick_in",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_dark.png",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": [
+            "flag:dark",
+            "!flag:beacon_lit"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_lit.webp",
+          "rect": [
+            0,
+            0,
+            3840,
+            2160
+          ],
+          "if": "flag:beacon_lit",
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_trapdoor_open.png",
+          "rect": [
+            2297,
+            1240,
+            1543,
+            919
+          ],
+          "if": "flag:trapdoor_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "trap_shut",
+          "label": "Trapdoor",
+          "rect": [
+            2434,
+            1711,
+            1194,
+            448
+          ],
+          "if": "!flag:trapdoor_open",
+          "do": [
+            {
+              "say": "A heavy trapdoor. It is raised and lowered by the winch, and the winch has no handle."
+            }
+          ]
+        },
+        {
+          "id": "winch",
+          "label": "Winch",
+          "rect": [
+            3169,
+            1435,
+            574,
+            390
+          ],
+          "if": "!flag:trapdoor_open",
+          "use": "crank",
+          "fail": "A winch with a square hole where its handle should be.",
+          "hint": "The winch needs a handle, and the ghosts must agree to let you go.",
+          "do": [
+            {
+              "if": "!flag:beacon_lit",
+              "say": "The handle fits, but the winch will not turn. Something cold holds it still."
+            },
+            {
+              "if": "flag:beacon_lit",
+              "sfx": "winch"
+            },
+            {
+              "if": "flag:beacon_lit",
+              "say": "The winch turns easily now and the trapdoor drops open."
+            },
+            {
+              "if": "flag:beacon_lit",
+              "set": "trapdoor_open"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Go down",
+          "rect": [
+            2297,
+            1286,
+            1378,
+            873
+          ],
+          "if": "flag:trapdoor_open",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "spoon": {
+      "name": "Silver spoon",
+      "icon": "assets/spoon.png",
+      "text": "A shiny silver spoon."
+    },
+    "crank_a": {
+      "name": "Handle grip",
+      "icon": "assets/crank_a.png",
+      "text": "The wooden grip of a winch handle.",
+      "combine": {
+        "with": "crank_b",
+        "into": "crank",
+        "text": "The grip slides onto the iron arm. A winch handle!"
+      }
+    },
+    "crank_b": {
+      "name": "Iron arm",
+      "icon": "assets/crank_b.png",
+      "text": "A bent iron arm with a square end."
+    },
+    "crank": {
+      "name": "Winch handle",
+      "icon": "assets/crank.png",
+      "text": "A winch handle, all in one piece."
+    },
+    "lens": {
+      "name": "Lens",
+      "icon": "assets/lens.png",
+      "text": "A round glass lens in a brass ring."
+    },
+    "matches": {
+      "name": "Matches",
+      "icon": "assets/matches.png",
+      "text": "A box of matches. A few left."
+    },
+    "wick": {
+      "name": "Wick",
+      "icon": "assets/wick.png",
+      "text": "A thick wick for the beacon."
+    },
+    "scope_view": {
+      "name": "Through the telescope",
+      "text": "Four tombstones, left to right: a moon, a cat, a spider, a bat.",
+      "image": "assets/scope_view.jpg"
+    }
+  },
+  "puzzles": {
+    "cabinet": {
+      "type": "code",
+      "title": "Cabinet lock",
+      "prompt": "Three number wheels.",
+      "answer": "429",
+      "clue": [
+        "flag:dark",
+        "flag:portrait_1",
+        "flag:portrait_2",
+        "flag:portrait_3"
+      ],
+      "do": [
+        {
+          "sfx": "cabinet"
+        },
+        {
+          "say": "The cabinet creaks open. Inside: the wooden grip of a handle and a shiny silver spoon."
+        },
+        {
+          "give": "crank_a"
+        },
+        {
+          "give": "spoon"
+        },
+        {
+          "if": "!flag:bat_2",
+          "set": "doorbat_auto"
+        },
+        {
+          "sfx": "bat",
+          "if": [
+            "flag:doorbat_auto",
+            "!flag:doorbat_done"
+          ]
+        },
+        {
+          "set": "bat_2",
+          "if": [
+            "flag:doorbat_auto",
+            "!flag:doorbat_done"
+          ]
+        },
+        {
+          "count": {
+            "prefix": "bat_",
+            "of": 5,
+            "text": "The little bat carved on the door counts too: {n} of {of} found."
+          },
+          "if": [
+            "flag:doorbat_auto",
+            "!flag:doorbat_done"
+          ]
+        },
+        {
+          "if": [
+            "flag:doorbat_auto",
+            "!flag:doorbat_done",
+            "flag:bat_1",
+            "flag:bat_2",
+            "flag:bat_3",
+            "flag:bat_4",
+            "flag:bat_5",
+            "!flag:panel_open"
+          ],
+          "say": "With the fifth bat a panel in the wall clicks and swings open."
+        },
+        {
+          "if": [
+            "flag:doorbat_auto",
+            "!flag:doorbat_done",
+            "flag:bat_1",
+            "flag:bat_2",
+            "flag:bat_3",
+            "flag:bat_4",
+            "flag:bat_5",
+            "!flag:panel_open"
+          ],
+          "sfx": "panel"
+        },
+        {
+          "if": [
+            "flag:doorbat_auto",
+            "!flag:doorbat_done",
+            "flag:bat_1",
+            "flag:bat_2",
+            "flag:bat_3",
+            "flag:bat_4",
+            "flag:bat_5",
+            "!flag:panel_open"
+          ],
+          "set": "panel_open"
+        },
+        {
+          "if": "flag:doorbat_auto",
+          "set": "doorbat_done"
+        }
+      ]
+    },
+    "organ": {
+      "type": "sequence",
+      "title": "Organ",
+      "prompt": "Each key has a little sign.",
+      "buttons": [
+        "💀",
+        "🌙",
+        "🦇",
+        "🎃",
+        "🐈",
+        "🕷️"
+      ],
+      "answer": [
+        "🌙",
+        "🐈",
+        "🕷️",
+        "🦇"
+      ],
+      "clue": "flag:lens_in",
+      "do": [
+        {
+          "sfx": "organ"
+        },
+        {
+          "say": "A spooky chord, and a little drawer slides out of the organ: an iron arm and a box of matches."
+        },
+        {
+          "give": "crank_b"
+        },
+        {
+          "give": "matches"
+        }
+      ],
+      "blind": true
+    }
+  },
+  "actors": [
+    {
+      "size": [
+        338,
+        440
+      ],
+      "path": [
+        [
+          1150,
+          1220
+        ],
+        [
+          1040,
+          1010
+        ],
+        [
+          1300,
+          860
+        ],
+        [
+          1560,
+          960
+        ],
+        [
+          1480,
+          1180
+        ],
+        [
+          1150,
+          1220
+        ]
+      ],
+      "speed": 24,
+      "wait": 900,
+      "flip": false,
+      "idle": "float",
+      "id": "ghost_top",
+      "image": "assets/ghost_top.png",
+      "filter": "opacity(.7)",
+      "if": "!flag:dark"
+    },
+    {
+      "size": [
+        338,
+        440
+      ],
+      "path": [
+        [
+          1150,
+          1220
+        ],
+        [
+          1040,
+          1010
+        ],
+        [
+          1300,
+          860
+        ],
+        [
+          1560,
+          960
+        ],
+        [
+          1480,
+          1180
+        ],
+        [
+          1150,
+          1220
+        ]
+      ],
+      "speed": 24,
+      "wait": 900,
+      "flip": false,
+      "idle": "float",
+      "id": "ghost_top_dark",
+      "image": "assets/ghost_top_dark.png",
+      "if": "flag:dark"
+    },
+    {
+      "size": [
+        352,
+        440
+      ],
+      "path": [
+        [
+          2150,
+          1520
+        ],
+        [
+          2420,
+          1650
+        ],
+        [
+          2760,
+          1580
+        ],
+        [
+          2840,
+          1400
+        ],
+        [
+          2500,
+          1340
+        ],
+        [
+          2150,
+          1520
+        ]
+      ],
+      "speed": 19,
+      "wait": 2200,
+      "flip": false,
+      "idle": "float",
+      "id": "ghost_bonnet",
+      "image": "assets/ghost_bonnet.png",
+      "filter": "opacity(.7)",
+      "if": "!flag:dark"
+    },
+    {
+      "size": [
+        352,
+        440
+      ],
+      "path": [
+        [
+          2150,
+          1520
+        ],
+        [
+          2420,
+          1650
+        ],
+        [
+          2760,
+          1580
+        ],
+        [
+          2840,
+          1400
+        ],
+        [
+          2500,
+          1340
+        ],
+        [
+          2150,
+          1520
+        ]
+      ],
+      "speed": 19,
+      "wait": 2200,
+      "flip": false,
+      "idle": "float",
+      "id": "ghost_bonnet_dark",
+      "image": "assets/ghost_bonnet_dark.png",
+      "if": "flag:dark"
+    },
+    {
+      "size": [
+        383,
+        440
+      ],
+      "path": [
+        [
+          2420,
+          830
+        ],
+        [
+          2120,
+          690
+        ],
+        [
+          1760,
+          760
+        ],
+        [
+          1820,
+          960
+        ],
+        [
+          2200,
+          980
+        ],
+        [
+          2420,
+          830
+        ]
+      ],
+      "speed": 31,
+      "wait": 0,
+      "flip": false,
+      "idle": "float",
+      "id": "ghost_night",
+      "image": "assets/ghost_night.png",
+      "filter": "opacity(.7)",
+      "if": "!flag:dark"
+    },
+    {
+      "size": [
+        383,
+        440
+      ],
+      "path": [
+        [
+          2420,
+          830
+        ],
+        [
+          2120,
+          690
+        ],
+        [
+          1760,
+          760
+        ],
+        [
+          1820,
+          960
+        ],
+        [
+          2200,
+          980
+        ],
+        [
+          2420,
+          830
+        ]
+      ],
+      "speed": 31,
+      "wait": 0,
+      "flip": false,
+      "idle": "float",
+      "id": "ghost_night_dark",
+      "image": "assets/ghost_night_dark.png",
+      "if": "flag:dark"
+    },
+    {
+      "id": "raven",
+      "frames": [
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven.png",
+        "assets/raven_turn.png",
+        "assets/raven_turn.png",
+        "assets/raven_turn.png"
+      ],
+      "fps": 3,
+      "size": [
+        423,
+        372
+      ],
+      "path": [
+        [
+          3628,
+          804
+        ]
+      ],
+      "flip": false,
+      "if": "!flag:raven_traded",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/raven_turn.png",
+          "assets/raven.png",
+          "assets/raven_turn.png",
+          "assets/raven.png",
+          "assets/raven_turn.png"
+        ],
+        "fps": 4,
+        "hold": 0
+      }
+    },
+    {
+      "id": "raven_spoon",
+      "frames": [
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon.png",
+        "assets/raven_spoon_turn.png",
+        "assets/raven_spoon_turn.png",
+        "assets/raven_spoon_turn.png"
+      ],
+      "fps": 3,
+      "size": [
+        423,
+        372
+      ],
+      "path": [
+        [
+          3628,
+          804
+        ]
+      ],
+      "flip": false,
+      "if": [
+        "flag:raven_traded",
+        "!flag:beacon_lit"
+      ],
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/raven_spoon_turn.png",
+          "assets/raven_spoon.png",
+          "assets/raven_spoon_turn.png",
+          "assets/raven_spoon.png",
+          "assets/raven_spoon_turn.png"
+        ],
+        "fps": 4,
+        "hold": 0
+      }
+    },
+    {
+      "id": "raven_spoon_lit",
+      "frames": [
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit.png",
+        "assets/raven_lit_turn.png",
+        "assets/raven_lit_turn.png",
+        "assets/raven_lit_turn.png"
+      ],
+      "fps": 3,
+      "size": [
+        423,
+        372
+      ],
+      "path": [
+        [
+          3628,
+          804
+        ]
+      ],
+      "flip": false,
+      "if": "flag:beacon_lit",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/raven_lit_turn.png",
+          "assets/raven_lit.png",
+          "assets/raven_lit_turn.png",
+          "assets/raven_lit.png",
+          "assets/raven_lit_turn.png"
+        ],
+        "fps": 4,
+        "hold": 0
+      }
+    }
+  ],
+  "ambient": [
+    {
+      "type": "flame",
+      "rect": [
+        983,
+        1190,
+        92,
+        165
+      ],
+      "src": "assets/layer_flame.png",
+      "srcRect": [
+        983,
+        1190,
+        92,
+        165
+      ],
+      "amp": 0.8,
+      "dur": 1500,
+      "if": "!flag:dark"
+    },
+    {
+      "type": "flame",
+      "rect": [
+        2078,
+        310,
+        196,
+        260
+      ],
+      "src": "assets/layer_lantern_flame.png",
+      "srcRect": [
+        2078,
+        310,
+        196,
+        260
+      ],
+      "amp": 0.6,
+      "dur": 1300,
+      "if": "flag:beacon_lit"
+    },
+    {
+      "type": "light",
+      "at": [
+        1029,
+        1286
+      ],
+      "r": 700,
+      "color": "#ffb060",
+      "strength": 0.3,
+      "flicker": 0.2,
+      "if": "!flag:dark"
+    },
+    {
+      "type": "light",
+      "at": [
+        2182,
+        436
+      ],
+      "r": 1100,
+      "color": "#ffb050",
+      "strength": 0.35,
+      "flicker": 0.25,
+      "if": "flag:beacon_lit"
+    },
+    {
+      "type": "light",
+      "at": [
+        3227,
+        367
+      ],
+      "r": 600,
+      "color": "#8fa8ff",
+      "strength": 0.15,
+      "flicker": 0
+    },
+    {
+      "type": "particles",
+      "kind": "mist",
+      "rect": [
+        2549,
+        574,
+        942,
+        735
+      ],
+      "count": 6
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        804,
+        873,
+        689,
+        574
+      ],
+      "count": 14,
+      "size": 0.5,
+      "alpha": 0.45,
+      "speed": 0.5,
+      "color": "#ffd9a0",
+      "if": "!flag:dark"
+    }
+  ]
+}

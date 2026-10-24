@@ -65,6 +65,12 @@
     "minutes": 10,
     "tasks": 6
   },
+  "the-crooked-tower": {
+    "difficulty": "hard",
+    "score": 24.5,
+    "minutes": 30,
+    "tasks": 19
+  },
   "the-cursed-manor": {
     "difficulty": "hard",
     "score": 15.8,

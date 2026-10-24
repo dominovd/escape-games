@@ -63,6 +63,11 @@ export function runActions(game, state, actions, opts = {}) {
     if (a.take) { remove(s.inv, a.take); events.push({ type: 'take', item: a.take }); }
     if (a.set) for (const f of [].concat(a.set)) add(s.flags, f);
     if (a.unset) for (const f of [].concat(a.unset)) remove(s.flags, f);
+    // "count": { "prefix": "bat_", "of": 5, "text": "{n} of {of} bats found." } says how many flags with that prefix are set (find-the-hidden-things mini games)
+    if (a.count) {
+      const n = s.flags.filter(f => f.startsWith(a.count.prefix)).length;
+      events.push({ type: 'say', text: String(a.count.text || '{n} of {of}').replace('{n}', n).replace('{of}', a.count.of ?? '') });
+    }
     if (a.puzzle) {
       if (s.solved.includes(a.puzzle)) {
         const p = game.puzzles[a.puzzle];
