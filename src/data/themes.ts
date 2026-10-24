@@ -13,7 +13,7 @@ export interface Theme {
   body: { h2: string; text: string }[]; // текст под сеткой
   faq?: FaqItem[];
   accent: string; // цвет темы
-  icon: 'prison' | 'skull' | 'pumpkin' | 'snow' | 'car' | 'kids' | 'trophy' | 'cursor';
+  icon: 'prison' | 'skull' | 'pumpkin' | 'snow' | 'car' | 'kids' | 'trophy' | 'cursor' | 'rocket';
   seasonal?: boolean;
 }
 
@@ -162,6 +162,28 @@ export const themes: Theme[] = [
     ],
     accent: '#ff5a4f',
     icon: 'trophy',
+  },
+  {
+    slug: 'space',
+    name: 'Space',
+    h1: 'Space Escape Games',
+    title: 'Space Escape Games: Free Sci-Fi Escape Rooms Online',
+    metaDescription:
+      'Free space escape games online: locked spaceships, airlocks, robots and alien creatures. Solve sci-fi puzzles in your browser, no downloads.',
+    intro:
+      'The airlock is sealed and the stars are waiting outside. Wake up the robots, read the ship\'s log and find a way off the deck.',
+    body: [
+      {
+        h2: 'Sci-fi escape rooms in space',
+        text:
+          'A spaceship is full of things to try: control panels with strange symbols, robots that need power, alien creatures with habits of their own. Look out of the portholes too: what you see outside often matters inside.',
+      },
+    ],
+    faq: [
+      { q: 'Are these space escape games free?', a: 'Yes, available games are free and run in your browser on PC and mobile.' },
+    ],
+    accent: '#7c8cff',
+    icon: 'rocket',
   },
   {
     slug: 'point-and-click',

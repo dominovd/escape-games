@@ -20,7 +20,7 @@
 //   "shadow": 0.55,                                    // soft contact shadow under the feet (its darkness), or {"opacity", "width", "height"} as parts of the size
 //   "filter": "brightness(.7) saturate(.8)",           // CSS filter to fit a separately drawn picture into the room's light
 //   "blend": true,                                     // crossfade between frames (slow, soft creatures); or the fade time in ms
-//   "idle": "float",                                   // idle motion for a standing actor: "breathe" (a sleeping animal), "sniff", "float" (slow drift in water or air) "jelly" (drift with a soft sway of the lower body) or "scrub" (quick side-to-side, a robot cleaning)
+//   "idle": "float",                                   // idle motion for a standing actor: "breathe" (a sleeping animal), "sniff", "float" (slow drift in water or air) "jelly" (drift with a soft sway of the lower body), "bob" (a gentle up-and-down without sway) or "scrub" (quick side-to-side, a robot cleaning)
 //   "delay": 1500,                                     // when it appears during play, wait this long and fade in (after another actor's exit run)
 //   "play": { "type": "frames", "frames": [...], "fps": 8, "hold": 600 }   // one-shot frame sequence for the "play" action
 // }]

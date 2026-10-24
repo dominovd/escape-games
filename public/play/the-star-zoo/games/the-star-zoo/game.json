@@ -1,0 +1,2381 @@
+{
+  "id": "deck",
+  "title": "The Star Zoo",
+  "theme": "castle",
+  "start": "deck",
+  "intro": "At night you sneaked aboard an old interplanetary zoo ship parked at the edge of a dark planet. The hatch hissed shut behind you, and a calm voice announced: automatic launch in one hour. Find a way to open the airlock before the Star Zoo takes you to the stars.",
+  "winTitle": "Airlock open",
+  "winText": "The airlock wheel spins, the hatch swings open and cool night air rolls in. You step out under the two moons. Behind you the little robot waves goodbye, and the jelly creature flashes all its colours at once.",
+  "audio": {
+    "music": "assets/audio/music_deck.mp3",
+    "ambience": "assets/audio/amb_deck.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "rack": "assets/audio/sfx_rack.mp3",
+      "grab": "assets/audio/sfx_grab.mp3",
+      "slurp": "assets/audio/sfx_slurp.mp3",
+      "robot": "assets/audio/sfx_robot.mp3",
+      "holo": "assets/audio/sfx_holo.mp3",
+      "crate": "assets/audio/sfx_crate.mp3",
+      "console": "assets/audio/sfx_console.mp3",
+      "card": "assets/audio/sfx_card.mp3",
+      "airlock": "assets/audio/sfx_airlock.mp3"
+    }
+  },
+  "scenes": {
+    "deck": {
+      "title": "The menagerie deck",
+      "image": "assets/deck.webp",
+      "layers": [
+        {
+          "image": "assets/layer_fruit.png",
+          "rect": [
+            3548,
+            253,
+            161,
+            257
+          ],
+          "if": "!flag:fruit_taken"
+        },
+        {
+          "image": "assets/layer_blob_bg.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "!flag:fed"
+        },
+        {
+          "image": "assets/layer_rack_open.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_rack_open_empty.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": "flag:grabber_taken"
+        },
+        {
+          "image": "assets/layer_terrarium_fed.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_terrarium_fed_empty.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "flag:cell_taken"
+        },
+        {
+          "image": "assets/layer_crate_open.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_crate_open_empty.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": "flag:crate_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_airlock_open.png",
+          "rect": [
+            0,
+            322,
+            574,
+            1332
+          ],
+          "if": "flag:airlock_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "airlock",
+          "label": "Airlock",
+          "rect": [
+            0,
+            322,
+            574,
+            1286
+          ],
+          "do": [
+            {
+              "goto": "airlock"
+            }
+          ]
+        },
+        {
+          "id": "chart",
+          "label": "Maintenance chart",
+          "rect": [
+            753,
+            230,
+            390,
+            271
+          ],
+          "do": [
+            {
+              "goto": "rack"
+            }
+          ]
+        },
+        {
+          "id": "rack",
+          "label": "Tool rack",
+          "rect": [
+            792,
+            528,
+            333,
+            942
+          ],
+          "do": [
+            {
+              "goto": "rack"
+            }
+          ]
+        },
+        {
+          "id": "robot",
+          "label": "Robot",
+          "rect": [
+            988,
+            1194,
+            356,
+            459
+          ],
+          "if": "!flag:robot_on",
+          "do": [
+            {
+              "goto": "robot"
+            }
+          ]
+        },
+        {
+          "id": "portholes",
+          "label": "Portholes",
+          "rect": [
+            1194,
+            69,
+            1332,
+            919
+          ],
+          "do": [
+            {
+              "goto": "portholes"
+            }
+          ]
+        },
+        {
+          "id": "console",
+          "label": "Navigation console",
+          "rect": [
+            1309,
+            988,
+            1217,
+            482
+          ],
+          "do": [
+            {
+              "goto": "console"
+            }
+          ]
+        },
+        {
+          "id": "terrarium",
+          "label": "Terrarium",
+          "rect": [
+            2526,
+            574,
+            609,
+            1079
+          ],
+          "do": [
+            {
+              "goto": "terrarium"
+            }
+          ]
+        },
+        {
+          "id": "planter",
+          "label": "Planter",
+          "rect": [
+            3365,
+            69,
+            413,
+            1217
+          ],
+          "do": [
+            {
+              "goto": "planter"
+            }
+          ]
+        },
+        {
+          "id": "crate",
+          "label": "Cargo crate",
+          "rect": [
+            3009,
+            1344,
+            792,
+            574
+          ],
+          "do": [
+            {
+              "goto": "crate"
+            }
+          ]
+        },
+        {
+          "id": "shelf",
+          "label": "Specimen jars",
+          "rect": [
+            2825,
+            218,
+            609,
+            310
+          ],
+          "do": [
+            {
+              "say": "Jars with labels from far-off worlds: a pickled star-snail, a jar of humming moss, a sock of unknown origin."
+            }
+          ]
+        },
+        {
+          "id": "robot_c",
+          "label": "Robot",
+          "if": "flag:robot_on",
+          "do": [
+            {
+              "goto": "console"
+            }
+          ],
+          "rect": [
+            2021,
+            1194,
+            333,
+            471
+          ]
+        }
+      ]
+    },
+    "rack": {
+      "title": "Tool rack",
+      "image": "assets/deck.webp",
+      "crop": [
+        0,
+        101,
+        2744,
+        1543
+      ],
+      "back": "deck",
+      "layers": [
+        {
+          "image": "assets/layer_fruit.png",
+          "rect": [
+            3548,
+            253,
+            161,
+            257
+          ],
+          "if": "!flag:fruit_taken"
+        },
+        {
+          "image": "assets/layer_blob_bg.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "!flag:fed"
+        },
+        {
+          "image": "assets/layer_rack_open.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_rack_open_empty.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": "flag:grabber_taken"
+        },
+        {
+          "image": "assets/layer_terrarium_fed.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_terrarium_fed_empty.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "flag:cell_taken"
+        },
+        {
+          "image": "assets/layer_crate_open.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_crate_open_empty.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": "flag:crate_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_airlock_open.png",
+          "rect": [
+            0,
+            322,
+            574,
+            1332
+          ],
+          "if": "flag:airlock_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "chart_look",
+          "label": "Maintenance chart",
+          "rect": [
+            753,
+            230,
+            390,
+            271
+          ],
+          "do": [
+            {
+              "say": "A maintenance chart for the tool rack: two rows of four little lamps, some lit, some dark. \"Set the switches like this to open\"."
+            },
+            {
+              "set": "chart_seen"
+            }
+          ]
+        },
+        {
+          "id": "rack_lock",
+          "label": "Switch panel",
+          "rect": [
+            792,
+            528,
+            333,
+            942
+          ],
+          "if": "!solved:rack",
+          "hint": "The chart next to the rack shows which switches must be on.",
+          "do": [
+            {
+              "puzzle": "rack"
+            }
+          ]
+        },
+        {
+          "id": "grabber",
+          "label": "Grabber",
+          "rect": [
+            792,
+            528,
+            333,
+            942
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A grabber on a long telescopic pole. Good for things out of reach."
+            },
+            {
+              "set": "grabber_taken"
+            },
+            {
+              "give": "grabber"
+            }
+          ]
+        },
+        {
+          "id": "rack_empty",
+          "label": "Tool rack",
+          "rect": [
+            792,
+            528,
+            333,
+            942
+          ],
+          "if": "flag:grabber_taken",
+          "do": [
+            {
+              "say": "Spanners for bolts that do not exist on Earth."
+            }
+          ]
+        }
+      ]
+    },
+    "planter": {
+      "title": "Planter",
+      "image": "assets/deck.webp",
+      "crop": [
+        1096,
+        0,
+        2744,
+        1543
+      ],
+      "back": "deck",
+      "layers": [
+        {
+          "image": "assets/layer_fruit.png",
+          "rect": [
+            3548,
+            253,
+            161,
+            257
+          ],
+          "if": "!flag:fruit_taken"
+        },
+        {
+          "image": "assets/layer_blob_bg.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "!flag:fed"
+        },
+        {
+          "image": "assets/layer_rack_open.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_rack_open_empty.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": "flag:grabber_taken"
+        },
+        {
+          "image": "assets/layer_terrarium_fed.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_terrarium_fed_empty.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "flag:cell_taken"
+        },
+        {
+          "image": "assets/layer_crate_open.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_crate_open_empty.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": "flag:crate_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_airlock_open.png",
+          "rect": [
+            0,
+            322,
+            574,
+            1332
+          ],
+          "if": "flag:airlock_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "fruit",
+          "label": "Glowing fruit",
+          "rect": [
+            3525,
+            241,
+            195,
+            276
+          ],
+          "if": "!flag:fruit_taken",
+          "use": "grabber",
+          "fail": "A glowing orange fruit hangs at the very top of the vine, far out of reach.",
+          "hint": "Something on the tool rack can reach that high.",
+          "do": [
+            {
+              "sfx": "grab"
+            },
+            {
+              "say": "The grabber snaps shut around the fruit. It is warm and smells of pears and thunderstorms."
+            },
+            {
+              "set": "fruit_taken"
+            },
+            {
+              "give": "fruit"
+            }
+          ]
+        },
+        {
+          "id": "vine",
+          "label": "Vine",
+          "rect": [
+            3376,
+            528,
+            390,
+            758
+          ],
+          "do": [
+            {
+              "say": "A curly alien vine in a glass tube of bubbling water. It hums softly."
+            }
+          ]
+        }
+      ]
+    },
+    "terrarium": {
+      "title": "Terrarium",
+      "image": "assets/deck.webp",
+      "crop": [
+        1463,
+        456,
+        2377,
+        1337
+      ],
+      "back": "deck",
+      "layers": [
+        {
+          "image": "assets/layer_fruit.png",
+          "rect": [
+            3548,
+            253,
+            161,
+            257
+          ],
+          "if": "!flag:fruit_taken"
+        },
+        {
+          "image": "assets/layer_blob_bg.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "!flag:fed"
+        },
+        {
+          "image": "assets/layer_rack_open.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_rack_open_empty.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": "flag:grabber_taken"
+        },
+        {
+          "image": "assets/layer_terrarium_fed.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_terrarium_fed_empty.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "flag:cell_taken"
+        },
+        {
+          "image": "assets/layer_crate_open.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_crate_open_empty.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": "flag:crate_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_airlock_open.png",
+          "rect": [
+            0,
+            322,
+            574,
+            1332
+          ],
+          "if": "flag:airlock_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "blob",
+          "label": "Jelly creature",
+          "rect": [
+            2630,
+            850,
+            459,
+            402
+          ],
+          "if": "!flag:fed",
+          "use": "fruit",
+          "consume": true,
+          "fail": "A wobbly jelly creature sits on something that glows under it. It stares at you with hungry eyes and will not move.",
+          "hint": "The creature is hungry. Something on the planter looks tasty.",
+          "do": [
+            {
+              "sfx": "slurp"
+            },
+            {
+              "say": "Gulp! The creature swallows the fruit, oozes into the corner and starts flashing colours. It was sitting on an energy cell."
+            },
+            {
+              "set": "fed"
+            }
+          ]
+        },
+        {
+          "id": "cell",
+          "label": "Energy cell",
+          "rect": [
+            2630,
+            1045,
+            218,
+            161
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "You reach through the little hatch and take the energy cell. It buzzes in your hand."
+            },
+            {
+              "set": "cell_taken"
+            },
+            {
+              "give": "cell"
+            }
+          ]
+        },
+        {
+          "id": "blob_colors",
+          "label": "Jelly creature",
+          "rect": [
+            2813,
+            850,
+            276,
+            402
+          ],
+          "if": "flag:fed",
+          "hint": "Watch the creature: after each bright white flash it shows four colours in a row.",
+          "do": [
+            {
+              "say": "After every bright white flash the creature shows the same four colours, one after another."
+            },
+            {
+              "set": "colors_seen"
+            }
+          ]
+        }
+      ]
+    },
+    "crate": {
+      "title": "Cargo crate",
+      "image": "assets/deck.webp",
+      "crop": [
+        1919,
+        975,
+        1921,
+        1081
+      ],
+      "back": "deck",
+      "layers": [
+        {
+          "image": "assets/layer_fruit.png",
+          "rect": [
+            3548,
+            253,
+            161,
+            257
+          ],
+          "if": "!flag:fruit_taken"
+        },
+        {
+          "image": "assets/layer_blob_bg.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "!flag:fed"
+        },
+        {
+          "image": "assets/layer_rack_open.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_rack_open_empty.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": "flag:grabber_taken"
+        },
+        {
+          "image": "assets/layer_terrarium_fed.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_terrarium_fed_empty.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "flag:cell_taken"
+        },
+        {
+          "image": "assets/layer_crate_open.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_crate_open_empty.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": "flag:crate_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_airlock_open.png",
+          "rect": [
+            0,
+            322,
+            574,
+            1332
+          ],
+          "if": "flag:airlock_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "crate_lock",
+          "label": "Colour lock",
+          "rect": [
+            3055,
+            1562,
+            689,
+            207
+          ],
+          "if": "!solved:crate",
+          "hint": "Four colour wheels. Somebody in this room changes colour all the time.",
+          "do": [
+            {
+              "puzzle": "crate"
+            }
+          ]
+        },
+        {
+          "id": "crate_items",
+          "label": "Crate",
+          "rect": [
+            3055,
+            1102,
+            781,
+            494
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "Inside: half of a key card and the ship's logbook."
+            },
+            {
+              "set": "crate_taken"
+            },
+            {
+              "give": "card_a"
+            },
+            {
+              "give": "log"
+            }
+          ]
+        },
+        {
+          "id": "crate_empty",
+          "label": "Crate",
+          "rect": [
+            3055,
+            1102,
+            781,
+            494
+          ],
+          "if": "flag:crate_taken",
+          "do": [
+            {
+              "say": "Packing straw and one lonely space sock."
+            }
+          ]
+        }
+      ]
+    },
+    "robot": {
+      "title": "Robot",
+      "image": "assets/deck.webp",
+      "crop": [
+        440,
+        989,
+        1463,
+        823
+      ],
+      "back": "deck",
+      "layers": [
+        {
+          "image": "assets/layer_fruit.png",
+          "rect": [
+            3548,
+            253,
+            161,
+            257
+          ],
+          "if": "!flag:fruit_taken"
+        },
+        {
+          "image": "assets/layer_blob_bg.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "!flag:fed"
+        },
+        {
+          "image": "assets/layer_rack_open.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_rack_open_empty.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": "flag:grabber_taken"
+        },
+        {
+          "image": "assets/layer_terrarium_fed.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_terrarium_fed_empty.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "flag:cell_taken"
+        },
+        {
+          "image": "assets/layer_crate_open.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_crate_open_empty.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": "flag:crate_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_airlock_open.png",
+          "rect": [
+            0,
+            322,
+            574,
+            1332
+          ],
+          "if": "flag:airlock_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "robot_off",
+          "label": "Robot",
+          "rect": [
+            988,
+            1194,
+            356,
+            459
+          ],
+          "if": "!flag:robot_on",
+          "use": "cell",
+          "consume": true,
+          "fail": "A little maintenance robot on a rail. Its battery slot is empty and one lamp blinks sadly.",
+          "hint": "The robot needs an energy cell. Something in the room is sitting on one.",
+          "do": [
+            {
+              "sfx": "robot"
+            },
+            {
+              "say": "The robot beeps, its eyes light up and it rolls along the rail to the navigation console."
+            },
+            {
+              "set": "robot_on"
+            }
+          ]
+        }
+      ]
+    },
+    "console": {
+      "title": "Navigation console",
+      "image": "assets/deck.webp",
+      "crop": [
+        1083,
+        821,
+        1738,
+        978
+      ],
+      "back": "deck",
+      "layers": [
+        {
+          "image": "assets/layer_fruit.png",
+          "rect": [
+            3548,
+            253,
+            161,
+            257
+          ],
+          "if": "!flag:fruit_taken"
+        },
+        {
+          "image": "assets/layer_blob_bg.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "!flag:fed"
+        },
+        {
+          "image": "assets/layer_rack_open.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_rack_open_empty.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": "flag:grabber_taken"
+        },
+        {
+          "image": "assets/layer_terrarium_fed.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_terrarium_fed_empty.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "flag:cell_taken"
+        },
+        {
+          "image": "assets/layer_crate_open.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_crate_open_empty.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": "flag:crate_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_airlock_open.png",
+          "rect": [
+            0,
+            322,
+            574,
+            1332
+          ],
+          "if": "flag:airlock_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "buttons_dead",
+          "label": "Planet buttons",
+          "rect": [
+            1447,
+            1045,
+            907,
+            172
+          ],
+          "if": [
+            "!flag:route_seen",
+            "!solved:console"
+          ],
+          "hint": "The console wants the ship's route. Someone in the room knows it.",
+          "do": [
+            {
+              "say": "Six buttons with planets on them. A sign says: ENTER ROUTE. You have no idea which route."
+            }
+          ]
+        },
+        {
+          "id": "buttons",
+          "label": "Planet buttons",
+          "rect": [
+            1447,
+            1045,
+            907,
+            172
+          ],
+          "if": [
+            "flag:route_seen",
+            "!solved:console"
+          ],
+          "hint": "Press the planets in the order of the route in the robot's hologram.",
+          "do": [
+            {
+              "puzzle": "console"
+            }
+          ]
+        },
+        {
+          "id": "robot_holo",
+          "label": "Robot",
+          "rect": [
+            2021,
+            1194,
+            333,
+            471
+          ],
+          "if": "flag:robot_on",
+          "do": [
+            {
+              "sfx": "holo"
+            },
+            {
+              "play": "robot_console"
+            },
+            {
+              "play": "robot_console"
+            },
+            {
+              "play": "robot_console"
+            },
+            {
+              "play": "robot_console"
+            },
+            {
+              "play": "robot_console"
+            },
+            {
+              "play": "robot_console"
+            },
+            {
+              "play": "robot_console"
+            },
+            {
+              "play": "robot_console"
+            },
+            {
+              "play": "robot_console"
+            },
+            {
+              "say": "The robot projects a glowing map: the ship's route through four worlds."
+            },
+            {
+              "set": "route_seen"
+            },
+            {
+              "inspect": "route"
+            }
+          ]
+        },
+        {
+          "id": "drawer",
+          "label": "Drawer",
+          "rect": [
+            1665,
+            1263,
+            505,
+            310
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "The other half of the key card."
+            },
+            {
+              "set": "drawer_taken"
+            },
+            {
+              "give": "card_b"
+            }
+          ]
+        },
+        {
+          "id": "drawer_empty",
+          "label": "Drawer",
+          "rect": [
+            1665,
+            1263,
+            505,
+            310
+          ],
+          "if": "flag:drawer_taken",
+          "do": [
+            {
+              "say": "Empty, apart from a star-shaped paperclip."
+            }
+          ]
+        }
+      ]
+    },
+    "portholes": {
+      "title": "Portholes",
+      "image": "assets/deck.webp",
+      "crop": [
+        832,
+        0,
+        2103,
+        1183
+      ],
+      "back": "deck",
+      "layers": [
+        {
+          "image": "assets/layer_fruit.png",
+          "rect": [
+            3548,
+            253,
+            161,
+            257
+          ],
+          "if": "!flag:fruit_taken"
+        },
+        {
+          "image": "assets/layer_blob_bg.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "!flag:fed"
+        },
+        {
+          "image": "assets/layer_rack_open.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_rack_open_empty.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": "flag:grabber_taken"
+        },
+        {
+          "image": "assets/layer_terrarium_fed.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_terrarium_fed_empty.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "flag:cell_taken"
+        },
+        {
+          "image": "assets/layer_crate_open.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_crate_open_empty.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": "flag:crate_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_airlock_open.png",
+          "rect": [
+            0,
+            322,
+            574,
+            1332
+          ],
+          "if": "flag:airlock_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "view",
+          "label": "View",
+          "rect": [
+            1194,
+            69,
+            1332,
+            919
+          ],
+          "do": [
+            {
+              "say": "Outside: the dark planet the ship is parked on, a huge ringed world in the sky and two little moons."
+            },
+            {
+              "set": "porthole_seen"
+            }
+          ]
+        }
+      ]
+    },
+    "airlock": {
+      "title": "Airlock",
+      "image": "assets/deck.webp",
+      "crop": [
+        0,
+        142,
+        2927,
+        1646
+      ],
+      "back": "deck",
+      "layers": [
+        {
+          "image": "assets/layer_fruit.png",
+          "rect": [
+            3548,
+            253,
+            161,
+            257
+          ],
+          "if": "!flag:fruit_taken"
+        },
+        {
+          "image": "assets/layer_blob_bg.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "!flag:fed"
+        },
+        {
+          "image": "assets/layer_rack_open.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": [
+            "solved:rack",
+            "!flag:grabber_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_rack_open_empty.png",
+          "rect": [
+            643,
+            494,
+            494,
+            1033
+          ],
+          "if": "flag:grabber_taken"
+        },
+        {
+          "image": "assets/layer_terrarium_fed.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": [
+            "flag:fed",
+            "!flag:cell_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_terrarium_fed_empty.png",
+          "rect": [
+            2618,
+            838,
+            471,
+            425
+          ],
+          "if": "flag:cell_taken"
+        },
+        {
+          "image": "assets/layer_crate_open.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": [
+            "solved:crate",
+            "!flag:crate_taken"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_crate_open_empty.png",
+          "rect": [
+            3055,
+            1091,
+            785,
+            517
+          ],
+          "if": "flag:crate_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": [
+            "solved:console",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1658,
+            1252,
+            519,
+            333
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_airlock_open.png",
+          "rect": [
+            0,
+            322,
+            574,
+            1332
+          ],
+          "if": "flag:airlock_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "slot",
+          "label": "Card slot",
+          "rect": [
+            574,
+            815,
+            138,
+            310
+          ],
+          "if": "!flag:card_in",
+          "use": "card",
+          "consume": true,
+          "fail": "A card slot and a keypad. The airlock will not even listen to you without a key card.",
+          "hint": "The airlock needs a whole key card. Its halves are hidden in two places.",
+          "do": [
+            {
+              "sfx": "card"
+            },
+            {
+              "say": "The card slides in and the keypad lights up: ENTER DOCKING CODE."
+            },
+            {
+              "set": "card_in"
+            }
+          ]
+        },
+        {
+          "id": "keypad",
+          "label": "Keypad",
+          "rect": [
+            574,
+            815,
+            138,
+            310
+          ],
+          "if": [
+            "flag:card_in",
+            "!flag:airlock_open"
+          ],
+          "hint": "Every planet in the logbook has its own docking code. Look out of the porthole to see where you are.",
+          "do": [
+            {
+              "puzzle": "airlock"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Step outside",
+          "rect": [
+            0,
+            322,
+            574,
+            1286
+          ],
+          "if": "flag:airlock_open",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "grabber": {
+      "name": "Grabber",
+      "icon": "assets/grabber.png",
+      "text": "A grabber on a long telescopic pole."
+    },
+    "fruit": {
+      "name": "Glowing fruit",
+      "icon": "assets/fruit.png",
+      "text": "Warm, glowing and smells of pears and thunderstorms."
+    },
+    "cell": {
+      "name": "Energy cell",
+      "icon": "assets/cell.png",
+      "text": "A buzzing energy cell."
+    },
+    "card_a": {
+      "name": "Left card half",
+      "icon": "assets/card_a.png",
+      "text": "The left half of a key card.",
+      "combine": {
+        "with": "card_b",
+        "into": "card",
+        "text": "The two halves click together into one key card."
+      }
+    },
+    "card_b": {
+      "name": "Right card half",
+      "icon": "assets/card_b.png",
+      "text": "The right half of a key card."
+    },
+    "card": {
+      "name": "Key card",
+      "icon": "assets/card.png",
+      "text": "The airlock key card, whole again."
+    },
+    "log": {
+      "name": "Ship's logbook",
+      "icon": "assets/log.png",
+      "text": "The ship's logbook. One page lists docking codes for four planets.",
+      "image": "assets/log.jpg"
+    },
+    "route": {
+      "name": "Route hologram",
+      "text": "The ship's route: 1 Earth, 2 a comet, 3 a moon, 4 a ringed planet.",
+      "image": "assets/route.jpg"
+    }
+  },
+  "puzzles": {
+    "rack": {
+      "type": "switches",
+      "title": "Switch panel",
+      "prompt": "Two rows of four switches.",
+      "rows": 2,
+      "cols": 4,
+      "start": "00000000",
+      "answer": "10011101",
+      "clue": "flag:chart_seen",
+      "do": [
+        {
+          "sfx": "rack"
+        },
+        {
+          "say": "Click, click, clunk: the tool rack unlocks and swings open. A grabber hangs inside."
+        }
+      ]
+    },
+    "crate": {
+      "type": "dials",
+      "title": "Colour lock",
+      "prompt": "Four colour wheels.",
+      "options": [
+        "#e2483d",
+        "#4fc25a",
+        "#3f74e0",
+        "#f0c93a",
+        "#a35ad6",
+        "#f08a32"
+      ],
+      "answer": [
+        "#f0c93a",
+        "#e2483d",
+        "#3f74e0",
+        "#4fc25a"
+      ],
+      "clue": "flag:colors_seen",
+      "do": [
+        {
+          "sfx": "crate"
+        },
+        {
+          "say": "The crate lid pops open with a hiss."
+        }
+      ]
+    },
+    "console": {
+      "type": "sequence",
+      "title": "Navigation console",
+      "prompt": "Enter the route.",
+      "blind": true,
+      "buttons": [
+        "🌍",
+        "🪐",
+        "🌕",
+        "☄️",
+        "🌑",
+        "⭐"
+      ],
+      "answer": [
+        "🌍",
+        "☄️",
+        "🌕",
+        "🪐"
+      ],
+      "clue": "flag:route_seen",
+      "do": [
+        {
+          "sfx": "console"
+        },
+        {
+          "say": "ROUTE CONFIRMED. A little drawer slides out of the console."
+        }
+      ]
+    },
+    "airlock": {
+      "type": "code",
+      "title": "Docking code",
+      "prompt": "Four digits.",
+      "answer": "7194",
+      "clue": [
+        "has:log",
+        "flag:porthole_seen"
+      ],
+      "do": [
+        {
+          "sfx": "airlock"
+        },
+        {
+          "say": "DOCKING CODE ACCEPTED. The big wheel on the hatch begins to turn."
+        },
+        {
+          "set": "airlock_open"
+        }
+      ]
+    }
+  },
+  "actors": [
+    {
+      "id": "robot",
+      "frames": [
+        "assets/robot_off.png",
+        "assets/robot_off.png",
+        "assets/robot_off.png",
+        "assets/robot_off.png",
+        "assets/robot_off.png",
+        "assets/robot_off.png",
+        "assets/robot_off.png",
+        "assets/robot_off.png",
+        "assets/robot_off_blink.png",
+        "assets/robot_off_blink.png"
+      ],
+      "fps": 2,
+      "size": [
+        455,
+        490
+      ],
+      "path": [
+        [
+          1172,
+          1635
+        ]
+      ],
+      "flip": false,
+      "if": "!flag:robot_on",
+      "shadow": {
+        "opacity": 0.5,
+        "width": 0.45,
+        "height": 0.06
+      },
+      "filter": "brightness(.86) saturate(.95)",
+      "exit": {
+        "lead": {
+          "frames": [
+            "assets/robot_wake.png",
+            "assets/robot_wake.png",
+            "assets/robot_wake.png",
+            "assets/robot_wake.png",
+            "assets/robot_wake.png",
+            "assets/robot_wake.png"
+          ],
+          "fps": 6,
+          "hold": 0
+        },
+        "frames": [
+          "assets/robot_roll1.png",
+          "assets/robot_roll2.png",
+          "assets/robot_roll3.png",
+          "assets/robot_roll4.png"
+        ],
+        "fps": 8,
+        "easing": "ease-in-out",
+        "path": [
+          [
+            2194,
+            1635
+          ]
+        ],
+        "speed": 420,
+        "fade": false
+      }
+    },
+    {
+      "id": "robot_console",
+      "frames": [
+        "assets/robot_wake.png"
+      ],
+      "fps": 1,
+      "size": [
+        455,
+        490
+      ],
+      "path": [
+        [
+          2194,
+          1635
+        ]
+      ],
+      "flip": false,
+      "if": "flag:robot_on",
+      "delay": 3700,
+      "shadow": {
+        "opacity": 0.5,
+        "width": 0.45,
+        "height": 0.06
+      },
+      "filter": "brightness(.86) saturate(.95)",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/robot_project.png",
+          "assets/robot_project.png",
+          "assets/robot_project.png",
+          "assets/robot_project.png",
+          "assets/robot_project.png",
+          "assets/robot_project.png",
+          "assets/robot_project.png",
+          "assets/robot_project.png"
+        ],
+        "fps": 2,
+        "hold": 0
+      }
+    },
+    {
+      "id": "blob",
+      "frames": [
+        "assets/blob.png"
+      ],
+      "idle": "bob",
+      "size": [
+        471,
+        425
+      ],
+      "path": [
+        [
+          2853,
+          1263
+        ]
+      ],
+      "flip": false,
+      "if": "!flag:fed"
+    },
+    {
+      "id": "blob_fed",
+      "frames": [
+        "assets/blob_fed_white.png",
+        "assets/blob_fed_yellow.png",
+        "assets/blob_fed_red.png",
+        "assets/blob_fed_blue.png",
+        "assets/blob_fed_green.png",
+        "assets/empty.png",
+        "assets/empty.png",
+        "assets/empty.png"
+      ],
+      "fps": 1.25,
+      "blend": 350,
+      "size": [
+        471,
+        425
+      ],
+      "path": [
+        [
+          2853,
+          1263
+        ]
+      ],
+      "flip": false,
+      "if": [
+        "flag:fed",
+        "!flag:cell_taken"
+      ]
+    },
+    {
+      "id": "blob_fed_empty",
+      "frames": [
+        "assets/blob_fed_empty_white.png",
+        "assets/blob_fed_empty_yellow.png",
+        "assets/blob_fed_empty_red.png",
+        "assets/blob_fed_empty_blue.png",
+        "assets/blob_fed_empty_green.png",
+        "assets/empty.png",
+        "assets/empty.png",
+        "assets/empty.png"
+      ],
+      "fps": 1.25,
+      "blend": 350,
+      "size": [
+        471,
+        425
+      ],
+      "path": [
+        [
+          2853,
+          1263
+        ]
+      ],
+      "flip": false,
+      "if": "flag:cell_taken"
+    }
+  ],
+  "ambient": [
+    {
+      "type": "particles",
+      "kind": "bubbles",
+      "rect": [
+        3411,
+        92,
+        322,
+        919
+      ],
+      "count": 18
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        1240,
+        138,
+        1240,
+        827
+      ],
+      "count": 18,
+      "size": 0.5,
+      "alpha": 0.5,
+      "speed": 0.3,
+      "color": "#d9dcff"
+    },
+    {
+      "type": "light",
+      "at": [
+        517,
+        253
+      ],
+      "r": 520,
+      "color": "#ffb257",
+      "strength": 0.22,
+      "flicker": 0.08
+    },
+    {
+      "type": "light",
+      "at": [
+        2733,
+        402
+      ],
+      "r": 360,
+      "color": "#ffb257",
+      "strength": 0.18,
+      "flicker": 0.08
+    },
+    {
+      "type": "light",
+      "at": [
+        1906,
+        1125
+      ],
+      "r": 600,
+      "color": "#47e3e0",
+      "strength": 0.16,
+      "flicker": 0.05
+    },
+    {
+      "type": "light",
+      "at": [
+        2848,
+        1079
+      ],
+      "r": 380,
+      "color": "#4fffe0",
+      "strength": 0.15,
+      "flicker": 0.12,
+      "if": "!flag:fed"
+    }
+  ]
+}

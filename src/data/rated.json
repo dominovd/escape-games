@@ -67,9 +67,9 @@
   },
   "the-crooked-tower": {
     "difficulty": "hard",
-    "score": 24.5,
+    "score": 23.3,
     "minutes": 30,
-    "tasks": 19
+    "tasks": 18
   },
   "the-cursed-manor": {
     "difficulty": "hard",
@@ -100,6 +100,12 @@
     "score": 8.5,
     "minutes": 10,
     "tasks": 6
+  },
+  "the-star-zoo": {
+    "difficulty": "hard",
+    "score": 22.1,
+    "minutes": 35,
+    "tasks": 18
   },
   "trick-or-escape": {
     "difficulty": "easy",
