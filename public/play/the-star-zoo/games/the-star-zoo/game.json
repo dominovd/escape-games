@@ -1555,6 +1555,9 @@
               "play": "robot_console"
             },
             {
+              "play": "robot_console"
+            },
+            {
               "say": "The robot projects a glowing map: the ship's route through four worlds."
             },
             {

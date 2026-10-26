@@ -1,0 +1,213 @@
+.ek{
+  --ek-bg:#090b1a; --ek-panel:#141833; --ek-panel-2:#1c2147; --ek-line:#ffffff1f;
+  --ek-text:#ece8f6; --ek-dim:#a7a2bf; --ek-accent:#f5c38b; --ek-accent-2:#efa85b; --ek-ok:#8ee0a6; --ek-bad:#ff8a7a;
+  position:relative; display:flex; flex-direction:column; height:100%; min-height:0; background:var(--ek-bg); color:var(--ek-text);
+  font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif; overflow:hidden; user-select:none; -webkit-user-select:none;
+}
+.ek *{box-sizing:border-box}
+.ek button{font:inherit;color:inherit}
+.ek-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-bottom:1px solid var(--ek-line);background:#0c0f22}
+.ek-title{font:400 20px Georgia,serif;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ek-actions{display:flex;gap:8px}
+.ek-btn{cursor:pointer;border:1px solid #ffdbab;border-radius:6px;padding:9px 18px;background:linear-gradient(#ffd69c,var(--ek-accent-2));color:#231629!important;font-weight:600!important}
+.ek-btn:hover{filter:brightness(1.1)}
+.ek-btn.ghost{background:transparent;border-color:var(--ek-line);color:var(--ek-text)!important;font-weight:500!important;padding:7px 14px}
+.ek-btn.ghost:hover{background:#ffffff12}
+.ek-btn:disabled{opacity:.4;cursor:default}
+.ek button:focus-visible{outline:2px solid var(--ek-accent);outline-offset:2px}
+
+.ek-view{position:relative;flex:1;min-height:0;display:grid;place-items:center;padding:12px}
+.ek-frame{position:relative}
+.ek-scene{position:absolute;inset:0;overflow:hidden;border-radius:10px;box-shadow:0 20px 60px #0008;background:#000}
+.ek-canvas{position:absolute}
+.ek-base,.ek-layer{position:absolute;display:block;pointer-events:none}
+.ek-base{inset:0;width:100%;height:100%}
+.ek-hot{position:absolute;padding:0;border:0;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ek-hot:focus{outline:none}
+.ek-hot:focus-visible{outline:2px solid #ffe3b499;outline-offset:2px;border-radius:6px}
+.ek-scene.debug .ek-hot{background:#ff3b6b33;box-shadow:inset 0 0 0 2px #ff3b6b}
+.ek-error{padding:40px;color:var(--ek-bad)}
+.ek-back{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:52px;height:52px;display:grid;place-items:center;cursor:pointer;border:1px solid #ffffff2e;background:#090b1a8c;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:50%;color:#f5e6cf;padding:0;transition:background .15s,transform .15s;z-index:2}
+.ek-back svg{width:26px;height:26px}
+.ek-back:hover{background:#1c2147d9;transform:translateX(-50%) translateY(2px)}
+.ek-back[hidden]{display:none}
+
+.ek-msg{position:absolute;left:50%;bottom:80px;transform:translate(-50%,8px);width:max-content;max-width:min(640px,calc(100% - 32px));padding:10px 18px;border-radius:10px;background:#0a0c1ef0;border:1px solid var(--ek-line);box-shadow:0 10px 30px #0008;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;text-align:center;z-index:5}
+.ek-msg.show{opacity:1;transform:translate(-50%,0)}
+.ek-msg .dim{color:var(--ek-dim)}
+.ek-msg .hint{color:var(--ek-accent)}
+
+.ek-inv{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 16px;border-top:1px solid var(--ek-line);background:#0c0f22;transition:box-shadow .3s}
+.ek-slots{display:flex;gap:8px;overflow-x:auto;min-width:0;scrollbar-width:none}
+.ek-slot{flex:none;width:60px;height:60px;border-radius:8px;border:1px solid var(--ek-line);background:var(--ek-panel);display:grid;place-items:center;cursor:pointer;padding:6px}
+.ek-slot:disabled{cursor:default;background:#11142a;opacity:.6}
+.ek-slot img{max-width:100%;max-height:100%}
+.ek-slot-name{font-size:10px;line-height:1.15;text-align:center;color:var(--ek-dim)}
+.ek-slot.sel{border-color:var(--ek-accent);box-shadow:0 0 0 2px #f5c38b55,0 0 18px #f5c38b40;background:var(--ek-panel-2)}
+
+.ek-modal{position:absolute;inset:0;z-index:10;display:grid;place-items:center;padding:16px;background:#04050ecc;backdrop-filter:blur(3px)}
+.ek-modal[hidden]{display:none}
+.ek-card{width:min(440px,100%);max-height:100%;overflow:auto;border-radius:14px;background:linear-gradient(#1a1f45,#11142e);border:1px solid #ffffff26;box-shadow:0 30px 80px #000a;transition:box-shadow .3s}
+.ek-card.solved{box-shadow:0 0 0 2px var(--ek-ok),0 0 60px #8ee0a666}
+.ek-card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0 20px}
+.ek-card-head h2{margin:0;font:400 22px Georgia,serif}
+.ek-close{cursor:pointer;border:0;background:transparent;font-size:16px!important;color:var(--ek-dim)!important;width:34px;height:34px;border-radius:6px}
+.ek-close:hover{background:#ffffff12}
+.ek-card-body{padding:12px 20px 22px;display:grid;gap:14px;justify-items:center;text-align:center}
+.ek-prompt{margin:0;color:var(--ek-dim)}
+.ek-puzzle{width:100%;display:grid;gap:12px;justify-items:center;outline:none}
+.ek-puzzle-img{max-width:100%;border-radius:8px}
+.ek-inspect-img{width:120px;height:120px;object-fit:contain}
+.ek-note{margin:0;font:17px/1.6 Georgia,serif;color:#f1e6d2;background:#f5c38b10;border:1px solid #f5c38b30;border-radius:8px;padding:14px 18px}
+.ek-row{display:flex;gap:8px}
+
+.ek-code-display{display:flex;gap:8px}
+.ek-code-cell{width:44px;height:54px;border-radius:8px;border:1px solid #ffffff33;background:#070915;display:grid;place-items:center;font:600 26px ui-monospace,Menlo,monospace;color:var(--ek-accent)}
+.ek-code-cell.filled{border-color:#f5c38b88}
+.ek-keypad{display:grid;grid-template-columns:repeat(3,64px);gap:8px}
+.ek-keypad.wide{grid-template-columns:repeat(7,44px)}
+.ek-key{cursor:pointer;height:52px;border-radius:8px;border:1px solid #ffffff22;background:var(--ek-panel-2);font:600 20px ui-monospace,Menlo,monospace!important}
+.ek-keypad.wide .ek-key{height:44px;font-size:16px!important}
+.ek-key:hover{background:#2a3066}
+.ek-key:active{transform:translateY(1px)}
+.ek-keypad:not(.wide) .ek-key:last-child{grid-column:2}
+
+.ek-dials{display:flex;gap:14px}
+.ek-dial{display:grid;gap:6px;justify-items:center}
+.ek-dial-face{cursor:pointer;width:76px;height:84px;border-radius:12px;border:1px solid #f5c38b55;background:radial-gradient(#262c5c,#0b0e22);font-size:38px!important;display:grid;place-items:center}
+.ek-dial-arrow{cursor:pointer;border:0;background:transparent;color:var(--ek-dim)!important;font-size:14px!important;padding:4px 14px;border-radius:6px}
+.ek-dial-arrow:hover{background:#ffffff12;color:var(--ek-text)!important}
+.ek-swatch{display:inline-block;width:1em;height:1em;border-radius:50%;box-shadow:inset 0 0 0 2px #0004}
+
+.ek-progress{display:flex;gap:6px}
+.ek-progress i{width:10px;height:10px;border-radius:50%;background:#ffffff22}
+.ek-progress i.on{background:var(--ek-accent)}
+.ek-seq{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.ek-seq-btn{cursor:pointer;min-width:64px;height:64px;border-radius:50%;border:1px solid #ffffff2a;background:radial-gradient(#2b3168,#121633);font-size:28px!important}
+.ek-seq-btn:hover{border-color:#f5c38b88}
+
+.ek-switches{display:grid;gap:8px}
+.ek-switch{cursor:pointer;width:54px;height:54px;border-radius:10px;border:1px solid #ffffff22;background:#0b0e22;transition:background .15s,box-shadow .15s}
+.ek-switch.on{background:radial-gradient(#ffe0a8,#e99a45);box-shadow:0 0 18px #f5a54a88;border-color:#ffdbab}
+
+@media (max-width:560px){
+  .ek-top{padding:8px 12px}.ek-title{font-size:17px}
+  .ek-view{padding:6px}
+  .ek-slot{width:50px;height:50px}
+  .ek-msg{bottom:74px;font-size:14px}
+  .ek-keypad{grid-template-columns:repeat(3,58px)}
+  .ek-keypad.wide{grid-template-columns:repeat(6,40px)}
+}
+@media (prefers-reduced-motion:reduce){.ek *{transition:none!important;animation:none!important}}
+.ek-sound{display:grid;place-items:center;width:38px;padding:0!important}
+.ek-sound svg{width:20px;height:20px}
+.ek-inspect-full{width:100%;max-height:60vh;object-fit:contain;filter:drop-shadow(0 12px 30px #000a)}
+.ek-card:has(.ek-inspect-full){width:min(680px,100%)}
+.ek-sound.off{color:var(--ek-dim)!important;opacity:.75}
+.ek-sound[hidden]{display:none}
+
+/* Quiet header: dimmed until the pointer comes near; always full on touch screens. */
+.ek-top{transition:opacity .35s ease}
+@media (hover:hover){
+  .ek-top{opacity:.42}
+  .ek-top:hover,.ek-top:focus-within{opacity:1}
+}
+/* Candle-light falloff around the scene. */
+.ek-view{background:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 45%,#00000080 100%)}
+.ek-view::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 50% 50%,#ffb45a0d,transparent 70%)}
+.ek-frame{z-index:1}
+
+/* ---------- ambient motion (engine/fx.js) ---------- */
+.ek-light,.ek-flame,.ek-particles{position:absolute;pointer-events:none}
+.ek-light{border-radius:50%;background:radial-gradient(circle,var(--c) 0%,color-mix(in srgb,var(--c) 45%,transparent) 28%,transparent 68%);mix-blend-mode:screen;opacity:var(--s)}
+.ek-light.flicker{animation:ek-light-flicker 2s infinite}
+@keyframes ek-light-flicker{
+  0%{opacity:var(--s);transform:scale(1)}
+  13%{opacity:calc(var(--s) * (1 - .22 * var(--f)));transform:scale(.985)}
+  27%{opacity:calc(var(--s) * (1 + .12 * var(--f)))}
+  41%{opacity:calc(var(--s) * (1 - .08 * var(--f)));transform:scale(1.01)}
+  58%{opacity:calc(var(--s) * (1 - .28 * var(--f)))}
+  71%{opacity:calc(var(--s) * (1 + .1 * var(--f)));transform:scale(.99)}
+  86%{opacity:calc(var(--s) * (1 - .14 * var(--f)))}
+  100%{opacity:var(--s);transform:scale(1)}
+}
+.ek-flame{overflow:hidden;transform-origin:50% 100%;animation:ek-flame 1s infinite ease-in-out;
+  -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 55%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 55%,#000 55%,transparent 100%)}
+@keyframes ek-flame{
+  0%,100%{transform:scale(1,1) skewX(0deg);filter:brightness(1)}
+  25%{transform:scale(calc(1 - .01 * var(--amp)),calc(1 + .045 * var(--amp))) skewX(calc(1.6deg * var(--amp)));filter:brightness(1.12)}
+  50%{transform:scale(1,calc(1 + .015 * var(--amp))) skewX(calc(-.8deg * var(--amp)));filter:brightness(1.04)}
+  75%{transform:scale(calc(1 + .01 * var(--amp)),calc(1 + .055 * var(--amp))) skewX(calc(-1.8deg * var(--amp)));filter:brightness(1.16)}
+}
+.ek-flame img{position:absolute;max-width:none}
+.ek-particles{display:block}
+.ek-sway{position:absolute;pointer-events:none;overflow:hidden;
+  -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 60%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 60%,transparent 100%)}
+.ek-sway-in{position:absolute;inset:0;animation:ek-web 5s infinite ease-in-out}
+.ek-sway-in img{position:absolute;max-width:none}
+@keyframes ek-web{
+  0%,100%{transform:rotate(0deg) skewX(0deg)}
+  30%{transform:rotate(calc(.9deg * var(--amp))) skewX(calc(.6deg * var(--amp))) scaleY(calc(1 + .006 * var(--amp)))}
+  65%{transform:rotate(calc(-.6deg * var(--amp))) skewX(calc(-.4deg * var(--amp)))}
+}
+.ek-anim{animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+.ek-anim-sway{animation-name:ek-sway}
+.ek-anim-bob{animation-name:ek-bob}
+.ek-anim-flicker{animation-name:ek-flicker;transform-origin:50% 100%}
+.ek-anim-pulse{animation-name:ek-pulse}
+@keyframes ek-sway{0%,100%{transform:rotate(calc(-2.5deg * var(--amp)))}50%{transform:rotate(calc(2.5deg * var(--amp)))}}
+@keyframes ek-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(-2% * var(--amp)))}}
+@keyframes ek-flicker{0%,100%{opacity:1;transform:scaleY(1)}30%{opacity:.86;transform:scaleY(calc(1 + .04 * var(--amp)))}60%{opacity:.95;transform:scaleY(calc(1 - .02 * var(--amp)))}}
+@keyframes ek-pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(calc(1 + .35 * var(--amp)))}}
+.ek-fly{position:absolute;z-index:20;pointer-events:none;object-fit:contain;filter:drop-shadow(0 6px 14px #000a)}
+@media (prefers-reduced-motion:reduce){.ek-light,.ek-flame,.ek-sway-in,.ek-anim,.ek-idle-float,.ek-idle-jelly,.ek-idle-scrub,.ek-idle-breathe,.ek-idle-bob{animation:none!important}}
+.ek-actor{position:absolute;pointer-events:none;z-index:1}
+.ek-shadow{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,var(--o)),rgba(0,0,0,calc(var(--o) * .45)) 55%,transparent)}
+.ek-actor-flip,.ek-actor-flip img,.ek-actor-body{position:absolute;inset:0;width:100%;height:100%}
+.ek-actor-flip img{object-fit:contain;object-position:50% 100%}
+.ek-hop{animation:ek-hop .32s infinite ease-in-out}
+@keyframes ek-hop{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(-6% * var(--amp)))}}
+.ek-hot.ek-hot-actor{position:absolute;inset:-25%;width:150%;height:150%;pointer-events:auto;border-radius:50%}
+.ek-anim-twirl{animation-name:ek-twirl;animation-timing-function:linear}
+.ek-anim-spin{animation-name:ek-spin;animation-timing-function:linear}
+@keyframes ek-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes ek-twirl{0%{transform:scaleX(1)}25%{transform:scaleX(.08)}50%{transform:scaleX(-1)}75%{transform:scaleX(.08)}100%{transform:scaleX(1)}}
+.ek-thread{position:absolute;width:2px;margin-left:-1px;background:linear-gradient(#e8e4ff00,#e8e4ffaa 12%);pointer-events:none}
+.ek-idle-sniff{transform-origin:50% 100%;animation:ek-sniff 2.4s infinite ease-in-out}
+.ek-idle-float{transform-origin:50% 30%;animation:ek-float 7s infinite ease-in-out}
+@keyframes ek-float{0%,100%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(1.2%,-2%) rotate(1.4deg)}50%{transform:translate(0,-3.2%) rotate(0deg)}75%{transform:translate(-1.2%,-1.6%) rotate(-1.4deg)}}
+.ek-idle-jelly{transform-origin:50% 12%;animation:ek-jelly 6s infinite ease-in-out}
+@keyframes ek-jelly{0%,100%{transform:translate(0,0) rotate(0deg) skewX(0deg) scaleY(1)}25%{transform:translate(1%,-1.6%) rotate(1deg) skewX(2.6deg) scaleY(1.012)}50%{transform:translate(0,-2.8%) rotate(0deg) skewX(0deg) scaleY(.99)}75%{transform:translate(-1%,-1.4%) rotate(-1deg) skewX(-2.6deg) scaleY(1.01)}}
+.ek-idle-bob{transform-origin:50% 100%;animation:ek-bob 4.5s infinite ease-in-out}
+@keyframes ek-bob{0%,100%{transform:translate(0,0) scale(1,1)}50%{transform:translate(0,-1.4%) scale(.995,1.018)}}
+.ek-idle-breathe{transform-origin:50% 100%;animation:ek-breathe 3.4s infinite ease-in-out}
+@keyframes ek-breathe{0%,100%{transform:scale(1,1)}45%{transform:scale(1.006,1.03)}}
+.ek-idle-scrub{transform-origin:50% 100%;animation:ek-scrub .42s infinite ease-in-out}
+@keyframes ek-scrub{0%,100%{transform:translateX(0) rotate(0deg)}25%{transform:translateX(-1.6%) rotate(-.5deg)}75%{transform:translateX(1.6%) rotate(.5deg)}}
+@keyframes ek-sniff{0%,40%,100%{transform:none}48%{transform:translateY(-2%) rotate(-2deg)}56%{transform:translateY(0) rotate(1deg)}64%{transform:translateY(-1.5%) rotate(-1deg)}72%{transform:none}}
+
+/* ---------- compact mode: a short player (phone in portrait inside a page, or a phone in landscape) ----------
+   Header and inventory shrink so the scene gets the height. Doubled .ek.ek beats the theme rules. */
+@media (max-height:460px){
+  .ek.ek .ek-top{padding:3px 8px;gap:6px;min-height:0}
+  .ek.ek .ek-title{font-size:13px!important;letter-spacing:.06em}
+  .ek.ek .ek-actions{gap:4px}
+  .ek.ek .ek-top .ek-btn{font-size:10px!important;padding:3px 8px!important;line-height:1.4;box-shadow:none}
+  .ek.ek .ek-top .ek-sound{width:26px;height:22px;padding:0!important}
+  .ek.ek .ek-top .ek-sound svg{width:14px;height:14px}
+  .ek.ek .ek-view{padding:2px}
+  .ek.ek .ek-scene{border-radius:4px}
+  .ek.ek .ek-inv{padding:3px 8px;gap:6px}
+  .ek.ek .ek-slot{width:38px;height:38px;padding:3px;border-radius:6px}
+  .ek.ek .ek-inv .ek-btn{font-size:10px!important;padding:3px 8px!important;box-shadow:none}
+  .ek.ek .ek-msg{bottom:50px;font-size:12px!important;line-height:1.35;padding:5px 12px!important;max-width:calc(100% - 16px)}
+  .ek.ek .ek-back{width:34px;height:34px;bottom:6px}
+  .ek.ek .ek-back svg{width:18px;height:18px}
+  .ek.ek .ek-modal{padding:6px}
+  .ek.ek .ek-card{max-height:calc(100% - 4px)}
+}
+@media (max-height:300px){
+  .ek.ek .ek-title{display:none}
+  .ek.ek .ek-top{justify-content:flex-end}
+  .ek.ek .ek-slot{width:32px;height:32px}
+}

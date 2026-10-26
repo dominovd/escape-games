@@ -1,0 +1,1661 @@
+{
+  "id": "control",
+  "title": "Maximum Security",
+  "theme": "castle",
+  "start": "control",
+  "intro": "You slipped out of cell 7 and crept into the security control room. It is the middle of the night, the duty guard is asleep in his chair and the monitors hum on the wall. One steel door leads to the yard: a card reader, a code that the warden changes every hour, and a laser grid you cannot see.",
+  "winTitle": "Out in the yard",
+  "winText": "The reader blinks green, the code is accepted and the heavy door slides open. The lasers are dark. Behind you the guard snores on. Ahead: the yard, the searchlights and the outer wall. Room one: done.",
+  "audio": {
+    "music": "assets/audio/music_control.mp3",
+    "ambience": "assets/audio/amb_control.mp3",
+    "musicVolume": 0.5,
+    "ambienceVolume": 0.45,
+    "sfxVolume": 0.8,
+    "sfx": {
+      "pickup": "assets/audio/sfx_pickup.mp3",
+      "select": "assets/audio/sfx_select.mp3",
+      "locked": "assets/audio/sfx_locked.mp3",
+      "zoom": "assets/audio/sfx_zoom.mp3",
+      "back": "assets/audio/sfx_back.mp3",
+      "button": "assets/audio/sfx_button.mp3",
+      "fail": "assets/audio/sfx_fail.mp3",
+      "solve": "assets/audio/sfx_solve.mp3",
+      "win": "assets/audio/sfx_win.mp3",
+      "paper": "assets/audio/sfx_paper.mp3",
+      "glass": "assets/audio/sfx_glass.mp3",
+      "snore": "assets/audio/sfx_snore.mp3",
+      "snip": "assets/audio/sfx_snip.mp3",
+      "drawer": "assets/audio/sfx_drawer.mp3",
+      "spray": "assets/audio/sfx_spray.mp3",
+      "lasers": "assets/audio/sfx_lasers.mp3",
+      "beep": "assets/audio/sfx_beep.mp3",
+      "door": "assets/audio/sfx_door.mp3"
+    }
+  },
+  "scenes": {
+    "control": {
+      "title": "The control room",
+      "image": "assets/control.webp",
+      "layers": [
+        {
+          "image": "assets/layer_flashlight.png",
+          "rect": [
+            3560,
+            632,
+            126,
+            287
+          ],
+          "if": "!flag:flashlight_taken"
+        },
+        {
+          "image": "assets/layer_glass_broken.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": [
+            "flag:glass_broken",
+            "!flag:ext_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_glass_broken_empty.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": "flag:ext_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": [
+            "solved:drawer",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_smoke.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "flag:smoke",
+            "!solved:lasers"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_smoke_off.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "solved:lasers",
+            "!flag:door_open"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "door",
+          "label": "Steel door",
+          "rect": [
+            92,
+            138,
+            735,
+            1608
+          ],
+          "do": [
+            {
+              "goto": "door"
+            }
+          ]
+        },
+        {
+          "id": "firebox",
+          "label": "Fire box",
+          "rect": [
+            1263,
+            482,
+            356,
+            528
+          ],
+          "do": [
+            {
+              "goto": "firebox"
+            }
+          ]
+        },
+        {
+          "id": "clock",
+          "label": "Wall clock",
+          "rect": [
+            1298,
+            149,
+            276,
+            276
+          ],
+          "do": [
+            {
+              "say": "The wall clock says twelve o'clock. The second hand does not move. Stopped, probably for weeks."
+            },
+            {
+              "set": "clock_seen"
+            }
+          ]
+        },
+        {
+          "id": "monitors",
+          "label": "Monitors",
+          "rect": [
+            1780,
+            230,
+            1079,
+            792
+          ],
+          "do": [
+            {
+              "goto": "monitors"
+            }
+          ]
+        },
+        {
+          "id": "desk",
+          "label": "Desk",
+          "rect": [
+            1412,
+            1033,
+            1286,
+            666
+          ],
+          "do": [
+            {
+              "goto": "desk"
+            }
+          ]
+        },
+        {
+          "id": "guard",
+          "label": "Guard",
+          "rect": [
+            2526,
+            804,
+            919,
+            1148
+          ],
+          "do": [
+            {
+              "goto": "guard"
+            }
+          ]
+        },
+        {
+          "id": "shelf",
+          "label": "Shelf",
+          "rect": [
+            3433,
+            448,
+            379,
+            1378
+          ],
+          "do": [
+            {
+              "goto": "shelf"
+            }
+          ]
+        },
+        {
+          "id": "camera",
+          "label": "Camera",
+          "rect": [
+            3399,
+            46,
+            390,
+            276
+          ],
+          "do": [
+            {
+              "say": "A security camera sweeps the room. Luckily nobody is watching the monitors right now."
+            }
+          ]
+        }
+      ]
+    },
+    "shelf": {
+      "title": "Shelf",
+      "image": "assets/control.webp",
+      "crop": [
+        913,
+        325,
+        2927,
+        1646
+      ],
+      "back": "control",
+      "layers": [
+        {
+          "image": "assets/layer_flashlight.png",
+          "rect": [
+            3560,
+            632,
+            126,
+            287
+          ],
+          "if": "!flag:flashlight_taken"
+        },
+        {
+          "image": "assets/layer_glass_broken.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": [
+            "flag:glass_broken",
+            "!flag:ext_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_glass_broken_empty.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": "flag:ext_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": [
+            "solved:drawer",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_smoke.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "flag:smoke",
+            "!solved:lasers"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_smoke_off.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "solved:lasers",
+            "!flag:door_open"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "flashlight",
+          "label": "Flashlight",
+          "rect": [
+            3548,
+            632,
+            149,
+            299
+          ],
+          "if": "!flag:flashlight_taken",
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A long, heavy metal flashlight. Fully charged."
+            },
+            {
+              "set": "flashlight_taken"
+            },
+            {
+              "give": "flashlight"
+            }
+          ]
+        },
+        {
+          "id": "binders",
+          "label": "Folders",
+          "rect": [
+            3445,
+            965,
+            344,
+            827
+          ],
+          "do": [
+            {
+              "say": "Shift reports, visitor logs, a menu from the canteen. Nothing useful."
+            }
+          ]
+        }
+      ]
+    },
+    "firebox": {
+      "title": "Fire box",
+      "image": "assets/control.webp",
+      "crop": [
+        761,
+        372,
+        1372,
+        772
+      ],
+      "back": "control",
+      "layers": [
+        {
+          "image": "assets/layer_flashlight.png",
+          "rect": [
+            3560,
+            632,
+            126,
+            287
+          ],
+          "if": "!flag:flashlight_taken"
+        },
+        {
+          "image": "assets/layer_glass_broken.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": [
+            "flag:glass_broken",
+            "!flag:ext_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_glass_broken_empty.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": "flag:ext_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": [
+            "solved:drawer",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_smoke.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "flag:smoke",
+            "!solved:lasers"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_smoke_off.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "solved:lasers",
+            "!flag:door_open"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "glass",
+          "label": "Break glass",
+          "rect": [
+            1263,
+            482,
+            356,
+            528
+          ],
+          "if": "!flag:glass_broken",
+          "use": "flashlight",
+          "fail": "A fire extinguisher behind glass: IN CASE OF FIRE BREAK GLASS. You need something heavy.",
+          "hint": "Something heavy on the shelf would break this glass.",
+          "do": [
+            {
+              "sfx": "glass"
+            },
+            {
+              "sfx": "snore"
+            },
+            {
+              "if": "!flag:card_cut",
+              "play": "guard"
+            },
+            {
+              "if": "flag:card_cut",
+              "play": "guard_nocard"
+            },
+            {
+              "say": "Crash! The guard snorts, mumbles something about pancakes and goes back to sleep. Phew."
+            },
+            {
+              "set": "glass_broken"
+            }
+          ]
+        },
+        {
+          "id": "extinguisher",
+          "label": "Fire extinguisher",
+          "rect": [
+            1263,
+            482,
+            356,
+            528
+          ],
+          "if": [
+            "flag:glass_broken",
+            "!flag:ext_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A small powder fire extinguisher."
+            },
+            {
+              "set": "ext_taken"
+            },
+            {
+              "give": "extinguisher"
+            }
+          ]
+        },
+        {
+          "id": "box_empty",
+          "label": "Fire box",
+          "rect": [
+            1263,
+            482,
+            356,
+            528
+          ],
+          "if": "flag:ext_taken",
+          "do": [
+            {
+              "say": "Just broken glass now."
+            }
+          ]
+        }
+      ]
+    },
+    "desk": {
+      "title": "Desk",
+      "image": "assets/control.webp",
+      "crop": [
+        1247,
+        895,
+        1595,
+        897
+      ],
+      "back": "control",
+      "layers": [
+        {
+          "image": "assets/layer_flashlight.png",
+          "rect": [
+            3560,
+            632,
+            126,
+            287
+          ],
+          "if": "!flag:flashlight_taken"
+        },
+        {
+          "image": "assets/layer_glass_broken.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": [
+            "flag:glass_broken",
+            "!flag:ext_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_glass_broken_empty.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": "flag:ext_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": [
+            "solved:drawer",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_smoke.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "flag:smoke",
+            "!solved:lasers"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_smoke_off.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "solved:lasers",
+            "!flag:door_open"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "drawer_lock",
+          "label": "Drawer lock",
+          "rect": [
+            1562,
+            1321,
+            253,
+            138
+          ],
+          "if": "!solved:drawer",
+          "hint": "A sticker on the drawer says \"my badge number\". Whose desk is it?",
+          "do": [
+            {
+              "puzzle": "drawer"
+            }
+          ]
+        },
+        {
+          "id": "drawer_items",
+          "label": "Drawer",
+          "rect": [
+            1401,
+            1252,
+            505,
+            344
+          ],
+          "if": [
+            "solved:drawer",
+            "!flag:drawer_taken"
+          ],
+          "do": [
+            {
+              "sfx": "pickup"
+            },
+            {
+              "say": "A pair of scissors and a folder: HOURLY DOOR CODES. TOP SECRET."
+            },
+            {
+              "set": "drawer_taken"
+            },
+            {
+              "give": "scissors"
+            },
+            {
+              "give": "binder"
+            }
+          ]
+        },
+        {
+          "id": "drawer_empty",
+          "label": "Drawer",
+          "rect": [
+            1401,
+            1252,
+            505,
+            344
+          ],
+          "if": "flag:drawer_taken",
+          "do": [
+            {
+              "say": "Chewing gum and a crossword with no answers filled in."
+            }
+          ]
+        },
+        {
+          "id": "console",
+          "label": "Desk",
+          "rect": [
+            1412,
+            1033,
+            1286,
+            207
+          ],
+          "do": [
+            {
+              "say": "A cold cup of coffee and a sticker on the drawer: \"my badge number\"."
+            }
+          ]
+        }
+      ]
+    },
+    "guard": {
+      "title": "Guard",
+      "image": "assets/control.webp",
+      "crop": [
+        1371,
+        684,
+        2469,
+        1389
+      ],
+      "back": "control",
+      "layers": [
+        {
+          "image": "assets/layer_flashlight.png",
+          "rect": [
+            3560,
+            632,
+            126,
+            287
+          ],
+          "if": "!flag:flashlight_taken"
+        },
+        {
+          "image": "assets/layer_glass_broken.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": [
+            "flag:glass_broken",
+            "!flag:ext_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_glass_broken_empty.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": "flag:ext_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": [
+            "solved:drawer",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_smoke.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "flag:smoke",
+            "!solved:lasers"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_smoke_off.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "solved:lasers",
+            "!flag:door_open"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "guard_sleep",
+          "label": "Guard",
+          "rect": [
+            2526,
+            804,
+            919,
+            1148
+          ],
+          "do": [
+            {
+              "sfx": "snore"
+            },
+            {
+              "if": "!flag:card_cut",
+              "play": "guard"
+            },
+            {
+              "if": "flag:card_cut",
+              "play": "guard_nocard"
+            },
+            {
+              "say": "Officer Holt is fast asleep. Better keep it that way."
+            }
+          ]
+        },
+        {
+          "id": "badge",
+          "label": "Badge",
+          "rect": [
+            3158,
+            1011,
+            119,
+            103
+          ],
+          "do": [
+            {
+              "say": "The guard's badge: OFFICER B. HOLT, No. 586."
+            },
+            {
+              "set": "badge_seen"
+            },
+            {
+              "inspect": "badge_view"
+            },
+            {
+              "inspect": "badge_view"
+            },
+            {
+              "inspect": "badge_view"
+            },
+            {
+              "inspect": "badge_view"
+            }
+          ]
+        },
+        {
+          "id": "lanyard",
+          "label": "Key card",
+          "rect": [
+            3100,
+            1252,
+            138,
+            218
+          ],
+          "if": "!flag:card_cut",
+          "use": "scissors",
+          "fail": "His key card hangs on a lanyard clipped to his belt. If you pull it, he will wake up.",
+          "hint": "Pulling would wake him. Cutting would not.",
+          "do": [
+            {
+              "sfx": "snip"
+            },
+            {
+              "say": "Snip. The key card drops into your hand. The guard just smacks his lips."
+            },
+            {
+              "set": "card_cut"
+            },
+            {
+              "give": "keycard"
+            }
+          ],
+          "failDo": [
+            {
+              "sfx": "snore"
+            },
+            {
+              "play": "guard"
+            }
+          ]
+        }
+      ]
+    },
+    "monitors": {
+      "title": "Monitors",
+      "image": "assets/control.webp",
+      "crop": [
+        1450,
+        132,
+        1738,
+        978
+      ],
+      "back": "control",
+      "layers": [
+        {
+          "image": "assets/layer_flashlight.png",
+          "rect": [
+            3560,
+            632,
+            126,
+            287
+          ],
+          "if": "!flag:flashlight_taken"
+        },
+        {
+          "image": "assets/layer_glass_broken.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": [
+            "flag:glass_broken",
+            "!flag:ext_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_glass_broken_empty.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": "flag:ext_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": [
+            "solved:drawer",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_smoke.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "flag:smoke",
+            "!solved:lasers"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_smoke_off.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "solved:lasers",
+            "!flag:door_open"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "feeds",
+          "label": "Camera feeds",
+          "rect": [
+            1780,
+            230,
+            1079,
+            792
+          ],
+          "do": [
+            {
+              "say": "Four camera feeds: the yard, the corridor, the gate and this very room. Each one shows the real time in the corner."
+            },
+            {
+              "set": "time_seen"
+            },
+            {
+              "inspect": "feeds"
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "title": "Steel door",
+      "image": "assets/control.webp",
+      "crop": [
+        0,
+        0,
+        3202,
+        1801
+      ],
+      "back": "control",
+      "layers": [
+        {
+          "image": "assets/layer_flashlight.png",
+          "rect": [
+            3560,
+            632,
+            126,
+            287
+          ],
+          "if": "!flag:flashlight_taken"
+        },
+        {
+          "image": "assets/layer_glass_broken.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": [
+            "flag:glass_broken",
+            "!flag:ext_taken"
+          ]
+        },
+        {
+          "image": "assets/layer_glass_broken_empty.png",
+          "rect": [
+            1252,
+            471,
+            379,
+            1206
+          ],
+          "if": "flag:ext_taken"
+        },
+        {
+          "image": "assets/layer_drawer_open.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": [
+            "solved:drawer",
+            "!flag:drawer_taken"
+          ],
+          "enter": "slide-down"
+        },
+        {
+          "image": "assets/layer_drawer_open_empty.png",
+          "rect": [
+            1389,
+            1252,
+            517,
+            344
+          ],
+          "if": "flag:drawer_taken"
+        },
+        {
+          "image": "assets/layer_smoke.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "flag:smoke",
+            "!solved:lasers"
+          ],
+          "enter": "fade"
+        },
+        {
+          "image": "assets/layer_smoke_off.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": [
+            "solved:lasers",
+            "!flag:door_open"
+          ]
+        },
+        {
+          "image": "assets/layer_door_open.png",
+          "rect": [
+            92,
+            138,
+            735,
+            2021
+          ],
+          "if": "flag:door_open",
+          "enter": "fade"
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "beams_hidden",
+          "label": "Doorway",
+          "rect": [
+            126,
+            207,
+            666,
+            1424
+          ],
+          "if": "!flag:smoke",
+          "use": "extinguisher",
+          "fail": "Little black lenses sit along the door frame, top to bottom. Laser emitters. You cannot see any beams, but they are surely there.",
+          "hint": "Laser beams show up in smoke or dust.",
+          "do": [
+            {
+              "sfx": "spray"
+            },
+            {
+              "say": "Pssshhh! In the cloud of powder four laser beams light up across the doorway: green, red, yellow and blue, from top to bottom."
+            },
+            {
+              "set": "smoke"
+            }
+          ]
+        },
+        {
+          "id": "beams_seen",
+          "label": "Laser beams",
+          "rect": [
+            126,
+            207,
+            666,
+            1424
+          ],
+          "if": [
+            "flag:smoke",
+            "!solved:lasers"
+          ],
+          "do": [
+            {
+              "say": "Four beams, from top to bottom: green, red, yellow, blue."
+            }
+          ]
+        },
+        {
+          "id": "laser_panel",
+          "label": "Laser panel",
+          "rect": [
+            884,
+            919,
+            344,
+            149
+          ],
+          "if": "!solved:lasers",
+          "hint": "The panel switches the beams off one by one, from top to bottom. You need to see them first.",
+          "do": [
+            {
+              "if": "!flag:smoke",
+              "say": "Six coloured buttons and a label: SHUT DOWN BEAMS IN ORDER, TOP TO BOTTOM. But which beams?"
+            },
+            {
+              "if": "flag:smoke",
+              "puzzle": "lasers"
+            }
+          ]
+        },
+        {
+          "id": "laser_off",
+          "label": "Laser panel",
+          "rect": [
+            884,
+            919,
+            344,
+            149
+          ],
+          "if": "solved:lasers",
+          "do": [
+            {
+              "say": "All lasers: OFF."
+            }
+          ]
+        },
+        {
+          "id": "reader",
+          "label": "Card reader",
+          "rect": [
+            953,
+            643,
+            149,
+            230
+          ],
+          "if": "!flag:card_in",
+          "use": "keycard",
+          "consume": true,
+          "fail": "A card reader with a keypad. A red light: INSERT CARD.",
+          "hint": "The guard carries a key card.",
+          "do": [
+            {
+              "sfx": "beep"
+            },
+            {
+              "say": "The light turns amber: ENTER HOURLY CODE."
+            },
+            {
+              "set": "card_in"
+            }
+          ]
+        },
+        {
+          "id": "keypad",
+          "label": "Keypad",
+          "rect": [
+            953,
+            643,
+            149,
+            230
+          ],
+          "if": [
+            "flag:card_in",
+            "!flag:door_open"
+          ],
+          "hint": "The code changes every hour. Find the real time: the wall clock is lying.",
+          "do": [
+            {
+              "if": "!solved:lasers",
+              "say": "You could type the code, but you would walk straight into the lasers. Switch them off first."
+            },
+            {
+              "if": "solved:lasers",
+              "puzzle": "keypad"
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "label": "Out to the yard",
+          "rect": [
+            92,
+            138,
+            735,
+            1608
+          ],
+          "if": "flag:door_open",
+          "do": [
+            {
+              "win": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "items": {
+    "flashlight": {
+      "name": "Flashlight",
+      "icon": "assets/flashlight.png",
+      "text": "A long, heavy metal flashlight."
+    },
+    "extinguisher": {
+      "name": "Fire extinguisher",
+      "icon": "assets/extinguisher.png",
+      "text": "A small powder fire extinguisher."
+    },
+    "scissors": {
+      "name": "Scissors",
+      "icon": "assets/scissors.png",
+      "text": "Office scissors, sharp enough."
+    },
+    "binder": {
+      "name": "Code folder",
+      "icon": "assets/binder.png",
+      "text": "Hourly door codes, one for every hour of the day.",
+      "image": "assets/binder.jpg"
+    },
+    "keycard": {
+      "name": "Key card",
+      "icon": "assets/keycard.png",
+      "text": "Officer Holt's key card."
+    },
+    "feeds": {
+      "name": "Camera feeds",
+      "text": "Four camera feeds with the time in the corner.",
+      "image": "assets/feeds.jpg"
+    },
+    "badge_view": {
+      "name": "Badge",
+      "image": "assets/badge_view.jpg",
+      "text": "Officer Holt's badge: No. 586."
+    }
+  },
+  "puzzles": {
+    "drawer": {
+      "type": "code",
+      "title": "Drawer lock",
+      "prompt": "Three digits.",
+      "answer": "586",
+      "clue": "flag:badge_seen",
+      "do": [
+        {
+          "sfx": "drawer"
+        },
+        {
+          "say": "Click. The drawer slides open."
+        }
+      ]
+    },
+    "lasers": {
+      "type": "sequence",
+      "title": "Laser panel",
+      "prompt": "Shut down beams in order, top to bottom.",
+      "blind": true,
+      "buttons": [
+        "🔴",
+        "🟢",
+        "🔵",
+        "🟡",
+        "🟣",
+        "🟠"
+      ],
+      "answer": [
+        "🟢",
+        "🔴",
+        "🟡",
+        "🔵"
+      ],
+      "clue": "flag:smoke",
+      "do": [
+        {
+          "sfx": "lasers"
+        },
+        {
+          "say": "One by one the beams die. LASER GRID: OFF."
+        }
+      ]
+    },
+    "keypad": {
+      "type": "code",
+      "title": "Hourly code",
+      "prompt": "Four digits.",
+      "answer": "6158",
+      "clue": [
+        "has:binder",
+        "flag:time_seen"
+      ],
+      "do": [
+        {
+          "sfx": "door"
+        },
+        {
+          "say": "CODE ACCEPTED. The steel door slides open."
+        },
+        {
+          "set": "door_open"
+        }
+      ]
+    }
+  },
+  "actors": [
+    {
+      "id": "guard",
+      "frames": [
+        "assets/guard_sleep.png",
+        "assets/guard_sleep.png",
+        "assets/guard_sleep.png",
+        "assets/guard_snore.png",
+        "assets/guard_snore.png"
+      ],
+      "fps": 0.8,
+      "blend": 900,
+      "size": [
+        597,
+        689
+      ],
+      "path": [
+        [
+          3065,
+          1481
+        ]
+      ],
+      "flip": false,
+      "if": "!flag:card_cut",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/guard_stir.png",
+          "assets/guard_stir.png",
+          "assets/guard_stir.png",
+          "assets/guard_stir.png",
+          "assets/guard_stir.png"
+        ],
+        "fps": 2,
+        "hold": 0
+      }
+    },
+    {
+      "id": "guard_nocard",
+      "frames": [
+        "assets/guard_sleep_nocard.png",
+        "assets/guard_sleep_nocard.png",
+        "assets/guard_sleep_nocard.png",
+        "assets/guard_snore_nocard.png",
+        "assets/guard_snore_nocard.png"
+      ],
+      "fps": 0.8,
+      "blend": 900,
+      "size": [
+        597,
+        689
+      ],
+      "path": [
+        [
+          3065,
+          1481
+        ]
+      ],
+      "flip": false,
+      "if": "flag:card_cut",
+      "play": {
+        "type": "frames",
+        "frames": [
+          "assets/guard_stir_nocard.png",
+          "assets/guard_stir_nocard.png",
+          "assets/guard_stir_nocard.png",
+          "assets/guard_stir_nocard.png",
+          "assets/guard_stir_nocard.png"
+        ],
+        "fps": 2,
+        "hold": 0
+      }
+    },
+    {
+      "id": "camera",
+      "frames": [
+        "assets/cam_left.png",
+        "assets/cam_left.png",
+        "assets/cam_left.png",
+        "assets/cam_left.png",
+        "assets/cam_left.png",
+        "assets/cam_right.png",
+        "assets/cam_right.png",
+        "assets/cam_right.png",
+        "assets/cam_right.png",
+        "assets/cam_right.png"
+      ],
+      "fps": 0.5,
+      "blend": 2500,
+      "size": [
+        487,
+        361
+      ],
+      "path": [
+        [
+          3573,
+          379
+        ]
+      ],
+      "flip": false
+    }
+  ],
+  "ambient": [
+    {
+      "type": "light",
+      "at": [
+        505,
+        69
+      ],
+      "r": 500,
+      "color": "#ff3030",
+      "strength": 0.22,
+      "flicker": 0.35
+    },
+    {
+      "type": "light",
+      "at": [
+        1814,
+        976
+      ],
+      "r": 420,
+      "color": "#ffb75a",
+      "strength": 0.2,
+      "flicker": 0.05
+    },
+    {
+      "type": "light",
+      "at": [
+        2320,
+        620
+      ],
+      "r": 650,
+      "color": "#9fc4ff",
+      "strength": 0.12,
+      "flicker": 0.15
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        138,
+        230,
+        643,
+        1378
+      ],
+      "count": 40,
+      "size": 0.8,
+      "alpha": 0.55,
+      "speed": 0.25,
+      "color": "#e8ecf0",
+      "if": [
+        "flag:smoke",
+        "!flag:door_open"
+      ]
+    },
+    {
+      "type": "particles",
+      "kind": "dust",
+      "rect": [
+        1608,
+        276,
+        1263,
+        1033
+      ],
+      "count": 14,
+      "size": 0.45,
+      "alpha": 0.4,
+      "speed": 0.3,
+      "color": "#cfe0ff"
+    }
+  ]
+}

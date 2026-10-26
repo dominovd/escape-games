@@ -35,6 +35,12 @@
     "minutes": 20,
     "tasks": 11
   },
+  "maximum-security": {
+    "difficulty": "hard",
+    "score": 16.5,
+    "minutes": 25,
+    "tasks": 13
+  },
   "midnight-manor": {
     "difficulty": "medium",
     "score": 11.5,
