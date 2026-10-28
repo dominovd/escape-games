@@ -1,6 +1,6 @@
 ---
 import type { Game } from '../data/games';
-import { gameUrl, walkthroughUrl, isNew, isPlayable } from '../lib/catalog';
+import { gameUrl, isNew, isPlayable } from '../lib/catalog';
 import Thumb from './Thumb.astro';
 import Difficulty from './Difficulty.astro';
 import Icon from './Icon.astro';
@@ -22,9 +22,6 @@ const soon = !isPlayable(game);
       <span class="time"><Icon name="clock" size={14} />{game.minutes} min</span>
     </div>
     <span class="plays" data-stat="plays" data-slug={game.slug} hidden><Icon name="play" size={12} /><span data-label></span></span>
-    {game.walkthrough && (
-      <a class="wt" href={walkthroughUrl(game.slug)}><Icon name="book" size={13} />Walkthrough</a>
-    )}
   </div>
 </article>
 
@@ -45,6 +42,4 @@ const soon = !isPlayable(game);
   .meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: .82rem; color: #c9ccd4; flex-wrap: wrap; }
   .time { display: inline-flex; align-items: center; gap: 4px; }
   .plays { display: inline-flex; align-items: center; gap: 4px; font-size: .8rem; color: var(--muted); }
-  .wt { display: inline-flex; align-items: center; gap: 5px; font-size: .8rem; color: var(--muted); text-decoration: none; }
-  .wt:hover { color: var(--text); text-decoration: underline; }
 </style>

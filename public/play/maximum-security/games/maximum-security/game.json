@@ -950,6 +950,9 @@
             },
             {
               "inspect": "badge_view"
+            },
+            {
+              "inspect": "badge_view"
             }
           ]
         },
