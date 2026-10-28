@@ -1,4 +1,5 @@
 import rated from './rated.json';
+import copy from './copy.json';
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
 export interface WalkthroughStep {
@@ -80,7 +81,7 @@ export const games: Game[] = [
     added: '2026-10-14',
     featured: true,
     description: [
-      'Castle of Secrets is a Halloween escape game currently in development. The game is not available to play yet; check back for the finished version.',
+      'Castle of Secrets is a Halloween escape game set in an old castle. The first room, the Great Hall, is open to play, and more of the castle is on the way.',
     ],
     howToPlay: std.howToPlay,
     controls: std.controls,
@@ -189,6 +190,15 @@ games.forEach((game, coverIndex) => {
   }
   game.image = '/images/escape-covers-v1.png';
   game.coverIndex = coverIndex;
+});
+
+// Переписанные тексты (scripts/rewrite-copy.mjs): описание и FAQ из copy.json заменяют те, что выше.
+const gameCopy = (copy as unknown as { games?: Record<string, Pick<Game, 'description' | 'faq'>> }).games ?? {};
+games.forEach((game) => {
+  const c = gameCopy[game.slug];
+  if (!c) return;
+  if (c.description?.length) game.description = c.description;
+  if (c.faq?.length) game.faq = c.faq;
 });
 
 export const gameBySlug = (slug: string) => games.find((g) => g.slug === slug);

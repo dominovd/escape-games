@@ -1,3 +1,4 @@
+import copy from './copy.json';
 export interface FaqItem {
   q: string;
   a: string;
@@ -203,5 +204,10 @@ export const themes: Theme[] = [
     icon: 'cursor',
   },
 ];
+
+// Переписанные тексты (scripts/rewrite-copy.mjs) из copy.json заменяют intro, body, faq и metaDescription.
+type ThemeCopy = Partial<Pick<Theme, 'metaDescription' | 'intro' | 'body' | 'faq'>>;
+const themeCopy = (copy as unknown as { themes?: Record<string, ThemeCopy> }).themes ?? {};
+themes.forEach((t) => Object.assign(t, themeCopy[t.slug] ?? {}));
 
 export const themeBySlug = (slug: string) => themes.find((t) => t.slug === slug);

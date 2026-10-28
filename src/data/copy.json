@@ -1,0 +1,872 @@
+{
+  "home": {
+    "sub": "A locked door, a few clues, and no one rushing you out.",
+    "columns": [
+      [
+        {
+          "h2": "What an escape room game actually is",
+          "paragraphs": [
+            "You're in a room you can't leave yet. Click or tap around it: open the drawers, check the shelves, read the notes taped to the wall. Some of what you find works on its own; some of it only makes sense next to something across the room. The goal is simple, even when the puzzle isn't. Figure out how the pieces talk to each other and get the door open.",
+            "These free online escape games are built for a browser, so there's nothing to install and no account to make. Pick a title, and it opens. Games that aren't finished yet show as Coming soon, and you'll know before you click."
+          ]
+        },
+        {
+          "h2": "How to begin a room",
+          "paragraphs": [
+            "Before you touch anything, take a slow look around. Most rooms put the first clue right in front of you and hide the second one behind it. Pick up what you can, try the things that look like they should open, and notice the details that don't seem to belong. A number scratched near a lock matters if you've seen that number somewhere else.",
+            "You don't have to solve anything in order. If a puzzle won't budge, leave it and try a different corner of the room. What you're missing is often the clue you haven't found yet, not the one you're staring at."
+          ]
+        }
+      ],
+      [
+        {
+          "h2": "Choosing a category or a difficulty",
+          "paragraphs": [
+            "The list at the top is there to narrow things down. Halloween Escape Games lean on creaky old rooms and things you'd rather not touch after dark. Prison Escape Games swap the manor for locked cells and a way past the guards. If you'd rather not be scared, Escape Games for Kids keeps things friendly, and Hard Escape Games will make you write things down.",
+            "On the category pages you can filter by difficulty and rough playing time. On this page, just browse and open whatever looks interesting. Each game page lists its difficulty, an estimate in minutes, how many rooms it has, and its controls."
+          ]
+        },
+        {
+          "h2": "Playing on a phone or a computer",
+          "paragraphs": [
+            "Check the control line on the game page before you start. Mouse & touch means fingers work fine on a phone or tablet. Best with a mouse means reach for a computer, since some rooms expect a cursor and a wider screen. Turning your phone sideways can give you more room to look around, too.",
+            "If you close the tab partway through, progress is saved in your browser on that device. Finished rooms stay marked as done when you come back. Clearing your browser data or switching devices puts you back at the start."
+          ]
+        },
+        {
+          "h2": "When a puzzle won't click",
+          "paragraphs": [
+            "Some games have a walkthrough, and it's built to give you one step at a time. Read the hint first. The full solution stays closed until you decide you want it, so a single stuck puzzle doesn't cost you the rest of the room.",
+            "There's no countdown and no score here, so stepping away to think costs you nothing. A rough playing time is listed on each game, but treat it as a guess. Some rooms open a new one once you finish what's there, so a game with more rooms coming can grow after you've already played it."
+          ]
+        }
+      ]
+    ],
+    "faq": [
+      {
+        "q": "Are these escape room games really free?",
+        "a": "Yes. Every game is free to play, with no payment and no account or sign-up. If a game is still being built, it's marked Coming soon instead of leaving you with a broken page."
+      },
+      {
+        "q": "Can I play escape games online on my phone?",
+        "a": "Yes, if the game is marked Mouse & touch, which means it works with your fingers on a phone or tablet. Games marked Best with a mouse are meant for a computer."
+      },
+      {
+        "q": "What do I do if I get stuck?",
+        "a": "Open the game's walkthrough if it has one. Each step shows a hint first, and the full solution stays hidden until you open it. You can take a break and come back to a puzzle later, since there's no countdown."
+      },
+      {
+        "q": "Is my progress saved?",
+        "a": "It's saved automatically in your browser on that device, and a finished room stays marked as done. Clearing your browser data or playing on a different device clears it."
+      },
+      {
+        "q": "Which games are good for kids?",
+        "a": "Look at Escape Games for Kids, which keeps the rooms friendly. Several Halloween titles are colorful rather than frightening, and each game page lists its difficulty so you can judge before you start."
+      },
+      {
+        "q": "How long does a game take?",
+        "a": "Each game page gives a rough estimate in minutes along with its difficulty and number of rooms. There's no clock running, so you can take as long as you like."
+      }
+    ]
+  },
+  "themes": {
+    "halloween": {
+      "metaDescription": "Play free Halloween escape games online in your browser. Haunted houses, witch cabins, cursed manors and pumpkin puzzles, with no download and no sign-up.",
+      "intro": "A door clicks shut somewhere behind you, and the only light comes from a few candles. Pick a room below and look around before you touch anything.",
+      "body": [
+        {
+          "h2": "What these rooms are like",
+          "text": "Most Halloween escapes lean on the same handful of tricks: a spirit board in an old parlor, a potion shelf with one ingredient left out, a carved pumpkin that hides part of a code. The rooms are small and hand drawn, so the work is in looking close. Click a portrait, read a name carved into a crypt, open the drawer you almost skipped. Some games are friendly enough for kids. Others, like The Cursed Manor, ask you to piece together a family's history before anything opens."
+        },
+        {
+          "h2": "How to pick your first room",
+          "text": "Check the difficulty and time filters above the grid before you commit. If you are new to these rooms, Trick or Escape is a gentle place to start: you trade your way past a sleepy dog and a skeleton butler to get back outside. Pumpkin Puzzle keeps things light with friendly carved faces. From there, step up to The Haunted House or Witch's Cabin, or take on The Crooked Tower if you want a longer stay. Some games have a walkthrough where each step shows a hint first and the full answer stays hidden until you open it. Progress saves in the browser on that device."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these Halloween escape games free to play online?",
+          "a": "Yes. Every game listed here is free and runs in your browser with no download and no account. Titles still being built are marked Coming soon."
+        },
+        {
+          "q": "How scary are the Halloween escape rooms?",
+          "a": "Expect haunted houses, dim rooms and a ghost or two, but the tone shifts a lot from game to game. Pumpkin Puzzle is cheerful and not scary at all, while The Cursed Manor goes darker with a crypt and a family curse. Read the description on the game page before you start."
+        },
+        {
+          "q": "Which Halloween escape game should I try first?",
+          "a": "If you are new to point-and-click rooms, start with something light like Trick or Escape or Pumpkin Puzzle, then move on to a haunted house once the clicking feels natural."
+        },
+        {
+          "q": "Do the games have a time limit?",
+          "a": "No. There is no countdown clock and no score, so you can sit in a room as long as you like. The playing time on each game page is only a rough estimate of how long a room takes."
+        }
+      ]
+    },
+    "kids": {
+      "metaDescription": "Free escape games for kids: easy online rooms with simple clues, friendly themes and no scary content. Play in your browser, no download or sign-up.",
+      "intro": "These rooms keep things small and friendly: a garage, an attic, a room full of carved pumpkins. The clues are simple enough that a kid can spot them without help, and a grown-up can sit nearby just in case.",
+      "body": [
+        {
+          "h2": "What a kids escape room is like",
+          "text": "The setups are everyday places with one odd detail. In Escape the Garage, Biscuit the dog is lying in his bed with a little key in his mouth. The Locked Attic has old trunks, dusty toys and a door that opens with the right melody. Halloween rooms here stay friendly: Pumpkin Puzzle is full of carved pumpkins hiding pieces of a code, and Trick or Escape has a sleepy dog, a fortune-teller machine and a skeleton butler with a sweet tooth. Nothing jumps out at you."
+        },
+        {
+          "h2": "How to pick the first room",
+          "text": "Use the difficulty and playing time filters above the grid to narrow the list. The gentler rooms suit a first try at the genre: The Guard Room starts while the guards are out at lunch, and you search a jacket and a key cabinet for the door code. Check the controls line on each game page too. Mouse & touch games work on a phone or tablet, while Best with a mouse games are better on a computer. If someone gets stuck, some games have a walkthrough page that shows a hint first and keeps the full solution hidden until you open it."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these escape games for kids free to play?",
+          "a": "Yes. Every game runs in your browser for free, with no download and no account or sign-up."
+        },
+        {
+          "q": "Are the Halloween rooms scary?",
+          "a": "The Halloween rooms on this page are written to be friendly rather than frightening. Pumpkin Puzzle is short and colorful, and in Trick or Escape you deal with a sleepy dog, a fortune-teller machine and a skeleton butler who likes sweets."
+        },
+        {
+          "q": "Which room should a younger player try first?",
+          "a": "Starting with one of the gentler rooms helps. The Guard Room is built as an introduction to how escape puzzles work, and Escape the Garage or The Locked Attic keep the clues close to everyday objects."
+        },
+        {
+          "q": "Does the progress save if we close the browser?",
+          "a": "Progress saves automatically in your browser on that device, and a finished room stays marked as done. Clearing your browser data or switching to another device resets it."
+        }
+      ]
+    },
+    "prison": {
+      "metaDescription": "Free prison escape games online: pick a cell, hunt for tools and slip past the guards. Play a prison escape room in your browser, no download needed.",
+      "intro": "The door is locked and the guard is somewhere down the hall. Look around the cell for anything that moves, opens or hides something, then figure out what it gets you.",
+      "body": [
+        {
+          "h2": "What a prison escape room asks of you",
+          "text": "These rooms start you in a place with almost nothing: a barred window, a bunk, a poster on the wall. The work is reading what is already there. A scratched message, a loose fitting or something stashed behind the poster points to the next step. Some games keep you in one cell the whole way through. Others move you from the cell into the corridor, the laundry and the watchtower, with a link at the end of one room that carries you into the next."
+        },
+        {
+          "h2": "How to choose your first prison escape game",
+          "text": "Each game page lists difficulty and a rough playing time in minutes, so you can match the room to the time you have. Use the filters on this page to narrow the list. The Guard Room puts you in the guards' room while they are out at lunch, which suits a quick first try. Solitary keeps you in one dark room with a message scratched on the wall. Maximum Security drops you in the control room with the duty guard snoring in his chair, and Prison Break starts you in cell 7 with a morning count coming."
+        },
+        {
+          "h2": "A few things that help in these rooms",
+          "text": "Search the dull spots first. Under the bed, inside a jacket, behind a poster: the games tend to hide objects where the room looks empty. Read every note and wall message closely, because the wording often tells you what comes next. If you get stuck, some games have a walkthrough page where each step shows a hint before the full solution, so you can take the hint and keep going. Nothing counts down while you think, and your finished rooms stay marked on that device."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these prison escape games free to play?",
+          "a": "Yes. Every game runs in your browser with no download, account or sign-up."
+        },
+        {
+          "q": "Can I play on my phone?",
+          "a": "Check the controls on the game page. If it says \"Mouse & touch,\" the game works on phones and tablets. If it says \"Best with a mouse,\" use a computer."
+        },
+        {
+          "q": "Should I start with the Prison Break series in order?",
+          "a": "If you want the story to make sense, play the first part and use the next-room link on each game page to continue. The series page keeps the chapters together so you can find your place."
+        },
+        {
+          "q": "How scary are the prison rooms?",
+          "a": "They lean on atmosphere rather than shocks. Solitary gives you one dark room, a barred window and a message scratched into the wall, which sets a tense mood without jump scares."
+        }
+      ]
+    },
+    "christmas": {
+      "metaDescription": "Free Christmas escape games online: snowy cabins, Santa's workshop and locked holiday rooms. Play in your browser with no sign-up.",
+      "intro": "Snow outside, a locked door inside, and a few holiday surprises to work out. Pick a Christmas room and settle in.",
+      "body": [
+        {
+          "h2": "What a Christmas escape room is like",
+          "text": "These rooms lean on the holiday itself: decorations, wrapped gifts, workshop shelves, a snowy cabin with the door shut. You click around, pick things up, and work out what fits where. The puzzles tend to be the kind you can solve with the family in the room, taking turns spotting details. Nothing here runs on a countdown, so you can sit with a clue as long as you need. Each game page lists its difficulty and a rough playing time, which helps when you have one evening and one screen. Some rooms come with a walkthrough that shows a hint before the full solution."
+        },
+        {
+          "h2": "How to choose a Christmas escape game",
+          "text": "Start with the difficulty and time filters if you are playing with younger kids, and pick easy or a shorter estimate. Games marked Mouse & touch work on a phone or tablet; Best with a mouse is for a computer. If you like a game, some of them get more rooms over time, and the next one unlocks after you finish the one before. Your progress saves in the browser on that device, so a finished room stays marked as done when you come back. Games still in development show up as Coming soon."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these Christmas escape games free to play?",
+          "a": "Yes. Every game on the page is free and runs in your browser with no download, account or sign-up."
+        },
+        {
+          "q": "Can I play a Christmas escape room on my phone?",
+          "a": "Some of them, yes. Check the controls line on the game page: Mouse & touch games work on phones and tablets, while Best with a mouse games are meant for a computer."
+        },
+        {
+          "q": "What kind of puzzles do Christmas escape rooms have?",
+          "a": "Expect holiday-themed puzzles built around decorations, gifts and workshop shelves. You look for clues in the room and work out what goes with what."
+        },
+        {
+          "q": "Where do I start if I have never played an escape room before?",
+          "a": "Pick an easy game with a short playing time. Then click around, collect what you can, and read each clue carefully before moving on."
+        }
+      ]
+    },
+    "horror": {
+      "metaDescription": "Free horror escape games online, from abandoned labs to haunted houses and cursed manors. Find the clues, keep your nerve and get out in your browser.",
+      "intro": "The doors are already shut and something in the next room just moved. Read the clues slowly, check every corner, and don't let the noise get to you.",
+      "body": [
+        {
+          "h2": "What a horror escape room feels like",
+          "text": "These rooms lean on atmosphere as much as on locks. A sealed lab with something awake in a tank. A castle hall that keeps its secrets. A parlor where the portraits watch you back. The puzzles are still puzzles: read the notes, study the objects, work out what the room wants from you. What changes is the mood around them, and that you're often alone in a place that doesn't want company. Forgotten Lab leaves you in the dark with a glowing tank, while The Locked Attic keeps things light enough for a short break."
+        },
+        {
+          "h2": "How to pick one and play it",
+          "text": "Check the difficulty and the rough playing time before you open a room. Easy games run short and keep the puzzle count low, which suits a first try or a quick session. Medium and hard rooms ask you to hold more clues in your head at once. Play with the sound up if you can, since a lot of the tension sits in what you hear. Use a mouse for games marked Best with a mouse, and reach for Mouse & touch titles on a tablet. Progress saves in your browser on that device, so you can leave a room and come back to it later."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these horror escape games free to play?",
+          "a": "Yes. Every game runs in your browser with no download and no account. Open a room and play."
+        },
+        {
+          "q": "How scary do the rooms get?",
+          "a": "It's tension rather than jump scares: dark settings, strange equipment and the sense that something happened before you arrived. Each game page describes its setting, so you can read it first and pick a room you're comfortable with."
+        },
+        {
+          "q": "What if I get stuck in a room?",
+          "a": "Some games have a walkthrough page where each step shows a hint first and keeps the full solution hidden until you open it. Games without one still save your progress, so you can step away and return with fresh eyes."
+        },
+        {
+          "q": "Is there a countdown while I play?",
+          "a": "No. Playing time is a rough estimate of how long a room takes, and there's no clock running you out."
+        }
+      ]
+    },
+    "car": {
+      "metaDescription": "Free escape the car games online: locked cars, garages and parking lots. Find the keys, open the gate and drive out, right in your browser.",
+      "intro": "A door clicks shut behind you and the car keys are somewhere in the room. These are the small, tidy escapes where the way out is a driveway.",
+      "body": [
+        {
+          "h2": "What car escape room games feel like",
+          "text": "The setting is ordinary, which is the point. You are in a garage, a parking lot or the driver's seat, and the way out is a key, a gate or a car that will not start. Look in the glovebox. Check the shelves. See what the tools in the corner can actually do. The puzzles are built from things you already recognize, so the trick is usually in how two plain objects fit together rather than in a riddle you have never seen."
+        },
+        {
+          "h2": "How to choose your first one",
+          "text": "Each game lists its difficulty and a rough playing time in minutes, and the filters at the top narrow the grid by both. Start with an easy room if you want a quick win, then move up once you know how these puzzles tend to work. Check the controls before you settle in: Mouse & touch games run on phones and tablets, while Best with a mouse games want a computer. Escape the Garage is a gentle place to begin, with an old red car, a flat battery and a dog holding a little key."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these car escape games free to play online?",
+          "a": "Yes. Every game runs in your browser for free, with no download and no account to set up. Open a game and play."
+        },
+        {
+          "q": "What kind of puzzles show up in a car escape room?",
+          "a": "Expect the usual point-and-click work: hunting for keys, opening gloveboxes and looking around garages and parking lots. Tools you find are meant to be used on something nearby."
+        },
+        {
+          "q": "Will I lose progress if I close the page?",
+          "a": "No. Progress is saved automatically in your browser on that device, and a finished room stays marked as done. Clearing browser data or switching to another device starts you fresh."
+        },
+        {
+          "q": "Can I play car escape games on my phone?",
+          "a": "Some of them. Games marked Mouse & touch work on phones and tablets, and games marked Best with a mouse are built for a computer."
+        }
+      ]
+    },
+    "hard": {
+      "metaDescription": "Free hard escape games you play in the browser, with multi-step puzzles and long chains of clues. Pick a room by difficulty, time and rooms.",
+      "intro": "Some rooms hand you the answer if you look twice. These ones want you to look five times, write things down, and come back to a scene you thought you were done with.",
+      "body": [
+        {
+          "h2": "What makes these rooms harder",
+          "text": "A hard room rarely gives you one lock and one key. Maximum Security puts you in the prison control room with a card reader, an hourly code and a laser grid. The Last Door ends a run of ninety-nine doors on black oak with three locks on it. Forgotten Lab seals the doors while something floats awake in a glowing tank. The extra work is in the connections: a detail from one room matters in another, and a puzzle you skipped turns out to be the one you needed."
+        },
+        {
+          "h2": "How to choose your first hard room",
+          "text": "Check the estimated playing time before you open anything. A short room like Castle of Secrets is an easier way in, while The Star Zoo and Forgotten Lab have more rooms and ask more of you. Series matter too: Castle of Secrets has the Great Hall open with more of the castle coming, and the next room unlocks once you finish the one before it. Mouse & touch games work on a phone or tablet, and the ones marked Best with a mouse want a computer. There is no countdown, so the time is only a rough guess."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these hard escape games free to play?",
+          "a": "Yes. Every game runs in your browser with no download, no account and no sign-up. Open a room and you are playing."
+        },
+        {
+          "q": "What are the puzzles like in a difficult escape room?",
+          "a": "Expect several steps between a clue and the lock it opens. You may need to read a family chronicle to work out an order, or carry something you found early into a room you reach much later."
+        },
+        {
+          "q": "How do I save my progress in an online escape room?",
+          "a": "Your progress saves automatically in your browser on that device, and a finished room stays marked as done. Clearing your browser data or switching to another device resets it."
+        },
+        {
+          "q": "What can I do when I get stuck in one of these rooms?",
+          "a": "Go back to an earlier scene with what you have learned since. Some games also have a walkthrough page where each step shows a hint first and keeps the full solution hidden until you open it."
+        }
+      ]
+    },
+    "space": {
+      "metaDescription": "Free space escape games online: locked spaceships, airlocks, robots and alien creatures. Solve sci-fi puzzles in your browser, no downloads.",
+      "intro": "You are stuck on a ship with the hatch sealed and a voice counting down to launch. Poke at the panels, find out what the robots need, and work your way off the deck.",
+      "body": [
+        {
+          "h2": "What a space escape room puts in front of you",
+          "text": "These rooms lean on ship hardware: control panels covered in symbols you have to decode, robots sitting there with no power, airlocks that will not budge. Alien creatures turn up too, each with its own habits, and they tend to matter more than they first look. The portholes are worth a second glance. Plenty of these rooms hide the thing you need in what is drifting past outside the glass, so read the view before you tear the cabin apart."
+        },
+        {
+          "h2": "How to pick your first one",
+          "text": "Check the difficulty and the playing time on each card before you click in. A hard room with a long estimate is a fine evening but a rough place to learn the controls, so if you are new to escape games, take an easy or medium one first. The filters at the top sort by both. Watch the control label as well: games marked Mouse & touch are fine on a phone, while Best with a mouse is better on a computer. Nothing counts down at you, so you can sit with a puzzle as long as it takes."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these space escape games free to play?",
+          "a": "Yes. Every game here is free and runs in your browser on PC and mobile, with no download and no account."
+        },
+        {
+          "q": "Are the sci-fi rooms scary or gory?",
+          "a": "No. The settings are spaceships, alien zoos and star views, and the creatures you meet are puzzles to solve rather than jump scares."
+        },
+        {
+          "q": "Which game should I try first?",
+          "a": "The Star Zoo is a good place to see what these rooms are like: an old interplanetary zoo ship, glowing mushroom lamps and a robot that needs a battery. It is listed as hard, so pick an easier room first if you want to get used to how escape games work."
+        },
+        {
+          "q": "Does my progress save if I close the tab?",
+          "a": "Yes, progress is saved in your browser on that device, and finished rooms stay marked as done. Clearing your browser data or switching to another device resets it."
+        }
+      ]
+    },
+    "point-and-click": {
+      "metaDescription": "Free point and click escape games online: explore a room, pick up objects and work out what fits where. No download, no account, saved progress.",
+      "intro": "These rooms don't rush you. Look around, pick things up, and give that stubborn lock another try with whatever you found in the drawer.",
+      "body": [
+        {
+          "h2": "How these rooms play",
+          "text": "You click through a scene with a mouse or a finger, take what you find and try items where they seem to belong. Everything is free and runs in your browser, with no download and no sign-up. Each game page lists the difficulty (easy, medium or hard), a rough playing time, how many rooms it has and whether it's Mouse & touch or Best with a mouse. Start with something light to get the rhythm of clicking and checking, then work up to a room like The Star Zoo, where a jelly creature refuses to budge and a little robot needs a battery."
+        },
+        {
+          "h2": "Picking a game by difficulty and time",
+          "text": "The difficulty and playing time filters at the top of the page narrow the list fast. If you have a short break, The Locked Attic is a gentle way in, with its trunks, dusty toys and a door that wants the right melody. Shadow Circus is a bigger scene, where the calliope, a brass lion and the ringmaster's keys all pull on each other. Lost in the Library asks you to get past a sleeping cat for the book you need. Those playing times are an estimate only, and there's no countdown, so you can stare at the same shelf for as long as you like."
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these point and click escape games free to play?",
+          "a": "Yes. Every game on the site is free, runs in your browser and needs no account or sign-up."
+        },
+        {
+          "q": "What are the puzzles usually like in a point and click room?",
+          "a": "You collect objects, read notes and try what you've found on the things around you. A small detail, like a book or a missing gear, often opens up the next step."
+        },
+        {
+          "q": "Can I play on my phone?",
+          "a": "Games marked Mouse & touch work on phones and tablets. Games marked Best with a mouse are meant for a computer."
+        },
+        {
+          "q": "Do I lose my progress if I close the page?",
+          "a": "Progress saves automatically in your browser on that device, and a finished room stays marked as done. Clearing your browser data or switching to another device resets it."
+        }
+      ]
+    }
+  },
+  "games": {
+    "forgotten-lab": {
+      "description": [
+        "Forgotten Lab is a horror escape game set in a research lab where the night shift goes wrong. The alarm sounds, the doors seal and the lights turn emergency red, while the subject in a glowing tank is wide awake.",
+        "You need to get the power back on, track down Dr. Hale's notes in invisible ink, deal with a stubborn little cleaning robot and get the shutdown sequence from the subject itself. It is one long, hard room, roughly 35 minutes of tricky work, and it suits players who like a tense lab to pick apart. More rooms are coming, starting with The Cold Storage."
+      ],
+      "faq": [
+        {
+          "q": "Does Forgotten Lab work on a phone or tablet?",
+          "a": "Yes. Forgotten Lab uses mouse or touch controls and no keyboard, so it plays on phones and tablets as well as computers."
+        },
+        {
+          "q": "What is the story in Forgotten Lab?",
+          "a": "You are on the night shift at a research lab when the alarm goes off and the doors seal. The lights drop to emergency red, and the subject in the glowing tank is awake. You need the power back to get anywhere."
+        },
+        {
+          "q": "Is Forgotten Lab a scary game?",
+          "a": "It is a horror game, with the lab under red emergency lighting and something awake in the tank. The scares come from the setting and the situation rather than anything you have to react to quickly."
+        },
+        {
+          "q": "How hard is Forgotten Lab compared with other escape rooms?",
+          "a": "It is rated hard, and it is one long, tricky room rather than a quick warm-up. Expect to spend around 35 minutes on it, and to work out the invisible ink notes and the shutdown sequence for yourself."
+        }
+      ]
+    },
+    "escape-the-garage": {
+      "description": [
+        "Escape the Garage is a short point-and-click escape room set in Grandpa's garage, where a dead car and a dog with a key block your way out. The side door clicked shut behind you and the big garage door will not budge.",
+        "To get out, you make a swap with Biscuit, open the toolbox, fix the jammed door and charge Grandpa's old red car so you can drive into the sunshine. It is an easy room that takes about 10 minutes, and it works on phones and tablets with mouse or touch. Good for kids and anyone who likes old cars and good dogs."
+      ],
+      "faq": [
+        {
+          "q": "How long does Escape the Garage take?",
+          "a": "About 10 minutes. It is an easy room, so most players finish it in one short sitting."
+        },
+        {
+          "q": "What is the story in Escape the Garage?",
+          "a": "You go into Grandpa's garage to get your bike, and the side door clicks shut behind you. Grandpa's red car has a flat battery, and Biscuit the dog is lying in his bed with a little key in his mouth."
+        },
+        {
+          "q": "Is Escape the Garage good for kids?",
+          "a": "Yes. It is an easy car escape game made for kids and for anyone who likes old cars and dogs, and it runs with mouse or touch."
+        },
+        {
+          "q": "Can I play Escape the Garage online on my phone?",
+          "a": "Yes. It runs in the browser on phones and tablets, and there is nothing to download or sign up for."
+        }
+      ]
+    },
+    "castle-of-secrets": {
+      "description": [
+        "Castle of Secrets is a Halloween escape game that drops you inside an old castle with one room open: the Great Hall. It's a hard one, and the mood is closer to horror than to cute pumpkins.",
+        "You click around the hall, pick up what you find, and work out what the place is hiding. Expect about 25 minutes of careful looking, and expect to get stuck once or twice. Mouse or touch both work, no keyboard needed, and it plays fine on a phone. More rooms are coming, starting with the Grand Staircase. Good pick if you like your Halloween puzzles on the tough side."
+      ],
+      "faq": [
+        {
+          "q": "How long does Castle of Secrets take to finish?",
+          "a": "About 25 minutes for the Great Hall, which is the only room open right now. That's a rough estimate, so a slow, thorough run can take longer."
+        },
+        {
+          "q": "Is Castle of Secrets scary?",
+          "a": "It leans horror, but it's a point-and-click puzzle game rather than a jump-scare ride. The tension comes from the old castle setting, not from anything chasing you."
+        },
+        {
+          "q": "How hard is Castle of Secrets compared to other escape games?",
+          "a": "It's marked hard, so it sits at the top of the easy, medium and hard scale the site uses. If you're newer to escape rooms, a medium game is a gentler place to begin."
+        },
+        {
+          "q": "What other rooms are in Castle of Secrets?",
+          "a": "The Great Hall is open now, and the Grand Staircase is coming soon. More of the castle is planned beyond that, and each room opens once you've finished the one before it."
+        }
+      ]
+    },
+    "cell-block-13": {
+      "description": [
+        "Cell Block 13 is a prison escape game: a breakout goes wrong and you wake in cell 12, next to the cell nobody leaves.",
+        "Joe in the neighboring cell is the one to trade with. Rocco left something behind the poster, and his old keycard is your way out. It plays with mouse or touch, no keyboard needed, and runs in your browser on a phone, tablet or computer. The difficulty sits in the middle and a run takes roughly 15 minutes, so it fits a short break. It is part 2 of the Prison Break series. Cell 13 is coming soon, and more rooms after that, each one opening once you finish the last."
+      ],
+      "faq": [
+        {
+          "q": "Is Cell Block 13 part of a series?",
+          "a": "Yes, it is part 2 of the Prison Break series. It picks up after a break that went wrong, so the setup follows on from the first part."
+        },
+        {
+          "q": "Is Cell Block 13 hard?",
+          "a": "It is rated medium difficulty, and a playthrough takes about 15 minutes. It works well if you have played an escape room before but do not want a long, punishing one."
+        },
+        {
+          "q": "When is Cell 13 coming?",
+          "a": "Cell 13 is listed as coming soon. More rooms are on the way, and the next room unlocks after you finish the previous one."
+        },
+        {
+          "q": "What do I do if I get stuck in Cell Block 13?",
+          "a": "There is a walkthrough page. Each step shows a hint first, and the full solution stays hidden until you open it."
+        }
+      ]
+    },
+    "prison-break": {
+      "description": [
+        "Prison Break is a point-and-click prison escape game set in Cell 7, where you wake up in a cell you have to get out of. A guard passes by without a second look, and the morning count is coming soon.",
+        "You search the cell, turn what you find into tools, and work on the footlocker and the door keypad until the cell is behind you. It is rated medium, and the estimate is about 20 minutes for this first room, so it suits a coffee break or a slow evening. Part 1 of the Prison Break series, it is a good place to begin if you like puzzles that make you think about what you are holding. Cell 7 is open now, and more rooms are coming."
+      ],
+      "faq": [
+        {
+          "q": "Does Prison Break work on my phone or tablet?",
+          "a": "Yes. The controls are Mouse & touch, so it runs in a phone or tablet browser with no keyboard needed. It plays the same way on a computer."
+        },
+        {
+          "q": "What is the story in Prison Break?",
+          "a": "You wake up in Cell 7 with a guard who never looks twice and a morning count you cannot be there for. Your job is to get out of the cell before that, using what you find around you."
+        },
+        {
+          "q": "Is Prison Break hard for someone new to escape rooms?",
+          "a": "It sits at medium difficulty, so it asks for some thought without being punishing. If you get stuck, there is a walkthrough page where each step shows a hint first and the full solution stays hidden until you open it."
+        },
+        {
+          "q": "Do I need to play the Prison Break games in order?",
+          "a": "This is Part 1 of the Prison Break series, so it is the natural place to start. Cell 7 is the room open now, and more rooms are coming, with the next one unlocking after you finish the one before it."
+        }
+      ]
+    },
+    "solitary": {
+      "description": [
+        "Solitary is a short prison escape game set in one dark cell, lit by moonlight through a barred window.",
+        "A message scratched into the wall by the last prisoner sets your search. You follow the moonlight, track down what that prisoner hid, and work out symbols that only a mirror reveals. It is rated easy and takes about 10 minutes, with mouse or touch controls and no keyboard needed. A good fit if you want a quick solo escape room to play online, and there is a walkthrough page if you get stuck."
+      ],
+      "faq": [
+        {
+          "q": "How long does Solitary take to finish?",
+          "a": "About 10 minutes. That is a rough estimate, since nothing pushes you to hurry. Searching the cell carefully can stretch it a little."
+        },
+        {
+          "q": "What is the story in Solitary?",
+          "a": "You are locked in a dark cell with one barred window. The last prisoner scratched a message into the wall before you got there, and following the moonlight leads you to what they hid."
+        },
+        {
+          "q": "Is Solitary a hard prison escape game?",
+          "a": "No, it is rated easy. There is one room and a handful of things to find and read, so it works well as a first escape room or a short break."
+        },
+        {
+          "q": "Can I play Solitary on my phone?",
+          "a": "Yes. It uses mouse or touch and needs no keyboard, so it runs in your browser on a phone or tablet as well as on a computer."
+        }
+      ]
+    },
+    "the-guard-room": {
+      "description": [
+        "The Guard Room is a short prison escape game where the guards have gone to lunch and left their door unlocked. The room is quiet, the keys are somewhere in it, and you have a few minutes of freedom to use.",
+        "You search the room, check the jacket, and work out how to get into the key cabinet for the new door code. Nothing here is meant to stump you: it is an easy room of about 10 minutes, and the puzzles stay small enough for a first escape room. Kids can play it with Mouse & touch controls, so a phone or tablet works fine. If you get stuck, a walkthrough with hints is on the page."
+      ],
+      "faq": [
+        {
+          "q": "What is the story in The Guard Room?",
+          "a": "The guards leave for lunch and forget to lock up, so their room is open to you. Your job is to go through their things and get out before they come back."
+        },
+        {
+          "q": "Is The Guard Room good for kids or first-time players?",
+          "a": "Yes. It is rated easy and takes around 10 minutes, so it suits kids and anyone playing an escape room for the first time. You only need a mouse or a finger, and no keyboard."
+        },
+        {
+          "q": "Is The Guard Room hard compared with other escape rooms?",
+          "a": "It is one of the easier rooms, marked easy and built for a short sitting. If you have played a lot of escape games, expect a quick one rather than a challenge."
+        },
+        {
+          "q": "Does The Guard Room work on a phone or tablet?",
+          "a": "Yes. It uses Mouse & touch controls and runs in your browser, so it plays on phones and tablets as well as computers. Nothing needs to be downloaded or signed up for."
+        }
+      ]
+    },
+    "maximum-security": {
+      "description": [
+        "Maximum Security is a hard prison escape game set in the security control room, where a dozing guard sits among glowing monitors.",
+        "You got out of cell 7, and now the room itself is the puzzle. Break the glass without waking the guard, take his key card from under his nose, find out what time it really is and make the invisible lasers show themselves. The only door to the yard is locked behind a card reader and a code the warden changes every hour. This is part 3 of the Prison Break series, and it runs around 25 minutes with mouse or touch controls, no keyboard needed. It suits players who want a real fight from the opening move. More rooms are coming after this one."
+      ],
+      "faq": [
+        {
+          "q": "Does Maximum Security work on a phone or tablet?",
+          "a": "Yes. It runs in the browser with mouse or touch, and no keyboard is needed, so phones and tablets are fine. There is nothing to download or install."
+        },
+        {
+          "q": "Is Maximum Security part of the Prison Break series?",
+          "a": "It is part 3 of the Prison Break series, set right after you get out of cell 7. You begin in the security control room rather than back in the cell."
+        },
+        {
+          "q": "Is Maximum Security harder than the other prison games?",
+          "a": "It is rated hard, and it opens with a full control room of problems at once: the guard, the card reader and the laser grid. If you want a gentler first prison escape, start with an earlier part of the series."
+        },
+        {
+          "q": "Will there be more rooms in Maximum Security?",
+          "a": "Yes. The control room is the first room, and more are coming: the yard, the watchtower and the outer wall. The next room unlocks once you finish the one before it."
+        }
+      ]
+    },
+    "midnight-manor": {
+      "description": [
+        "Midnight Manor is a free Halloween escape game where the party ended at midnight and the guests never left. The ballroom is your first room, and a masked guest is already moving through it.",
+        "You follow the guest, finish the host's waltz, and work out which year the doors will open. It's a medium escape room that takes about 15 minutes, playable online on your phone, tablet or computer with mouse or touch. More rooms are coming, starting with the library. Good for players who want a short Halloween puzzle with some atmosphere."
+      ],
+      "faq": [
+        {
+          "q": "What is Midnight Manor about?",
+          "a": "It's a Halloween escape room set in a manor after a party that ended at midnight. The guests never left, and you start in the ballroom following a masked guest and finishing the host's waltz."
+        },
+        {
+          "q": "Is Midnight Manor scary?",
+          "a": "It has a Halloween mood: a manor, a masked guest and a party that never really ended. There are no jump scares or monsters described, so it's more eerie than frightening."
+        },
+        {
+          "q": "How hard is Midnight Manor?",
+          "a": "It's rated medium difficulty and takes about 15 minutes. That makes it a step up from an easy room but still short enough for one sitting."
+        },
+        {
+          "q": "Where can I find help if I get stuck in Midnight Manor?",
+          "a": "There's a walkthrough page for Midnight Manor. Each step shows a hint first, and you can open the full solution only if you need it."
+        }
+      ]
+    },
+    "witchs-cabin": {
+      "description": [
+        "Witch's Cabin is a free Halloween escape game set in a witch's hut with a locked door and shelves of ingredients. A cat watches you from somewhere in the room.",
+        "The way out runs through the brewing: you need the recipe, the cat's cooperation, and the ingredients added in the right order. Get the mix wrong and the potion starts over. It's rated medium and takes about 15 minutes, which suits a short break or a first try at escape rooms. Play it online in your browser on a computer or a phone. A second room, The Moonlit Forest, is coming, and more rooms after that."
+      ],
+      "faq": [
+        {
+          "q": "How long does Witch's Cabin take to finish?",
+          "a": "About 15 minutes on a medium setting. That's only a rough estimate, so it can run longer if the potion gives you trouble."
+        },
+        {
+          "q": "Is Witch's Cabin scary?",
+          "a": "It's a Halloween game, so expect a spooky witch's cabin mood rather than jump scares. The tension comes from the puzzle and the mixing order, not from anything chasing you."
+        },
+        {
+          "q": "Can I play Witch's Cabin on my phone?",
+          "a": "Yes. The controls are mouse or touch with no keyboard needed, so it works on phones and tablets as well as computers."
+        },
+        {
+          "q": "Are more rooms coming after The Witch's Cabin?",
+          "a": "Yes. The Moonlit Forest is listed as coming soon, and more rooms are planned. The next room opens once you finish the one before it."
+        }
+      ]
+    },
+    "the-haunted-house": {
+      "description": [
+        "The Haunted House is a free Halloween escape game you play in your browser, and nobody in this parlor is alone. Doors slam by themselves and the eyes in the portraits follow you around the room.",
+        "To get out the front door, you'll work the spirit board and the old music box and settle the ghost that shares the house with you. It runs about 20 minutes at medium difficulty, so it suits players who have tried a few escape rooms and want a real puzzle without a long sit. More rooms are coming, with The Upstairs Hall next."
+      ],
+      "faq": [
+        {
+          "q": "Is The Haunted House scary or just Halloween themed?",
+          "a": "It leans on atmosphere more than jump scares. The house is tagged Halloween and Horror: doors slam on their own, the portraits watch you, and a ghost has to be calmed before you leave. If you like creepy rooms but not shock scares, this sits on the milder side."
+        },
+        {
+          "q": "How hard is this Halloween escape game compared with other escape rooms?",
+          "a": "It's rated medium, with a playing time of about 20 minutes. That puts it between the easy rooms and the hard ones on the site, so it works if you've played a few and want a step up without a long session."
+        },
+        {
+          "q": "Will there be more rooms in The Haunted House?",
+          "a": "Yes. The Parlor is open now and The Upstairs Hall is coming soon, with more rooms planned after that. The next room unlocks once you finish the one before it."
+        },
+        {
+          "q": "Does the game save my progress?",
+          "a": "Yes, progress saves automatically in your browser on the device you're playing on, and a finished room stays marked as done. Clearing your browser data or switching to another device resets it."
+        }
+      ]
+    },
+    "pumpkin-puzzle": {
+      "description": [
+        "Pumpkin Puzzle is a friendly Halloween escape game set in The Pumpkin Patch, where carved pumpkins each hide a piece of the code. The room is colorful and calm, with nothing there to scare you.",
+        "You click around the patch to find the hidden pieces and work out how they fit together, and you never need a keyboard. It's rated medium and takes about 15 minutes, so it suits kids and anyone who wants a Halloween room without jump scares. Play it free in your browser, with nothing to download."
+      ],
+      "faq": [
+        {
+          "q": "Is Pumpkin Puzzle scary?",
+          "a": "No. It's a friendly Halloween room with carved pumpkins, and it isn't scary at all."
+        },
+        {
+          "q": "Is Pumpkin Puzzle good for kids?",
+          "a": "Yes. The room is short and colorful, made with younger players in mind, and the medium difficulty keeps it from being too simple."
+        },
+        {
+          "q": "Does Pumpkin Puzzle work on a phone or tablet?",
+          "a": "Yes. It uses mouse or touch and needs no keyboard, so it plays fine on phones and tablets."
+        },
+        {
+          "q": "How hard is Pumpkin Puzzle compared with other Halloween escape games?",
+          "a": "It sits at medium difficulty and takes around 15 minutes. That makes it lighter than a hard room but still a real puzzle to work through."
+        }
+      ]
+    },
+    "trick-or-escape": {
+      "description": [
+        "Trick or Escape is a free Halloween escape game where you knocked on the wrong door and need to get back outside. The room is The Hallway, and it comes with a sleepy dog, a fortune-teller machine and a skeleton butler who has a sweet tooth.",
+        "You trade your way past those three to reach the door, using a mouse or touch on a phone, tablet or computer. It is an easy room that takes about 10 minutes, so it works well for kids and for anyone new to point-and-click escape rooms. More rooms are coming, and the next one is The Kitchen."
+      ],
+      "faq": [
+        {
+          "q": "Is Trick or Escape scary?",
+          "a": "No, it is not scary. The Halloween setting is playful, with a sleepy dog, a fortune-teller machine and a skeleton butler who likes sweets."
+        },
+        {
+          "q": "Is Trick or Escape good for kids?",
+          "a": "Yes, it suits kids. It is an easy room in the Kids and Halloween themes, takes around 10 minutes, and needs only a mouse or touch, with no keyboard."
+        },
+        {
+          "q": "Are more rooms coming to Trick or Escape?",
+          "a": "Yes, more rooms are coming. The Kitchen is listed as coming soon, and it opens after you finish The Hallway."
+        },
+        {
+          "q": "Does Trick or Escape save my progress?",
+          "a": "Yes, your progress saves automatically in your browser on that device, and a finished room stays marked as done. Clearing browser data or switching device resets it."
+        }
+      ]
+    },
+    "the-cursed-manor": {
+      "description": [
+        "The Cursed Manor is a hard Halloween escape game set in a study of Blackwood family secrets, where a family curse keeps a crypt locked. Read the family chronicle and piece together what the ancestors left behind.",
+        "You work out the order in which four ancestors died, then light their candles to open the way down to the crypt. Plan on roughly 25 minutes in The Study, and expect to be kept guessing: this is one of the harder Halloween escapes on the site. The controls are mouse or touch, though the game is best with a mouse rather than on a phone. More rooms are coming, with The Crypt still to open."
+      ],
+      "faq": [
+        {
+          "q": "Is The Cursed Manor scary?",
+          "a": "It leans on atmosphere rather than jump scares: a family curse, a locked crypt and a study of Blackwood secrets. The mood is horror and Halloween, and the puzzles are what make it demanding."
+        },
+        {
+          "q": "Who is The Cursed Manor suited to?",
+          "a": "Players who like hard Halloween escape rooms and don't mind reading carefully. The family chronicle matters, so it rewards patience with clues more than fast clicking. It runs on a computer with a mouse better than on a phone."
+        },
+        {
+          "q": "Are more rooms coming to The Cursed Manor?",
+          "a": "Yes. The Study is open now and The Crypt is marked Coming soon, with more rooms planned after that. Each new room opens once you finish the one before it."
+        },
+        {
+          "q": "What should I do if I'm stuck in The Cursed Manor?",
+          "a": "Open the walkthrough page. Each step shows a hint first, and the full solution stays hidden until you choose to open it."
+        }
+      ]
+    },
+    "shadow-circus": {
+      "description": [
+        "Shadow Circus is a free Halloween escape room you play online, and the tent flap is laced shut with you still inside. The circus pulled into town for a single night, and the show is about to begin without you.",
+        "You have a steam calliope to get going, a brass lion to wake, and the ringmaster's keys to find somewhere in The Big Top. It's a medium-difficulty point-and-click game, and 20 minutes is a fair estimate for a first run. It suits players who want a short Halloween escape room with some real thinking in it, on a computer or on a phone. The Wagon Yard is coming as a second room, and more rooms after that."
+      ],
+      "faq": [
+        {
+          "q": "How long does Shadow Circus take?",
+          "a": "About 20 minutes, going by the medium rating on the page. That's a rough estimate rather than a limit, so a slow first pass is fine."
+        },
+        {
+          "q": "Is Shadow Circus scary?",
+          "a": "It's spooky in a Halloween way rather than frightening: a dark tent, an old steam calliope and a brass lion. There's nothing here that jumps out at you."
+        },
+        {
+          "q": "What do I do in Shadow Circus?",
+          "a": "You're locked inside The Big Top and need to wake the brass lion, get the steam calliope playing and find the ringmaster's keys. It's point and click, so every puzzle is solved with the mouse or a finger on the screen."
+        },
+        {
+          "q": "Are more rooms coming to Shadow Circus?",
+          "a": "Yes, The Wagon Yard is listed as coming soon, with more rooms after it. Each new room opens up once you finish the one before."
+        }
+      ]
+    },
+    "the-locked-attic": {
+      "description": [
+        "The Locked Attic is a short horror escape game set in Grandma's attic, where old trunks, dusty toys and one stubborn door fill the room. It is an easy point-and-click escape room you can play online in your browser.",
+        "You click or tap around the attic, look at what the family left behind and work out how to get that door open. Nothing here is punishing: expect about ten minutes of poking around, and the small puzzles suit kids and newer escape room players as much as anyone. The scares stay mild, so a spooky mood does not turn into a fright fest. If you get stuck, a walkthrough is on hand, with hints first and the full answer kept folded away until you open it."
+      ],
+      "faq": [
+        {
+          "q": "Does The Locked Attic work on a phone or tablet?",
+          "a": "Yes. It runs in the browser on phones and tablets, and you play with touch instead of a keyboard. A mouse on a computer works just as well."
+        },
+        {
+          "q": "Is The Locked Attic scary?",
+          "a": "It leans on atmosphere rather than jump scares. The setting is a dark old attic with trunks and dusty toys, so the mood is spooky, but it is easy enough for kids to play."
+        },
+        {
+          "q": "Is The Locked Attic good for kids and beginners?",
+          "a": "Yes, it is one of the gentler horror escape games. It is marked easy, takes roughly ten minutes, and a walkthrough is available if someone gets stuck."
+        },
+        {
+          "q": "How many rooms does The Locked Attic have?",
+          "a": "One room, the Attic. That is the whole game for now, so there is no second room to wait for."
+        }
+      ]
+    },
+    "the-star-zoo": {
+      "description": [
+        "The Star Zoo is a point and click space escape game set on an old interplanetary zoo ship, with the hatch already sealed behind you. A calm voice announces an automatic launch in one hour, and glowing mushroom lamps light the room while the portholes show a violet alien sky.",
+        "You'll crack a switch lock, work out what a jelly creature wants, and get a little robot running again so you can read the ship's route and figure out where you are. It's a hard room, roughly 35 minutes of play, with mouse or touch controls and no keyboard needed. Good for players who like a long, hand painted retro sci-fi puzzle to pick apart piece by piece."
+      ],
+      "faq": [
+        {
+          "q": "What do I do if I'm stuck in The Star Zoo?",
+          "a": "Open the walkthrough page for the game. Each step shows a hint first, and the full solution stays hidden until you choose to open it."
+        },
+        {
+          "q": "What is The Star Zoo about?",
+          "a": "You're trapped on an old interplanetary zoo ship that is about to launch on its own. You have glowing mushroom lamps, portholes onto a violet alien sky, a stubborn jelly creature and a robot with an empty battery to work with."
+        },
+        {
+          "q": "Is The Star Zoo a hard escape room?",
+          "a": "Yes. It's rated hard, and the description calls it a long, tricky sci-fi room. Expect to spend around 35 minutes if you like to think things through."
+        },
+        {
+          "q": "Who is The Star Zoo best for?",
+          "a": "Players who enjoy sci-fi settings and long point and click puzzles with a hand painted retro look. It runs on phones and tablets with touch as well as on a computer with a mouse."
+        }
+      ]
+    },
+    "the-crooked-tower": {
+      "description": [
+        "The Crooked Tower is a free Halloween escape game where a slammed trapdoor leaves you shut inside a tower room with three ghosts. It is Halloween night, and the three little ghosts drifting around you (one in a top hat, one in a lace bonnet, one in a striped nightcap) lived here once. They will let you out only once the great beacon is lit again so lost souls can find their way home.",
+        "To get there you hunt for five carved bats, blow out the candle to see what the ghosts are hiding, read a far-off graveyard through a telescope and strike a bargain with a raven who loves shiny things. There is plenty to click and combine in one handmade-looking room, and it is a hard one, so give it around 30 minutes. Play it online on a computer or with touch on a phone, and turn to the walkthrough if a step stops making sense."
+      ],
+      "faq": [
+        {
+          "q": "Is The Crooked Tower scary?",
+          "a": "It leans spooky rather than frightening. You are stuck in a tower on Halloween with three small ghosts and a raven, and the work is mostly searching the room and figuring out what fits where."
+        },
+        {
+          "q": "Is The Crooked Tower harder than most Halloween escape games?",
+          "a": "Yes, it is marked hard. One room holds five carved bats to find plus a candle, a telescope and a raven to deal with, so expect to spend around 30 minutes on it."
+        },
+        {
+          "q": "Who is The Crooked Tower best for?",
+          "a": "Players who like a long, busy Halloween escape room with lots of objects to click and combine. It runs on a computer with a mouse or on a phone and tablet with touch, and no keyboard is needed."
+        },
+        {
+          "q": "Does my progress in The Crooked Tower save?",
+          "a": "Yes, it saves automatically in your browser on that device, and a finished room stays marked as done. Clearing your browser data or switching to another device resets it."
+        }
+      ]
+    },
+    "clockwork-room": {
+      "description": [
+        "Clockwork Room is a point & click escape game set in Master Ottavio's workshop, where every clock on the wall has stopped. The door has no keyhole. A long rod runs from the lock into the great gear train, and one gear is missing.",
+        "You'll oil a rusted drawer, wind up a little brass bird, and work the gears until the great clock points to the right hour. Every part of the mechanism connects to another, so poking around pays off. It's a medium-difficulty escape room that runs about 20 minutes, playable online for free on a computer or with touch on a phone or tablet. Good for players who like to tinker before they solve."
+      ],
+      "faq": [
+        {
+          "q": "What is the story in Clockwork Room?",
+          "a": "You're in Master Ottavio's workshop, surrounded by clocks that have all stopped. The door has no keyhole, so you follow the rod from its lock into the gear train on the wall and find the missing gear."
+        },
+        {
+          "q": "Is Clockwork Room hard?",
+          "a": "It's rated medium, so expect some thinking but no long stretches of being lost. Most players take around 20 minutes, and the puzzles build on each other as you go."
+        },
+        {
+          "q": "Is Clockwork Room good for kids or beginners?",
+          "a": "It works well for newer players, since the workshop gives you a clear chain of things to touch and fix. Kids may need a hand with a few of the gear puzzles."
+        },
+        {
+          "q": "What should I do if I'm stuck in Clockwork Room?",
+          "a": "Open the walkthrough page for the game. Each step shows a hint first, and the full solution stays hidden until you choose to open it."
+        }
+      ]
+    },
+    "the-last-door": {
+      "description": [
+        "The Last Door is a hard escape game where ninety-nine doors are already open behind you, and the hundredth is black oak with three locks. A bronze lion sits with nothing in its mouth, a dial of moons waits beside it, and none of the old keys fit the keyhole.",
+        "You dig through cold ash, give the lion back its voice, read the moons in the stained glass and work out a code that only a mirror can show. The Antechamber runs about 25 minutes and plays with a mouse or touch, no keyboard needed. It suits players who want their last door to be the toughest one, and a walkthrough is there if you need a nudge."
+      ],
+      "faq": [
+        {
+          "q": "Is The Last Door a scary game?",
+          "a": "It leans on cold ash, a silent bronze lion and stained glass moons rather than jump scares. The mood is dark and patient, so expect unease more than frights."
+        },
+        {
+          "q": "Who is The Last Door meant for?",
+          "a": "It is for players who like a hard escape room and don't mind sitting with a puzzle for a while. The Antechamber is rated hard and runs roughly 25 minutes."
+        },
+        {
+          "q": "How does The Last Door compare to easier escape games?",
+          "a": "It is rated hard, so expect less hand-holding than an easy or medium room. Three locks and a code that only a mirror can show mean slower, more careful work."
+        },
+        {
+          "q": "Does my progress save if I close the page?",
+          "a": "Yes, progress is saved automatically in your browser on that device, and a finished room stays marked as done. Clearing browser data or switching device resets it."
+        }
+      ]
+    },
+    "lost-in-the-library": {
+      "description": [
+        "You fall asleep over a book in Lost in the Library and wake to a dark, locked Hartwell Library. Rain runs down the tall windows, one green reading lamp is still on, and the library cat is asleep on the book you need.",
+        "Getting out means working with what the room gives you: wake the cat, follow the returns ledger, check behind the books, and read what the globe says. It's a medium point & click escape game with one room, The Reading Room, and about 20 minutes of play, with more rooms coming later. Good for anyone who likes a quiet puzzle while the weather does its worst outside."
+      ],
+      "faq": [
+        {
+          "q": "How long does Lost in the Library take to finish?",
+          "a": "Around 20 minutes for most players, though that is only a rough estimate. You can sit with a puzzle as long as you like."
+        },
+        {
+          "q": "Is Lost in the Library scary?",
+          "a": "No, it's a cozy room rather than a horror one. The library is dark and the doors are locked, but the company is a sleeping cat and a reading lamp."
+        },
+        {
+          "q": "Will there be more rooms in Lost in the Library?",
+          "a": "Yes, more rooms are coming. The Reading Room is open now, and the archive below it is still to come."
+        },
+        {
+          "q": "Is Lost in the Library hard?",
+          "a": "It's medium difficulty. You'll wake the cat, follow the returns ledger, look behind the books and read the globe, but nothing here is built to stump you for long."
+        }
+      ]
+    }
+  }
+}
